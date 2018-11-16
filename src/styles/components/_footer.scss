@@ -1,0 +1,33 @@
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: 30px;
+      margin-right: 10px;
+      a {
+        text-decoration: none;
+        color: white;
+        .fa {
+          font-size: 1.5em;
+          &:hover {
+            color: lightcoral;
+          }
+        }
+      }
+    }
+  }
+}
