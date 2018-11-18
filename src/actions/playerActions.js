@@ -14,7 +14,6 @@ export const setMembershipDataAction = playerGamerTag => {
           }
         );
         if (res.data.Response.length !== 0) {
-          console.log(res.data.Response);
           const {
             membershipId,
             displayName,
@@ -53,7 +52,6 @@ export const setMembershipDataAction = playerGamerTag => {
             }
           });
           dispatch({ type: "SUCCESS_SET_DATA" });
-          console.log(1);
           resolve();
         } else {
           dispatch({ type: "FAIL_SET_DATA" });
@@ -67,5 +65,6 @@ export const setMembershipDataAction = playerGamerTag => {
 };
 
 export const resetTheStateAction = () => {
+  console.log("RESET");
   return { type: "RESET_DATA" };
 };
