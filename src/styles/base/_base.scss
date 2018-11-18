@@ -2,6 +2,10 @@ $black: rgb(18, 18, 18);
 $lightgray: rgba(35, 35, 35, 0.1);
 $white: rgb(255, 255, 255);
 
+ul {
+  list-style-type: none;
+}
+
 @mixin breakpoint($point) {
   @if $point == "big_desktop" {
     @media (max-width: 1824px) {
