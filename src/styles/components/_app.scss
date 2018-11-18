@@ -1,4 +1,7 @@
 .App {
   height: 100vh;
-  background: url(~/assets/gradient_green.jpg);
+  background: url(~/assets/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

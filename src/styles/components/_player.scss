@@ -1,20 +1,55 @@
 .characters-container {
-  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80%;
   color: $white;
-
+  height: 625px;
   .characters-list {
     display: flex;
-    list-style-type: none;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    width: 35%;
+    margin-left: 1%;
+    margin-top: 3%;
+    height: 300px;
 
-    option {
-      height: 80px;
-      width: 420px;
+    .character {
+      background-image: url(~/assets/wish-ascended.jpg);
+      height: 100px;
+      width: 100%;
+      background-repeat: no-repeat;
+      display: none;
+      cursor: pointer;
+
+      &.active {
+        display: block;
+      }
+    }
+    &:hover .character {
+      display: block;
+    }
+  }
+  .stats-container {
+    font-size: 2em;
+    width: 65%;
+    margin-left: 20px;
+    margin-top: 3%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    .track-container {
+      display: flex;
+      padding: 5px;
+      width: 100%;
+      text-align: left;
+      border-radius: 5px;
+      outline: none;
+      background-color: rgba(0, 0, 0, 0.1);
+      margin: 0 5px 10px 5px;
+
+      & div {
+        flex: 1;
+      }
     }
   }
 }

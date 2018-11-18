@@ -1,33 +1,71 @@
 import axios from "axios";
-export const setMembershipID = playerGamerTag => {
-  return dispatch => {
-    axios
-      .get(
-        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${playerGamerTag}/`,
-        {
-          headers: {
-            "X-API-KEY": process.env.REACT_APP_API_KEY
+import { values } from "lodash";
+
+export const setMembershipDataAction = playerGamerTag => {
+  return async dispatch => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(
+          `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${playerGamerTag}/`,
+          {
+            headers: {
+              "X-API-KEY": process.env.REACT_APP_API_KEY
+            }
           }
-        }
-      )
-      .then(res => {
+        );
         if (res.data.Response.length !== 0) {
-          const membershipId = res.data.Response[0].membershipId;
+          console.log(res.data.Response);
+          const {
+            membershipId,
+            displayName,
+            membershipType
+          } = res.data.Response[0];
+          const stats = await axios.get(
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/0/Stats/?modes=63&periodType=0`,
+            {
+              headers: {
+                "X-API-KEY": process.env.REACT_APP_API_KEY
+              }
+            }
+          );
+          const infamyStats = await axios.get(
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=CharacterProgressions`,
+            {
+              headers: {
+                "X-API-KEY": process.env.REACT_APP_API_KEY
+              }
+            }
+          );
+          const { currentProgress, progressToNextLevel, stepIndex } = values(
+            infamyStats.data.Response.characterProgressions.data
+          )[0].progressions["2772425241"];
+          const infamy = { currentProgress, progressToNextLevel, stepIndex };
+
+          dispatch({ type: "START_SET_DATA" });
           dispatch({
-            type: "START_SET_MEMBERSHIP_ID"
+            type: "SET_DATA",
+            payload: {
+              membershipId,
+              membershipType,
+              displayName,
+              gambitStats: stats.data.Response.pvecomp_gambit,
+              infamy
+            }
           });
-          dispatch({
-            type: "SET_MEMBERSHIP_ID",
-            payload: { membershipId }
-          });
-          dispatch({
-            type: "SUCCESS_SET_MEMBERSHIP_ID"
-          });
-          return;
+          dispatch({ type: "SUCCESS_SET_DATA" });
+          console.log(1);
+          resolve();
+        } else {
+          dispatch({ type: "FAIL_SET_DATA" });
+          reject("Player not found");
         }
-        dispatch({
-          type: "FAIL_SET_MEMBERSHIP_ID"
-        });
-      });
+      } catch (err) {
+        reject(err);
+      }
+    });
   };
+};
+
+export const resetTheStateAction = () => {
+  return { type: "RESET_DATA" };
 };
