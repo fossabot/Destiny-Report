@@ -37,10 +37,15 @@ class Player extends Component {
 
       gambit.motesDeposited = this.props.player.gambitStats.allTime.motesDeposited.basic.value;
       gambit.motesLost = this.props.player.gambitStats.allTime.motesLost.basic.value;
+
       gambit.winLossRatio = (
         100 *
         (gambit.won / (gambit.won + gambit.lost))
       ).toFixed(1);
+
+      if (gambit.won === 0 && gambit.lost === 0) {
+        gambit.winLossRatio = 0;
+      }
     }
 
     return (
@@ -59,7 +64,7 @@ class Player extends Component {
                 </li>
                 <li>Rank: {this.props.player.infamy.stepIndex}</li>
                 <li>
-                  points to next rank:{" "}
+                  points to next rank:
                   {this.props.player.infamy.progressToNextLevel}
                 </li>
               </ul>
