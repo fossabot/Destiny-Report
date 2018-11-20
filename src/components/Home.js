@@ -1,13 +1,17 @@
 import React from "react";
 import {
-  setMembershipDataAction as setMembershipData,
-  resetTheStateAction as resetTheState
+  resetTheStateAction,
+  setMembershipInfoAction,
+  setGambitStatsAction
 } from "../actions/playerActions";
 import { connect } from "react-redux";
 
 class Home extends React.Component {
-  componentWillMount() {
-    this.props.resetTheState();
+  state = {
+    isMore: false
+  };
+  componentDidMount() {
+    this.props.resetTheStateAction();
   }
 
   setActive = (e, blur) => {
@@ -20,14 +24,36 @@ class Home extends React.Component {
 
   handlePress = async event => {
     if (event.key === "Enter") {
-      const id = event.target.value.toLowerCase();
+      const playerGamerTag = event.target.value.toLowerCase();
       try {
-        await this.props.setMembershipData(id);
-        this.props.history.push(`/player/${this.props.player.displayName}`);
+        const memberships = await this.props.setMembershipInfoAction(
+          playerGamerTag
+        );
+        if (memberships.length > 1) {
+          this.setState({ isMore: true });
+          return;
+        }
+        await this.props.setGambitStatsAction(
+          memberships[0].membershipType,
+          memberships[0].membershipId
+        );
+
+        this.props.history.push(`/player/${memberships[0].displayName}`);
       } catch (err) {
         console.log(err);
       }
     }
+  };
+
+  handleMembershipType = async event => {
+    const index = event.target.value;
+    const memberships = this.props.player.memberships;
+    await this.props.setGambitStatsAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+
+    this.props.history.push(`/player/${memberships[index].displayName}`);
   };
 
   render() {
@@ -35,10 +61,37 @@ class Home extends React.Component {
     const errorPopup = (
       <div className="error_popup">This player doesn't exist</div>
     );
+    const multiMembershipPopup = (
+      <div className="error_popup multi_membership_popup">
+        <ul>
+          {this.props.player.memberships.map((elem, index) => {
+            let platform = "";
+            if (elem.membershipType === 2) {
+              platform = "psn";
+            } else if (elem.membershipType === 1) {
+              platform = "xbox";
+            } else {
+              platform = "pc";
+            }
+            return (
+              <li
+                key={index}
+                value={index}
+                onClick={this.handleMembershipType}
+                className={`membershipLi ${platform}`}
+              >
+                {elem.displayName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
 
     return (
       <div className="home-wrapper">
         {error && errorPopup}
+        {this.state.isMore && multiMembershipPopup}
         <div className="input-container">
           <label htmlFor="gamertag">Enter a player's name</label>
           <input
@@ -63,5 +116,9 @@ const mapStoreToProps = store => {
 
 export default connect(
   mapStoreToProps,
-  { setMembershipData, resetTheState }
+  {
+    resetTheStateAction,
+    setMembershipInfoAction,
+    setGambitStatsAction
+  }
 )(Home);
