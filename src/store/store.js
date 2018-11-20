@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 
 const store = createStore(
   combineReducers({ player: playerReducer }),
-  applyMiddleware(logger, thunk)
+  applyMiddleware(thunk, logger)
 );
 
 export default store;

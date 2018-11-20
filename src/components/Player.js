@@ -1,21 +1,59 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMembershipDataAction as setMembershipData } from "../actions/playerActions";
+import {
+  resetTheStateAction,
+  setMembershipInfoAction,
+  setGambitStatsAction
+} from "../actions/playerActions";
+import { infamySteps } from "../utility/Steps";
 
 class Player extends Component {
-  async componentWillMount() {
-    let { membershipId } = this.props.player;
-    if (membershipId === 0 && this.props.match.params.id) {
-      const id = this.props.match.params.id.toLowerCase();
-      this.props.setMembershipData(id);
-      return;
-    }
-    if (this.props.player.membershipId === 0) {
+  state = {
+    isMore: false
+  };
+  async componentDidMount() {
+    try {
+      const { memberships } = this.props.player;
+      if (memberships.length === 0 && this.props.match.params.id) {
+        const playerGamerTag = this.props.match.params.id.toLowerCase();
+        const playerMemberships = await this.props.setMembershipInfoAction(
+          playerGamerTag
+        );
+
+        if (this.props.player.memberships.length > 1) {
+          this.setState({ isMore: true });
+          return;
+        }
+        await this.props.setGambitStatsAction(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
+        return;
+      }
+      if (this.props.player.memberships.length === 0) {
+        this.props.history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
       this.props.history.push("/");
     }
   }
+
+  handleMembershipType = async event => {
+    const index = event.target.value;
+    const memberships = this.props.player.memberships;
+    await this.props.setGambitStatsAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+
+    this.setState({ isMore: false });
+    this.props.history.push(`/player/${memberships[index].displayName}`);
+  };
+
   render() {
     const gambit = {};
+    const infamy = {};
     if (this.props.player.success) {
       gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
       gambit.lost =
@@ -46,75 +84,101 @@ class Player extends Component {
       if (gambit.won === 0 && gambit.lost === 0) {
         gambit.winLossRatio = 0;
       }
+
+      infamy.currentInfamy = this.props.player.infamy.currentProgress;
+      infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
+      infamy.progressToNextLevel = this.props.player.infamy.progressToNextLevel;
+      infamy.overallInfamy = 0;
+      infamy.ranks = 0;
+      infamy.resets = 0;
     }
 
+    const multiMembershipPopup = (
+      <div className="error_popup multi_membership_popup">
+        <ul>
+          {this.props.player.memberships.map((elem, index) => {
+            let platform = "";
+            if (elem.membershipType === 2) {
+              platform = "psn";
+            } else if (elem.membershipType === 1) {
+              platform = "xbox";
+            } else {
+              platform = "pc";
+            }
+            return (
+              <li
+                key={index}
+                value={index}
+                onClick={this.handleMembershipType}
+                className={`membershipLi ${platform}`}
+              >
+                {elem.displayName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+
     return (
-      <div className="characters-container">
-        <div className="characters-list">
-          <div className="character character--1 active">A</div>
-          <div className="character character--2">B</div>
-          <div className="character character--3">C</div>
+      <div className="infamy-container">
+        {this.state.isMore && multiMembershipPopup}
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Current Infamy: {infamy.currentInfamy}</li>
+              <li>Rank: {infamy.currentRank}</li>
+              <li>
+                To next rank:
+                {infamy.progressToNextLevel}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Overall Infamy: {infamy.overallInfamy}</li>
+              <li>Ranks: {infamy.ranks}</li>
+              <li>Resets: {infamy.resets}</li>
+            </ul>
+          </div>
         </div>
-        <div className="stats-container">
-          <div className="track-container infamy">
-            <div>
-              <ul>
-                <li>
-                  Current Infamy: {this.props.player.infamy.currentProgress}
-                </li>
-                <li>Rank: {this.props.player.infamy.stepIndex}</li>
-                <li>
-                  points to next rank:
-                  {this.props.player.infamy.progressToNextLevel}
-                </li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>Overall Infamy: 200</li>
-                <li>Ranks: fable</li>
-                <li>Resets: 2</li>
-              </ul>
-            </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Wins: {gambit.won}</li>
+              <li>Loses: {gambit.lost}</li>
+              <li>Win/Loss: {gambit.winLossRatio}%</li>
+            </ul>
           </div>
-          <div className="track-container wins">
-            <div>
-              <ul>
-                <li>Wins: {gambit.won}</li>
-                <li>Loses: {gambit.lost}</li>
-                <li>Win/Loss: {gambit.winLossRatio}%</li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>Kills: {gambit.kills}</li>
-                <li>Deaths: {gambit.deaths}</li>
-                <li>Invader Kills: {gambit.invaderkills}</li>
-              </ul>
-            </div>
+          <div>
+            <ul>
+              <li>Kills: {gambit.kills}</li>
+              <li>Deaths: {gambit.deaths}</li>
+              <li>Invader Kills: {gambit.invaderkills}</li>
+            </ul>
           </div>
-          <div className="track-container blockers">
-            <div>
-              <ul>
-                <li>Blockers sent: {gambit.blockersSent}</li>
-                <li>Blockers killed: {gambit.blockerKills}</li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>Large Blockers: {gambit.largeBlockersSent}</li>
-                <li>Medium Blockers: {gambit.mediumBlockersSent}</li>
-                <li>Small Blockers: {gambit.smallBlockersSent}</li>
-              </ul>
-            </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Blockers sent: {gambit.blockersSent}</li>
+              <li>Blockers killed: {gambit.blockerKills}</li>
+            </ul>
           </div>
-          <div className="track-container blockers">
-            <div>
-              <ul>
-                <li>Motes banked: {gambit.motesDeposited}</li>
-                <li>Motes lost: {gambit.motesLost}</li>
-              </ul>
-            </div>
+          <div>
+            <ul>
+              <li>Large Blockers: {gambit.largeBlockersSent}</li>
+              <li>Medium Blockers: {gambit.mediumBlockersSent}</li>
+              <li>Small Blockers: {gambit.smallBlockersSent}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Motes banked: {gambit.motesDeposited}</li>
+              <li>Motes lost: {gambit.motesLost}</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -130,5 +194,9 @@ const mapStoreToProps = store => {
 
 export default connect(
   mapStoreToProps,
-  { setMembershipData }
+  {
+    resetTheStateAction,
+    setMembershipInfoAction,
+    setGambitStatsAction
+  }
 )(Player);

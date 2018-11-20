@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  height: 83vh;
   color: $white;
   position: relative;
 
@@ -20,6 +20,40 @@
     outline: none;
     background-color: rgba(0, 0, 0, 0.1);
     color: $white;
+  }
+  .multi_membership_popup {
+    background-color: rgb(31, 29, 29);
+    top: 160px;
+    z-index: 1;
+
+    .membershipLi {
+      width: min-content;
+      margin: 0 auto;
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 10px;
+      &:nth-child(odd) {
+        margin-bottom: 10px;
+      }
+      &.psn {
+        background-color: rgb(30, 32, 161);
+        &:hover {
+          background-color: rgb(65, 67, 167);
+        }
+      }
+      &.xbox {
+        background-color: rgb(30, 161, 36);
+        &:hover {
+          background-color: rgb(65, 167, 82);
+        }
+      }
+      &.pc {
+        background-color: rgb(161, 30, 30);
+        &:hover {
+          background-color: rgb(167, 65, 65);
+        }
+      }
+    }
   }
 
   .input-container {

@@ -1,15 +1,14 @@
 import { cloneDeep, isEmpty } from "lodash";
 
-const SET_DATA = "SET_DATA";
+const SET_GAMBIT_DATA = "SET_GAMBIT_DATA";
 const START_SET_DATA = "START_SET_DATA";
 const SUCCESS_SET_DATA = "SUCCESS_SET_DATA";
 const FAIL_SET_DATA = "FAIL_SET_DATA";
 const RESET_DATA = "RESET_DATA";
+const SET_MEMBERSHIP_DATA = "SET_MEMBERSHIP_DATA";
 
 const initial = {
-  membershipId: 0,
-  membershipType: 0,
-  displayName: "",
+  memberships: [],
   gambitStats: {
     allTime: {
       activitiesEntered: {
@@ -720,7 +719,7 @@ const initial = {
   infamy: {
     currentProgress: 0,
     progressToNextLevel: 0,
-    stepIndex: 0
+    level: 0
   },
   success: false,
   loading: false,
@@ -732,16 +731,17 @@ export const playerReducer = (state = initial, action) => {
     case START_SET_DATA:
       state = { ...state, loading: true, success: false };
       return state;
-    case SET_DATA:
+    case SET_GAMBIT_DATA:
       const nextState = cloneDeep(state);
-      nextState.membershipId = action.payload.membershipId;
-      nextState.membershipType = action.payload.membershipType;
-      nextState.displayName = action.payload.displayName;
       if (!isEmpty(action.payload.gambitStats)) {
         nextState.gambitStats = cloneDeep(action.payload.gambitStats);
         nextState.infamy = cloneDeep(action.payload.infamy);
       }
       return nextState;
+    case SET_MEMBERSHIP_DATA:
+      state = cloneDeep(state);
+      state.memberships = cloneDeep(action.payload.memberships);
+      return state;
     case SUCCESS_SET_DATA:
       state = { ...state, success: true, loading: false, error: false };
       return state;
