@@ -59,26 +59,34 @@
   .input-container {
     position: relative;
     color: inherit;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     label {
       display: block;
       font-family: inherit;
-      font-size: 4em;
+      font-size: 5.5vw;
       position: absolute;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      width: 80%;
+      top: 5%;
+      left: 20%;
       padding: 10px;
       transition: all 0.5s;
       cursor: text;
+      @include breakpoint(768px) {
+        left: 10%;
+      }
     }
 
     &.active label {
-      top: -100%;
-      font-size: 2em;
+      top: -70%;
+      font-size: 3.5vw;
+      @include breakpoint(768px) {
+        top: -90%;
+        left: 10%;
+      }
     }
 
     &.active input {
@@ -87,13 +95,17 @@
     }
 
     input {
-      font-size: 4em;
+      width: 60%;
+      font-size: 6vw;
       margin-top: 2px;
       padding: 10px;
       border-radius: 5px;
       outline: none;
       background-color: rgba(0, 0, 0, 0.1);
       color: $white;
+      @include breakpoint(768px) {
+        width: 80%;
+      }
     }
   }
 }

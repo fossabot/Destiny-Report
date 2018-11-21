@@ -10,6 +10,10 @@
   &--home-item {
     .link {
       margin-right: 20px;
+      font-size: 2.5vw;
+      @include breakpoint(768px) {
+        font-size: 25px;
+      }
       &:hover {
         border-bottom: 1px solid $white;
       }
