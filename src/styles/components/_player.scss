@@ -4,7 +4,14 @@
   width: 80%;
   margin: 20px auto;
   position: relative;
+  min-height: 77vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  .track-wrapper {
+    width: 100%;
+  }
   @include breakpoint(890px) {
     width: 90%;
   }

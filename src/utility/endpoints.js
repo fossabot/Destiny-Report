@@ -4,7 +4,6 @@ export const getMembershipID = playerTag => {
   if (playerTag.includes("#")) {
     playerTag = playerTag.replace("#", "%23");
   }
-  console.log(playerTag);
   return axios.get(
     `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${playerTag}/`,
     {

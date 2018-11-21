@@ -2,9 +2,11 @@ import React from "react";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setGambitStatsAction
+  setGambitStatsAction,
+  setActiveMembership
 } from "../actions/playerActions";
 import { connect } from "react-redux";
+import Loading from "../components/Loading";
 
 class Home extends React.Component {
   state = {
@@ -29,16 +31,20 @@ class Home extends React.Component {
         const memberships = await this.props.setMembershipInfoAction(
           playerGamerTag
         );
-        if (memberships.length > 1) {
+        if (
+          memberships.length > 1 &&
+          this.props.player.activeMembership === -1
+        ) {
           this.setState({ isMore: true });
           return;
         }
+        await this.props.setActiveMembership(0);
         await this.props.setGambitStatsAction(
           memberships[0].membershipType,
           memberships[0].membershipId
         );
 
-        this.props.history.push(`/player/${memberships[0].displayName}`);
+        this.props.history.push(`/gambit/${memberships[0].displayName}`);
       } catch (err) {
         console.log(err);
       }
@@ -48,12 +54,16 @@ class Home extends React.Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
+    await this.props.setActiveMembership(index);
+    const activeMembership = this.props.player.activeMembership;
     await this.props.setGambitStatsAction(
-      memberships[index].membershipType,
-      memberships[index].membershipId
+      memberships[activeMembership].membershipType,
+      memberships[activeMembership].membershipId
     );
 
-    this.props.history.push(`/player/${memberships[index].displayName}`);
+    this.props.history.push(
+      `/gambit/${memberships[activeMembership].displayName}`
+    );
   };
 
   render() {
@@ -100,11 +110,7 @@ class Home extends React.Component {
         />
       </div>
     );
-    const isPlayerDataLoading = isLoading ? (
-      <div>Loading...</div>
-    ) : (
-      inputPlayerId
-    );
+    const isPlayerDataLoading = isLoading ? <Loading /> : inputPlayerId;
     return (
       <div className="home-wrapper">
         {error && errorPopup}
@@ -127,6 +133,7 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setGambitStatsAction
+    setGambitStatsAction,
+    setActiveMembership
   }
 )(Home);

@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setGambitStatsAction
+  setGambitStatsAction,
+  setActiveMembership
 } from "../actions/playerActions";
 import { infamySteps } from "../utility/Steps";
+import Loading from "../components/Loading";
 
 class Player extends Component {
   state = {
@@ -19,11 +21,16 @@ class Player extends Component {
         const playerMemberships = await this.props.setMembershipInfoAction(
           playerGamerTag
         );
+        const activeMembership = this.props.player.activeMembership;
 
-        if (this.props.player.memberships.length > 1) {
+        if (
+          this.props.player.memberships.length > 1 &&
+          activeMembership === -1
+        ) {
           this.setState({ isMore: true });
           return;
         }
+
         await this.props.setGambitStatsAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
@@ -42,6 +49,7 @@ class Player extends Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
+    await this.props.setActiveMembership(index);
     await this.props.setGambitStatsAction(
       memberships[index].membershipType,
       memberships[index].membershipId
@@ -122,9 +130,10 @@ class Player extends Component {
       </div>
     );
 
-    return (
-      <div className="infamy-container">
-        {this.state.isMore && multiMembershipPopup}
+    const { isLoading } = this.props.player;
+
+    const trackContainer = (
+      <div className="track-wrapper">
         <div className="track-container">
           <div>
             <ul>
@@ -185,6 +194,14 @@ class Player extends Component {
         </div>
       </div>
     );
+
+    const progression = isLoading ? <Loading /> : trackContainer;
+    return (
+      <div className="infamy-container">
+        {this.state.isMore && multiMembershipPopup}
+        {progression}
+      </div>
+    );
   }
 }
 
@@ -199,6 +216,7 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setGambitStatsAction
+    setGambitStatsAction,
+    setActiveMembership
   }
 )(Player);

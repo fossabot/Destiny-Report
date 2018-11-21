@@ -7,9 +7,11 @@ const FAIL_SET_DATA = "FAIL_SET_DATA";
 const RESET_DATA = "RESET_DATA";
 const SET_MEMBERSHIP_DATA = "SET_MEMBERSHIP_DATA";
 const FINISHED_LOADING = "FINISHED_LOADING";
+const SET_ACTIVE_MEMBERSHIP = "SET_ACTIVE_MEMBERSHIP";
 
 const initial = {
   memberships: [],
+  activeMembership: -1,
   gambitStats: {
     allTime: {
       activitiesEntered: {
@@ -742,10 +744,12 @@ export const playerReducer = (state = initial, action) => {
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);
       state.memberships = cloneDeep(action.payload.memberships);
-      console.log(state);
       return state;
     case SUCCESS_SET_DATA:
       state = { ...state, success: true, isLoading: true, error: false };
+      return state;
+    case SET_ACTIVE_MEMBERSHIP:
+      state = { ...state, activeMembership: action.payload };
       return state;
     case FINISHED_LOADING:
       state = { ...state, isLoading: false };

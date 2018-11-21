@@ -77,3 +77,12 @@ export const setGambitStatsAction = (membershipType, membershipId) => {
     });
   };
 };
+
+export const setActiveMembership = index => {
+  return dispatch => {
+    return new Promise(async (resolve, reject) => {
+      dispatch({ type: "SET_ACTIVE_MEMBERSHIP", payload: index });
+      resolve();
+    });
+  };
+};
