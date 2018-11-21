@@ -6,6 +6,7 @@ const SUCCESS_SET_DATA = "SUCCESS_SET_DATA";
 const FAIL_SET_DATA = "FAIL_SET_DATA";
 const RESET_DATA = "RESET_DATA";
 const SET_MEMBERSHIP_DATA = "SET_MEMBERSHIP_DATA";
+const FINISHED_LOADING = "FINISHED_LOADING";
 
 const initial = {
   memberships: [],
@@ -722,14 +723,14 @@ const initial = {
     level: 0
   },
   success: false,
-  loading: false,
+  isLoading: false,
   error: false
 };
 
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
     case START_SET_DATA:
-      state = { ...state, loading: true, success: false };
+      state = { ...state, isLoading: true, success: false };
       return state;
     case SET_GAMBIT_DATA:
       const nextState = cloneDeep(state);
@@ -741,12 +742,16 @@ export const playerReducer = (state = initial, action) => {
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);
       state.memberships = cloneDeep(action.payload.memberships);
+      console.log(state);
       return state;
     case SUCCESS_SET_DATA:
-      state = { ...state, success: true, loading: false, error: false };
+      state = { ...state, success: true, isLoading: true, error: false };
+      return state;
+    case FINISHED_LOADING:
+      state = { ...state, isLoading: false };
       return state;
     case FAIL_SET_DATA:
-      state = { ...state, success: false, loading: false, error: true };
+      state = { ...state, success: false, isLoading: false, error: true };
       return state;
     case RESET_DATA:
       state = cloneDeep(initial);

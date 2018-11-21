@@ -22,7 +22,7 @@ export const getGambitStats = (membershipType, membershipId) => {
 };
 export const getInfamyProgression = (membershipType, membershipId) => {
   return axios.get(
-    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=CharacterProgressions`,
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=CharacterProgressions,900`,
     {
       headers: {
         "X-API-KEY": process.env.REACT_APP_API_KEY

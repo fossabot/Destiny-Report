@@ -88,9 +88,11 @@ class Player extends Component {
       infamy.currentInfamy = this.props.player.infamy.currentProgress;
       infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
       infamy.progressToNextLevel = this.props.player.infamy.progressToNextLevel;
-      infamy.overallInfamy = 0;
-      infamy.ranks = 0;
-      infamy.resets = 0;
+      infamy.overallInfamy =
+        this.props.player.infamy.progress * 15000 + infamy.currentInfamy;
+      infamy.ranks =
+        this.props.player.infamy.progress * 16 + this.props.player.infamy.level;
+      infamy.resets = this.props.player.infamy.progress;
     }
 
     const multiMembershipPopup = (
