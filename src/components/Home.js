@@ -57,7 +57,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { error } = this.props.player;
+    const { error, isLoading } = this.props.player;
     const errorPopup = (
       <div className="error_popup">This player doesn't exist</div>
     );
@@ -87,22 +87,30 @@ class Home extends React.Component {
         </ul>
       </div>
     );
-
+    const inputPlayerId = (
+      <div className="input-container">
+        <label htmlFor="gamertag">Enter a player's name</label>
+        <input
+          type="text"
+          name="gamertag"
+          id="gamertag"
+          onFocus={this.setActive}
+          onBlur={event => this.setActive(event, true)}
+          onKeyPress={this.handlePress}
+        />
+      </div>
+    );
+    const isPlayerDataLoading = isLoading ? (
+      <div>Loading...</div>
+    ) : (
+      inputPlayerId
+    );
     return (
       <div className="home-wrapper">
         {error && errorPopup}
         {this.state.isMore && multiMembershipPopup}
-        <div className="input-container">
-          <label htmlFor="gamertag">Enter a player's name</label>
-          <input
-            type="text"
-            name="gamertag"
-            id="gamertag"
-            onFocus={this.setActive}
-            onBlur={event => this.setActive(event, true)}
-            onKeyPress={this.handlePress}
-          />
-        </div>
+
+        {isPlayerDataLoading}
       </div>
     );
   }
