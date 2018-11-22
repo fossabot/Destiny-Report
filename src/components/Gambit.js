@@ -93,10 +93,19 @@ class Gambit extends Component {
         gambit.winLossRatio = 0;
       }
       infamy.currentInfamy = this.props.player.infamy.currentProgress;
-      infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
-      infamy.progressToNextLevel =
-        infamySteps[this.props.player.infamy.level].progressTotal -
-        this.props.player.infamy.progressToNextLevel;
+      if (this.props.player.infamy.level === 16) {
+        infamy.currentRank =
+          infamySteps[this.props.player.infamy.level - 1].stepName;
+        infamy.progressToNextLevel =
+          infamySteps[this.props.player.infamy.level - 1].progressTotal -
+          this.props.player.infamy.progressToNextLevel;
+      } else {
+        infamy.currentRank =
+          infamySteps[this.props.player.infamy.level].stepName;
+        infamy.progressToNextLevel =
+          infamySteps[this.props.player.infamy.level].progressTotal -
+          this.props.player.infamy.progressToNextLevel;
+      }
       infamy.overallInfamy =
         this.props.player.infamy.progress * 15000 + infamy.currentInfamy;
       infamy.ranks =

@@ -83,11 +83,16 @@ class Crucible extends Component {
 
       valor.currentValor = this.props.player.valor.currentProgress;
 
-      valor.currentRank = valorSteps[this.props.player.valor.level].stepName;
-
+      if (this.props.player.valor.level === 6) {
+        valor.currentRank =
+          valorSteps[this.props.player.valor.level - 1].stepName;
+      } else {
+        valor.currentRank = valorSteps[this.props.player.valor.level].stepName;
+      }
       valor.progressToNextLevel =
-        valorSteps[this.props.player.valor.level].progressTotal -
+        this.props.player.valor.nextLevelAt -
         this.props.player.valor.progressToNextLevel;
+
       valor.overallValor =
         this.props.player.valor.progress * 2000 + valor.currentValor;
       valor.ranks =
@@ -95,11 +100,17 @@ class Crucible extends Component {
       valor.resets = this.props.player.valor.progress;
 
       //Glory
+      if (this.props.player.glory.level === 6) {
+        glory.currentRank =
+          glorySteps[this.props.player.glory.level - 1].stepName;
+      } else {
+        glory.currentRank = glorySteps[this.props.player.glory.level].stepName;
+      }
+
       glory.currentGlory = this.props.player.glory.currentProgress;
-      glory.currentRank = glorySteps[this.props.player.glory.level].stepName;
 
       glory.progressToNextLevel =
-        glorySteps[this.props.player.glory.level].progressTotal -
+        this.props.player.glory.nextLevelAt -
         this.props.player.glory.progressToNextLevel;
       glory.overallGlory =
         this.props.player.glory.progress * 5500 + glory.currentGlory;
