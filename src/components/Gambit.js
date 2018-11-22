@@ -50,7 +50,7 @@ class Gambit extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
-    await this.props.setGambitStatsAction(
+    await this.props.setAllProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
     );
@@ -92,11 +92,11 @@ class Gambit extends Component {
       if (gambit.won === 0 && gambit.lost === 0) {
         gambit.winLossRatio = 0;
       }
-
       infamy.currentInfamy = this.props.player.infamy.currentProgress;
-      infamy.currentRank =
-        infamySteps[this.props.player.infamy.level - 1].stepName;
-      infamy.progressToNextLevel = this.props.player.infamy.progressToNextLevel;
+      infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
+      infamy.progressToNextLevel =
+        infamySteps[this.props.player.infamy.level].progressTotal -
+        this.props.player.infamy.progressToNextLevel;
       infamy.overallInfamy =
         this.props.player.infamy.progress * 15000 + infamy.currentInfamy;
       infamy.ranks =
@@ -106,23 +106,27 @@ class Gambit extends Component {
 
     const multiMembershipPopup = (
       <div className="error_popup multi_membership_popup">
-        <ul>
+        <ul className="membershipsUL">
           {this.props.player.memberships.map((elem, index) => {
             let platform = "";
             if (elem.membershipType === 2) {
-              platform = "psn";
+              platform = "fab fa-playstation membershipLi";
+              platform += " psn";
             } else if (elem.membershipType === 1) {
-              platform = "xbox";
+              platform = "fab fa-xbox membershipLi";
+              platform += " xbox";
             } else {
-              platform = "pc";
+              platform = "fas fa-desktop membershipLi";
+              platform += " pc";
             }
             return (
               <li
                 key={index}
                 value={index}
                 onClick={this.handleMembershipType}
-                className={`membershipLi ${platform}`}
+                className={`${platform}`}
               >
+                {" "}
                 {elem.displayName}
               </li>
             );
@@ -155,8 +159,8 @@ class Gambit extends Component {
           <div>
             <ul>
               <li>Wins: {gambit.won}</li>
-              <li>Loses: {gambit.lost}</li>
-              <li>Win/Loss: {gambit.winLossRatio}%</li>
+              <li>Losses: {gambit.lost}</li>
+              <li>Wins/Losses: {gambit.winLossRatio}%</li>
             </ul>
           </div>
           <div>

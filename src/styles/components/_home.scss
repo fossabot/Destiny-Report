@@ -25,32 +25,50 @@
     background-color: rgb(31, 29, 29);
     top: 160px;
     z-index: 1;
-
-    .membershipLi {
-      width: min-content;
+    width: 70%;
+    @include breakpoint(750px) {
+      top: 180px;
+    }
+    @include breakpoint(480px) {
+      top: 220px;
+    }
+    .membershipsUL {
       margin: 0 auto;
-      cursor: pointer;
-      border-radius: 5px;
-      padding: 10px;
-      &:nth-child(odd) {
-        margin-bottom: 10px;
-      }
-      &.psn {
-        background-color: rgb(30, 32, 161);
-        &:hover {
-          background-color: rgb(65, 67, 167);
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      .membershipLi {
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 10px;
+        @include breakpoint(750px) {
+          font-size: 40px;
         }
-      }
-      &.xbox {
-        background-color: rgb(30, 161, 36);
-        &:hover {
-          background-color: rgb(65, 167, 82);
+        @include breakpoint(480px) {
+          font-size: 20px;
         }
-      }
-      &.pc {
-        background-color: rgb(161, 30, 30);
-        &:hover {
-          background-color: rgb(167, 65, 65);
+        &:nth-child(odd) {
+          margin-bottom: 10px;
+        }
+        &.psn {
+          background-color: rgb(30, 32, 161);
+          &:hover {
+            background-color: rgb(65, 67, 167);
+          }
+        }
+        &.xbox {
+          background-color: rgb(30, 161, 36);
+          &:hover {
+            background-color: rgb(65, 167, 82);
+          }
+        }
+        &.pc {
+          background-color: rgb(161, 30, 30);
+          &:hover {
+            background-color: rgb(167, 65, 65);
+          }
         }
       }
     }

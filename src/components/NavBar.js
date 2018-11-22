@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 
 const navBar = props => {
   let displayName = "";
-  if (props.player.activeMembership !== -1) {
+  if (
+    props.player.activeMembership !== -1 &&
+    props.player.memberships.length !== 0
+  ) {
     displayName =
       props.player.memberships[props.player.activeMembership].displayName;
   }

@@ -56,7 +56,7 @@ class Home extends React.Component {
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
     const activeMembership = this.props.player.activeMembership;
-    await this.props.setGambitStatsAction(
+    await this.props.setAllProgressionAction(
       memberships[activeMembership].membershipType,
       memberships[activeMembership].membershipId
     );
@@ -73,23 +73,27 @@ class Home extends React.Component {
     );
     const multiMembershipPopup = (
       <div className="error_popup multi_membership_popup">
-        <ul>
+        <ul className="membershipsUL">
           {this.props.player.memberships.map((elem, index) => {
             let platform = "";
             if (elem.membershipType === 2) {
-              platform = "psn";
+              platform = "fab fa-playstation membershipLi";
+              platform += " psn";
             } else if (elem.membershipType === 1) {
-              platform = "xbox";
+              platform = "fab fa-xbox membershipLi";
+              platform += " xbox";
             } else {
-              platform = "pc";
+              platform = "fas fa-desktop membershipLi";
+              platform += " pc";
             }
             return (
               <li
                 key={index}
                 value={index}
                 onClick={this.handleMembershipType}
-                className={`membershipLi ${platform}`}
+                className={`${platform}`}
               >
+                {" "}
                 {elem.displayName}
               </li>
             );

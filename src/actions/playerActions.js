@@ -45,7 +45,6 @@ export const setAllProgressionAction = (membershipType, membershipId) => {
           membershipType,
           membershipId
         );
-        console.log("crucible", crucibleStats);
         const allStats = await endpoints.getAllProgression(
           membershipType,
           membershipId

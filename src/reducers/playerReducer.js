@@ -883,12 +883,12 @@ export const playerReducer = (state = initial, action) => {
       state = { ...state, isLoading: true, success: false };
       return state;
     case SET_GAMBIT_DATA:
-      const nextState = cloneDeep(state);
+      state = cloneDeep(state);
       if (!isEmpty(action.payload.gambitStats)) {
-        nextState.gambitStats = cloneDeep(action.payload.gambitStats);
-        nextState.infamy = cloneDeep(action.payload.infamy);
+        state.gambitStats = cloneDeep(action.payload.gambitStats);
+        state.infamy = cloneDeep(action.payload.infamy);
       }
-      return nextState;
+      return state;
     case SET_CRUCIBLE_DATA:
       state = cloneDeep(state);
       if (!isEmpty(action.payload.valorProgress)) {
@@ -897,8 +897,9 @@ export const playerReducer = (state = initial, action) => {
       if (!isEmpty(action.payload.gloryProgress)) {
         state.glory = cloneDeep(action.payload.gloryProgress);
       }
-      state.crucibleStats = cloneDeep(action.payload.crucibleStats);
-
+      if (!isEmpty(action.payload.crucibleStats)) {
+        state.crucibleStats = cloneDeep(action.payload.crucibleStats);
+      }
       return state;
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);

@@ -50,7 +50,7 @@ class Crucible extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
-    await this.props.setGambitStatsAction(
+    await this.props.setAllProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
     );
@@ -81,9 +81,12 @@ class Crucible extends Component {
       }
 
       valor.currentValor = this.props.player.valor.currentProgress;
-      valor.currentRank =
-        valorSteps[this.props.player.valor.level - 1].stepName;
-      valor.progressToNextLevel = this.props.player.valor.progressToNextLevel;
+
+      valor.currentRank = valorSteps[this.props.player.valor.level].stepName;
+
+      valor.progressToNextLevel =
+        valorSteps[this.props.player.valor.level].progressTotal -
+        this.props.player.valor.progressToNextLevel;
       valor.overallValor =
         this.props.player.valor.progress * 2000 + valor.currentValor;
       valor.ranks =
@@ -92,9 +95,11 @@ class Crucible extends Component {
 
       //Glory
       glory.currentGlory = this.props.player.glory.currentProgress;
-      glory.currentRank =
-        glorySteps[this.props.player.glory.level - 1].stepName;
-      glory.progressToNextLevel = this.props.player.glory.progressToNextLevel;
+      glory.currentRank = glorySteps[this.props.player.glory.level].stepName;
+
+      glory.progressToNextLevel =
+        glorySteps[this.props.player.glory.level].progressTotal -
+        this.props.player.glory.progressToNextLevel;
       glory.overallGlory =
         this.props.player.glory.progress * 5500 + glory.currentGlory;
       glory.ranks =
@@ -104,23 +109,27 @@ class Crucible extends Component {
 
     const multiMembershipPopup = (
       <div className="error_popup multi_membership_popup">
-        <ul>
+        <ul className="membershipsUL">
           {this.props.player.memberships.map((elem, index) => {
             let platform = "";
             if (elem.membershipType === 2) {
-              platform = "psn";
+              platform = "fab fa-playstation membershipLi";
+              platform += " psn";
             } else if (elem.membershipType === 1) {
-              platform = "xbox";
+              platform = "fab fa-xbox membershipLi";
+              platform += " xbox";
             } else {
-              platform = "pc";
+              platform = "fas fa-desktop membershipLi";
+              platform += " pc";
             }
             return (
               <li
                 key={index}
                 value={index}
                 onClick={this.handleMembershipType}
-                className={`membershipLi ${platform}`}
+                className={`${platform}`}
               >
+                {" "}
                 {elem.displayName}
               </li>
             );
@@ -170,8 +179,8 @@ class Crucible extends Component {
           <div>
             <ul>
               <li>Wins: {valor.won}</li>
-              <li>Loses: {valor.lost}</li>
-              <li>Win/Loss: {valor.winLossRatio}%</li>
+              <li>Losses: {valor.lost}</li>
+              <li>Wins/Losses: {valor.winLossRatio}%</li>
             </ul>
           </div>
           <div>
