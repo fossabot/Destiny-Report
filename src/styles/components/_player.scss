@@ -2,15 +2,21 @@
   color: $white;
   font-size: 2em;
   width: 80%;
+  min-height: 75vh;
   margin: 20px auto;
   position: relative;
-  min-height: 77vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .track-wrapper {
     width: 100%;
+  }
+  @include breakpoint(390px) {
+    font-size: 1.8em;
+  }
+  @include breakpoint(360px) {
+    font-size: 1.3em;
   }
   @include breakpoint(890px) {
     width: 90%;
@@ -26,7 +32,6 @@
     background-color: rgba(0, 0, 0, 0.1);
     margin: 0 5px 10px 0;
     padding: 10px;
-    padding-left: 5%;
 
     @include breakpoint(714px) {
       flex-direction: column;
@@ -38,6 +43,9 @@
     & div {
       width: 320px;
       margin: 0 auto;
+      @include breakpoint(400px) {
+        width: 100%;
+      }
     }
   }
 

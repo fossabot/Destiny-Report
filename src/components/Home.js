@@ -2,7 +2,7 @@ import React from "react";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setGambitStatsAction,
+  setAllProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
 import { connect } from "react-redux";
@@ -39,7 +39,7 @@ class Home extends React.Component {
           return;
         }
         await this.props.setActiveMembership(0);
-        await this.props.setGambitStatsAction(
+        await this.props.setAllProgressionAction(
           memberships[0].membershipType,
           memberships[0].membershipId
         );
@@ -133,7 +133,7 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setGambitStatsAction,
+    setAllProgressionAction,
     setActiveMembership
   }
 )(Home);

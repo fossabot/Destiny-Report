@@ -33,7 +33,7 @@ export const setMembershipInfoAction = playerGamerTag => {
   };
 };
 
-export const setGambitStatsAction = (membershipType, membershipId) => {
+export const setAllProgressionAction = (membershipType, membershipId) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -41,16 +41,44 @@ export const setGambitStatsAction = (membershipType, membershipId) => {
           membershipType,
           membershipId
         );
-        const infamyStats = await endpoints.getInfamyProgression(
+        const crucibleStats = await endpoints.getCrucibleStats(
           membershipType,
           membershipId
         );
+        console.log("crucible", crucibleStats);
+        const allStats = await endpoints.getAllProgression(
+          membershipType,
+          membershipId
+        );
+
+        //Infamy
         const { currentProgress, progressToNextLevel, level } = values(
-          infamyStats.data.Response.characterProgressions.data
+          allStats.data.Response.characterProgressions.data
         )[0].progressions["2772425241"];
+
         const progress =
-          infamyStats.data.Response.profileRecords.data.records["3901785488"]
+          allStats.data.Response.profileRecords.data.records["3901785488"]
             .objectives[0].progress;
+
+        //Valor
+        const valorProgress = values(
+          allStats.data.Response.characterProgressions.data
+        )[0].progressions["3882308435"];
+
+        const valorResets =
+          allStats.data.Response.profileRecords.data.records["559943871"]
+            .objectives[0].progress;
+        valorProgress.progress = valorResets;
+
+        //Glory
+        const gloryProgress = values(
+          allStats.data.Response.characterProgressions.data
+        )[0].progressions["2679551909"];
+
+        const gloryResets =
+          allStats.data.Response.profileRecords.data.records["4185918315"]
+            .objectives[0].progress;
+        gloryProgress.progress = gloryResets;
 
         const infamy = {
           currentProgress,
@@ -65,6 +93,14 @@ export const setGambitStatsAction = (membershipType, membershipId) => {
           payload: {
             gambitStats: gambitStats.data.Response.pvecomp_gambit,
             infamy
+          }
+        });
+        dispatch({
+          type: "SET_CRUCIBLE_DATA",
+          payload: {
+            valorProgress,
+            gloryProgress,
+            crucibleStats: crucibleStats.data.Response.allPvP
           }
         });
         dispatch({ type: "SUCCESS_SET_DATA" });

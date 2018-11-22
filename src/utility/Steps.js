@@ -66,3 +66,55 @@ export const infamySteps = [
     progressTotal: 3000
   }
 ];
+export const glorySteps = [
+  {
+    stepName: "Guardian",
+    progressTotal: 200
+  },
+  {
+    stepName: "Brave",
+    progressTotal: 850
+  },
+  {
+    stepName: "Heroic",
+    progressTotal: 1050
+  },
+  {
+    stepName: "Fabled",
+    progressTotal: 1400
+  },
+  {
+    stepName: "Mythic",
+    progressTotal: 1950
+  },
+  {
+    stepName: "Legend",
+    progressTotal: 50
+  }
+];
+export const valorSteps = [
+  {
+    stepName: "Guardian",
+    progressTotal: 50
+  },
+  {
+    stepName: "Brave",
+    progressTotal: 300
+  },
+  {
+    stepName: "Heroic",
+    progressTotal: 350
+  },
+  {
+    stepName: "Fabled",
+    progressTotal: 450
+  },
+  {
+    stepName: "Mythic",
+    progressTotal: 650
+  },
+  {
+    stepName: "Legend",
+    progressTotal: 200
+  }
+];

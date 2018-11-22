@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setGambitStatsAction,
+  setAllProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
-import { infamySteps } from "../utility/Steps";
+import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
 
-class Player extends Component {
+class Crucible extends Component {
   state = {
     isMore: false
   };
@@ -31,7 +31,7 @@ class Player extends Component {
           return;
         }
 
-        await this.props.setGambitStatsAction(
+        await this.props.setAllProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
         );
@@ -60,47 +60,46 @@ class Player extends Component {
   };
 
   render() {
-    const gambit = {};
-    const infamy = {};
+    const valor = {};
+    const glory = {};
     if (this.props.player.success) {
-      gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
-      gambit.lost =
-        this.props.player.gambitStats.allTime.activitiesEntered.basic.value -
-        gambit.won;
-      gambit.kills = this.props.player.gambitStats.allTime.kills.basic.value;
-      gambit.deaths = this.props.player.gambitStats.allTime.deaths.basic.value;
-      gambit.invaderkills = this.props.player.gambitStats.allTime.invaderKills.basic.value;
-      gambit.invasionKills = this.props.player.gambitStats.allTime.invasionKills.basic.value;
-      gambit.blockerKills = this.props.player.gambitStats.allTime.blockerKills.basic.value;
+      valor.won = this.props.player.crucibleStats.allTime.activitiesWon.basic.value;
+      valor.lost =
+        this.props.player.crucibleStats.allTime.activitiesEntered.basic.value -
+        valor.won;
+      valor.kills = this.props.player.crucibleStats.allTime.kills.basic.value;
+      valor.deaths = this.props.player.crucibleStats.allTime.deaths.basic.value;
+      valor.killStreak = this.props.player.crucibleStats.allTime.longestKillSpree.basic.value;
 
-      gambit.smallBlockersSent = this.props.player.gambitStats.allTime.smallBlockersSent.basic.value;
-      gambit.mediumBlockersSent = this.props.player.gambitStats.allTime.mediumBlockersSent.basic.value;
-      gambit.largeBlockersSent = this.props.player.gambitStats.allTime.largeBlockersSent.basic.value;
-      gambit.blockersSent =
-        gambit.smallBlockersSent +
-        gambit.mediumBlockersSent +
-        gambit.largeBlockersSent;
-
-      gambit.motesDeposited = this.props.player.gambitStats.allTime.motesDeposited.basic.value;
-      gambit.motesLost = this.props.player.gambitStats.allTime.motesLost.basic.value;
-
-      gambit.winLossRatio = (
+      valor.winLossRatio = (
         100 *
-        (gambit.won / (gambit.won + gambit.lost))
+        (valor.won / (valor.won + valor.lost))
       ).toFixed(1);
 
-      if (gambit.won === 0 && gambit.lost === 0) {
-        gambit.winLossRatio = 0;
+      if (valor.won === 0 && valor.lost === 0) {
+        valor.winLossRatio = 0;
       }
 
-      infamy.currentInfamy = this.props.player.infamy.currentProgress;
-      infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
-      infamy.progressToNextLevel = this.props.player.infamy.progressToNextLevel;
-      infamy.overallInfamy =
-        this.props.player.infamy.progress * 15000 + infamy.currentInfamy;
-      infamy.ranks =
-        this.props.player.infamy.progress * 16 + this.props.player.infamy.level;
-      infamy.resets = this.props.player.infamy.progress;
+      valor.currentValor = this.props.player.valor.currentProgress;
+      valor.currentRank =
+        valorSteps[this.props.player.valor.level - 1].stepName;
+      valor.progressToNextLevel = this.props.player.valor.progressToNextLevel;
+      valor.overallValor =
+        this.props.player.valor.progress * 2000 + valor.currentValor;
+      valor.ranks =
+        this.props.player.valor.progress * 6 + this.props.player.valor.level;
+      valor.resets = this.props.player.valor.progress;
+
+      //Glory
+      glory.currentGlory = this.props.player.glory.currentProgress;
+      glory.currentRank =
+        glorySteps[this.props.player.glory.level - 1].stepName;
+      glory.progressToNextLevel = this.props.player.glory.progressToNextLevel;
+      glory.overallGlory =
+        this.props.player.glory.progress * 5500 + glory.currentGlory;
+      glory.ranks =
+        this.props.player.glory.progress * 6 + this.props.player.glory.level;
+      glory.resets = this.props.player.glory.progress;
     }
 
     const multiMembershipPopup = (
@@ -137,58 +136,49 @@ class Player extends Component {
         <div className="track-container">
           <div>
             <ul>
-              <li>Current Infamy: {infamy.currentInfamy}</li>
-              <li>Rank: {infamy.currentRank}</li>
-              <li>
-                To next rank:
-                {infamy.progressToNextLevel}
-              </li>
+              <li>Current Valor: {valor.currentValor}</li>
+              <li>Rank: {valor.currentRank}</li>
+              <li>To next rank: {valor.progressToNextLevel}</li>
             </ul>
           </div>
           <div>
             <ul>
-              <li>Overall Infamy: {infamy.overallInfamy}</li>
-              <li>Ranks: {infamy.ranks}</li>
-              <li>Resets: {infamy.resets}</li>
+              <li>Overall Valor: {valor.overallValor}</li>
+              <li>Ranks: {valor.ranks}</li>
+              <li>Resets: {valor.resets}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Current Glory: {glory.currentGlory}</li>
+              <li>Rank: {glory.currentRank}</li>
+              <li>To next rank: {glory.progressToNextLevel}</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Overall Glory: {glory.overallGlory}</li>
+              <li>Ranks: {glory.ranks}</li>
+              <li>Resets: {glory.resets}</li>
             </ul>
           </div>
         </div>
         <div className="track-container">
           <div>
             <ul>
-              <li>Wins: {gambit.won}</li>
-              <li>Loses: {gambit.lost}</li>
-              <li>Win/Loss: {gambit.winLossRatio}%</li>
+              <li>Wins: {valor.won}</li>
+              <li>Loses: {valor.lost}</li>
+              <li>Win/Loss: {valor.winLossRatio}%</li>
             </ul>
           </div>
           <div>
             <ul>
-              <li>Kills: {gambit.kills}</li>
-              <li>Deaths: {gambit.deaths}</li>
-              <li>Invader Kills: {gambit.invaderkills}</li>
-            </ul>
-          </div>
-        </div>
-        <div className="track-container">
-          <div>
-            <ul>
-              <li>Blockers sent: {gambit.blockersSent}</li>
-              <li>Blockers killed: {gambit.blockerKills}</li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>Large Blockers: {gambit.largeBlockersSent}</li>
-              <li>Medium Blockers: {gambit.mediumBlockersSent}</li>
-              <li>Small Blockers: {gambit.smallBlockersSent}</li>
-            </ul>
-          </div>
-        </div>
-        <div className="track-container">
-          <div>
-            <ul>
-              <li>Motes banked: {gambit.motesDeposited}</li>
-              <li>Motes lost: {gambit.motesLost}</li>
+              <li>Kills: {valor.kills}</li>
+              <li>Deaths: {valor.deaths}</li>
+              <li>Kill Streak: {valor.killStreak}</li>
             </ul>
           </div>
         </div>
@@ -216,7 +206,7 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setGambitStatsAction,
+    setAllProgressionAction,
     setActiveMembership
   }
-)(Player);
+)(Crucible);
