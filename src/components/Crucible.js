@@ -70,6 +70,7 @@ class Crucible extends Component {
       valor.kills = this.props.player.crucibleStats.allTime.kills.basic.value;
       valor.deaths = this.props.player.crucibleStats.allTime.deaths.basic.value;
       valor.killStreak = this.props.player.crucibleStats.allTime.longestKillSpree.basic.value;
+      valor.killDeathRatio = (valor.kills / valor.deaths).toFixed(2);
 
       valor.winLossRatio = (
         100 *
@@ -188,6 +189,13 @@ class Crucible extends Component {
               <li>Kills: {valor.kills}</li>
               <li>Deaths: {valor.deaths}</li>
               <li>Kill Streak: {valor.killStreak}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container kill_death_ratio">
+          <div>
+            <ul>
+              <li>K/D: {valor.killDeathRatio}</li>
             </ul>
           </div>
         </div>

@@ -32,7 +32,9 @@
     background-color: rgba(0, 0, 0, 0.1);
     margin: 0 5px 10px 0;
     padding: 10px;
-
+    &.kill_death_ratio {
+      text-align: center;
+    }
     @include breakpoint(714px) {
       flex-direction: column;
       text-align: center;
