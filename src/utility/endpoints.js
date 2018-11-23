@@ -25,7 +25,7 @@ export const getGambitStats = (membershipType, membershipId) => {
 };
 export const getAllProgression = (membershipType, membershipId) => {
   return axios.get(
-    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=CharacterProgressions,900`,
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=100,202,900`,
     {
       headers: {
         "X-API-KEY": process.env.REACT_APP_API_KEY
@@ -45,9 +45,9 @@ export const getCrucibleStats = (membershipType, membershipId) => {
   );
 };
 
-export const getRaidStats = (membershipType, membershipId) => {
+export const getRaidStats = (membershipType, membershipId, characterId) => {
   return axios.get(
-    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/0/Stats/?modes=4&periodType=2`,
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${characterId}/Stats/AggregateActivityStats/`,
     {
       headers: {
         "X-API-KEY": process.env.REACT_APP_API_KEY

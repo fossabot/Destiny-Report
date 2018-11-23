@@ -69,7 +69,7 @@ class Gambit extends Component {
         gambit.won;
       gambit.kills = this.props.player.gambitStats.allTime.kills.basic.value;
       gambit.deaths = this.props.player.gambitStats.allTime.deaths.basic.value;
-      gambit.invaderkills = this.props.player.gambitStats.allTime.invaderKills.basic.value;
+      gambit.invaderKills = this.props.player.gambitStats.allTime.invaderKills.basic.value;
       gambit.invasionKills = this.props.player.gambitStats.allTime.invasionKills.basic.value;
       gambit.blockerKills = this.props.player.gambitStats.allTime.blockerKills.basic.value;
 
@@ -176,7 +176,7 @@ class Gambit extends Component {
             <ul>
               <li>Kills: {gambit.kills}</li>
               <li>Deaths: {gambit.deaths}</li>
-              <li>Invader Kills: {gambit.invaderkills}</li>
+              <li>Invader Kills: {gambit.invaderKills}</li>
             </ul>
           </div>
         </div>

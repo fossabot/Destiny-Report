@@ -12,7 +12,7 @@ class Raid extends Component {
   state = {
     isMore: false
   };
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       const { memberships } = this.props.player;
       if (memberships.length === 0 && this.props.match.params.id) {
@@ -30,6 +30,7 @@ class Raid extends Component {
           return;
         }
 
+        await this.props.setActiveMembership(0);
         await this.props.setAllProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
@@ -92,10 +93,93 @@ class Raid extends Component {
 
     const { isLoading } = this.props.player;
 
+    const raid = {
+      lastWish: { normalCompletions: 0 },
+      EoW: {
+        normalCompletions: 0,
+        prestigeCompletions: 0
+      },
+      SoS: { normalCompletions: 0, prestigeCompletions: 0 },
+      leviathan: { normalCompletions: 0, prestigeCompletions: 0 }
+    };
+    if (!this.props.player.isLoading) {
+      for (let i = 0; i < this.props.player.raid.length; ++i) {
+        this.props.player.raid[i][`character${i + 1}`].forEach(elm => {
+          //console.log(elm.values.fastestCompletionMsForActivity.basic.value);
+          if (elm.activityHash === 2122313384) {
+            raid.lastWish.normalCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (elm.activityHash === 3089205900) {
+            raid.EoW.normalCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (elm.activityHash === 809170886) {
+            raid.EoW.prestigeCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (elm.activityHash === 119944200) {
+            raid.SoS.normalCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (elm.activityHash === 3213556450) {
+            raid.SoS.prestigeCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (
+            elm.activityHash === 2693136600 ||
+            elm.activityHash === 2693136601 ||
+            elm.activityHash === 2693136602 ||
+            elm.activityHash === 2693136603 ||
+            elm.activityHash === 2693136604 ||
+            elm.activityHash === 2693136605
+          ) {
+            raid.leviathan.normalCompletions +=
+              elm.values.activityCompletions.basic.value;
+          } else if (
+            elm.activityHash === 417231112 ||
+            elm.activityHash === 757116822 ||
+            elm.activityHash === 1685065161 ||
+            elm.activityHash === 2449714930 ||
+            elm.activityHash === 3446541099 ||
+            elm.activityHash === 3879860661
+          ) {
+            raid.leviathan.prestigeCompletions +=
+              elm.values.activityCompletions.basic.value;
+          }
+        });
+      }
+    }
+
+    console.log(raid);
     const trackContainer = (
       <div className="track-wrapper">
         <div className="track-container">
-          Development in progress for Raid, please comeback later
+          <div>
+            <ul>
+              <li>Leviathan normal: {raid.leviathan.normalCompletions}</li>
+              <li>Leviathan prestige: {raid.leviathan.prestigeCompletions}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Eater of Worlds normal: {raid.EoW.normalCompletions}</li>
+              <li>Eater of Worlds prestige: {raid.EoW.prestigeCompletions}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Spire of Stars normal: {raid.SoS.normalCompletions}</li>
+              <li>Spire of Stars prestige: {raid.SoS.prestigeCompletions}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
+              <li>Last Wish normal: {raid.lastWish.normalCompletions}</li>
+              <li>Last Wish prestige: {raid.lastWish.prestigeCompletions}</li>
+            </ul>
+          </div>
         </div>
       </div>
     );

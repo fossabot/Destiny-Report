@@ -79,6 +79,22 @@ export const setAllProgressionAction = (membershipType, membershipId) => {
             .objectives[0].progress;
         gloryProgress.progress = gloryResets;
 
+        //Raid
+        const characterIds = allStats.data.Response.profile.data.characterIds;
+        console.log(characterIds);
+
+        const raidStats = [];
+        for (let i = 0; i < characterIds.length; ++i) {
+          const characterRaidStat = await endpoints.getRaidStats(
+            membershipType,
+            membershipId,
+            characterIds[i]
+          );
+          raidStats.push({
+            [`character${i + 1}`]: characterRaidStat.data.Response.activities
+          });
+        }
+
         const infamy = {
           currentProgress,
           progressToNextLevel,
@@ -101,6 +117,10 @@ export const setAllProgressionAction = (membershipType, membershipId) => {
             gloryProgress,
             crucibleStats: crucibleStats.data.Response.allPvP
           }
+        });
+        dispatch({
+          type: "SET_RAID_DATA",
+          payload: raidStats
         });
         dispatch({ type: "SUCCESS_SET_DATA" });
         dispatch({ type: "FINISHED_LOADING" });
