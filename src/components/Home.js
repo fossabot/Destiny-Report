@@ -2,7 +2,9 @@ import React from "react";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setAllProgressionAction,
+  setGambitProgressionAction,
+  setCrucibleProgressionAction,
+  setRaidProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
 import { connect } from "react-redux";
@@ -29,7 +31,8 @@ class Home extends React.Component {
       const playerGamerTag = event.target.value.toLowerCase();
       try {
         const memberships = await this.props.setMembershipInfoAction(
-          playerGamerTag
+          playerGamerTag,
+          "gambit"
         );
         if (
           memberships.length > 1 &&
@@ -39,7 +42,15 @@ class Home extends React.Component {
           return;
         }
         await this.props.setActiveMembership(0);
-        await this.props.setAllProgressionAction(
+        await this.props.setGambitProgressionAction(
+          memberships[0].membershipType,
+          memberships[0].membershipId
+        );
+        this.props.setRaidProgressionAction(
+          memberships[0].membershipType,
+          memberships[0].membershipId
+        );
+        this.props.setCrucibleProgressionAction(
           memberships[0].membershipType,
           memberships[0].membershipId
         );
@@ -56,7 +67,15 @@ class Home extends React.Component {
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
     const activeMembership = this.props.player.activeMembership;
-    await this.props.setAllProgressionAction(
+    await this.props.setGambitProgressionAction(
+      memberships[activeMembership].membershipType,
+      memberships[activeMembership].membershipId
+    );
+    this.props.setRaidProgressionAction(
+      memberships[activeMembership].membershipType,
+      memberships[activeMembership].membershipId
+    );
+    this.props.setCrucibleProgressionAction(
       memberships[activeMembership].membershipType,
       memberships[activeMembership].membershipId
     );
@@ -67,7 +86,8 @@ class Home extends React.Component {
   };
 
   render() {
-    const { error, isLoading } = this.props.player;
+    const { error, gambitIsLoading } = this.props.player;
+    console.log(gambitIsLoading);
     const errorPopup = (
       <div className="error_popup">This player doesn't exist</div>
     );
@@ -114,7 +134,7 @@ class Home extends React.Component {
         />
       </div>
     );
-    const isPlayerDataLoading = isLoading ? <Loading /> : inputPlayerId;
+    const isPlayerDataLoading = gambitIsLoading ? <Loading /> : inputPlayerId;
     return (
       <div className="home-wrapper">
         {error && errorPopup}
@@ -137,7 +157,9 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setAllProgressionAction,
+    setGambitProgressionAction,
+    setCrucibleProgressionAction,
+    setRaidProgressionAction,
     setActiveMembership
   }
 )(Home);

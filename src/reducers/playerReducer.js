@@ -1,5 +1,5 @@
 import { cloneDeep, isEmpty } from "lodash";
-import initial2 from "../utility/initials.json";
+import initial from "../utility/initials.json";
 
 const SET_GAMBIT_DATA = "SET_GAMBIT_DATA";
 const START_SET_DATA = "START_SET_DATA";
@@ -12,10 +12,31 @@ const SET_ACTIVE_MEMBERSHIP = "SET_ACTIVE_MEMBERSHIP";
 const SET_CRUCIBLE_DATA = "SET_CRUCIBLE_DATA";
 const SET_RAID_DATA = "SET_RAID_DATA";
 
-export const playerReducer = (state = initial2, action) => {
+export const playerReducer = (state = initial, action) => {
   switch (action.type) {
     case START_SET_DATA:
-      state = { ...state, isLoading: true, success: false };
+      if (action.payload === "gambit") {
+        state = {
+          ...state,
+          gambitIsLoading: true,
+          gambitSuccess: false,
+          error: false
+        };
+      } else if (action.payload === "crucible") {
+        state = {
+          ...state,
+          crucibleIsLoading: true,
+          crucibleSuccess: false,
+          error: false
+        };
+      } else if (action.payload === "raid") {
+        state = {
+          ...state,
+          raidIsLoading: true,
+          raidSuccess: false,
+          error: false
+        };
+      }
       return state;
     case SET_GAMBIT_DATA:
       state = cloneDeep(state);
@@ -45,19 +66,37 @@ export const playerReducer = (state = initial2, action) => {
       state.memberships = cloneDeep(action.payload.memberships);
       return state;
     case SUCCESS_SET_DATA:
-      state = { ...state, success: true, isLoading: true, error: false };
+      if (action.payload === "gambit") {
+        state = { ...state, gambitSuccess: true };
+      } else if (action.payload === "crucible") {
+        state = { ...state, crucibleSuccess: true };
+      } else if (action.payload === "raid") {
+        state = { ...state, raidSuccess: true };
+      }
       return state;
     case SET_ACTIVE_MEMBERSHIP:
       state = { ...state, activeMembership: action.payload };
       return state;
     case FINISHED_LOADING:
-      state = { ...state, isLoading: false };
+      if (action.payload === "gambit") {
+        state = { ...state, gambitIsLoading: false };
+      } else if (action.payload === "crucible") {
+        state = { ...state, crucibleIsLoading: false };
+      } else if (action.payload === "raid") {
+        state = { ...state, raidIsLoading: false };
+      }
       return state;
     case FAIL_SET_DATA:
-      state = { ...state, success: false, isLoading: false, error: true };
+      if (action.payload === "gambit") {
+        state = { ...state, gambitSuccess: false, error: true };
+      } else if (action.payload === "crucible") {
+        state = { ...state, crucibleSuccess: false, error: true };
+      } else if (action.payload === "raid") {
+        state = { ...state, raidSuccess: false, error: true };
+      }
       return state;
     case RESET_DATA:
-      state = cloneDeep(initial2);
+      state = cloneDeep(initial);
       return state;
     default:
       return state;

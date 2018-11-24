@@ -49,5 +49,11 @@
         width: 100%;
       }
     }
+    & .raid {
+      width: 380px;
+      @include breakpoint(455px) {
+        width: 100%;
+      }
+    }
   }
 }

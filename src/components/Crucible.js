@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setAllProgressionAction,
+  setGambitProgressionAction,
+  setCrucibleProgressionAction,
+  setRaidProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
 import { valorSteps, glorySteps } from "../utility/Steps";
@@ -19,7 +21,8 @@ class Crucible extends Component {
       if (memberships.length === 0 && this.props.match.params.id) {
         const playerGamerTag = this.props.match.params.id.toLowerCase();
         const playerMemberships = await this.props.setMembershipInfoAction(
-          playerGamerTag
+          playerGamerTag,
+          "crucible"
         );
         const activeMembership = this.props.player.activeMembership;
 
@@ -31,7 +34,16 @@ class Crucible extends Component {
           return;
         }
 
-        await this.props.setAllProgressionAction(
+        await this.props.setActiveMembership(0);
+        await this.props.setCrucibleProgressionAction(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
+        this.props.setGambitProgressionAction(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
+        this.props.setRaidProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
         );
@@ -50,19 +62,27 @@ class Crucible extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
-    await this.props.setAllProgressionAction(
+    await this.props.setCrucibleProgressionAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+    this.props.setRaidProgressionAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+    this.props.setGambitProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
     );
 
     this.setState({ isMore: false });
-    this.props.history.push(`/player/${memberships[index].displayName}`);
+    this.props.history.push(`/crucible/${memberships[index].displayName}`);
   };
 
   render() {
     const valor = {};
     const glory = {};
-    if (this.props.player.success) {
+    if (this.props.player.crucibleSuccess) {
       valor.won = this.props.player.crucibleStats.allTime.activitiesWon.basic.value;
       valor.lost =
         this.props.player.crucibleStats.allTime.activitiesEntered.basic.value -
@@ -150,7 +170,7 @@ class Crucible extends Component {
       </div>
     );
 
-    const { isLoading } = this.props.player;
+    const { crucibleIsLoading } = this.props.player;
 
     const trackContainer = (
       <div className="track-wrapper">
@@ -213,7 +233,7 @@ class Crucible extends Component {
       </div>
     );
 
-    const progression = isLoading ? <Loading /> : trackContainer;
+    const progression = crucibleIsLoading ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
         {this.state.isMore && multiMembershipPopup}
@@ -234,7 +254,9 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setAllProgressionAction,
+    setGambitProgressionAction,
+    setCrucibleProgressionAction,
+    setRaidProgressionAction,
     setActiveMembership
   }
 )(Crucible);

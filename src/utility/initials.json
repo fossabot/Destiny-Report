@@ -1,4 +1,13 @@
 {
+  "success": false,
+  "gambitSuccess": false,
+  "gambitIsLoading": false,
+  "crucibleSuccess": false,
+  "crucibleIsLoading": false,
+  "raidSuccess": false,
+  "raidIsLoading": false,
+  "isLoading": false,
+  "error": false,
   "memberships": [],
   "activeMembership": -1,
   "gambitStats": {
@@ -860,9 +869,6 @@
       }
     }
   },
-  "success": false,
-  "isLoading": false,
-  "error": false,
   "raid": [
     {
       "character1": [

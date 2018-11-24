@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import {
   resetTheStateAction,
   setMembershipInfoAction,
-  setAllProgressionAction,
+  setGambitProgressionAction,
+  setCrucibleProgressionAction,
+  setRaidProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
 import { infamySteps } from "../utility/Steps";
@@ -31,7 +33,15 @@ class Gambit extends Component {
           return;
         }
 
-        await this.props.setAllProgressionAction(
+        await this.props.setGambitProgressionAction(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
+        this.props.setCrucibleProgressionAction(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
+        this.props.setRaidProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
         );
@@ -50,19 +60,27 @@ class Gambit extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     await this.props.setActiveMembership(index);
-    await this.props.setAllProgressionAction(
+    await this.props.setGambitProgressionAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+    this.props.setCrucibleProgressionAction(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
+    this.props.setRaidProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
     );
 
     this.setState({ isMore: false });
-    this.props.history.push(`/player/${memberships[index].displayName}`);
+    this.props.history.push(`/gambit/${memberships[index].displayName}`);
   };
 
   render() {
     const gambit = {};
     const infamy = {};
-    if (this.props.player.success) {
+    if (this.props.player.gambitSuccess) {
       gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
       gambit.lost =
         this.props.player.gambitStats.allTime.activitiesEntered.basic.value -
@@ -144,7 +162,7 @@ class Gambit extends Component {
       </div>
     );
 
-    const { isLoading } = this.props.player;
+    const { gambitIsLoading } = this.props.player;
 
     const trackContainer = (
       <div className="track-wrapper">
@@ -206,7 +224,7 @@ class Gambit extends Component {
       </div>
     );
 
-    const progression = isLoading ? <Loading /> : trackContainer;
+    const progression = gambitIsLoading ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
         {this.state.isMore && multiMembershipPopup}
@@ -227,7 +245,9 @@ export default connect(
   {
     resetTheStateAction,
     setMembershipInfoAction,
-    setAllProgressionAction,
+    setGambitProgressionAction,
+    setCrucibleProgressionAction,
+    setRaidProgressionAction,
     setActiveMembership
   }
 )(Gambit);
