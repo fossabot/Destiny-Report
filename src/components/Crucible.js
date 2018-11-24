@@ -10,6 +10,7 @@ import {
 } from "../actions/playerActions";
 import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
+import MultiMembershipPopup from "./MultiMembershipPopup";
 
 class Crucible extends Component {
   state = {
@@ -61,6 +62,7 @@ class Crucible extends Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
+    this.setState({ isMore: false });
     await this.props.setActiveMembership(index);
     await this.props.setCrucibleProgressionAction(
       memberships[index].membershipType,
@@ -91,6 +93,9 @@ class Crucible extends Component {
       valor.deaths = this.props.player.crucibleStats.allTime.deaths.basic.value;
       valor.killStreak = this.props.player.crucibleStats.allTime.longestKillSpree.basic.value;
       valor.killDeathRatio = (valor.kills / valor.deaths).toFixed(2);
+      if (valor.kills === 0 && valor.deaths === 0) {
+        valor.killDeathRatio = 0;
+      }
 
       valor.winLossRatio = (
         100 *
@@ -138,37 +143,6 @@ class Crucible extends Component {
         this.props.player.glory.progress * 6 + this.props.player.glory.level;
       glory.resets = this.props.player.glory.progress;
     }
-
-    const multiMembershipPopup = (
-      <div className="error_popup multi_membership_popup">
-        <ul className="membershipsUL">
-          {this.props.player.memberships.map((elem, index) => {
-            let platform = "";
-            if (elem.membershipType === 2) {
-              platform = "fab fa-playstation membershipLi";
-              platform += " psn";
-            } else if (elem.membershipType === 1) {
-              platform = "fab fa-xbox membershipLi";
-              platform += " xbox";
-            } else {
-              platform = "fas fa-desktop membershipLi";
-              platform += " pc";
-            }
-            return (
-              <li
-                key={index}
-                value={index}
-                onClick={this.handleMembershipType}
-                className={`${platform}`}
-              >
-                {" "}
-                {elem.displayName}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
 
     const { crucibleIsLoading } = this.props.player;
 
@@ -233,10 +207,15 @@ class Crucible extends Component {
       </div>
     );
 
-    const progression = crucibleIsLoading ? <Loading /> : trackContainer;
+    const progression =
+      crucibleIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
-        {this.state.isMore && multiMembershipPopup}
+        {this.state.isMore && (
+          <MultiMembershipPopup
+            handleMembershipType={this.handleMembershipType}
+          />
+        )}
         {progression}
       </div>
     );

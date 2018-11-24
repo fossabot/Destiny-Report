@@ -10,6 +10,7 @@ import {
 } from "../actions/playerActions";
 import { infamySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
+import MultiMembershipPopup from "./MultiMembershipPopup";
 
 class Gambit extends Component {
   state = {
@@ -59,6 +60,7 @@ class Gambit extends Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
+    this.setState({ isMore: false });
     await this.props.setActiveMembership(index);
     await this.props.setGambitProgressionAction(
       memberships[index].membershipType,
@@ -131,37 +133,6 @@ class Gambit extends Component {
       infamy.resets = this.props.player.infamy.progress;
     }
 
-    const multiMembershipPopup = (
-      <div className="error_popup multi_membership_popup">
-        <ul className="membershipsUL">
-          {this.props.player.memberships.map((elem, index) => {
-            let platform = "";
-            if (elem.membershipType === 2) {
-              platform = "fab fa-playstation membershipLi";
-              platform += " psn";
-            } else if (elem.membershipType === 1) {
-              platform = "fab fa-xbox membershipLi";
-              platform += " xbox";
-            } else {
-              platform = "fas fa-desktop membershipLi";
-              platform += " pc";
-            }
-            return (
-              <li
-                key={index}
-                value={index}
-                onClick={this.handleMembershipType}
-                className={`${platform}`}
-              >
-                {" "}
-                {elem.displayName}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-
     const { gambitIsLoading } = this.props.player;
 
     const trackContainer = (
@@ -224,10 +195,15 @@ class Gambit extends Component {
       </div>
     );
 
-    const progression = gambitIsLoading ? <Loading /> : trackContainer;
+    const progression =
+      gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
-        {this.state.isMore && multiMembershipPopup}
+        {this.state.isMore && (
+          <MultiMembershipPopup
+            handleMembershipType={this.handleMembershipType}
+          />
+        )}
         {progression}
       </div>
     );

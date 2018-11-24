@@ -8,6 +8,7 @@ import {
   setRaidProgressionAction,
   setActiveMembership
 } from "../actions/playerActions";
+import MultiMembershipPopup from "./MultiMembershipPopup";
 import Loading from "../components/Loading";
 
 class Raid extends Component {
@@ -60,6 +61,7 @@ class Raid extends Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
+    this.setState({ isMore: false });
     await this.props.setActiveMembership(index);
     await this.props.setRaidProgressionAction(
       memberships[index].membershipType,
@@ -79,37 +81,6 @@ class Raid extends Component {
   };
 
   render() {
-    const multiMembershipPopup = (
-      <div className="error_popup multi_membership_popup">
-        <ul className="membershipsUL">
-          {this.props.player.memberships.map((elem, index) => {
-            let platform = "";
-            if (elem.membershipType === 2) {
-              platform = "fab fa-playstation membershipLi";
-              platform += " psn";
-            } else if (elem.membershipType === 1) {
-              platform = "fab fa-xbox membershipLi";
-              platform += " xbox";
-            } else {
-              platform = "fas fa-desktop membershipLi";
-              platform += " pc";
-            }
-            return (
-              <li
-                key={index}
-                value={index}
-                onClick={this.handleMembershipType}
-                className={`${platform}`}
-              >
-                {" "}
-                {elem.displayName}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-
     const { raidIsLoading } = this.props.player;
 
     const raid = {
@@ -123,44 +94,46 @@ class Raid extends Component {
     };
     if (!raidIsLoading) {
       for (let i = 0; i < this.props.player.raid.length; ++i) {
-        this.props.player.raid[i][`character${i + 1}`].forEach(elm => {
-          if (elm.activityHash === 2122313384) {
-            raid.lastWish.normalCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (elm.activityHash === 3089205900) {
-            raid.EoW.normalCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (elm.activityHash === 809170886) {
-            raid.EoW.prestigeCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (elm.activityHash === 119944200) {
-            raid.SoS.normalCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (elm.activityHash === 3213556450) {
-            raid.SoS.prestigeCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (
-            elm.activityHash === 2693136600 ||
-            elm.activityHash === 2693136601 ||
-            elm.activityHash === 2693136602 ||
-            elm.activityHash === 2693136603 ||
-            elm.activityHash === 2693136604 ||
-            elm.activityHash === 2693136605
-          ) {
-            raid.leviathan.normalCompletions +=
-              elm.values.activityCompletions.basic.value;
-          } else if (
-            elm.activityHash === 417231112 ||
-            elm.activityHash === 757116822 ||
-            elm.activityHash === 1685065161 ||
-            elm.activityHash === 2449714930 ||
-            elm.activityHash === 3446541099 ||
-            elm.activityHash === 3879860661
-          ) {
-            raid.leviathan.prestigeCompletions +=
-              elm.values.activityCompletions.basic.value;
-          }
-        });
+        if (this.props.player.raid[i][`character${i + 1}`] !== undefined) {
+          this.props.player.raid[i][`character${i + 1}`].forEach(elm => {
+            if (elm.activityHash === 2122313384) {
+              raid.lastWish.normalCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 3089205900) {
+              raid.EoW.normalCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 809170886) {
+              raid.EoW.prestigeCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 119944200) {
+              raid.SoS.normalCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 3213556450) {
+              raid.SoS.prestigeCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (
+              elm.activityHash === 2693136600 ||
+              elm.activityHash === 2693136601 ||
+              elm.activityHash === 2693136602 ||
+              elm.activityHash === 2693136603 ||
+              elm.activityHash === 2693136604 ||
+              elm.activityHash === 2693136605
+            ) {
+              raid.leviathan.normalCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (
+              elm.activityHash === 417231112 ||
+              elm.activityHash === 757116822 ||
+              elm.activityHash === 1685065161 ||
+              elm.activityHash === 2449714930 ||
+              elm.activityHash === 3446541099 ||
+              elm.activityHash === 3879860661
+            ) {
+              raid.leviathan.prestigeCompletions +=
+                elm.values.activityCompletions.basic.value;
+            }
+          });
+        }
       }
     }
 
@@ -200,10 +173,15 @@ class Raid extends Component {
       </div>
     );
 
-    const progression = raidIsLoading ? <Loading /> : trackContainer;
+    const progression =
+      raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
-        {this.state.isMore && multiMembershipPopup}
+        {this.state.isMore && (
+          <MultiMembershipPopup
+            handleMembershipType={this.handleMembershipType}
+          />
+        )}
         {progression}
       </div>
     );

@@ -1,6 +1,6 @@
 .infamy-container {
   color: $white;
-  font-size: 2em;
+
   width: 80%;
   min-height: 75vh;
   margin: 20px auto;
@@ -11,12 +11,13 @@
 
   .track-wrapper {
     width: 100%;
-  }
-  @include breakpoint(390px) {
-    font-size: 1.8em;
-  }
-  @include breakpoint(360px) {
-    font-size: 1.3em;
+    font-size: 2em;
+    @include breakpoint(390px) {
+      font-size: 1.8em;
+    }
+    @include breakpoint(360px) {
+      font-size: 1.3em;
+    }
   }
   @include breakpoint(890px) {
     width: 90%;

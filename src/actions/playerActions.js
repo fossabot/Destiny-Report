@@ -172,9 +172,10 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   };
 };
 
-export const setActiveMembership = index => {
+export const setActiveMembership = (index, pageName) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
+      dispatch({ type: "START_SET_DATA", payload: pageName });
       dispatch({ type: "SET_ACTIVE_MEMBERSHIP", payload: index });
       resolve();
     });

@@ -9,6 +9,7 @@ import {
 } from "../actions/playerActions";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
+import MultiMembershipPopup from "./MultiMembershipPopup";
 
 class Home extends React.Component {
   state = {
@@ -65,7 +66,8 @@ class Home extends React.Component {
   handleMembershipType = async event => {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
-    await this.props.setActiveMembership(index);
+    await this.props.setActiveMembership(index, "gambit");
+    this.setState({ isMore: false });
     const activeMembership = this.props.player.activeMembership;
     await this.props.setGambitProgressionAction(
       memberships[activeMembership].membershipType,
@@ -91,36 +93,7 @@ class Home extends React.Component {
     const errorPopup = (
       <div className="error_popup">This player doesn't exist</div>
     );
-    const multiMembershipPopup = (
-      <div className="error_popup multi_membership_popup">
-        <ul className="membershipsUL">
-          {this.props.player.memberships.map((elem, index) => {
-            let platform = "";
-            if (elem.membershipType === 2) {
-              platform = "fab fa-playstation membershipLi";
-              platform += " psn";
-            } else if (elem.membershipType === 1) {
-              platform = "fab fa-xbox membershipLi";
-              platform += " xbox";
-            } else {
-              platform = "fas fa-desktop membershipLi";
-              platform += " pc";
-            }
-            return (
-              <li
-                key={index}
-                value={index}
-                onClick={this.handleMembershipType}
-                className={`${platform}`}
-              >
-                {" "}
-                {elem.displayName}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
+
     const inputPlayerId = (
       <div className="input-container">
         <label htmlFor="gamertag">Enter a player's name</label>
@@ -138,7 +111,11 @@ class Home extends React.Component {
     return (
       <div className="home-wrapper">
         {error && errorPopup}
-        {this.state.isMore && multiMembershipPopup}
+        {this.state.isMore && (
+          <MultiMembershipPopup
+            handleMembershipType={this.handleMembershipType}
+          />
+        )}
 
         {isPlayerDataLoading}
       </div>
