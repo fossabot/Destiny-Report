@@ -196,8 +196,6 @@ class Gambit extends Component {
       </div>
     );
 
-    console.log(gambitIsLoading);
-
     const progression =
       gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (

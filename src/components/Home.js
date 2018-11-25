@@ -209,6 +209,7 @@ class Home extends React.Component {
         </div>
       </form>
     );
+    console.log("loaaidng", gambitIsLoading);
     const isPlayerDataLoading = gambitIsLoading ? <Loading /> : inputPlayerId;
     return (
       <div className="home-wrapper">

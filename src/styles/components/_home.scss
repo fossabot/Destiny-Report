@@ -13,8 +13,9 @@
     right: 0;
     left: 0;
     top: 20px;
-    width: 700px;
-    font-size: 4em;
+    width: 80%;
+    font-size: 5vw;
+    text-align: center;
     margin: 0 auto;
     padding: 10px;
     border-radius: 5px;
@@ -32,25 +33,26 @@
     align-items: center;
     justify-content: center;
     .search-wrapper {
+      position: relative;
       .search-label {
         display: block;
         font-family: inherit;
         font-size: 5.5vw;
         position: absolute;
-        width: 80%;
+        width: 100%;
         top: 5%;
-        left: 20%;
+        left: 0;
         padding: 10px;
         transition: all 0.5s;
         cursor: text;
       }
 
       &.active .search-label {
-        top: -70%;
+        top: -60%;
         font-size: 3.5vw;
         @include breakpoint(768px) {
           top: -90%;
-          left: 10%;
+          left: 0;
         }
       }
 

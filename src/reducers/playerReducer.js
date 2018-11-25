@@ -88,7 +88,12 @@ export const playerReducer = (state = initial, action) => {
       return state;
     case FAIL_SET_DATA:
       if (action.payload === "gambit") {
-        state = { ...state, gambitSuccess: false, error: true };
+        state = {
+          ...state,
+          gambitSuccess: false,
+          gambitIsLoading: false,
+          error: true
+        };
       } else if (action.payload === "crucible") {
         state = { ...state, crucibleSuccess: false, error: true };
       } else if (action.payload === "raid") {
