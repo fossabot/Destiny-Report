@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
+import { Helmet } from "react-helmet";
 
 class Home extends React.Component {
   state = {
@@ -210,10 +211,13 @@ class Home extends React.Component {
         </div>
       </form>
     );
-    console.log("loaaidng", gambitIsLoading);
     const isPlayerDataLoading = gambitIsLoading ? <Loading /> : inputPlayerId;
     return (
       <div className="home-wrapper">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Destiny Report</title>
+        </Helmet>
         {error && errorPopup}
         {this.state.isMore && (
           <MultiMembershipPopup

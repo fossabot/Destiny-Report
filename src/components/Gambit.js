@@ -11,6 +11,7 @@ import {
 import { infamySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
+import { Helmet } from "react-helmet";
 
 class Gambit extends Component {
   state = {
@@ -200,6 +201,10 @@ class Gambit extends Component {
       gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Gambit</title>
+        </Helmet>
         {this.state.isMore && (
           <MultiMembershipPopup
             handleMembershipType={this.handleMembershipType}

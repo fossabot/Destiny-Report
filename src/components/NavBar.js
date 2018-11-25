@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-const navBar = (props) => {
+const navBar = props => {
   let displayName = "";
   if (
     props.player.activeMembership !== -1 &&
@@ -46,7 +46,7 @@ const navBar = (props) => {
   );
 };
 
-const mapStoreToProps = (store) => {
+const mapStoreToProps = store => {
   return {
     player: store.player
   };

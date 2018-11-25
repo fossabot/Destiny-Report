@@ -11,6 +11,7 @@ import {
 import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
+import { Helmet } from "react-helmet";
 
 class Crucible extends Component {
   state = {
@@ -211,6 +212,10 @@ class Crucible extends Component {
       crucibleIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Crucible</title>
+        </Helmet>
         {this.state.isMore && (
           <MultiMembershipPopup
             handleMembershipType={this.handleMembershipType}

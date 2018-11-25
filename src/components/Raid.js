@@ -10,6 +10,7 @@ import {
 } from "../actions/playerActions";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import Loading from "../components/Loading";
+import { Helmet } from "react-helmet";
 
 class Raid extends Component {
   state = {
@@ -177,6 +178,10 @@ class Raid extends Component {
       raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
     return (
       <div className="infamy-container">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Raid</title>
+        </Helmet>
         {this.state.isMore && (
           <MultiMembershipPopup
             handleMembershipType={this.handleMembershipType}
