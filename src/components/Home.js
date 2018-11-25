@@ -169,6 +169,7 @@ class Home extends React.Component {
             ref="gamertag"
             onFocus={this.setActive}
             onBlur={event => this.setActive(event, true)}
+            autoComplete="off"
           />
         </div>
         <div className="checkbox-wrapper">
