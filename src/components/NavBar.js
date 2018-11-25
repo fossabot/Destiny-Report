@@ -3,15 +3,16 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 const navBar = props => {
-  let displayName = "";
-  if (
-    props.player.activeMembership !== -1 &&
-    props.player.memberships.length !== 0
-  ) {
-    displayName =
-      props.player.memberships[props.player.activeMembership].displayName;
+  let displayName = props.location.pathname.split("/")[2];
+  if (displayName === "") {
+    if (
+      props.player.activeMembership !== -1 &&
+      props.player.memberships.length !== 0
+    ) {
+      displayName =
+        props.player.memberships[props.player.activeMembership].displayName;
+    }
   }
-
   const path = props.location.pathname;
 
   return (
