@@ -14,13 +14,14 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/gambit" component={Home} />
-          <Route path="/gambit/:id" component={Gambit} />
-          <Route exact path="/crucible" component={Home} />
-          <Route path="/crucible/:id" component={Crucible} />
 
-          <Route exact path="/raid" component={Home} />
-          <Route path="/raid/:id" component={Raid} />
+          <Route exact path="/gambit/:id" component={Gambit} />
+
+          <Route exact path="/crucible/:id" component={Crucible} />
+
+          <Route exact path="/raid/:id" component={Raid} />
+
+          <Route render={() => <div>404</div>} />
         </Switch>
         <Footer />
       </div>

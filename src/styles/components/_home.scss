@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   min-height: 80vh;
   color: $white;
@@ -22,55 +23,133 @@
     color: $white;
   }
 
-  .input-container {
+  .input-form {
     position: relative;
     color: inherit;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    label {
-      display: block;
-      font-family: inherit;
-      font-size: 5.5vw;
-      position: absolute;
-      width: 80%;
-      top: 5%;
-      left: 20%;
-      padding: 10px;
-      transition: all 0.5s;
-      cursor: text;
-      @include breakpoint(768px) {
-        left: 10%;
-      }
-    }
-
-    &.active label {
-      top: -70%;
-      font-size: 3.5vw;
-      @include breakpoint(768px) {
-        top: -90%;
-        left: 10%;
-      }
-    }
-
-    &.active input {
-      box-shadow: 0 0 3pt 1pt $white;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    input {
-      width: 60%;
-      font-size: 6vw;
-      margin-top: 2px;
-      padding: 10px;
-      border-radius: 5px;
-      outline: none;
-      background-color: rgba(0, 0, 0, 0.1);
-      color: $white;
-      @include breakpoint(768px) {
+    .search-wrapper {
+      .search-label {
+        display: block;
+        font-family: inherit;
+        font-size: 5.5vw;
+        position: absolute;
         width: 80%;
+        top: 5%;
+        left: 20%;
+        padding: 10px;
+        transition: all 0.5s;
+        cursor: text;
+      }
+
+      &.active .search-label {
+        top: -70%;
+        font-size: 3.5vw;
+        @include breakpoint(768px) {
+          top: -90%;
+          left: 10%;
+        }
+      }
+
+      &.active .search-input {
+        box-shadow: 0 0 3pt 1pt $white;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .search-input {
+        width: 100%;
+        font-size: 6vw;
+        margin-top: 2px;
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0.1);
+        color: $white;
+      }
+    }
+    .checkbox-wrapper {
+      margin-top: 10px;
+      align-self: left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      .checkbox-label {
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        padding-right: 10px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        @include breakpoint(515px) {
+          font-size: 16px;
+          padding-left: 20px;
+          line-height: 15px;
+        }
+        /* Hide the browser's default radio button */
+        .checkbox-input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
+        /* Create a custom radio button */
+        .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 25px;
+          width: 25px;
+          background-color: #eee;
+          border-radius: 50%;
+          @include breakpoint(515px) {
+            width: 15px;
+            height: 15px;
+          }
+        }
+        /* On mouse-over, add a grey background color */
+        &:hover .checkbox-input ~ .checkmark {
+          background-color: #ccc;
+        }
+
+        /* When the radio button is checked, add a blue background */
+        .checkbox-input:checked ~ .checkmark {
+          background-color: #9da6ad;
+        }
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+
+        /* Show the indicator (dot/circle) when checked */
+        .checkbox-input:checked ~ .checkmark:after {
+          display: block;
+        }
+
+        /* Style the indicator (dot/circle) */
+        .checkmark:after {
+          top: 9px;
+          left: 9px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: white;
+          @include breakpoint(515px) {
+            width: 5px;
+            height: 5px;
+            left: 5px;
+            top: 5px;
+          }
+        }
       }
     }
   }

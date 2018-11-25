@@ -22,7 +22,8 @@ class Gambit extends Component {
       if (memberships.length === 0 && this.props.match.params.id) {
         const playerGamerTag = this.props.match.params.id.toLowerCase();
         const playerMemberships = await this.props.setMembershipInfoAction(
-          playerGamerTag
+          playerGamerTag,
+          "gambit"
         );
         const activeMembership = this.props.player.activeMembership;
 
@@ -194,6 +195,8 @@ class Gambit extends Component {
         </div>
       </div>
     );
+
+    console.log(gambitIsLoading);
 
     const progression =
       gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
