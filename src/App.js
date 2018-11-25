@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Gambit from "./components/Gambit";
 import Crucible from "./components/Crucible";
 import Raid from "./components/Raid";
+import Error from "./components/Error";
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
 
           <Route exact path="/raid/:id" component={Raid} />
 
-          <Route render={() => <div>404</div>} />
+          <Route component={Error} />
         </Switch>
         <Footer />
       </div>
