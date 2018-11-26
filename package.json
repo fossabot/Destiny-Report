@@ -1,6 +1,6 @@
 {
   "name": "Destiny-Tracker",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "dependencies": {
     "axios": "^0.18.0",
     "font-awesome": "^4.7.0",
