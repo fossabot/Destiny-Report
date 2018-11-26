@@ -14,7 +14,7 @@ const navBar = props => {
     }
   }
   const path = props.location.pathname;
-
+  const linkHide = path === "/" ? "link--hide" : "";
   return (
     <div className="navbar">
       <h2 className="navbar--home-item">
@@ -23,21 +23,21 @@ const navBar = props => {
         </Link>
         <Link
           to={`/gambit/${displayName}`}
-          className="link"
+          className={`link ${linkHide}`}
           replace={path === `/gambit/${displayName}`}
         >
           Gambit
         </Link>
         <Link
           to={`/crucible/${displayName}`}
-          className="link"
+          className={`link ${linkHide}`}
           replace={path === `/crucible/${displayName}`}
         >
           Crucible
         </Link>
         <Link
           to={`/raid/${displayName}`}
-          className="link"
+          className={`link ${linkHide}`}
           replace={path === `/raid/${displayName}`}
         >
           Raid

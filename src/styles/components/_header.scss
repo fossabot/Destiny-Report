@@ -17,6 +17,9 @@
       @include breakpoint(400px) {
         font-size: 15px;
       }
+      &--hide {
+        display: none;
+      }
       &:hover {
         border-bottom: 1px solid $white;
       }
