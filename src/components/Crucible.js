@@ -119,10 +119,8 @@ class Crucible extends Component {
         this.props.player.valor.nextLevelAt -
         this.props.player.valor.progressToNextLevel;
 
-      valor.overallValor =
-        this.props.player.valor.progress * 2000 + valor.currentValor;
-      valor.ranks =
-        this.props.player.valor.progress * 6 + this.props.player.valor.level;
+      valor.overallValor = 0;
+      valor.ranks = this.props.player.valor.ranks;
       valor.resets = this.props.player.valor.progress;
 
       //Glory
@@ -138,10 +136,8 @@ class Crucible extends Component {
       glory.progressToNextLevel =
         this.props.player.glory.nextLevelAt -
         this.props.player.glory.progressToNextLevel;
-      glory.overallGlory =
-        this.props.player.glory.progress * 5500 + glory.currentGlory;
-      glory.ranks =
-        this.props.player.glory.progress * 6 + this.props.player.glory.level;
+
+      glory.ranks = this.props.player.glory.ranks;
       glory.resets = this.props.player.glory.progress;
     }
 
@@ -159,7 +155,6 @@ class Crucible extends Component {
           </div>
           <div>
             <ul>
-              <li>Overall Valor: {valor.overallValor}</li>
               <li>Ranks: {valor.ranks}</li>
               <li>Resets: {valor.resets}</li>
             </ul>
@@ -176,7 +171,6 @@ class Crucible extends Component {
           </div>
           <div>
             <ul>
-              <li>Overall Glory: {glory.overallGlory}</li>
               <li>Ranks: {glory.ranks}</li>
               <li>Resets: {glory.resets}</li>
             </ul>

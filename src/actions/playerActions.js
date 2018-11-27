@@ -51,11 +51,6 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
           allStats.data.Response.characterProgressions.data
         )[0].progressions["2772425241"];
 
-        console.log(
-          allStats.data.Response.profileRecords.data.records["3470255495"]
-            .objectives[0]
-        );
-
         const ranks =
           allStats.data.Response.profileRecords.data.records["3470255495"]
             .objectives[0].progress;
@@ -101,12 +96,17 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
           membershipType,
           membershipId
         );
+
         const allStats = await endpoints.getAllProgression(
           membershipType,
           membershipId
         );
 
         //Valor
+        const valorRanks =
+          allStats.data.Response.profileRecords.data.records["1711079800"]
+            .objectives[0].progress;
+
         const valorProgress = values(
           allStats.data.Response.characterProgressions.data
         )[0].progressions["3882308435"];
@@ -115,8 +115,13 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
           allStats.data.Response.profileRecords.data.records["559943871"]
             .objectives[0].progress;
         valorProgress.progress = valorResets;
+        valorProgress.ranks = valorRanks;
 
         //Glory
+        const gloryRanks =
+          allStats.data.Response.profileRecords.data.records["200792717"]
+            .objectives[0].progress;
+
         const gloryProgress = values(
           allStats.data.Response.characterProgressions.data
         )[0].progressions["2679551909"];
@@ -125,6 +130,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
           allStats.data.Response.profileRecords.data.records["4185918315"]
             .objectives[0].progress;
         gloryProgress.progress = gloryResets;
+        gloryProgress.ranks = gloryRanks;
 
         dispatch({ type: "START_SET_DATA", payload: "crucible" });
         dispatch({

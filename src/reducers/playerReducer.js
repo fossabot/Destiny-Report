@@ -57,6 +57,7 @@ export const playerReducer = (state = initial, action) => {
       if (!isEmpty(action.payload.gloryProgress)) {
         state.glory = cloneDeep(action.payload.gloryProgress);
       }
+
       if (!isEmpty(action.payload.crucibleStats)) {
         state.crucibleStats = cloneDeep(action.payload.crucibleStats);
       }
