@@ -1,6 +1,8 @@
 {
   "name": "Destiny-Tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "author": "SarKurd",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "font-awesome": "^4.7.0",

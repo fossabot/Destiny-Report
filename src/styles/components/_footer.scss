@@ -7,12 +7,12 @@
   justify-content: center;
   align-items: center;
 
-  ul {
+  .source-and-contact {
     list-style-type: none;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 0;
+    margin-left: 6.5%;
     padding: 0;
 
     li {
@@ -24,9 +24,35 @@
         .fa {
           font-size: 1.5em;
           &:hover {
-            color: lightcoral;
+            color: aqua;
           }
         }
+      }
+    }
+  }
+  .info {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    padding-right: 10px;
+
+    @include breakpoint(500px) {
+      display: none;
+    }
+
+    li {
+      padding: 2px;
+    }
+  }
+
+  .developer {
+    margin-right: auto;
+    margin-left: 10px;
+
+    li {
+      .developer-anchor {
+        color: aqua;
       }
     }
   }
