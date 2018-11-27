@@ -9,9 +9,11 @@
     padding: 0 10px 0 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     &--home-item {
+      display: flex;
       .link {
         margin-right: 20px;
         font-size: 30px;
+
         @include breakpoint(550px) {
           font-size: 20px;
         }
@@ -22,6 +24,9 @@
           display: none;
         }
         &:hover {
+          border-bottom: 1px solid $white;
+        }
+        &.link-active {
           border-bottom: 1px solid $white;
         }
       }

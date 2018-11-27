@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 const navBar = props => {
@@ -26,32 +26,49 @@ const navBar = props => {
   return (
     <div className="navbar-wrapper">
       <div className="navbar">
-        <h2 className="navbar--home-item">
-          <Link to="/" className="link" replace={path === "/"}>
-            Home
-          </Link>
-          <Link
-            to={`/gambit/${displayName}`}
-            className={`link ${linkHide}`}
-            replace={path === `/gambit/${displayName}`}
-          >
-            Gambit
-          </Link>
-          <Link
-            to={`/crucible/${displayName}`}
-            className={`link ${linkHide}`}
-            replace={path === `/crucible/${displayName}`}
-          >
-            Crucible
-          </Link>
-          <Link
-            to={`/raid/${displayName}`}
-            className={`link ${linkHide}`}
-            replace={path === `/raid/${displayName}`}
-          >
-            Raid
-          </Link>
-        </h2>
+        <ul className="navbar--home-item">
+          <li>
+            <NavLink
+              exact
+              to="/"
+              activeClassName="link-active"
+              className="link"
+              replace={path === "/"}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={`/gambit/${displayName}`}
+              activeClassName="link-active"
+              className={`link ${linkHide}`}
+              replace={path === `/gambit/${displayName}`}
+            >
+              Gambit
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={`/crucible/${displayName}`}
+              activeClassName="link-active"
+              className={`link ${linkHide}`}
+              replace={path === `/crucible/${displayName}`}
+            >
+              Crucible
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={`/raid/${displayName}`}
+              activeClassName="link-active"
+              className={`link ${linkHide}`}
+              replace={path === `/raid/${displayName}`}
+            >
+              Raid
+            </NavLink>
+          </li>
+        </ul>
       </div>
       {error && apiMaintenance}
     </div>
