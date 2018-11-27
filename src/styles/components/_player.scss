@@ -39,9 +39,6 @@
     @include breakpoint(714px) {
       flex-direction: column;
       text-align: center;
-      & div ~ div {
-        margin-top: 10px;
-      }
     }
     & div {
       width: 320px;

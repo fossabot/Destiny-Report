@@ -54,12 +54,16 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
         const progress =
           allStats.data.Response.profileRecords.data.records["3901785488"]
             .objectives[0].progress;
+        const armyOfOne =
+          allStats.data.Response.profileRecords.data.records["1071663279"]
+            .objectives[0].progress;
 
         const infamy = {
           currentProgress,
           progressToNextLevel,
           level,
-          progress
+          progress,
+          armyOfOne
         };
 
         dispatch({ type: "START_SET_DATA", payload: "gambit" });

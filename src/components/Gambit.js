@@ -105,6 +105,7 @@ class Gambit extends Component {
 
       gambit.motesDeposited = this.props.player.gambitStats.allTime.motesDeposited.basic.value;
       gambit.motesLost = this.props.player.gambitStats.allTime.motesLost.basic.value;
+      gambit.motesDenied = this.props.player.gambitStats.allTime.motesDenied.basic.value;
 
       gambit.winLossRatio = (
         100 *
@@ -115,6 +116,7 @@ class Gambit extends Component {
         gambit.winLossRatio = 0;
       }
       infamy.currentInfamy = this.props.player.infamy.currentProgress;
+      infamy.armyOfOne = this.props.player.infamy.armyOfOne;
       if (this.props.player.infamy.level === 16) {
         infamy.currentRank =
           infamySteps[this.props.player.infamy.level - 1].stepName;
@@ -167,7 +169,19 @@ class Gambit extends Component {
             <ul>
               <li>Kills: {gambit.kills}</li>
               <li>Deaths: {gambit.deaths}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="track-container">
+          <div>
+            <ul>
               <li>Invader Kills: {gambit.invaderKills}</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Invasion Kills: {gambit.invasionKills}</li>
+              <li>Army of One: {infamy.armyOfOne}</li>
             </ul>
           </div>
         </div>
@@ -191,6 +205,7 @@ class Gambit extends Component {
             <ul>
               <li>Motes banked: {gambit.motesDeposited}</li>
               <li>Motes lost: {gambit.motesLost}</li>
+              <li>Motes denied: {gambit.motesDenied}</li>
             </ul>
           </div>
         </div>
