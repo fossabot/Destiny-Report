@@ -51,6 +51,14 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
           allStats.data.Response.characterProgressions.data
         )[0].progressions["2772425241"];
 
+        console.log(
+          allStats.data.Response.profileRecords.data.records["3470255495"]
+            .objectives[0]
+        );
+
+        const ranks =
+          allStats.data.Response.profileRecords.data.records["3470255495"]
+            .objectives[0].progress;
         const progress =
           allStats.data.Response.profileRecords.data.records["3901785488"]
             .objectives[0].progress;
@@ -62,6 +70,7 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
           currentProgress,
           progressToNextLevel,
           level,
+          ranks,
           progress,
           armyOfOne
         };

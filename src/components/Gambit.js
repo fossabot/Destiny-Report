@@ -130,10 +130,7 @@ class Gambit extends Component {
           infamySteps[this.props.player.infamy.level].progressTotal -
           this.props.player.infamy.progressToNextLevel;
       }
-      infamy.overallInfamy =
-        this.props.player.infamy.progress * 15000 + infamy.currentInfamy;
-      infamy.ranks =
-        this.props.player.infamy.progress * 16 + this.props.player.infamy.level;
+      infamy.ranks = this.props.player.infamy.ranks;
       infamy.resets = this.props.player.infamy.progress;
     }
 
@@ -151,7 +148,6 @@ class Gambit extends Component {
           </div>
           <div>
             <ul>
-              <li>Overall Infamy: {infamy.overallInfamy}</li>
               <li>Ranks: {infamy.ranks}</li>
               <li>Resets: {infamy.resets}</li>
             </ul>
