@@ -151,7 +151,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { error, gambitIsLoading } = this.props.player;
+    const { gambitIsLoading, isPlayerFound } = this.props.player;
     const errorPopup = (
       <div className="error_popup">This player doesn't exist</div>
     );
@@ -218,7 +218,7 @@ class Home extends React.Component {
           <meta charSet="utf-8" />
           <title>Destiny Report</title>
         </Helmet>
-        {error && errorPopup}
+        {!isPlayerFound && errorPopup}
         {this.state.isMore && (
           <MultiMembershipPopup
             handleMembershipType={this.handleMembershipType}

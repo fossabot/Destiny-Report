@@ -12,7 +12,7 @@ export const setMembershipInfoAction = (playerGamerTag, pageName) => {
         dispatch({ type: "START_SET_DATA", payload: pageName });
         const res = await endpoints.getMembershipID(playerGamerTag);
         if (res.data.Response.length === 0) {
-          dispatch({ type: "FAIL_SET_DATA", payload: pageName });
+          dispatch({ type: "PLAYER_NOT_FOUND" });
           reject("Player not found");
           return;
         }

@@ -11,6 +11,7 @@ const FINISHED_LOADING = "FINISHED_LOADING";
 const SET_ACTIVE_MEMBERSHIP = "SET_ACTIVE_MEMBERSHIP";
 const SET_CRUCIBLE_DATA = "SET_CRUCIBLE_DATA";
 const SET_RAID_DATA = "SET_RAID_DATA";
+const PLAYER_NOT_FOUND = "PLAYER_NOT_FOUND";
 
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
@@ -20,21 +21,24 @@ export const playerReducer = (state = initial, action) => {
           ...state,
           gambitIsLoading: true,
           gambitSuccess: false,
-          error: false
+          error: false,
+          isPlayerFound: true
         };
       } else if (action.payload === "crucible") {
         state = {
           ...state,
           crucibleIsLoading: true,
           crucibleSuccess: false,
-          error: false
+          error: false,
+          isPlayerFound: true
         };
       } else if (action.payload === "raid") {
         state = {
           ...state,
           raidIsLoading: true,
           raidSuccess: false,
-          error: false
+          error: false,
+          isPlayerFound: true
         };
       }
       return state;
@@ -102,6 +106,18 @@ export const playerReducer = (state = initial, action) => {
       return state;
     case RESET_DATA:
       state = cloneDeep(initial);
+      return state;
+    case PLAYER_NOT_FOUND:
+      state = {
+        ...state,
+        isPlayerFound: false,
+        gambitSuccess: false,
+        gambitIsLoading: false,
+        raidSuccess: false,
+        raidIsLoading: false,
+        crucibleSuccess: false,
+        crucibleIsLoading: false
+      };
       return state;
     default:
       return state;

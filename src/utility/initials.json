@@ -1,5 +1,6 @@
 {
   "success": false,
+  "isPlayerFound": true,
   "gambitSuccess": false,
   "gambitIsLoading": false,
   "crucibleSuccess": false,
