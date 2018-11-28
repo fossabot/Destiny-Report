@@ -12,6 +12,7 @@ const SET_ACTIVE_MEMBERSHIP = "SET_ACTIVE_MEMBERSHIP";
 const SET_CRUCIBLE_DATA = "SET_CRUCIBLE_DATA";
 const SET_RAID_DATA = "SET_RAID_DATA";
 const PLAYER_NOT_FOUND = "PLAYER_NOT_FOUND";
+const FAIL_SET_DATA_PRIVACY = "FAIL_SET_DATA_PRIVACY";
 
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
@@ -120,6 +121,10 @@ export const playerReducer = (state = initial, action) => {
         crucibleIsLoading: false
       };
       return state;
+    case FAIL_SET_DATA_PRIVACY:
+      state = { ...state, privacyError: true };
+      return state;
+
     default:
       return state;
   }

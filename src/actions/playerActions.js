@@ -46,28 +46,51 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
           membershipId
         );
 
-        //Infamy
-        const { currentProgress, progressToNextLevel, level } = values(
-          allStats.data.Response.characterProgressions.data
-        )[0].progressions["2772425241"];
+        let infamyData = {
+          currentProgress: 0,
+          progressToNextLevel: 0,
+          level: 0,
+          ranks: 0,
+          progress: 0,
+          armyOfOne: 0
+        };
+        if (allStats.data.Response.characterProgressions.data !== undefined) {
+          //Infamy
+          infamyData.level = values(
+            allStats.data.Response.characterProgressions.data
+          )[0].progressions["2772425241"].level;
 
-        const ranks =
-          allStats.data.Response.profileRecords.data.records["3470255495"]
-            .objectives[0].progress;
-        const progress =
-          allStats.data.Response.profileRecords.data.records["3901785488"]
-            .objectives[0].progress;
-        const armyOfOne =
-          allStats.data.Response.profileRecords.data.records["1071663279"]
-            .objectives[0].progress;
+          infamyData.progressToNextLevel = values(
+            allStats.data.Response.characterProgressions.data
+          )[0].progressions["2772425241"].progressToNextLevel;
+
+          infamyData.currentProgress = values(
+            allStats.data.Response.characterProgressions.data
+          )[0].progressions["2772425241"].currentProgress;
+
+          infamyData.ranks =
+            allStats.data.Response.profileRecords.data.records[
+              "3470255495"
+            ].objectives[0].progress;
+          infamyData.progress =
+            allStats.data.Response.profileRecords.data.records[
+              "3901785488"
+            ].objectives[0].progress;
+          infamyData.armyOfOne =
+            allStats.data.Response.profileRecords.data.records[
+              "1071663279"
+            ].objectives[0].progress;
+        } else {
+          dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
+        }
 
         const infamy = {
-          currentProgress,
-          progressToNextLevel,
-          level,
-          ranks,
-          progress,
-          armyOfOne
+          currentProgress: infamyData.currentProgress,
+          progressToNextLevel: infamyData.progressToNextLevel,
+          level: infamyData.level,
+          ranks: infamyData.ranks,
+          progress: infamyData.progress,
+          armyOfOne: infamyData.armyOfOne
         };
 
         dispatch({ type: "START_SET_DATA", payload: "gambit" });
@@ -102,42 +125,74 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
           membershipId
         );
 
-        //Valor
-        const valorRanks =
-          allStats.data.Response.profileRecords.data.records["1711079800"]
-            .objectives[0].progress;
+        let crucibleData = {
+          valor: {
+            ranks: 0,
+            progress: 0,
+            resets: 0,
+            level: 0,
+            nextLevelAt: 0,
+            progressToNextLevel: 0
+          },
+          glory: {
+            ranks: 0,
+            progress: 0,
+            resets: 0,
+            level: 0,
+            nextLevelAt: 0,
+            progressToNextLevel: 0
+          }
+        };
+        if (allStats.data.Response.profileRecords.data !== undefined) {
+          //Valor
+          crucibleData.valor.ranks =
+            allStats.data.Response.profileRecords.data.records[
+              "1711079800"
+            ].objectives[0].progress;
 
-        const valorProgress = values(
-          allStats.data.Response.characterProgressions.data
-        )[0].progressions["3882308435"];
+          const valorLevelStats = values(
+            allStats.data.Response.characterProgressions.data
+          )[0].progressions["3882308435"];
 
-        const valorResets =
-          allStats.data.Response.profileRecords.data.records["559943871"]
-            .objectives[0].progress;
-        valorProgress.progress = valorResets;
-        valorProgress.ranks = valorRanks;
+          crucibleData.valor.level = valorLevelStats.level;
+          crucibleData.valor.nextLevelAt = valorLevelStats.nextLevelAt;
+          crucibleData.valor.progressToNextLevel =
+            valorLevelStats.progressToNextLevel;
+          crucibleData.valor.currentProgress = valorLevelStats.currentProgress;
 
-        //Glory
-        const gloryRanks =
-          allStats.data.Response.profileRecords.data.records["200792717"]
-            .objectives[0].progress;
+          crucibleData.valor.resets =
+            allStats.data.Response.profileRecords.data.records[
+              "559943871"
+            ].objectives[0].progress;
 
-        const gloryProgress = values(
-          allStats.data.Response.characterProgressions.data
-        )[0].progressions["2679551909"];
+          //Glory
+          crucibleData.glory.ranks =
+            allStats.data.Response.profileRecords.data.records[
+              "200792717"
+            ].objectives[0].progress;
 
-        const gloryResets =
-          allStats.data.Response.profileRecords.data.records["4185918315"]
-            .objectives[0].progress;
-        gloryProgress.progress = gloryResets;
-        gloryProgress.ranks = gloryRanks;
+          const gloryLevelStats = values(
+            allStats.data.Response.characterProgressions.data
+          )[0].progressions["2679551909"];
+
+          crucibleData.glory.level = gloryLevelStats.level;
+          crucibleData.glory.nextLevelAt = gloryLevelStats.nextLevelAt;
+          crucibleData.glory.progressToNextLevel =
+            gloryLevelStats.progressToNextLevel;
+          crucibleData.glory.currentProgress = gloryLevelStats.currentProgress;
+
+          crucibleData.glory.resets =
+            allStats.data.Response.profileRecords.data.records[
+              "4185918315"
+            ].objectives[0].progress;
+        }
 
         dispatch({ type: "START_SET_DATA", payload: "crucible" });
         dispatch({
           type: "SET_CRUCIBLE_DATA",
           payload: {
-            valorProgress,
-            gloryProgress,
+            valorProgress: crucibleData.valor,
+            gloryProgress: crucibleData.glory,
             crucibleStats: crucibleStats.data.Response.allPvP
           }
         });

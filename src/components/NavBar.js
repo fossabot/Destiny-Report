@@ -16,12 +16,15 @@ const navBar = props => {
   const path = props.location.pathname;
   const linkHide = path === "/" ? "link--hide" : "";
 
-  const { error } = props.player;
-  const apiMaintenance = (
-    <div className="api-issue">
-      Bungie API is having issues at this moment, please try again later
-    </div>
-  );
+  const { error, privacyError } = props.player;
+  console.log(privacyError);
+  let errorMessage =
+    "Bungie API is having issues at this moment, please try again later";
+  if (privacyError) {
+    errorMessage =
+      "Due to player's privacy, you can't see most of his/her stats";
+  }
+  const apiMaintenance = <div className="api-issue">{errorMessage}</div>;
 
   return (
     <div className="navbar-wrapper">
@@ -70,7 +73,7 @@ const navBar = props => {
           </li>
         </ul>
       </div>
-      {error && apiMaintenance}
+      {(error || privacyError) && apiMaintenance}
     </div>
   );
 };

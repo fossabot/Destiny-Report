@@ -1,5 +1,6 @@
 {
   "success": false,
+  "privacyError": false,
   "isPlayerFound": true,
   "gambitSuccess": false,
   "gambitIsLoading": false,
