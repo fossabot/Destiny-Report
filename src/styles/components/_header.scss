@@ -35,10 +35,13 @@
 
   .api-issue {
     width: 100%;
-    font-size: 2vw;
+    font-size: 20px;
     background-color: rgb(250, 0, 0);
     padding: 5px;
     color: rgb(255, 255, 255);
     text-align: center;
+    @include breakpoint(550px) {
+      font-size: 15px;
+    }
   }
 }
