@@ -140,70 +140,62 @@ class Gambit extends Component {
       <div className="track-wrapper">
         <div className="track-container">
           <div>
-            <ul>
-              <li>Current Infamy: {infamy.currentInfamy}</li>
-              <li>Rank: {infamy.currentRank}</li>
-              <li>To next rank: {infamy.progressToNextLevel}</li>
-            </ul>
+            <h4>Infamy</h4>
           </div>
+          <ul>
+            <li>Current: {infamy.currentInfamy}</li>
+            <li>Rank: {infamy.currentRank}</li>
+            <li>To next rank: {infamy.progressToNextLevel}</li>
+            <li>Resets: {infamy.resets}</li>
+            <li>Ranks: {infamy.ranks}</li>
+          </ul>
+        </div>
+
+        <div className="track-container">
           <div>
-            <ul>
-              <li>Ranks: {infamy.ranks}</li>
-              <li>Resets: {infamy.resets}</li>
-            </ul>
+            <h4>Overall</h4>
           </div>
+          <ul>
+            <li>Wins: {gambit.won}</li>
+            <li>Losses: {gambit.lost}</li>
+            <li>Wins/Losses: {gambit.winLossRatio}%</li>
+            <li>Kills: {gambit.kills}</li>
+            <li>Deaths: {gambit.deaths}</li>
+            <li>Kills/Deaths: {(gambit.kills / gambit.deaths).toFixed(2)}</li>
+          </ul>
+        </div>
+
+        <div className="track-container">
+          <div>
+            <h4>Invading & Invaders</h4>
+          </div>
+          <ul>
+            <li>Invader Kills: {gambit.invaderKills}</li>
+            <li>Invasion Kills: {gambit.invasionKills}</li>
+            <li>Army of One: {infamy.armyOfOne}</li>
+          </ul>
         </div>
         <div className="track-container">
           <div>
-            <ul>
-              <li>Wins: {gambit.won}</li>
-              <li>Losses: {gambit.lost}</li>
-              <li>Wins/Losses: {gambit.winLossRatio}%</li>
-            </ul>
+            <h4>Blockers</h4>
           </div>
-          <div>
-            <ul>
-              <li>Kills: {gambit.kills}</li>
-              <li>Deaths: {gambit.deaths}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>Large Blockers: {gambit.largeBlockersSent}</li>
+            <li>Medium Blockers: {gambit.mediumBlockersSent}</li>
+            <li>Small Blockers: {gambit.smallBlockersSent}</li>
+            <li>Blockers sent: {gambit.blockersSent}</li>
+            <li>Blockers killed: {gambit.blockerKills}</li>
+          </ul>
         </div>
         <div className="track-container">
           <div>
-            <ul>
-              <li>Invader Kills: {gambit.invaderKills}</li>
-            </ul>
+            <h4>Motes</h4>
           </div>
-          <div>
-            <ul>
-              <li>Invasion Kills: {gambit.invasionKills}</li>
-              <li>Army of One: {infamy.armyOfOne}</li>
-            </ul>
-          </div>
-        </div>
-        <div className="track-container">
-          <div>
-            <ul>
-              <li>Blockers sent: {gambit.blockersSent}</li>
-              <li>Blockers killed: {gambit.blockerKills}</li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>Large Blockers: {gambit.largeBlockersSent}</li>
-              <li>Medium Blockers: {gambit.mediumBlockersSent}</li>
-              <li>Small Blockers: {gambit.smallBlockersSent}</li>
-            </ul>
-          </div>
-        </div>
-        <div className="track-container">
-          <div>
-            <ul>
-              <li>Motes banked: {gambit.motesDeposited}</li>
-              <li>Motes lost: {gambit.motesLost}</li>
-              <li>Motes denied: {gambit.motesDenied}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>Motes banked: {gambit.motesDeposited}</li>
+            <li>Motes lost: {gambit.motesLost}</li>
+            <li>Motes denied: {gambit.motesDenied}</li>
+          </ul>
         </div>
       </div>
     );

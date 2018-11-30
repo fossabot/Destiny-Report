@@ -146,57 +146,42 @@ class Crucible extends Component {
       <div className="track-wrapper">
         <div className="track-container">
           <div>
-            <ul>
-              <li>Current Valor: {valor.currentValor}</li>
-              <li>Rank: {valor.currentRank}</li>
-              <li>To next rank: {valor.progressToNextLevel}</li>
-            </ul>
+            <h4>Valor</h4>
           </div>
-          <div>
-            <ul>
-              <li>Ranks: {valor.ranks}</li>
-              <li>Resets: {valor.resets}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>Current Valor: {valor.currentValor}</li>
+            <li>Rank: {valor.currentRank}</li>
+            <li>To next rank: {valor.progressToNextLevel}</li>
+            <li>Ranks: {valor.ranks}</li>
+            <li>Resets: {valor.resets}</li>
+          </ul>
         </div>
 
         <div className="track-container">
           <div>
-            <ul>
-              <li>Current Glory: {glory.currentGlory}</li>
-              <li>Rank: {glory.currentRank}</li>
-              <li>To next rank: {glory.progressToNextLevel}</li>
-            </ul>
+            <h4>Glory</h4>
           </div>
-          <div>
-            <ul>
-              <li>Ranks: {glory.ranks}</li>
-              <li>Resets: {glory.resets}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>Current Glory: {glory.currentGlory}</li>
+            <li>Rank: {glory.currentRank}</li>
+            <li>To next rank: {glory.progressToNextLevel}</li>
+            <li>Ranks: {glory.ranks}</li>
+            <li>Resets: {glory.resets}</li>
+          </ul>
         </div>
         <div className="track-container">
           <div>
-            <ul>
-              <li>Wins: {valor.won}</li>
-              <li>Losses: {valor.lost}</li>
-              <li>Wins/Losses: {valor.winLossRatio}%</li>
-            </ul>
+            <h4>Overall</h4>
           </div>
-          <div>
-            <ul>
-              <li>Kills: {valor.kills}</li>
-              <li>Deaths: {valor.deaths}</li>
-              <li>Kill Streak: {valor.killStreak}</li>
-            </ul>
-          </div>
-        </div>
-        <div className="track-container kill_death_ratio">
-          <div>
-            <ul>
-              <li>K/D: {valor.killDeathRatio}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>Wins: {valor.won}</li>
+            <li>Losses: {valor.lost}</li>
+            <li>Win/Loss: {valor.winLossRatio}%</li>
+            <li>Kills: {valor.kills}</li>
+            <li>Deaths: {valor.deaths}</li>
+            <li>Kill Streak: {valor.killStreak}</li>
+            <li className="center-li">K/D: {valor.killDeathRatio}</li>
+          </ul>
         </div>
       </div>
     );

@@ -141,35 +141,41 @@ class Raid extends Component {
     const trackContainer = (
       <div className="track-wrapper">
         <div className="track-container">
-          <div className="raid">
-            <ul>
-              <li>Leviathan normal: {raid.leviathan.normalCompletions}</li>
-              <li>Leviathan prestige: {raid.leviathan.prestigeCompletions}</li>
-            </ul>
+          <div>
+            <h4>Leviathan</h4>
           </div>
+          <ul>
+            <li>Normal: {raid.leviathan.normalCompletions}</li>
+            <li>Prestige: {raid.leviathan.prestigeCompletions}</li>
+          </ul>
         </div>
         <div className="track-container">
-          <div className="raid">
-            <ul>
-              <li>Eater of Worlds normal: {raid.EoW.normalCompletions}</li>
-              <li>Eater of Worlds prestige: {raid.EoW.prestigeCompletions}</li>
-            </ul>
+          <div>
+            <h4>Eater of Worlds</h4>
           </div>
+          <ul>
+            <li>Normal: {raid.EoW.normalCompletions}</li>
+            <li>Prestige: {raid.EoW.prestigeCompletions}</li>
+          </ul>
         </div>
         <div className="track-container">
-          <div className="raid">
-            <ul>
-              <li>Spire of Stars normal: {raid.SoS.normalCompletions}</li>
-              <li>Spire of Stars prestige: {raid.SoS.prestigeCompletions}</li>
-            </ul>
+          <div>
+            <h4>Spire of Stars</h4>
           </div>
+          <ul>
+            <li>Normal: {raid.SoS.normalCompletions}</li>
+            <li>Prestige: {raid.SoS.prestigeCompletions}</li>
+          </ul>
         </div>
         <div className="track-container">
-          <div className="raid">
-            <ul>
-              <li>Last Wish normal: {raid.lastWish.normalCompletions}</li>
-            </ul>
+          <div>
+            <h4>Last wish</h4>
           </div>
+          <ul>
+            <li className="center-li">
+              Normal: {raid.lastWish.normalCompletions}
+            </li>
+          </ul>
         </div>
       </div>
     );

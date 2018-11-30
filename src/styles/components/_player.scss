@@ -24,33 +24,43 @@
   }
 
   .track-container {
-    display: flex;
     padding: 5px;
     width: 100%;
-    text-align: left;
+    text-align: center;
     border-radius: 5px;
     outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
     margin: 0 5px 10px 0;
     padding: 10px;
-    &.kill_death_ratio {
-      text-align: center;
-    }
-    @include breakpoint(714px) {
-      flex-direction: column;
-      text-align: center;
-    }
-    & div {
-      width: 320px;
-      margin: 0 auto;
-      @include breakpoint(400px) {
-        width: 100%;
+
+    div {
+      h4 {
+        margin-bottom: 10px;
+        padding: 5px;
       }
     }
-    & .raid {
-      width: 380px;
-      @include breakpoint(455px) {
-        width: 100%;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      li {
+        min-width: 30%;
+        padding: 5px;
+
+        text-align: center;
+        color: rgb(238, 238, 238);
+
+        @include breakpoint(1200px) {
+          min-width: 50%;
+        }
+        @include breakpoint(750px) {
+          width: 100%;
+        }
+      }
+      .center-li {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }
