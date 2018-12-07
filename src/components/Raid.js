@@ -6,7 +6,8 @@ import {
   setGambitProgressionAction,
   setCrucibleProgressionAction,
   setRaidProgressionAction,
-  setActiveMembership
+  setActiveMembership,
+  startSetDataAction
 } from "../actions/playerActions";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import Loading from "../components/Loading";
@@ -21,9 +22,9 @@ class Raid extends Component {
       const { memberships } = this.props.player;
       if (memberships.length === 0 && this.props.match.params.id) {
         const playerGamerTag = this.props.match.params.id.toLowerCase();
+        await this.props.startSetDataAction();
         const playerMemberships = await this.props.setMembershipInfoAction(
-          playerGamerTag,
-          "raid"
+          playerGamerTag
         );
         const activeMembership = this.props.player.activeMembership;
 
@@ -63,6 +64,7 @@ class Raid extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     this.setState({ isMore: false });
+    await this.props.startSetDataAction();
     await this.props.setActiveMembership(index);
     await this.props.setRaidProgressionAction(
       memberships[index].membershipType,
@@ -86,6 +88,7 @@ class Raid extends Component {
 
     const raid = {
       lastWish: { normalCompletions: 0 },
+      SotP: { normalCompletions: 0 },
       EoW: {
         normalCompletions: 0,
         prestigeCompletions: 0
@@ -99,6 +102,12 @@ class Raid extends Component {
           this.props.player.raid[i][`character${i + 1}`].forEach(elm => {
             if (elm.activityHash === 2122313384) {
               raid.lastWish.normalCompletions +=
+                elm.values.activityCompletions.basic.value;
+            } else if (
+              elm.activityHash === 548750096 ||
+              elm.activityHash === 2812525063
+            ) {
+              raid.SotP.normalCompletions +=
                 elm.values.activityCompletions.basic.value;
             } else if (elm.activityHash === 3089205900) {
               raid.EoW.normalCompletions +=
@@ -142,6 +151,24 @@ class Raid extends Component {
       <div className="track-wrapper">
         <div className="track-container">
           <div>
+            <h4>Scourge of the Past</h4>
+          </div>
+          <ul>
+            <li className="center-li">Normal: {raid.SotP.normalCompletions}</li>
+          </ul>
+        </div>
+        <div className="track-container">
+          <div>
+            <h4>Last wish</h4>
+          </div>
+          <ul>
+            <li className="center-li">
+              Normal: {raid.lastWish.normalCompletions}
+            </li>
+          </ul>
+        </div>
+        <div className="track-container">
+          <div>
             <h4>Leviathan</h4>
           </div>
           <ul>
@@ -165,16 +192,6 @@ class Raid extends Component {
           <ul>
             <li>Normal: {raid.SoS.normalCompletions}</li>
             <li>Prestige: {raid.SoS.prestigeCompletions}</li>
-          </ul>
-        </div>
-        <div className="track-container">
-          <div>
-            <h4>Last wish</h4>
-          </div>
-          <ul>
-            <li className="center-li">
-              Normal: {raid.lastWish.normalCompletions}
-            </li>
           </ul>
         </div>
       </div>
@@ -213,6 +230,7 @@ export default connect(
     setGambitProgressionAction,
     setCrucibleProgressionAction,
     setRaidProgressionAction,
-    setActiveMembership
+    setActiveMembership,
+    startSetDataAction
   }
 )(Raid);

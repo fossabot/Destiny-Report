@@ -5,7 +5,8 @@ import {
   setGambitProgressionAction,
   setCrucibleProgressionAction,
   setRaidProgressionAction,
-  setActiveMembership
+  setActiveMembership,
+  startSetDataAction
 } from "../actions/playerActions";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
@@ -34,6 +35,7 @@ class Home extends React.Component {
     const playerGamerTag = this.refs.gamertag.value.toLowerCase();
     const redirectLocation = this.state.redirectLocation;
     try {
+      await this.props.startSetDataAction();
       const memberships = await this.props.setMembershipInfoAction(
         playerGamerTag,
         "gambit"
@@ -97,7 +99,8 @@ class Home extends React.Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     const redirectLocation = this.state.redirectLocation;
-    await this.props.setActiveMembership(index, "gambit");
+    await this.props.startSetDataAction();
+    await this.props.setActiveMembership(index);
     this.setState({ isMore: false });
     const activeMembership = this.props.player.activeMembership;
     if (redirectLocation === "gambit") {
@@ -245,6 +248,7 @@ export default connect(
     setGambitProgressionAction,
     setCrucibleProgressionAction,
     setRaidProgressionAction,
-    setActiveMembership
+    setActiveMembership,
+    startSetDataAction
   }
 )(Home);

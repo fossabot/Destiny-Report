@@ -6,7 +6,8 @@ import {
   setGambitProgressionAction,
   setCrucibleProgressionAction,
   setRaidProgressionAction,
-  setActiveMembership
+  setActiveMembership,
+  startSetDataAction
 } from "../actions/playerActions";
 import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
@@ -22,9 +23,10 @@ class Crucible extends Component {
       const { memberships } = this.props.player;
       if (memberships.length === 0 && this.props.match.params.id) {
         const playerGamerTag = this.props.match.params.id.toLowerCase();
+        await this.props.startSetDataAction();
+
         const playerMemberships = await this.props.setMembershipInfoAction(
-          playerGamerTag,
-          "crucible"
+          playerGamerTag
         );
         const activeMembership = this.props.player.activeMembership;
 
@@ -64,6 +66,7 @@ class Crucible extends Component {
     const index = event.target.value;
     const memberships = this.props.player.memberships;
     this.setState({ isMore: false });
+    await this.props.startSetDataAction();
     await this.props.setActiveMembership(index);
     await this.props.setCrucibleProgressionAction(
       memberships[index].membershipType,
@@ -219,6 +222,7 @@ export default connect(
     setGambitProgressionAction,
     setCrucibleProgressionAction,
     setRaidProgressionAction,
-    setActiveMembership
+    setActiveMembership,
+    startSetDataAction
   }
 )(Crucible);

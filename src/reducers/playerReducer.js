@@ -17,31 +17,17 @@ const FAIL_SET_DATA_PRIVACY = "FAIL_SET_DATA_PRIVACY";
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
     case START_SET_DATA:
-      if (action.payload === "gambit") {
-        state = {
-          ...state,
-          gambitIsLoading: true,
-          gambitSuccess: false,
-          error: false,
-          isPlayerFound: true
-        };
-      } else if (action.payload === "crucible") {
-        state = {
-          ...state,
-          crucibleIsLoading: true,
-          crucibleSuccess: false,
-          error: false,
-          isPlayerFound: true
-        };
-      } else if (action.payload === "raid") {
-        state = {
-          ...state,
-          raidIsLoading: true,
-          raidSuccess: false,
-          error: false,
-          isPlayerFound: true
-        };
-      }
+      state = {
+        ...state,
+        gambitIsLoading: true,
+        crucibleIsLoading: true,
+        raidIsLoading: true,
+        gambitSuccess: false,
+        crucibleSuccess: false,
+        raidSuccess: false,
+        error: false,
+        isPlayerFound: true
+      };
       return state;
     case SET_GAMBIT_DATA:
       state = cloneDeep(state);

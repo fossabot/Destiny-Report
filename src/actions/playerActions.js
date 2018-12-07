@@ -9,7 +9,6 @@ export const setMembershipInfoAction = (playerGamerTag, pageName) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       try {
-        dispatch({ type: "START_SET_DATA", payload: pageName });
         const res = await endpoints.getMembershipID(playerGamerTag);
         if (res.data.Response.length === 0) {
           dispatch({ type: "PLAYER_NOT_FOUND" });
@@ -93,7 +92,6 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
           armyOfOne: infamyData.armyOfOne
         };
 
-        dispatch({ type: "START_SET_DATA", payload: "gambit" });
         dispatch({
           type: "SET_GAMBIT_DATA",
           payload: {
@@ -187,7 +185,6 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
             ].objectives[0].progress;
         }
 
-        dispatch({ type: "START_SET_DATA", payload: "crucible" });
         dispatch({
           type: "SET_CRUCIBLE_DATA",
           payload: {
@@ -230,7 +227,6 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
           });
         }
 
-        dispatch({ type: "START_SET_DATA", payload: "raid" });
         dispatch({
           type: "SET_RAID_DATA",
           payload: raidStats
@@ -246,11 +242,19 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   };
 };
 
-export const setActiveMembership = (index, pageName) => {
+export const setActiveMembership = index => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
-      dispatch({ type: "START_SET_DATA", payload: pageName });
       dispatch({ type: "SET_ACTIVE_MEMBERSHIP", payload: index });
+      resolve();
+    });
+  };
+};
+
+export const startSetDataAction = () => {
+  return dispatch => {
+    return new Promise(async (resolve, reject) => {
+      dispatch({ type: "START_SET_DATA" });
       resolve();
     });
   };

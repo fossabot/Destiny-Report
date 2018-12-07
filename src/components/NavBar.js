@@ -17,7 +17,6 @@ const navBar = props => {
   const linkHide = path === "/" ? "link--hide" : "";
 
   const { error, privacyError } = props.player;
-  console.log(privacyError);
   let errorMessage =
     "Bungie API is having issues at this moment, please try again later";
   if (privacyError) {
