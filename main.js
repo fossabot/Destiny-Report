@@ -40,7 +40,7 @@ mongoose.connect(
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/getbadges/:id", async (req, res) => {
+app.get("/api/getbadges/:id", async (req, res) => {
   const membershipId = req.params.id;
   const membershipType = req.query.platform;
   if (membershipId === undefined || membershipType === undefined) {
@@ -56,7 +56,7 @@ app.get("/getbadges/:id", async (req, res) => {
     }
   });
 });
-app.get("/checkbadges/:id", async (req, res) => {
+app.get("/api/checkbadges/:id", async (req, res) => {
   const membershipId = req.params.id;
   const membershipType = req.query.platform;
   if (membershipId === undefined || membershipType === undefined) {
