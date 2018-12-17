@@ -13,6 +13,7 @@ const SET_CRUCIBLE_DATA = "SET_CRUCIBLE_DATA";
 const SET_RAID_DATA = "SET_RAID_DATA";
 const PLAYER_NOT_FOUND = "PLAYER_NOT_FOUND";
 const FAIL_SET_DATA_PRIVACY = "FAIL_SET_DATA_PRIVACY";
+const SET_CHECKED_RAID_BADGES = "SET_CHECKED_RAID_BADGES";
 
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
@@ -52,6 +53,10 @@ export const playerReducer = (state = initial, action) => {
     case SET_RAID_DATA:
       state = cloneDeep(state);
       state.raid = cloneDeep(action.payload);
+      return state;
+    case SET_CHECKED_RAID_BADGES:
+      state = cloneDeep(state);
+      state.raid.badges = action.payload;
       return state;
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);

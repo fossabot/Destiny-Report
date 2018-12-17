@@ -207,7 +207,6 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       try {
-        //needs to be improved
         const allStats = await endpoints.getAllProgression(
           membershipType,
           membershipId
@@ -226,6 +225,21 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
             [`character${i + 1}`]: characterRaidStat.data.Response.activities
           });
         }
+
+        const raidBadges = await endpoints.getRaidBadges(
+          membershipType,
+          membershipId
+        );
+        if (raidBadges) {
+          raidStats.badges = raidBadges.data;
+        }
+
+        endpoints
+          .getCheckRaidBadges(membershipType, membershipId)
+          .then(badges => {
+            dispatch({ type: "SET_CHECKED_RAID_BADGES", payload: badges.data });
+          })
+          .catch(err => console.log(err));
 
         dispatch({
           type: "SET_RAID_DATA",

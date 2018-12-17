@@ -235,7 +235,7 @@ const findAndUpdate = (membershipId, raidName, badgeName, instanceId) => {
       [field]: true,
       [instanceIdField]: instanceId
     },
-    { upsert: true },
+    { upsert: true, setDefaultsOnInsert: true },
     err => {
       if (err) {
         console.log(err);
