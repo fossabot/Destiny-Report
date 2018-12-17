@@ -1,38 +1,19 @@
 {
-  "name": "Destiny-Tracker",
-  "version": "1.1.1",
-  "author": "SarKurd",
+  "name": "api",
+  "version": "1.1.0",
+  "main": "main.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "node main.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
+  },
   "dependencies": {
     "axios": "^0.18.0",
-    "font-awesome": "^4.7.0",
-    "lodash": "^4.17.11",
-    "node-sass": "^4.10.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0",
-    "react-redux": "^5.1.1",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "aws s3 sync build/ s3://destinyprogress",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.15"
+  }
 }
