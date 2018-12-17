@@ -2,13 +2,18 @@
 
 You can get the API key on [Bungie.net](https://www.bungie.net/en/Application)
 
-Create a `.env` file and put the key inside it like this
+Create a `.env` file in the root of the project and put the keys inside it
 
 ```
-REACT_APP_API_KEY="your key here"
 DB_USERNAME="DB username here"
 DB_PASSWORD="DB password here"
 BUNGIE_API_KEY="Bungie API key here"
+```
+
+And create another `.env` file inside client root directory and put Bungie API key inside it
+
+``` 
+REACT_APP_API_KEY="your key here" 
 ```
 
 ## Roadmap
