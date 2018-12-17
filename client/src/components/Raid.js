@@ -94,12 +94,149 @@ class Raid extends Component {
         prestigeCompletions: 0
       },
       SoS: { normalCompletions: 0, prestigeCompletions: 0 },
-      leviathan: { normalCompletions: 0, prestigeCompletions: 0 }
+      leviathan: { normalCompletions: 0, prestigeCompletions: 0 },
+      badges: {
+        leviathan: {
+          flawless: {
+            value: false,
+            instanceId: ""
+          },
+          dayOne: {
+            value: false,
+            instanceId: ""
+          },
+          weekOne: {
+            value: false,
+            instanceId: ""
+          },
+          fourMan: {
+            value: false,
+            instanceId: ""
+          },
+          threeMan: {
+            value: false,
+            instanceId: ""
+          },
+          twoMan: {
+            value: false,
+            instanceId: ""
+          }
+        },
+        EoW: {
+          flawless: {
+            value: false,
+            instanceId: ""
+          },
+          dayOne: {
+            value: false,
+            instanceId: ""
+          },
+          weekOne: {
+            value: false,
+            instanceId: ""
+          },
+          fourMan: {
+            value: false,
+            instanceId: ""
+          },
+          threeMan: {
+            value: false,
+            instanceId: ""
+          },
+          twoMan: {
+            value: false,
+            instanceId: ""
+          }
+        },
+        SoS: {
+          flawless: {
+            value: false,
+            instanceId: ""
+          },
+          dayOne: {
+            value: false,
+            instanceId: ""
+          },
+          weekOne: {
+            value: false,
+            instanceId: ""
+          },
+          fourMan: {
+            value: false,
+            instanceId: ""
+          },
+          threeMan: {
+            value: false,
+            instanceId: ""
+          },
+          twoMan: {
+            value: false,
+            instanceId: ""
+          }
+        },
+        lastWish: {
+          flawless: {
+            value: false,
+            instanceId: ""
+          },
+          dayOne: {
+            value: false,
+            instanceId: ""
+          },
+          weekOne: {
+            value: false,
+            instanceId: ""
+          },
+          fourMan: {
+            value: false,
+            instanceId: ""
+          },
+          threeMan: {
+            value: false,
+            instanceId: ""
+          },
+          twoMan: {
+            value: false,
+            instanceId: ""
+          }
+        },
+        SotP: {
+          flawless: {
+            value: false,
+            instanceId: ""
+          },
+          dayOne: {
+            value: false,
+            instanceId: ""
+          },
+          weekOne: {
+            value: false,
+            instanceId: ""
+          },
+          fourMan: {
+            value: false,
+            instanceId: ""
+          },
+          threeMan: {
+            value: false,
+            instanceId: ""
+          },
+          twoMan: {
+            value: false,
+            instanceId: ""
+          }
+        }
+      }
     };
     if (!raidIsLoading) {
-      for (let i = 0; i < this.props.player.raid.length; ++i) {
-        if (this.props.player.raid[i][`character${i + 1}`] !== undefined) {
-          this.props.player.raid[i][`character${i + 1}`].forEach(elm => {
+      if (this.props.player.raid.badges !== undefined) {
+        raid.badges = this.props.player.raid.badges;
+      }
+      for (let i = 0; i < this.props.player.raid.stats.length; ++i) {
+        if (
+          this.props.player.raid.stats[i][`character${i + 1}`] !== undefined
+        ) {
+          this.props.player.raid.stats[i][`character${i + 1}`].forEach(elm => {
             if (elm.activityHash === 2122313384) {
               raid.lastWish.normalCompletions +=
                 elm.values.activityCompletions.basic.value;
@@ -156,16 +293,36 @@ class Raid extends Component {
           <ul>
             <li className="center-li">Normal: {raid.SotP.normalCompletions}</li>
           </ul>
+          <div className="raid-badges-container">
+            <ul className="raid-badges-list">
+              {raid.badges.SotP.flawless.value && <li>Flawless</li>}
+              {raid.badges.SotP.dayOne.value && <li>Day one</li>}
+              {raid.badges.SotP.weekOne.value && <li>Week one</li>}
+              {raid.badges.SotP.twoMan.value && <li>Two man</li>}
+              {raid.badges.SotP.threeMan.value && <li>Three man</li>}
+              {raid.badges.SotP.fourMan.value && <li>Four man</li>}
+            </ul>
+          </div>
         </div>
         <div className="track-container">
           <div>
-            <h4>Last wish</h4>
+            <h4>Last Wish</h4>
           </div>
           <ul>
             <li className="center-li">
               Normal: {raid.lastWish.normalCompletions}
             </li>
           </ul>
+          <div className="raid-badges-container">
+            <ul className="raid-badges-list">
+              {raid.badges.lastWish.flawless.value && <li>Flawless</li>}
+              {raid.badges.lastWish.dayOne.value && <li>Day one</li>}
+              {raid.badges.lastWish.weekOne.value && <li>Week one</li>}
+              {raid.badges.lastWish.twoMan.value && <li>Two man</li>}
+              {raid.badges.lastWish.threeMan.value && <li>Three man</li>}
+              {raid.badges.lastWish.fourMan.value && <li>Four man</li>}
+            </ul>
+          </div>
         </div>
         <div className="track-container">
           <div>
@@ -175,6 +332,16 @@ class Raid extends Component {
             <li>Normal: {raid.leviathan.normalCompletions}</li>
             <li>Prestige: {raid.leviathan.prestigeCompletions}</li>
           </ul>
+          <div className="raid-badges-container">
+            <ul className="raid-badges-list">
+              {raid.badges.leviathan.flawless.value && <li>Flawless</li>}
+              {raid.badges.leviathan.dayOne.value && <li>Day one</li>}
+              {raid.badges.leviathan.weekOne.value && <li>Week one</li>}
+              {raid.badges.leviathan.twoMan.value && <li>Two man</li>}
+              {raid.badges.leviathan.threeMan.value && <li>Three man</li>}
+              {raid.badges.leviathan.fourMan.value && <li>Four man</li>}
+            </ul>
+          </div>
         </div>
         <div className="track-container">
           <div>
@@ -184,6 +351,16 @@ class Raid extends Component {
             <li>Normal: {raid.EoW.normalCompletions}</li>
             <li>Prestige: {raid.EoW.prestigeCompletions}</li>
           </ul>
+          <div className="raid-badges-container">
+            <ul className="raid-badges-list">
+              {raid.badges.EoW.flawless.value && <li>Flawless</li>}
+              {raid.badges.EoW.dayOne.value && <li>Day one</li>}
+              {raid.badges.EoW.weekOne.value && <li>Week one</li>}
+              {raid.badges.EoW.twoMan.value && <li>Two man</li>}
+              {raid.badges.EoW.threeMan.value && <li>Three man</li>}
+              {raid.badges.EoW.fourMan.value && <li>Four man</li>}
+            </ul>
+          </div>
         </div>
         <div className="track-container">
           <div>
@@ -193,6 +370,16 @@ class Raid extends Component {
             <li>Normal: {raid.SoS.normalCompletions}</li>
             <li>Prestige: {raid.SoS.prestigeCompletions}</li>
           </ul>
+          <div className="raid-badges-container">
+            <ul className="raid-badges-list">
+              {raid.badges.SoS.flawless.value && <li>Flawless</li>}
+              {raid.badges.SoS.dayOne.value && <li>Day one</li>}
+              {raid.badges.SoS.weekOne.value && <li>Week one</li>}
+              {raid.badges.SoS.twoMan.value && <li>Two man</li>}
+              {raid.badges.SoS.threeMan.value && <li>Three man</li>}
+              {raid.badges.SoS.fourMan.value && <li>Four man</li>}
+            </ul>
+          </div>
         </div>
       </div>
     );

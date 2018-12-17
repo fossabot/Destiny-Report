@@ -214,14 +214,14 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 
         const characterIds = allStats.data.Response.profile.data.characterIds;
 
-        const raidStats = [];
+        const raidStats = { stats: [] };
         for (let i = 0; i < characterIds.length; ++i) {
           const characterRaidStat = await endpoints.getRaidStats(
             membershipType,
             membershipId,
             characterIds[i]
           );
-          raidStats.push({
+          raidStats.stats.push({
             [`character${i + 1}`]: characterRaidStat.data.Response.activities
           });
         }
@@ -230,14 +230,20 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
           membershipType,
           membershipId
         );
-        if (raidBadges) {
+
+        if (raidBadges.data) {
           raidStats.badges = raidBadges.data;
         }
 
         endpoints
           .getCheckRaidBadges(membershipType, membershipId)
           .then(badges => {
-            dispatch({ type: "SET_CHECKED_RAID_BADGES", payload: badges.data });
+            if (badges.data) {
+              dispatch({
+                type: "SET_CHECKED_RAID_BADGES",
+                payload: badges.data
+              });
+            }
           })
           .catch(err => console.log(err));
 

@@ -13,8 +13,8 @@ const sosWeekOne = new Date("2018-05-18T17:00:00Z");
 const lastWishDayOne = new Date("2018-09-15T17:00:00Z");
 const lastWishWeekOne = new Date("2018-09-21T17:00:00Z");
 
-const sotpDayOne = new Date("2018-12-15T17:00:00Z");
-const sotpWeekOne = new Date("2018-12-21T17:00:00Z");
+const sotpDayOne = new Date("2018-12-08T17:00:00Z");
+const sotpWeekOne = new Date("2018-12-14T17:00:00Z");
 
 module.exports = async (membershipType, membershipId, characterIds) => {
   try {
@@ -164,10 +164,12 @@ const checkFireteamBadges = response => {
         }
 
         const finishedRaidDateAndTime = new Date(response.period);
+        console.log(finishedRaidDateAndTime, instanceId);
         finishedRaidDateAndTime.setSeconds(
           finishedRaidDateAndTime.getSeconds() +
             player.values.activityDurationSeconds.basic.value
         );
+        console.log(finishedRaidDateAndTime, instanceId);
         if (finishedRaidDateAndTime < sotpDayOne) {
           isDayOne = true;
           isWeekOne = true;
