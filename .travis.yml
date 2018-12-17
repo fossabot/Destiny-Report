@@ -6,4 +6,4 @@ node_js:
 script:
   - npm install
   - cd client
-  - npm start
+  - npm install
