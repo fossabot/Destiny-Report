@@ -4,162 +4,132 @@ const playerSchema = mongoose.Schema({
   _id: String,
   leviathan: {
     flawless: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     dayOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     weekOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     fourMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     threeMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     twoMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     }
   },
   EoW: {
     flawless: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     dayOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     weekOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     fourMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     threeMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     twoMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     }
   },
   SoS: {
     flawless: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     dayOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     weekOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     fourMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     threeMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     twoMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     }
   },
   lastWish: {
     flawless: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     dayOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     weekOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     fourMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     threeMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     twoMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     }
   },
   SotP: {
     flawless: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     dayOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     weekOne: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     fourMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     threeMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     },
     twoMan: {
-      value: Boolean,
-      instanceId: String,
-      default: false
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
     }
   }
 });

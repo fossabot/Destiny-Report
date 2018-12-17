@@ -59,7 +59,6 @@ app.get("/api/getbadges/:id", async (req, res) => {
   });
 });
 app.get("/api/checkbadges/:id", async (req, res) => {
-  console.log("Called");
   const membershipId = req.params.id;
   const membershipType = req.query.platform;
   if (membershipId === undefined || membershipType === undefined) {
@@ -79,7 +78,6 @@ app.get("/api/checkbadges/:id", async (req, res) => {
         res.status(200).json(doc);
       }
     });
-    console.log("Done");
   } catch (err) {
     res.status(500).json(err);
   }
