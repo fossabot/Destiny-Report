@@ -11,22 +11,26 @@ const checkForBadges = require("./controllers/checkForBadges");
 
 const app = express();
 
-// if (process.env.NODE_ENV === "production") {
-//   const whitelist = ["https://destinyreport.app", "https://destiny.report"];
-//   const corsOptions = {
-//     origin: function(origin, callback) {
-//       if (whitelist.indexOf(origin) !== -1) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true
-//   };
-//   app.use(cors(corsOptions));
-// } else {
-app.use(cors());
-//}
+if (process.env.NODE_ENV === "production") {
+  const whitelist = [
+    "https://destinyreport.app",
+    "https://destiny.report",
+    "https://destiny-report.herokuapp.com/"
+  ];
+  const corsOptions = {
+    origin: function(origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true
+  };
+  app.use(cors(corsOptions));
+} else {
+  app.use(cors());
+}
 axios.defaults.headers.common["X-API-KEY"] = process.env.BUNGIE_API_KEY;
 
 mongoose.connect(
