@@ -40,7 +40,7 @@ mongoose.connect(
 );
 
 //Serve client
-// app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("/api/getbadges/:id", async (req, res) => {
   const membershipId = req.params.id;
@@ -84,9 +84,9 @@ app.get("/api/checkbadges/:id", async (req, res) => {
 });
 
 // The "catchall" handler
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
