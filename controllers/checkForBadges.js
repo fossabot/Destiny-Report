@@ -33,10 +33,11 @@ module.exports = async (membershipType, membershipId, characterIds) => {
               result.data.Response.activities[k].values.completed.basic
                 .value === 1
             ) {
-              const PGCRResult = await getPGCR(
+              getPGCR(
                 result.data.Response.activities[k].activityDetails.instanceId
-              );
-              checkFireteamBadges(PGCRResult.data.Response);
+              ).then(PGCRResult => {
+                checkFireteamBadges(PGCRResult.data.Response);
+              });
             }
           }
         }

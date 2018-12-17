@@ -31,7 +31,7 @@ const getPGCR = instanceId => {
           `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${instanceId}/`
         )
       );
-    }, 100);
+    }, 40);
   });
 };
 
