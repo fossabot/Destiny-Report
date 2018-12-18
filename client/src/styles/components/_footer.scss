@@ -16,15 +16,24 @@
     padding: 0;
 
     li {
-      width: 30px;
-      margin-right: 10px;
+      margin-right: 20px;
       a {
         text-decoration: none;
         color: white;
+
+        &:hover {
+          color: aqua;
+        }
+
         .fa {
           font-size: 1.5em;
-          &:hover {
-            color: aqua;
+        }
+        span {
+          margin-left: 5px;
+          font-size: 1.3em;
+
+          @include breakpoint(425px) {
+            display: none;
           }
         }
       }

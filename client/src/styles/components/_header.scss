@@ -13,6 +13,7 @@
       .link {
         margin-right: 20px;
         font-size: 30px;
+        font-weight: 500;
 
         @include breakpoint(550px) {
           font-size: 20px;

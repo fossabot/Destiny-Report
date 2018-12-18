@@ -13,17 +13,12 @@ export default () => (
     <ul className="source-and-contact">
       <li>
         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CBDESK5LVTJPC&source=url">
-          <i className="fa fa-paypal" />
+          <i className="fa fa-paypal" /> <span>Donate</span>
         </a>
       </li>
       <li>
         <a href="https://www.github.com/sarkurd">
-          <i className="fa fa-github" />
-        </a>
-      </li>
-      <li>
-        <a href="https://twitter.com/xXSARKURDZz">
-          <i className="fa fa-twitter" />
+          <i className="fa fa-github" /> <span>Source </span>
         </a>
       </li>
     </ul>
