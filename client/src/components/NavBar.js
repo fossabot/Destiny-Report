@@ -17,8 +17,7 @@ const navBar = props => {
   const linkHide = path === "/" ? "link--hide" : "";
 
   const { error, privacyError } = props.player;
-  let errorMessage =
-    "Bungie API is having issues at this moment, please try again later";
+  let errorMessage = "Bungie API returned an error, please try again later";
   if (privacyError) {
     errorMessage =
       "Due to player's privacy, you can't see most of his/her stats";

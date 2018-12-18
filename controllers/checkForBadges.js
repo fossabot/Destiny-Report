@@ -35,9 +35,11 @@ module.exports = async (membershipType, membershipId, characterIds) => {
             ) {
               getPGCR(
                 result.data.Response.activities[k].activityDetails.instanceId
-              ).then(PGCRResult => {
-                checkFireteamBadges(PGCRResult.data.Response);
-              });
+              )
+                .then(PGCRResult => {
+                  checkFireteamBadges(PGCRResult.data.Response);
+                })
+                .catch(err => console.log(err));
             }
           }
         }

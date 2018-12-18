@@ -207,22 +207,28 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       try {
-        const allStats = await endpoints.getAllProgression(
+        const profileResult = await endpoints.getProfileCharacters(
           membershipType,
           membershipId
         );
 
-        const characterIds = allStats.data.Response.profile.data.characterIds;
+        const characterIds =
+          profileResult.data.Response.profile.data.characterIds;
 
         const raidStats = { stats: [] };
-        for (let i = 0; i < characterIds.length; ++i) {
-          const characterRaidStat = await endpoints.getRaidStats(
-            membershipType,
-            membershipId,
-            characterIds[i]
-          );
+        const charactersRaidStats = await Promise.all(
+          characterIds.map(characterId => {
+            return endpoints.getRaidStats(
+              membershipType,
+              membershipId,
+              characterId
+            );
+          })
+        );
+        for (let i = 0; i < charactersRaidStats.length; ++i) {
           raidStats.stats.push({
-            [`character${i + 1}`]: characterRaidStat.data.Response.activities
+            [`character${i + 1}`]: charactersRaidStats[i].data.Response
+              .activities
           });
         }
 

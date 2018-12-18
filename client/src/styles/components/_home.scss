@@ -13,8 +13,8 @@
     right: 0;
     left: 0;
     top: 20px;
-    width: 80%;
-    font-size: 5vw;
+    width: 60%;
+    font-size: 4vw;
     text-align: center;
     margin: 0 auto;
     padding: 10px;
@@ -22,6 +22,14 @@
     outline: none;
     background-color: rgba(0, 0, 0, 0.1);
     color: $white;
+
+    @include breakpoint(768px) {
+      font-size: 5vw;
+      top: 40px;
+    }
+    @include breakpoint(580px) {
+      width: 80%;
+    }
   }
 
   .input-form {

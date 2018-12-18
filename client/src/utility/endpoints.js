@@ -33,6 +33,16 @@ export const getAllProgression = (membershipType, membershipId) => {
     }
   );
 };
+export const getProfileCharacters = (membershipType, membershipId) => {
+  return axios.get(
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=100`,
+    {
+      headers: {
+        "X-API-KEY": process.env.REACT_APP_API_KEY
+      }
+    }
+  );
+};
 
 export const getCrucibleStats = (membershipType, membershipId) => {
   return axios.get(
