@@ -11,13 +11,12 @@ const checkForBadges = require("./controllers/checkForBadges");
 
 const app = express();
 
-app.configure("production", () => {
-  app.use((req, res, next) => {
-    if (req.header("x-forwarded-proto") !== "https")
-      res.redirect(`https://${req.header("host")}${req.url}`);
-    else next();
-  });
+app.use((req, res, next) => {
+  if (req.header("x-forwarded-proto") !== "https")
+    res.redirect(`https://${req.header("host")}${req.url}`);
+  else next();
 });
+
 const corsOptions = {
   origin: "http://destiny.report",
   optionsSuccessStatus: 200
