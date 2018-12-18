@@ -25,7 +25,7 @@ export default () => (
     <ul className="info">
       <li>
         Contact:{" "}
-        <a href="mailto:info@destinyreport.app">info@destinyreport.app</a>
+        <a href="mailto:contact@destiny.report">contact@destiny.report</a>
       </li>
     </ul>
   </footer>
