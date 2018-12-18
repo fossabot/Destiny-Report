@@ -30,8 +30,8 @@ module.exports = async (membershipType, membershipId, characterIds) => {
         if (Object.keys(result.data.Response).length !== 0) {
           for (let k = 0; k < result.data.Response.activities.length; ++k) {
             if (
-              result.data.Response.activities[k].values.completed.basic
-                .value === 1
+              result.data.Response.activities[k].values.completionReason.basic
+                .value === 0
             ) {
               getPGCR(
                 result.data.Response.activities[k].activityDetails.instanceId
@@ -68,7 +68,7 @@ const checkFireteamBadges = response => {
   let isWeekOne = false;
 
   for (let player of response.entries) {
-    if (player.values.completed.basic.value === 1) {
+    if (player.values.completionReason.basic.value === 0) {
       count++;
       isCompleted = true;
 
@@ -166,12 +166,10 @@ const checkFireteamBadges = response => {
         }
 
         const finishedRaidDateAndTime = new Date(response.period);
-        console.log(finishedRaidDateAndTime, instanceId);
         finishedRaidDateAndTime.setSeconds(
           finishedRaidDateAndTime.getSeconds() +
             player.values.activityDurationSeconds.basic.value
         );
-        console.log(finishedRaidDateAndTime, instanceId);
         if (finishedRaidDateAndTime < sotpDayOne) {
           isDayOne = true;
           isWeekOne = true;

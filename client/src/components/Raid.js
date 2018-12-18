@@ -298,7 +298,8 @@ class Raid extends Component {
             <ul className="raid-badges-list">
               {raid.badges.SotP.flawless.value && <li>Flawless</li>}
               {raid.badges.SotP.dayOne.value && <li>Day one</li>}
-              {raid.badges.SotP.weekOne.value && <li>Week one</li>}
+              {raid.badges.SotP.weekOne.value &&
+                !raid.badges.SotP.dayOne.value && <li>Week one</li>}
               {raid.badges.SotP.twoMan.value && <li>Two man</li>}
               {raid.badges.SotP.threeMan.value && <li>Three man</li>}
               {raid.badges.SotP.fourMan.value && <li>Four man</li>}
@@ -319,7 +320,8 @@ class Raid extends Component {
               {raid.badges.lastWish.flawless.value && <li>Flawless</li>}
               {raid.petrasRun && <li>Petra's Run</li>}
               {raid.badges.lastWish.dayOne.value && <li>Day one</li>}
-              {raid.badges.lastWish.weekOne.value && <li>Week one</li>}
+              {raid.badges.lastWish.weekOne.value &&
+                !raid.badges.lastWish.dayOne.value && <li>Week one</li>}
               {raid.badges.lastWish.twoMan.value && <li>Two man</li>}
               {raid.badges.lastWish.threeMan.value && <li>Three man</li>}
               {raid.badges.lastWish.fourMan.value && <li>Four man</li>}
@@ -338,7 +340,8 @@ class Raid extends Component {
             <ul className="raid-badges-list">
               {raid.badges.leviathan.flawless.value && <li>Flawless</li>}
               {raid.badges.leviathan.dayOne.value && <li>Day one</li>}
-              {raid.badges.leviathan.weekOne.value && <li>Week one</li>}
+              {raid.badges.leviathan.weekOne.value &&
+                !raid.badges.leviathan.dayOne.value && <li>Week one</li>}
               {raid.badges.leviathan.twoMan.value && <li>Two man</li>}
               {raid.badges.leviathan.threeMan.value && <li>Three man</li>}
               {raid.badges.leviathan.fourMan.value && <li>Four man</li>}
@@ -357,7 +360,8 @@ class Raid extends Component {
             <ul className="raid-badges-list">
               {raid.badges.EoW.flawless.value && <li>Flawless</li>}
               {raid.badges.EoW.dayOne.value && <li>Day one</li>}
-              {raid.badges.EoW.weekOne.value && <li>Week one</li>}
+              {raid.badges.EoW.weekOne.value &&
+                !raid.badges.EoW.dayOne.value && <li>Week one</li>}
               {raid.badges.EoW.twoMan.value && <li>Two man</li>}
               {raid.badges.EoW.threeMan.value && <li>Three man</li>}
               {raid.badges.EoW.fourMan.value && <li>Four man</li>}
@@ -376,7 +380,8 @@ class Raid extends Component {
             <ul className="raid-badges-list">
               {raid.badges.SoS.flawless.value && <li>Flawless</li>}
               {raid.badges.SoS.dayOne.value && <li>Day one</li>}
-              {raid.badges.SoS.weekOne.value && <li>Week one</li>}
+              {raid.badges.SoS.weekOne.value &&
+                !raid.badges.SoS.dayOne.value && <li>Week one</li>}
               {raid.badges.SoS.twoMan.value && <li>Two man</li>}
               {raid.badges.SoS.threeMan.value && <li>Three man</li>}
               {raid.badges.SoS.fourMan.value && <li>Four man</li>}
