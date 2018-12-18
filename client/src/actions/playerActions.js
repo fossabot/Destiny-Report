@@ -10,6 +10,15 @@ export const setMembershipInfoAction = (playerGamerTag, pageName) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await endpoints.getMembershipID(playerGamerTag);
+        if (res.data.ErrorCode === 5) {
+          dispatch({
+            type: "FAIL_SET_DATA",
+            payload:
+              "Bungie API is under maintenance at this moment, please try again later"
+          });
+          reject({ ErrorCode: 5 });
+          return;
+        }
         if (res.data.Response.length === 0) {
           dispatch({ type: "PLAYER_NOT_FOUND" });
           reject("Player not found");
@@ -25,7 +34,10 @@ export const setMembershipInfoAction = (playerGamerTag, pageName) => {
         dispatch({ type: "SUCCESS_SET_DATA", payload: pageName });
         resolve(res.data.Response);
       } catch (err) {
-        dispatch({ type: "FAIL_SET_DATA", payload: pageName });
+        dispatch({
+          type: "FAIL_SET_DATA",
+          payload: "Something went wrong, please try again"
+        });
         reject(err);
       }
     });

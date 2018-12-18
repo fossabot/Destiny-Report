@@ -86,6 +86,7 @@ export const playerReducer = (state = initial, action) => {
     case FAIL_SET_DATA:
       state = cloneDeep(initial);
       state.error = true;
+      state.errorMessage = action.payload;
       return state;
     case RESET_DATA:
       state = cloneDeep(initial);

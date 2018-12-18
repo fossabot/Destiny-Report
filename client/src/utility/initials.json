@@ -10,6 +10,7 @@
   "raidIsLoading": false,
   "isLoading": false,
   "error": false,
+  "errorMessage": "Something went wrong, please try again later!",
   "memberships": [],
   "activeMembership": -1,
   "gambitStats": {
