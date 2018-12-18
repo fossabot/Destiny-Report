@@ -233,6 +233,7 @@ class Raid extends Component {
         raid.badges = this.props.player.raid.badges;
       }
       raid.petrasRun = this.props.player.raid.petrasRun;
+      raid.likeADiamond = this.props.player.raid.likeADiamond;
       for (let i = 0; i < this.props.player.raid.stats.length; ++i) {
         if (
           this.props.player.raid.stats[i][`character${i + 1}`] !== undefined
@@ -297,6 +298,7 @@ class Raid extends Component {
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
               {raid.badges.SotP.flawless.value && <li>Flawless</li>}
+              {raid.likeADiamond && <li>Like a Diamond</li>}
               {raid.badges.SotP.dayOne.value && <li>Day one</li>}
               {raid.badges.SotP.weekOne.value &&
                 !raid.badges.SotP.dayOne.value && <li>Week one</li>}
