@@ -1,7 +1,7 @@
 import { values } from "lodash";
 import * as endpoints from "../utility/endpoints";
 
-export const resetTheStateAction = () => {
+export const resetTheStateAction = error => {
   return { type: "RESET_DATA" };
 };
 
@@ -207,15 +207,18 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       try {
-        const profileResult = await endpoints.getProfileCharacters(
+        const raidStats = { stats: [] };
+        const profileResult = await endpoints.getAllProgression(
           membershipType,
           membershipId
         );
 
+        raidStats.petrasRun =
+          profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
+        console.log(raidStats.petrasRun);
         const characterIds =
           profileResult.data.Response.profile.data.characterIds;
 
-        const raidStats = { stats: [] };
         const charactersRaidStats = await Promise.all(
           characterIds.map(characterId => {
             return endpoints.getRaidStats(

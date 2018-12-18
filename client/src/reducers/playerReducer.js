@@ -84,18 +84,8 @@ export const playerReducer = (state = initial, action) => {
       }
       return state;
     case FAIL_SET_DATA:
-      if (action.payload === "gambit") {
-        state = {
-          ...state,
-          gambitSuccess: false,
-          gambitIsLoading: false,
-          error: true
-        };
-      } else if (action.payload === "crucible") {
-        state = { ...state, crucibleSuccess: false, error: true };
-      } else if (action.payload === "raid") {
-        state = { ...state, raidSuccess: false, error: true };
-      }
+      state = cloneDeep(initial);
+      state.error = true;
       return state;
     case RESET_DATA:
       state = cloneDeep(initial);

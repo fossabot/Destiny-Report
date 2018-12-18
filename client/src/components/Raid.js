@@ -232,6 +232,7 @@ class Raid extends Component {
       if (this.props.player.raid.badges !== undefined) {
         raid.badges = this.props.player.raid.badges;
       }
+      raid.petrasRun = this.props.player.raid.petrasRun;
       for (let i = 0; i < this.props.player.raid.stats.length; ++i) {
         if (
           this.props.player.raid.stats[i][`character${i + 1}`] !== undefined
@@ -316,6 +317,7 @@ class Raid extends Component {
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
               {raid.badges.lastWish.flawless.value && <li>Flawless</li>}
+              {raid.petrasRun && <li>Petra's Run</li>}
               {raid.badges.lastWish.dayOne.value && <li>Day one</li>}
               {raid.badges.lastWish.weekOne.value && <li>Week one</li>}
               {raid.badges.lastWish.twoMan.value && <li>Two man</li>}
