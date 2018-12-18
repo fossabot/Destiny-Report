@@ -215,7 +215,6 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 
         raidStats.petrasRun =
           profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
-        console.log(raidStats.petrasRun);
         const characterIds =
           profileResult.data.Response.profile.data.characterIds;
 
