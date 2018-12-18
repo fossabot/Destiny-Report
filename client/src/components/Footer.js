@@ -17,7 +17,7 @@ export default () => (
         </a>
       </li>
       <li>
-        <a href="https://www.github.com/sarkurd">
+        <a href="https://github.com/SarKurd/Destiny-Report">
           <i className="fa fa-github" /> <span>Source </span>
         </a>
       </li>
