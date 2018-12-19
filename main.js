@@ -11,18 +11,21 @@ const checkForBadges = require("./controllers/checkForBadges");
 
 const app = express();
 
-app.use((req, res, next) => {
-  if (req.header("x-forwarded-proto") !== "https")
-    res.redirect(`https://${req.header("host")}${req.url}`);
-  else next();
-});
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https")
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    else next();
+  });
 
-const corsOptions = {
-  origin: "http://destiny.report",
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
-
+  const corsOptions = {
+    origin: "https://destiny.report",
+    optionsSuccessStatus: 200
+  };
+  app.use(cors(corsOptions));
+} else {
+  app.use(cors());
+}
 axios.defaults.headers.common["X-API-KEY"] = process.env.BUNGIE_API_KEY;
 
 mongoose.connect(
@@ -33,7 +36,9 @@ mongoose.connect(
 );
 
 //Serve client
-app.use(express.static(path.join(__dirname, "client/build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 app.get("/api/getbadges/:id", async (req, res) => {
   const membershipId = req.params.id;
@@ -77,9 +82,11 @@ app.get("/api/checkbadges/:id", async (req, res) => {
 });
 
 // The "catchall" handler
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
