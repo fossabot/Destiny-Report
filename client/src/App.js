@@ -8,7 +8,6 @@ import Crucible from "./components/Crucible";
 import Raid from "./components/Raid";
 import Error from "./components/Error";
 import ReactGA from "react-ga";
-import AdUnit from "./components/AdUnit";
 
 ReactGA.initialize(process.env.REACT_APP_GA_KEY);
 
@@ -20,7 +19,6 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <AdUnit />
         <Switch>
           <Route exact path="/" component={Home} />
 

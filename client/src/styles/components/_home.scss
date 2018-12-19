@@ -95,18 +95,20 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+
+        &:hover {
+          color: #5aa8b6;
+        }
         @include breakpoint(515px) {
           font-size: 16px;
           padding-left: 20px;
           line-height: 15px;
         }
-        /* Hide the browser's default radio button */
         .checkbox-input {
           position: absolute;
           opacity: 0;
           cursor: pointer;
         }
-        /* Create a custom radio button */
         .checkmark {
           position: absolute;
           top: 0;
@@ -120,28 +122,23 @@
             height: 15px;
           }
         }
-        /* On mouse-over, add a grey background color */
         &:hover .checkbox-input ~ .checkmark {
-          background-color: #ccc;
+          background-color: #5aa8b6;
         }
 
-        /* When the radio button is checked, add a blue background */
         .checkbox-input:checked ~ .checkmark {
-          background-color: #9da6ad;
+          background-color: #5aa8b6;
         }
-        /* Create the indicator (the dot/circle - hidden when not checked) */
         .checkmark:after {
           content: "";
           position: absolute;
           display: none;
         }
 
-        /* Show the indicator (dot/circle) when checked */
         .checkbox-input:checked ~ .checkmark:after {
           display: block;
         }
 
-        /* Style the indicator (dot/circle) */
         .checkmark:after {
           top: 9px;
           left: 9px;
