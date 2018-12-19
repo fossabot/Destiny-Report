@@ -2,7 +2,10 @@ import React from "react";
 
 class AdUnit extends React.Component {
   componentDidUpdate() {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-9210265394268724",
+      enable_page_level_ads: true
+    });
   }
   render() {
     return (
