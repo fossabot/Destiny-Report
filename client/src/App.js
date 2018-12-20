@@ -9,10 +9,11 @@ import Raid from "./components/Raid";
 import Error from "./components/Error";
 import ReactGA from "react-ga";
 
+ReactGA.initialize(process.env.REACT_APP_GA_KEY);
+
 class App extends Component {
   constructor() {
     super();
-    ReactGA.initialize(process.env.REACT_APP_GA_KEY);
     ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
