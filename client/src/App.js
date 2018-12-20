@@ -22,13 +22,9 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
-
           <Route exact path="/gambit/:id" component={Gambit} />
-
           <Route exact path="/crucible/:id" component={Crucible} />
-
           <Route exact path="/raid/:id" component={Raid} />
-
           <Route component={Error} />
         </Switch>
         <Footer />
