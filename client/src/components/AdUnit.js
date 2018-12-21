@@ -1,13 +1,17 @@
 import React from "react";
-import AdSense from "react-adsense";
 
 class AdUnit extends React.Component {
-  componentDidUpdate() {}
+  componentDidMount() {
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
   render() {
     return (
-      <div className="ad-wrapper">
-        <AdSense.Google client="ca-pub-9210265394268724" slot="6432818314" />
-      </div>
+      <ins
+        className="adsbygoogle"
+        data-ad-client="ca-pub-9210265394268724"
+        data-ad-slot="6432818314"
+        data-ad-format="auto"
+      />
     );
   }
 }

@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import { Helmet } from "react-helmet";
+import AdUnit from "./AdUnit";
 
 class Home extends React.Component {
   state = {
@@ -227,7 +228,7 @@ class Home extends React.Component {
             handleMembershipType={this.handleMembershipType}
           />
         )}
-
+        <AdUnit />
         {isPlayerDataLoading}
       </div>
     );
