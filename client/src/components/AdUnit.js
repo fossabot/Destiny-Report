@@ -11,6 +11,7 @@ class AdUnit extends React.Component {
         data-ad-client="ca-pub-9210265394268724"
         data-ad-slot="6432818314"
         data-ad-format="auto"
+        data-adtest="on"
       />
     );
   }
