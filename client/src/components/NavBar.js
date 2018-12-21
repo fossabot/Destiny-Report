@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import ProgressBar from "./ProgressBar";
 
 const navBar = props => {
   let displayName = props.location.pathname.split("/")[2];
@@ -16,7 +17,9 @@ const navBar = props => {
   const path = props.location.pathname;
   const linkHide = path === "/" ? "link--hide" : "";
 
-  let { error, privacyError, errorMessage } = props.player;
+  let { error, privacyError, errorMessage, isApiLoading } = props.player;
+
+  const isRaidPage = path.includes("raid") ? true : false;
   if (privacyError) {
     errorMessage =
       "Due to player's privacy, you can't see most of his/her stats";
@@ -70,6 +73,7 @@ const navBar = props => {
           </li>
         </ul>
       </div>
+      {isRaidPage && isApiLoading && <ProgressBar />}
       {(error || privacyError) && apiMaintenance}
     </div>
   );

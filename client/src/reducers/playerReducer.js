@@ -20,6 +20,7 @@ export const playerReducer = (state = initial, action) => {
     case START_SET_DATA:
       state = {
         ...state,
+        isApiLoading: true,
         gambitIsLoading: true,
         crucibleIsLoading: true,
         raidIsLoading: true,
@@ -57,6 +58,7 @@ export const playerReducer = (state = initial, action) => {
     case SET_CHECKED_RAID_BADGES:
       state = cloneDeep(state);
       state.raid.badges = action.payload;
+      state.isApiLoading = false;
       return state;
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);

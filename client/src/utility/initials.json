@@ -2,6 +2,7 @@
   "success": false,
   "privacyError": false,
   "isPlayerFound": true,
+  "isApiLoading": false,
   "gambitSuccess": false,
   "gambitIsLoading": false,
   "crucibleSuccess": false,
