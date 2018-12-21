@@ -13,10 +13,12 @@ class App extends Component {
   constructor() {
     super();
     ReactGA.initialize(process.env.REACT_APP_GA_KEY);
-    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
+  componentDidMount() {}
+
   render() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     return (
       <div className="App">
         <NavBar />
