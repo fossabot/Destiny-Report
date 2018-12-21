@@ -1,4 +1,4 @@
-## MongoDB database and Bungie API key are required
+# MongoDB database and Bungie API key are required
 
 You can get the API key on [Bungie.net](https://www.bungie.net/en/Application)
 
@@ -13,9 +13,24 @@ BUNGIE_API_KEY="Bungie API key here"
 And create another `.env` file inside client root directory and put Bungie API key inside it
 
 ``` 
-REACT_APP_API_KEY="your key here" 
+REACT_APP_API_KEY="Bungie API key here" 
 ```
 
-## Roadmap
+<br/>
 
-https://github.com/SarKurd/Destiny-Tracker/wiki/Roadmap
+## Run the development mode
+
+```yarn dev```
+
+<br/>
+
+### Roadmap
+
+https://github.com/SarKurd/Destiny-Report/wiki/Roadmap
+
+<br/>
+
+### Disclaimer
+
+Destiny Report is NOT affiliated Bungie. </br>
+Destiny, Destiny logo, Bungie, Bungie logo and all the API resources are property of Bungie corporation.
