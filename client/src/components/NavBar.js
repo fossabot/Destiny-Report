@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import ProgressBar from "./ProgressBar";
-import AdUnit from "./AdUnit";
+// import AdUnit from "./AdUnit";
 
 const navBar = props => {
   let displayName = props.location.pathname.split("/")[2];
@@ -76,7 +76,7 @@ const navBar = props => {
       </div>
       {isRaidPage && isApiLoading && <ProgressBar />}
       {(error || privacyError) && apiMaintenance}
-      <AdUnit />
+      {/* <AdUnit /> */}
     </div>
   );
 };
