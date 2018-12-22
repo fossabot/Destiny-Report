@@ -57,7 +57,9 @@ export const playerReducer = (state = initial, action) => {
       return state;
     case SET_CHECKED_RAID_BADGES:
       state = cloneDeep(state);
-      state.raid.badges = action.payload;
+      if (action.payload) {
+        state.raid.badges = action.payload;
+      }
       state.isApiLoading = false;
       return state;
     case SET_MEMBERSHIP_DATA:

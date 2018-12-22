@@ -225,8 +225,10 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
           membershipId
         );
 
-        raidStats.petrasRun = profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
-        raidStats.likeADiamond = profileResult.data.Response.profileRecords.data.records[2648109757].objectives[0].complete;
+        raidStats.petrasRun =
+          profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
+        raidStats.likeADiamond =
+          profileResult.data.Response.profileRecords.data.records[2648109757].objectives[0].complete;
         const characterIds =
           profileResult.data.Response.profile.data.characterIds;
 
@@ -258,12 +260,10 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
         endpoints
           .getCheckRaidBadges(membershipType, membershipId)
           .then(badges => {
-            if (badges.data) {
-              dispatch({
-                type: "SET_CHECKED_RAID_BADGES",
-                payload: badges.data
-              });
-            }
+            dispatch({
+              type: "SET_CHECKED_RAID_BADGES",
+              payload: badges.data
+            });
           })
           .catch(err => console.log(err));
 
