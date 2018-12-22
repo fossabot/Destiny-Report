@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import ProgressBar from "./ProgressBar";
-import AdUnit from "./AdUnit";
 
 const navBar = props => {
   let displayName = props.location.pathname.split("/")[2];
@@ -17,7 +16,6 @@ const navBar = props => {
   }
   const path = props.location.pathname;
   const linkHide = path === "/" ? "link--hide" : "";
-  const showAds = path !== "/" ? true : false;
 
   let { error, privacyError, errorMessage, isApiLoading } = props.player;
 
@@ -77,7 +75,6 @@ const navBar = props => {
       </div>
       {isRaidPage && isApiLoading && <ProgressBar />}
       {(error || privacyError) && apiMaintenance}
-      {showAds && <AdUnit />}
     </div>
   );
 };

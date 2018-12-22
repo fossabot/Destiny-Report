@@ -15,8 +15,6 @@ class App extends Component {
     ReactGA.initialize(process.env.REACT_APP_GA_KEY);
   }
 
-  componentDidMount() {}
-
   render() {
     ReactGA.pageview(window.location.pathname + window.location.search);
     return (
