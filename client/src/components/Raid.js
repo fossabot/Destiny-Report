@@ -12,6 +12,7 @@ import {
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import Loading from "../components/Loading";
 import { Helmet } from "react-helmet";
+import Tooltip from "./Tooltip";
 
 class Raid extends Component {
   state = {
@@ -297,14 +298,63 @@ class Raid extends Component {
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
-              {raid.badges.SotP.flawless.value && <li>Flawless</li>}
-              {raid.likeADiamond && <li>Like a Diamond</li>}
-              {raid.badges.SotP.dayOne.value && <li>Day one</li>}
+              {raid.badges.SotP.flawless.value && (
+                <li>
+                  <Tooltip
+                    name="Flawless"
+                    tooltip="Completed the whole raid without anyone in the fireteam dies"
+                  />
+                </li>
+              )}
+              {raid.likeADiamond && (
+                <li>
+                  <Tooltip
+                    name="Like a Diamond"
+                    tooltip="Completed Like a Diamond triumph"
+                  />
+                </li>
+              )}
+              {raid.badges.SotP.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Day one"
+                    tooltip="Finished the raid within 24 hours"
+                  />
+                </li>
+              )}
               {raid.badges.SotP.weekOne.value &&
-                !raid.badges.SotP.dayOne.value && <li>Week one</li>}
-              {raid.badges.SotP.twoMan.value && <li>Two man</li>}
-              {raid.badges.SotP.threeMan.value && <li>Three man</li>}
-              {raid.badges.SotP.fourMan.value && <li>Four man</li>}
+                !raid.badges.SotP.dayOne.value && (
+                  <li>
+                    <Tooltip
+                      name="Week one"
+                      tooltip="Finished the raid within 168 hours"
+                    />
+                  </li>
+                )}
+              {raid.badges.SotP.twoMan.value && (
+                <li>
+                  <Tooltip
+                    name="Two man"
+                    tooltip="Completed the raid with a fireteam of two"
+                  />
+                </li>
+              )}
+              {raid.badges.SotP.threeMan.value && (
+                <li>
+                  <Tooltip
+                    name="Three man"
+                    tooltip="Completed the raid with a fireteam of three"
+                  />
+                </li>
+              )}
+              {raid.badges.SotP.fourMan.value && (
+                <li>
+                  <Tooltip
+                    name="Four man"
+                    tooltip="Completed the raid with a fireteam of four"
+                  />
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -319,14 +369,63 @@ class Raid extends Component {
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
-              {raid.badges.lastWish.flawless.value && <li>Flawless</li>}
-              {raid.petrasRun && <li>Petra's Run</li>}
-              {raid.badges.lastWish.dayOne.value && <li>Day one</li>}
+              {raid.badges.lastWish.flawless.value && (
+                <li>
+                  <Tooltip
+                    name="Flawless"
+                    tooltip="Completed the whole raid without anyone in the fireteam dies"
+                  />
+                </li>
+              )}
+              {raid.petrasRun && (
+                <li>
+                  <Tooltip
+                    name="Petra's Run"
+                    tooltip="Completed Petra's run triumph"
+                  />
+                </li>
+              )}
+              {raid.badges.lastWish.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Day one"
+                    tooltip="Finished the raid within 24 hours"
+                  />
+                </li>
+              )}
               {raid.badges.lastWish.weekOne.value &&
-                !raid.badges.lastWish.dayOne.value && <li>Week one</li>}
-              {raid.badges.lastWish.twoMan.value && <li>Two man</li>}
-              {raid.badges.lastWish.threeMan.value && <li>Three man</li>}
-              {raid.badges.lastWish.fourMan.value && <li>Four man</li>}
+                !raid.badges.lastWish.dayOne.value && (
+                  <li>
+                    <Tooltip
+                      name="Week one"
+                      tooltip="Finished the raid within 168 hours"
+                    />
+                  </li>
+                )}
+              {raid.badges.lastWish.twoMan.value && (
+                <li>
+                  <Tooltip
+                    name="Two man"
+                    tooltip="Completed the raid with a fireteam of two"
+                  />
+                </li>
+              )}
+              {raid.badges.lastWish.threeMan.value && (
+                <li>
+                  <Tooltip
+                    name="Three man"
+                    tooltip="Completed the raid with a fireteam of three"
+                  />
+                </li>
+              )}
+              {raid.badges.lastWish.fourMan.value && (
+                <li>
+                  <Tooltip
+                    name="Four man"
+                    tooltip="Completed the raid with a fireteam of four"
+                  />
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -340,13 +439,55 @@ class Raid extends Component {
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
-              {raid.badges.leviathan.flawless.value && <li>Flawless</li>}
-              {raid.badges.leviathan.dayOne.value && <li>Day one</li>}
+              {raid.badges.leviathan.flawless.value && (
+                <li>
+                  <Tooltip
+                    name="Flawless"
+                    tooltip="Completed the whole raid without anyone in the fireteam dies"
+                  />
+                </li>
+              )}
+              {raid.badges.leviathan.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Day one"
+                    tooltip="Finished the raid within 24 hours"
+                  />
+                </li>
+              )}
               {raid.badges.leviathan.weekOne.value &&
-                !raid.badges.leviathan.dayOne.value && <li>Week one</li>}
-              {raid.badges.leviathan.twoMan.value && <li>Two man</li>}
-              {raid.badges.leviathan.threeMan.value && <li>Three man</li>}
-              {raid.badges.leviathan.fourMan.value && <li>Four man</li>}
+                !raid.badges.leviathan.dayOne.value && (
+                  <li>
+                    <Tooltip
+                      name="Week one"
+                      tooltip="Finished the raid within 168 hours"
+                    />
+                  </li>
+                )}
+              {raid.badges.leviathan.twoMan.value && (
+                <li>
+                  <Tooltip
+                    name="Two man"
+                    tooltip="Completed the raid with a fireteam of two"
+                  />
+                </li>
+              )}
+              {raid.badges.leviathan.threeMan.value && (
+                <li>
+                  <Tooltip
+                    name="Three man"
+                    tooltip="Completed the raid with a fireteam of three"
+                  />
+                </li>
+              )}
+              {raid.badges.leviathan.fourMan.value && (
+                <li>
+                  <Tooltip
+                    name="Four man"
+                    tooltip="Completed the raid with a fireteam of four"
+                  />
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -360,13 +501,54 @@ class Raid extends Component {
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
-              {raid.badges.EoW.flawless.value && <li>Flawless</li>}
-              {raid.badges.EoW.dayOne.value && <li>Day one</li>}
-              {raid.badges.EoW.weekOne.value &&
-                !raid.badges.EoW.dayOne.value && <li>Week one</li>}
-              {raid.badges.EoW.twoMan.value && <li>Two man</li>}
-              {raid.badges.EoW.threeMan.value && <li>Three man</li>}
-              {raid.badges.EoW.fourMan.value && <li>Four man</li>}
+              {raid.badges.EoW.flawless.value && (
+                <li>
+                  <Tooltip
+                    name="Flawless"
+                    tooltip="Completed the whole raid without anyone in the fireteam dies"
+                  />
+                </li>
+              )}
+              {raid.badges.EoW.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Day one"
+                    tooltip="Finished the raid within 24 hours"
+                  />
+                </li>
+              )}
+              {raid.badges.EoW.weekOne.value && !raid.badges.EoW.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Week one"
+                    tooltip="Finished the raid within 168 hours"
+                  />
+                </li>
+              )}
+              {raid.badges.EoW.twoMan.value && (
+                <li>
+                  <Tooltip
+                    name="Two man"
+                    tooltip="Completed the raid with a fireteam of two"
+                  />
+                </li>
+              )}
+              {raid.badges.EoW.threeMan.value && (
+                <li>
+                  <Tooltip
+                    name="Three man"
+                    tooltip="Completed the raid with a fireteam of three"
+                  />
+                </li>
+              )}
+              {raid.badges.EoW.fourMan.value && (
+                <li>
+                  <Tooltip
+                    name="Four man"
+                    tooltip="Completed the raid with a fireteam of four"
+                  />
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -380,13 +562,54 @@ class Raid extends Component {
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
-              {raid.badges.SoS.flawless.value && <li>Flawless</li>}
-              {raid.badges.SoS.dayOne.value && <li>Day one</li>}
-              {raid.badges.SoS.weekOne.value &&
-                !raid.badges.SoS.dayOne.value && <li>Week one</li>}
-              {raid.badges.SoS.twoMan.value && <li>Two man</li>}
-              {raid.badges.SoS.threeMan.value && <li>Three man</li>}
-              {raid.badges.SoS.fourMan.value && <li>Four man</li>}
+              {raid.badges.SoS.flawless.value && (
+                <li>
+                  <Tooltip
+                    name="Flawless"
+                    tooltip="Completed the whole raid without anyone in the fireteam dies"
+                  />
+                </li>
+              )}
+              {raid.badges.SoS.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Day one"
+                    tooltip="Finished the raid within 24 hours"
+                  />
+                </li>
+              )}
+              {raid.badges.SoS.weekOne.value && !raid.badges.SoS.dayOne.value && (
+                <li>
+                  <Tooltip
+                    name="Week one"
+                    tooltip="Finished the raid within 168 hours"
+                  />
+                </li>
+              )}
+              {raid.badges.SoS.twoMan.value && (
+                <li>
+                  <Tooltip
+                    name="Two man"
+                    tooltip="Completed the raid with a fireteam of two"
+                  />
+                </li>
+              )}
+              {raid.badges.SoS.threeMan.value && (
+                <li>
+                  <Tooltip
+                    name="Three man"
+                    tooltip="Completed the raid with a fireteam of three"
+                  />
+                </li>
+              )}
+              {raid.badges.SoS.fourMan.value && (
+                <li>
+                  <Tooltip
+                    name="Four man"
+                    tooltip="Completed the raid with a fireteam of four"
+                  />
+                </li>
+              )}
             </ul>
           </div>
         </div>

@@ -51,7 +51,6 @@
       li {
         min-width: 30%;
         padding: 5px;
-
         text-align: center;
         color: rgb(238, 238, 238);
 
@@ -80,22 +79,13 @@
         align-items: center;
         justify-content: center;
         display: flex;
+        position: relative;
 
         li {
           min-width: auto;
-          border-radius: 5px;
-          margin: 5px;
-          outline: none;
-          background-color: rgba(90, 141, 141, 0.589);
-          color: rgba(255, 250, 250, 0.932);
-          padding: 10px;
-
-          @include breakpoint(750px) {
-            width: auto;
-          }
-          @include breakpoint(460px) {
-            font-size: 20px;
-          }
+          padding: 0;
+          margin-right: 5px;
+          margin-bottom: 5px;
         }
       }
     }
