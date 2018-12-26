@@ -115,7 +115,10 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
         dispatch({ type: "FINISHED_LOADING", payload: "gambit" });
         resolve();
       } catch (err) {
-        dispatch({ type: "FAIL_SET_DATA", payload: "gambit" });
+        dispatch({
+          type: "FAIL_SET_DATA",
+          payload: "Something went wrong, pleas try again"
+        });
         reject(err);
       }
     });
@@ -209,7 +212,10 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
         dispatch({ type: "FINISHED_LOADING", payload: "crucible" });
         resolve();
       } catch (err) {
-        dispatch({ type: "FAIL_SET_DATA", payload: "crucible" });
+        dispatch({
+          type: "FAIL_SET_DATA",
+          payload: "Something went wrong, pleas try again"
+        });
         reject(err);
       }
     });
@@ -275,7 +281,10 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
         dispatch({ type: "FINISHED_LOADING", payload: "raid" });
         resolve();
       } catch (err) {
-        dispatch({ type: "FAIL_SET_DATA", payload: "raid" });
+        dispatch({
+          type: "FAIL_SET_DATA",
+          payload: "Something went wrong, pleas try again"
+        });
         reject(err);
       }
     });

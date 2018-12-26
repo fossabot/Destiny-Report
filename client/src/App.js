@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Gambit from "./components/Gambit";
 import Crucible from "./components/Crucible";
 import Raid from "./components/Raid";
+import PGCR from "./components/PGCR";
 import Error from "./components/Error";
 import ReactGA from "react-ga";
 
@@ -25,6 +26,7 @@ class App extends Component {
           <Route exact path="/gambit/:id" component={Gambit} />
           <Route exact path="/crucible/:id" component={Crucible} />
           <Route exact path="/raid/:id" component={Raid} />
+          <Route exact path="/pgcr/:instanceId" component={PGCR} />
           <Route component={Error} />
         </Switch>
         <Footer />

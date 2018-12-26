@@ -59,8 +59,20 @@ export const getRaidStats = (membershipType, membershipId, characterId) => {
 export const getRaidBadges = (membershipType, membershipId) => {
   return axios.get(`/api/getbadges/${membershipId}?platform=${membershipType}`);
 };
+
 export const getCheckRaidBadges = (membershipType, membershipId) => {
   return axios.get(
     `/api/checkbadges/${membershipId}?platform=${membershipType}`
+  );
+};
+
+export const getPGCR = instanceId => {
+  return axios.get(
+    `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${instanceId}/`,
+    {
+      headers: {
+        "X-API-KEY": process.env.REACT_APP_API_KEY
+      }
+    }
   );
 };
