@@ -24,13 +24,13 @@ REACT_APP_API_KEY="Bungie API key here"
 
 <br/>
 
-### Roadmap
+## Roadmap
 
 https://github.com/SarKurd/Destiny-Report/wiki/Roadmap
 
 <br/>
 
-### Disclaimer
+## Disclaimer
 
 Destiny Report is NOT affiliated Bungie. </br>
 Destiny, Destiny logo, Bungie, Bungie logo and all the API resources are property of Bungie corporation.
