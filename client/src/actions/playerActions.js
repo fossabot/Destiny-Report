@@ -117,7 +117,8 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
       } catch (err) {
         dispatch({
           type: "FAIL_SET_DATA",
-          payload: "Something went wrong, pleas try again"
+          payload:
+            "This player doesn't have any destiny 2 stats or something went wrong"
         });
         reject(err);
       }
@@ -214,7 +215,8 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
       } catch (err) {
         dispatch({
           type: "FAIL_SET_DATA",
-          payload: "Something went wrong, pleas try again"
+          payload:
+            "This player doesn't have any destiny 2 stats or something went wrong"
         });
         reject(err);
       }
@@ -283,7 +285,8 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
       } catch (err) {
         dispatch({
           type: "FAIL_SET_DATA",
-          payload: "Something went wrong, pleas try again"
+          payload:
+            "This player doesn't have any destiny 2 stats or something went wrong"
         });
         reject(err);
       }
