@@ -165,7 +165,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 
           const valorLevelStats = values(
             allStats.data.Response.characterProgressions.data
-          )[0].progressions["3882308435"];
+          )[0].progressions["2626549951"];
 
           crucibleData.valor.level = valorLevelStats.level;
           crucibleData.valor.nextLevelAt = valorLevelStats.nextLevelAt;
@@ -186,7 +186,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 
           const gloryLevelStats = values(
             allStats.data.Response.characterProgressions.data
-          )[0].progressions["2679551909"];
+          )[0].progressions["2000925172"];
 
           crucibleData.glory.level = gloryLevelStats.level;
           crucibleData.glory.nextLevelAt = gloryLevelStats.nextLevelAt;

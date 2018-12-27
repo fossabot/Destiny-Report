@@ -112,11 +112,12 @@ class Crucible extends Component {
 
       valor.currentValor = this.props.player.valor.currentProgress;
 
-      if (this.props.player.valor.level === 6) {
+      if (this.props.player.valor.level === 16) {
         valor.currentRank =
           valorSteps[this.props.player.valor.level - 1].stepName;
       } else {
         valor.currentRank = valorSteps[this.props.player.valor.level].stepName;
+        console.log(this.props.player.valor.level);
       }
       valor.progressToNextLevel =
         this.props.player.valor.nextLevelAt -
@@ -126,7 +127,7 @@ class Crucible extends Component {
       valor.resets = this.props.player.valor.resets;
 
       //Glory
-      if (this.props.player.glory.level === 6) {
+      if (this.props.player.glory.level === 16) {
         glory.currentRank =
           glorySteps[this.props.player.glory.level - 1].stepName;
       } else {
