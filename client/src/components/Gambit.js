@@ -127,7 +127,13 @@ class Gambit extends Component {
         infamy.progressToNextLevel =
           infamySteps[this.props.player.infamy.level - 1].progressTotal -
           this.props.player.infamy.progressToNextLevel;
+        infamy.icon =
+          "https://www.bungie.net" +
+          infamySteps[this.props.player.infamy.level - 1].icon;
       } else {
+        infamy.icon =
+          "https://www.bungie.net" +
+          infamySteps[this.props.player.infamy.level].icon;
         infamy.currentRank =
           infamySteps[this.props.player.infamy.level].stepName;
         infamy.progressToNextLevel =
@@ -139,20 +145,25 @@ class Gambit extends Component {
     }
 
     const { gambitIsLoading } = this.props.player;
-
     const trackContainer = (
       <div className="track-wrapper">
         <div className="track-container">
-          <div>
-            <h4>Infamy</h4>
+          <div
+            className="track-container--effect"
+            style={{ backgroundImage: `url(${infamy.icon})` }}
+          />
+          <div className="track-container--content">
+            <div>
+              <h4>Infamy</h4>
+            </div>
+            <ul>
+              <li>Current: {infamy.currentInfamy}</li>
+              <li>Rank: {infamy.currentRank}</li>
+              <li>To next rank: {infamy.progressToNextLevel}</li>
+              <li>Resets: {infamy.resets}</li>
+              <li>Ranks: {infamy.ranks}</li>
+            </ul>
           </div>
-          <ul>
-            <li>Current: {infamy.currentInfamy}</li>
-            <li>Rank: {infamy.currentRank}</li>
-            <li>To next rank: {infamy.progressToNextLevel}</li>
-            <li>Resets: {infamy.resets}</li>
-            <li>Ranks: {infamy.ranks}</li>
-          </ul>
         </div>
 
         <div className="track-container">

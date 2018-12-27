@@ -31,13 +31,7 @@ const navBar = props => {
       <div className="navbar">
         <ul className="navbar--home-item">
           <li>
-            <NavLink
-              exact
-              to="/"
-              activeClassName="link-active"
-              className="link"
-              replace={path === "/"}
-            >
+            <NavLink exact to="/" className="link" replace={path === "/"}>
               Home
             </NavLink>
           </li>

@@ -115,9 +115,14 @@ class Crucible extends Component {
       if (this.props.player.valor.level === 16) {
         valor.currentRank =
           valorSteps[this.props.player.valor.level - 1].stepName;
+        valor.icon =
+          "https://www.bungie.net" +
+          valorSteps[this.props.player.valor.level - 1].icon;
       } else {
         valor.currentRank = valorSteps[this.props.player.valor.level].stepName;
-        console.log(this.props.player.valor.level);
+        valor.icon =
+          "https://www.bungie.net" +
+          valorSteps[this.props.player.valor.level].icon;
       }
       valor.progressToNextLevel =
         this.props.player.valor.nextLevelAt -
@@ -130,8 +135,14 @@ class Crucible extends Component {
       if (this.props.player.glory.level === 16) {
         glory.currentRank =
           glorySteps[this.props.player.glory.level - 1].stepName;
+        glory.icon =
+          "https://www.bungie.net" +
+          glorySteps[this.props.player.glory.level - 1].icon;
       } else {
         glory.currentRank = glorySteps[this.props.player.glory.level].stepName;
+        glory.icon =
+          "https://www.bungie.net" +
+          glorySteps[this.props.player.glory.level].icon;
       }
 
       glory.currentGlory = this.props.player.glory.currentProgress;
@@ -149,29 +160,42 @@ class Crucible extends Component {
     const trackContainer = (
       <div className="track-wrapper">
         <div className="track-container">
-          <div>
-            <h4>Valor</h4>
+          <div />
+          <div
+            className="track-container--effect"
+            style={{ backgroundImage: `url(${valor.icon})` }}
+          />
+          <div className="track-container--content">
+            <div>
+              <h4>Valor</h4>
+            </div>
+            <ul>
+              <li>Current Valor: {valor.currentValor}</li>
+              <li>Rank: {valor.currentRank}</li>
+              <li>To next rank: {valor.progressToNextLevel}</li>
+              <li>Ranks: {valor.ranks}</li>
+              <li>Resets: {valor.resets}</li>
+            </ul>
           </div>
-          <ul>
-            <li>Current Valor: {valor.currentValor}</li>
-            <li>Rank: {valor.currentRank}</li>
-            <li>To next rank: {valor.progressToNextLevel}</li>
-            <li>Ranks: {valor.ranks}</li>
-            <li>Resets: {valor.resets}</li>
-          </ul>
         </div>
 
         <div className="track-container">
-          <div>
-            <h4>Glory</h4>
+          <div
+            className="track-container--effect"
+            style={{ backgroundImage: `url(${glory.icon})` }}
+          />
+          <div className="track-container--content">
+            <div>
+              <h4>Glory</h4>
+            </div>
+            <ul>
+              <li>Current Glory: {glory.currentGlory}</li>
+              <li>Rank: {glory.currentRank}</li>
+              <li>To next rank: {glory.progressToNextLevel}</li>
+              <li>Ranks: {glory.ranks}</li>
+              <li>Resets: {glory.resets}</li>
+            </ul>
           </div>
-          <ul>
-            <li>Current Glory: {glory.currentGlory}</li>
-            <li>Rank: {glory.currentRank}</li>
-            <li>To next rank: {glory.progressToNextLevel}</li>
-            <li>Ranks: {glory.ranks}</li>
-            <li>Resets: {glory.resets}</li>
-          </ul>
         </div>
         <div className="track-container">
           <div>
