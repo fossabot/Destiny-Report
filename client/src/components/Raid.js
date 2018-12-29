@@ -89,7 +89,7 @@ class Raid extends Component {
   };
 
   render() {
-    const { raidIsLoading } = this.props.player;
+    const { raidIsLoading, isApiLoading } = this.props.player;
 
     const raid = {
       lastWish: { normalCompletions: 0 },
@@ -778,6 +778,11 @@ class Raid extends Component {
           />
         )}
         {progression}
+        {isApiLoading && (
+          <div className="raid-badges-update-popup">
+            Updating your raid badges, please wait...
+          </div>
+        )}
       </div>
     );
   }
