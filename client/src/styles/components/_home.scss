@@ -35,7 +35,11 @@
   .input-form {
     position: relative;
     color: inherit;
-    width: 80%;
+    width: 60%;
+
+    @include breakpoint(640px) {
+      width: 80%;
+    }
 
     .search-wrapper {
       position: relative;
