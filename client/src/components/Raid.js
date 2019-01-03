@@ -92,144 +92,51 @@ class Raid extends Component {
     const { raidIsLoading, isApiLoading } = this.props.player;
 
     const raid = {
-      lastWish: { normalCompletions: 0 },
-      SotP: { normalCompletions: 0 },
-      EoW: {
-        normalCompletions: 0,
-        prestigeCompletions: 0
-      },
-      SoS: { normalCompletions: 0, prestigeCompletions: 0 },
-      leviathan: { normalCompletions: 0, prestigeCompletions: 0 },
+      lastWish: { normalCompletions: 0, guided: 0 },
+      SotP: { normalCompletions: 0, guided: 0 },
+      EoW: { normalCompletions: 0, prestigeCompletions: 0, guided: 0 },
+      SoS: { normalCompletions: 0, prestigeCompletions: 0, guided: 0 },
+      leviathan: { normalCompletions: 0, prestigeCompletions: 0, guided: 0 },
       badges: {
         leviathan: {
-          flawless: {
-            value: false,
-            instanceId: ""
-          },
-          dayOne: {
-            value: false,
-            instanceId: ""
-          },
-          weekOne: {
-            value: false,
-            instanceId: ""
-          },
-          fourMan: {
-            value: false,
-            instanceId: ""
-          },
-          threeMan: {
-            value: false,
-            instanceId: ""
-          },
-          twoMan: {
-            value: false,
-            instanceId: ""
-          }
+          flawless: { value: false, instanceId: "" },
+          dayOne: { value: false, instanceId: "" },
+          weekOne: { value: false, instanceId: "" },
+          fourMan: { value: false, instanceId: "" },
+          threeMan: { value: false, instanceId: "" },
+          twoMan: { value: false, instanceId: "" }
         },
         EoW: {
-          flawless: {
-            value: false,
-            instanceId: ""
-          },
-          dayOne: {
-            value: false,
-            instanceId: ""
-          },
-          weekOne: {
-            value: false,
-            instanceId: ""
-          },
-          fourMan: {
-            value: false,
-            instanceId: ""
-          },
-          threeMan: {
-            value: false,
-            instanceId: ""
-          },
-          twoMan: {
-            value: false,
-            instanceId: ""
-          }
+          flawless: { value: false, instanceId: "" },
+          dayOne: { value: false, instanceId: "" },
+          weekOne: { value: false, instanceId: "" },
+          fourMan: { value: false, instanceId: "" },
+          threeMan: { value: false, instanceId: "" },
+          twoMan: { value: false, instanceId: "" }
         },
         SoS: {
-          flawless: {
-            value: false,
-            instanceId: ""
-          },
-          dayOne: {
-            value: false,
-            instanceId: ""
-          },
-          weekOne: {
-            value: false,
-            instanceId: ""
-          },
-          fourMan: {
-            value: false,
-            instanceId: ""
-          },
-          threeMan: {
-            value: false,
-            instanceId: ""
-          },
-          twoMan: {
-            value: false,
-            instanceId: ""
-          }
+          flawless: { value: false, instanceId: "" },
+          dayOne: { value: false, instanceId: "" },
+          weekOne: { value: false, instanceId: "" },
+          fourMan: { value: false, instanceId: "" },
+          threeMan: { value: false, instanceId: "" },
+          twoMan: { value: false, instanceId: "" }
         },
         lastWish: {
-          flawless: {
-            value: false,
-            instanceId: ""
-          },
-          dayOne: {
-            value: false,
-            instanceId: ""
-          },
-          weekOne: {
-            value: false,
-            instanceId: ""
-          },
-          fourMan: {
-            value: false,
-            instanceId: ""
-          },
-          threeMan: {
-            value: false,
-            instanceId: ""
-          },
-          twoMan: {
-            value: false,
-            instanceId: ""
-          }
+          flawless: { value: false, instanceId: "" },
+          dayOne: { value: false, instanceId: "" },
+          weekOne: { value: false, instanceId: "" },
+          fourMan: { value: false, instanceId: "" },
+          threeMan: { value: false, instanceId: "" },
+          twoMan: { value: false, instanceId: "" }
         },
         SotP: {
-          flawless: {
-            value: false,
-            instanceId: ""
-          },
-          dayOne: {
-            value: false,
-            instanceId: ""
-          },
-          weekOne: {
-            value: false,
-            instanceId: ""
-          },
-          fourMan: {
-            value: false,
-            instanceId: ""
-          },
-          threeMan: {
-            value: false,
-            instanceId: ""
-          },
-          twoMan: {
-            value: false,
-            instanceId: ""
-          }
+          flawless: { value: false, instanceId: "" },
+          dayOne: { value: false, instanceId: "" },
+          weekOne: { value: false, instanceId: "" },
+          fourMan: { value: false, instanceId: "" },
+          threeMan: { value: false, instanceId: "" },
+          twoMan: { value: false, instanceId: "" }
         }
       }
     };
@@ -247,15 +154,19 @@ class Raid extends Component {
             if (elm.activityHash === 2122313384) {
               raid.lastWish.normalCompletions +=
                 elm.values.activityCompletions.basic.value;
-            } else if (
-              elm.activityHash === 548750096 ||
-              elm.activityHash === 2812525063
-            ) {
+            } else if (elm.activityHash === 1661734046) {
+              raid.lastWish.guided +=
+                elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 548750096) {
               raid.SotP.normalCompletions +=
                 elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 2812525063) {
+              raid.SotP.guided += elm.values.activityCompletions.basic.value;
             } else if (elm.activityHash === 3089205900) {
               raid.EoW.normalCompletions +=
                 elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 2164432138) {
+              raid.EoW.guided += elm.values.activityCompletions.basic.value;
             } else if (elm.activityHash === 809170886) {
               raid.EoW.prestigeCompletions +=
                 elm.values.activityCompletions.basic.value;
@@ -265,6 +176,8 @@ class Raid extends Component {
             } else if (elm.activityHash === 3213556450) {
               raid.SoS.prestigeCompletions +=
                 elm.values.activityCompletions.basic.value;
+            } else if (elm.activityHash === 3004605630) {
+              raid.SoS.guided += elm.values.activityCompletions.basic.value;
             } else if (
               elm.activityHash === 2693136600 ||
               elm.activityHash === 2693136601 ||
@@ -285,6 +198,16 @@ class Raid extends Component {
             ) {
               raid.leviathan.prestigeCompletions +=
                 elm.values.activityCompletions.basic.value;
+            } else if (
+              elm.activityHash === 287649202 ||
+              elm.activityHash === 3916343513 ||
+              elm.activityHash === 4039317196 ||
+              elm.activityHash === 89727599 ||
+              elm.activityHash === 1875726950 ||
+              elm.activityHash === 1699948563
+            ) {
+              raid.leviathan.guided +=
+                elm.values.activityCompletions.basic.value;
             }
           });
         }
@@ -298,7 +221,8 @@ class Raid extends Component {
             <h4>Scourge of the Past</h4>
           </div>
           <ul>
-            <li className="center-li">Normal: {raid.SotP.normalCompletions}</li>
+            <li>Normal: {raid.SotP.normalCompletions}</li>
+            <li>Guided: {raid.SotP.guided}</li>
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
@@ -391,9 +315,8 @@ class Raid extends Component {
             <h4>Last Wish</h4>
           </div>
           <ul>
-            <li className="center-li">
-              Normal: {raid.lastWish.normalCompletions}
-            </li>
+            <li>Normal: {raid.lastWish.normalCompletions}</li>
+            <li>Guided: {raid.lastWish.guided}</li>
           </ul>
           <div className="raid-badges-container">
             <ul className="raid-badges-list">
@@ -499,6 +422,7 @@ class Raid extends Component {
           </div>
           <ul>
             <li>Normal: {raid.leviathan.normalCompletions}</li>
+            <li>Guided: {raid.leviathan.guided}</li>
             <li>Prestige: {raid.leviathan.prestigeCompletions}</li>
           </ul>
           <div className="raid-badges-container">
@@ -597,6 +521,7 @@ class Raid extends Component {
           </div>
           <ul>
             <li>Normal: {raid.EoW.normalCompletions}</li>
+            <li>Guided: {raid.EoW.guided}</li>
             <li>Prestige: {raid.EoW.prestigeCompletions}</li>
           </ul>
           <div className="raid-badges-container">
@@ -682,6 +607,7 @@ class Raid extends Component {
           </div>
           <ul>
             <li>Normal: {raid.SoS.normalCompletions}</li>
+            <li>Guided: {raid.SoS.guided}</li>
             <li>Prestige: {raid.SoS.prestigeCompletions}</li>
           </ul>
           <div className="raid-badges-container">

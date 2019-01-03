@@ -11,7 +11,13 @@
 
 body {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.92);
+  background: radial-gradient(
+    ellipse at center,
+    rgb(0, 128, 128) 0%,
+    rgb(5, 63, 69) 50%,
+    rgb(5, 63, 69) 50%,
+    rgb(9, 21, 30) 100%
+  );
 }
 a {
   color: $white;

@@ -92,6 +92,7 @@ class NavBar extends React.Component {
               </NavLink>
             </li>
           </ul>
+          {/* <div className="navbar--addon">Add-on</div> */}
         </div>
         {showProgressBar && <ProgressBar />}
         {(error || privacyError) && ErrorBlock}

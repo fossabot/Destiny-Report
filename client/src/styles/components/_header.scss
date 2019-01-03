@@ -33,6 +33,19 @@
         }
       }
     }
+
+    &--addon {
+      margin-left: auto;
+      font-size: 30px;
+      margin-right: 10px;
+
+      @include breakpoint(550px) {
+        font-size: 20px;
+      }
+      @include breakpoint(400px) {
+        font-size: 15px;
+      }
+    }
   }
 
   .api-issue {
