@@ -17,12 +17,6 @@ const getCharacterActivity = (
   );
 };
 
-// const getPGCR = instanceId => {
-//   return axios.get(
-//     `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${instanceId}/`
-//   );
-// };
-
 const getPGCR = instanceId => {
   return new Promise(resolve => {
     setTimeout(() => {

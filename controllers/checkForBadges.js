@@ -18,28 +18,45 @@ const sotpWeekOne = new Date("2018-12-14T17:00:00Z");
 
 module.exports = async (membershipType, membershipId, characterIds) => {
   try {
+    const currentPlayerData = (await Player.findById(membershipId)) || {
+      last_date: "1993-01-01T00:00:00Z"
+    };
+    const playerLastActivityCheckedDate = new Date(currentPlayerData.last_date);
+
     for (let i = 0; i < characterIds.length; ++i) {
-      for (let page = 0; page < 16; ++page) {
+      for (let page = 0; page < 10; ++page) {
         const result = await getCharacterActivity(
           membershipType,
           membershipId,
           characterIds[i],
           page
         );
-
         if (Object.keys(result.data.Response).length !== 0) {
-          for (let k = 0; k < result.data.Response.activities.length; ++k) {
-            if (
-              result.data.Response.activities[k].values.completionReason.basic
-                .value === 0
-            ) {
-              getPGCR(
-                result.data.Response.activities[k].activityDetails.instanceId
-              )
-                .then(PGCRResult => {
-                  checkFireteamBadges(PGCRResult.data.Response);
-                })
-                .catch(err => console.log(err));
+          const playerLastActivityPlayedDate = new Date(
+            result.data.Response.activities[0].period
+          );
+          if (playerLastActivityPlayedDate > playerLastActivityCheckedDate) {
+            for (let k = 0; k < result.data.Response.activities.length; ++k) {
+              const playerCurrentActivityPlayedDate = new Date(
+                result.data.Response.activities[k].period
+              );
+              if (
+                playerCurrentActivityPlayedDate < playerLastActivityCheckedDate
+              ) {
+                break;
+              }
+              if (
+                result.data.Response.activities[k].values.completionReason.basic
+                  .value === 0
+              ) {
+                getPGCR(
+                  result.data.Response.activities[k].activityDetails.instanceId
+                )
+                  .then(PGCRResult => {
+                    checkFireteamBadges(PGCRResult.data.Response);
+                  })
+                  .catch(err => console.log(err.data));
+              }
             }
           }
         }

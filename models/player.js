@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const playerSchema = mongoose.Schema({
   _id: String,
+  last_date: {
+    type: String,
+    default: "1993-01-01T10:00:00Z"
+  },
   leviathan: {
     flawless: {
       value: { type: Boolean, default: false },

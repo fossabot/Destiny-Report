@@ -69,6 +69,23 @@ app.get("/api/checkbadges/:id", async (req, res) => {
     const characterIds = result.data.Response.profile.data.characterIds;
     await checkForBadges(membershipType, membershipId, characterIds);
 
+    const currentDateAndTime = new Date();
+    currentDateAndTime.setDate(currentDateAndTime.getDate() - 1);
+    Player.findOneAndUpdate(
+      {
+        _id: membershipId
+      },
+      {
+        last_date: currentDateAndTime.toISOString()
+      },
+      { upsert: true, setDefaultsOnInsert: true },
+      err => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+
     Player.findById(membershipId, (err, doc) => {
       if (err) {
         res.status(500).json(err);
