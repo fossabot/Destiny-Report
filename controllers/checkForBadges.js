@@ -59,11 +59,13 @@ module.exports = async (membershipType, membershipId, characterIds) => {
               }
             }
           }
+        } else {
+          break;
         }
       }
     }
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
   }
 };
 
