@@ -52,6 +52,7 @@
     &--content {
       z-index: 2;
     }
+
     div {
       h4 {
         margin-bottom: 10px;
@@ -109,6 +110,9 @@
         }
       }
     }
+  }
+  .scrollbar-container {
+    padding: 20px 0 !important;
   }
 
   .raid-badges-update-popup {

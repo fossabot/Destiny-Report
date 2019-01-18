@@ -9,7 +9,9 @@
   "crucibleIsLoading": false,
   "raidSuccess": false,
   "raidIsLoading": false,
+  "raidActivitiesLoading": true,
   "isLoading": false,
+  "chartIsLoading": true,
   "error": false,
   "errorMessage": "Something went wrong, please try again later!",
   "memberships": [],
@@ -873,7 +875,7 @@
       }
     }
   },
-  "raid": {"stats": [
+  "raid": { "activities": {}, "stats": [
     {
       "character1": [
         {

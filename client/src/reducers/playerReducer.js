@@ -14,6 +14,7 @@ const SET_RAID_DATA = "SET_RAID_DATA";
 const PLAYER_NOT_FOUND = "PLAYER_NOT_FOUND";
 const FAIL_SET_DATA_PRIVACY = "FAIL_SET_DATA_PRIVACY";
 const SET_CHECKED_RAID_BADGES = "SET_CHECKED_RAID_BADGES";
+const SET_RAID_ACTIVITIES_DATA = "SET_RAID_ACTIVITIES_DATA";
 
 export const playerReducer = (state = initial, action) => {
   switch (action.type) {
@@ -27,6 +28,8 @@ export const playerReducer = (state = initial, action) => {
         gambitSuccess: false,
         crucibleSuccess: false,
         raidSuccess: false,
+        chartIsLoading: true,
+        raidActivitiesLoading: true,
         error: false,
         isPlayerFound: true
       };
@@ -62,6 +65,10 @@ export const playerReducer = (state = initial, action) => {
       }
       state.isApiLoading = false;
       return state;
+    case SET_RAID_ACTIVITIES_DATA:
+      state = cloneDeep(state);
+      state.raid.activities = action.payload;
+      return state;
     case SET_MEMBERSHIP_DATA:
       state = cloneDeep(state);
       state.memberships = cloneDeep(action.payload.memberships);
@@ -85,6 +92,10 @@ export const playerReducer = (state = initial, action) => {
         state = { ...state, crucibleIsLoading: false };
       } else if (action.payload === "raid") {
         state = { ...state, raidIsLoading: false };
+      } else if (action.payload === "raid-activities") {
+        state = { ...state, raidActivitiesLoading: false };
+      } else if (action.payload === "chart") {
+        state = { ...state, chartIsLoading: false };
       }
       return state;
     case FAIL_SET_DATA:

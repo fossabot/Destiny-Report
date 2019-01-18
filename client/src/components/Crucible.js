@@ -7,7 +7,8 @@ import {
   setCrucibleProgressionAction,
   setRaidProgressionAction,
   setActiveMembership,
-  startSetDataAction
+  startSetDataAction,
+  setOverallRaidAcitivitesPlayed
 } from "../actions/playerActions";
 import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
@@ -39,6 +40,10 @@ class Crucible extends Component {
         }
 
         await this.props.setActiveMembership(0);
+        this.props.setOverallRaidAcitivitesPlayed(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
         await this.props.setCrucibleProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
@@ -68,6 +73,10 @@ class Crucible extends Component {
     this.setState({ isMore: false });
     await this.props.startSetDataAction();
     await this.props.setActiveMembership(index);
+    this.props.setOverallRaidAcitivitesPlayed(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
     await this.props.setCrucibleProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
@@ -248,6 +257,7 @@ export default connect(
     setCrucibleProgressionAction,
     setRaidProgressionAction,
     setActiveMembership,
-    startSetDataAction
+    startSetDataAction,
+    setOverallRaidAcitivitesPlayed
   }
 )(Crucible);

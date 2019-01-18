@@ -7,12 +7,14 @@ import {
   setCrucibleProgressionAction,
   setRaidProgressionAction,
   setActiveMembership,
-  startSetDataAction
+  startSetDataAction,
+  setOverallRaidAcitivitesPlayed
 } from "../actions/playerActions";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import Loading from "../components/Loading";
 import { Helmet } from "react-helmet";
 import Tooltip from "./Tooltip";
+import Chart from "./Chart";
 
 class Raid extends Component {
   state = {
@@ -38,6 +40,10 @@ class Raid extends Component {
         }
 
         await this.props.setActiveMembership(0);
+        this.props.setOverallRaidAcitivitesPlayed(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
         await this.props.setRaidProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
@@ -67,6 +73,10 @@ class Raid extends Component {
     this.setState({ isMore: false });
     await this.props.startSetDataAction();
     await this.props.setActiveMembership(index);
+    this.props.setOverallRaidAcitivitesPlayed(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
     await this.props.setRaidProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
@@ -89,7 +99,11 @@ class Raid extends Component {
   };
 
   render() {
-    const { raidIsLoading, isApiLoading } = this.props.player;
+    const {
+      raidIsLoading,
+      isApiLoading,
+      raidActivitiesLoading
+    } = this.props.player;
 
     const raid = {
       lastWish: { normalCompletions: 0, guided: 0 },
@@ -309,7 +323,11 @@ class Raid extends Component {
               )}
             </ul>
           </div>
+          {!raidActivitiesLoading && (
+            <Chart data={this.props.player.raid.activities.SotP} />
+          )}
         </div>
+
         <div className="track-container">
           <div>
             <h4>Last Wish</h4>
@@ -415,7 +433,11 @@ class Raid extends Component {
               )}
             </ul>
           </div>
+          {!raidActivitiesLoading && (
+            <Chart data={this.props.player.raid.activities.lastWish} />
+          )}
         </div>
+
         <div className="track-container">
           <div>
             <h4>Leviathan</h4>
@@ -514,7 +536,11 @@ class Raid extends Component {
               )}
             </ul>
           </div>
+          {!raidActivitiesLoading && (
+            <Chart data={this.props.player.raid.activities.leviathan} />
+          )}
         </div>
+
         <div className="track-container">
           <div>
             <h4>Eater of Worlds</h4>
@@ -600,7 +626,11 @@ class Raid extends Component {
               )}
             </ul>
           </div>
+          {!raidActivitiesLoading && (
+            <Chart data={this.props.player.raid.activities.EoW} />
+          )}
         </div>
+
         <div className="track-container">
           <div>
             <h4>Spire of Stars</h4>
@@ -686,12 +716,17 @@ class Raid extends Component {
               )}
             </ul>
           </div>
+
+          {!raidActivitiesLoading && (
+            <Chart data={this.props.player.raid.activities.SoS} />
+          )}
         </div>
       </div>
     );
 
     const progression =
       raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
+
     return (
       <div className="infamy-container">
         <Helmet>
@@ -729,6 +764,7 @@ export default connect(
     setCrucibleProgressionAction,
     setRaidProgressionAction,
     setActiveMembership,
-    startSetDataAction
+    startSetDataAction,
+    setOverallRaidAcitivitesPlayed
   }
 )(Raid);

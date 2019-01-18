@@ -6,7 +6,8 @@ import {
   setCrucibleProgressionAction,
   setRaidProgressionAction,
   setActiveMembership,
-  startSetDataAction
+  startSetDataAction,
+  setOverallRaidAcitivitesPlayed
 } from "../actions/playerActions";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
@@ -45,7 +46,10 @@ class Home extends React.Component {
         return;
       }
       await this.props.setActiveMembership(0);
-
+      this.props.setOverallRaidAcitivitesPlayed(
+        memberships[0].membershipType,
+        memberships[0].membershipId
+      );
       if (redirectLocation === "gambit") {
         await this.props.setGambitProgressionAction(
           memberships[0].membershipType,
@@ -103,6 +107,11 @@ class Home extends React.Component {
     await this.props.setActiveMembership(index);
     this.setState({ isMore: false });
     const activeMembership = this.props.player.activeMembership;
+
+    this.props.setOverallRaidAcitivitesPlayed(
+      memberships[activeMembership].membershipType,
+      memberships[activeMembership].membershipId
+    );
     if (redirectLocation === "gambit") {
       await this.props.setGambitProgressionAction(
         memberships[activeMembership].membershipType,
@@ -248,6 +257,7 @@ export default connect(
     setCrucibleProgressionAction,
     setRaidProgressionAction,
     setActiveMembership,
-    startSetDataAction
+    startSetDataAction,
+    setOverallRaidAcitivitesPlayed
   }
 )(Home);

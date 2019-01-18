@@ -286,7 +286,7 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
         dispatch({
           type: "FAIL_SET_DATA",
           payload:
-            "This player doesn't have any destiny 2 stats or something went wrong"
+            "This player doesn't have some destiny 2 stats or something went wrong"
         });
         reject(err);
       }
@@ -294,6 +294,35 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
   };
 };
 
+export const setOverallRaidAcitivitesPlayed = (
+  membershipType,
+  membershipId
+) => {
+  return dispatch => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const raidActivities = await endpoints.getOverallRaidAcitivitesPlayed(
+          membershipType,
+          membershipId
+        );
+
+        dispatch({
+          type: "SET_RAID_ACTIVITIES_DATA",
+          payload: raidActivities
+        });
+        dispatch({ type: "FINISHED_LOADING", payload: "raid-activities" });
+        resolve();
+      } catch (err) {
+        dispatch({
+          type: "FAIL_SET_DATA",
+          payload:
+            "This player doesn't have some destiny 2 stats or something went wrong"
+        });
+        reject(err);
+      }
+    });
+  };
+};
 export const setActiveMembership = index => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
@@ -307,6 +336,16 @@ export const startSetDataAction = () => {
   return dispatch => {
     return new Promise(async (resolve, reject) => {
       dispatch({ type: "START_SET_DATA" });
+      resolve();
+    });
+  };
+};
+
+//Chart
+export const setChartLoadingDone = () => {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      dispatch({ type: "FINISHED_LOADING", payload: "chart" });
       resolve();
     });
   };

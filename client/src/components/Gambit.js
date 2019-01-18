@@ -7,7 +7,8 @@ import {
   setCrucibleProgressionAction,
   setRaidProgressionAction,
   setActiveMembership,
-  startSetDataAction
+  startSetDataAction,
+  setOverallRaidAcitivitesPlayed
 } from "../actions/playerActions";
 import { infamySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
@@ -38,6 +39,10 @@ class Gambit extends Component {
           return;
         }
 
+        this.props.setOverallRaidAcitivitesPlayed(
+          playerMemberships[0].membershipType,
+          playerMemberships[0].membershipId
+        );
         await this.props.setGambitProgressionAction(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId
@@ -68,6 +73,10 @@ class Gambit extends Component {
     await this.props.startSetDataAction();
 
     await this.props.setActiveMembership(index);
+    this.props.setOverallRaidAcitivitesPlayed(
+      memberships[index].membershipType,
+      memberships[index].membershipId
+    );
     await this.props.setGambitProgressionAction(
       memberships[index].membershipType,
       memberships[index].membershipId
@@ -88,6 +97,7 @@ class Gambit extends Component {
   render() {
     const gambit = {};
     const infamy = {};
+
     if (this.props.player.gambitSuccess) {
       gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
       gambit.lost =
@@ -249,6 +259,7 @@ export default connect(
     setCrucibleProgressionAction,
     setRaidProgressionAction,
     setActiveMembership,
-    startSetDataAction
+    startSetDataAction,
+    setOverallRaidAcitivitesPlayed
   }
 )(Gambit);
