@@ -32,7 +32,6 @@ class PGCR extends Component {
           <div className="pgcr-container">
             <div className="track-wrapper">
               {this.state.pgcr.entries.map((entry, index) => {
-                console.log(entry);
                 return (
                   <div key={index} className="track-container">
                     {entry.player.destinyUserInfo.displayName}

@@ -310,7 +310,10 @@ export const setOverallRaidAcitivitesPlayed = (
           type: "SET_RAID_ACTIVITIES_DATA",
           payload: raidActivities
         });
-        dispatch({ type: "FINISHED_LOADING", payload: "raid-activities" });
+        dispatch({
+          type: "FINISHED_LOADING",
+          payload: "raid-activities"
+        });
         resolve();
       } catch (err) {
         dispatch({

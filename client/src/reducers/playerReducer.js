@@ -56,7 +56,9 @@ export const playerReducer = (state = initial, action) => {
       return state;
     case SET_RAID_DATA:
       state = cloneDeep(state);
+      const activities = cloneDeep(state.raid.activities);
       state.raid = cloneDeep(action.payload);
+      state.raid.activities = activities;
       return state;
     case SET_CHECKED_RAID_BADGES:
       state = cloneDeep(state);

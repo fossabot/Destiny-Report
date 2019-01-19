@@ -128,8 +128,13 @@ export const getOverallRaidAcitivitesPlayed = (
           );
 
           if (Object.keys(result.data.Response).length !== 0) {
-            for (let k = 0; k < result.data.Response.activities.length; ++k) {
+            for (
+              let k = result.data.Response.activities.length - 1;
+              k > -1;
+              --k
+            ) {
               const activity = result.data.Response.activities[k];
+
               const isCompleted = activity.values.completed.basic.value;
               if (
                 activity.activityDetails.directorActivityHash === 2122313384
@@ -137,7 +142,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.lastWish.push({
                   x: raidActivitiesPlayed.lastWish.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 1661734046
@@ -145,7 +151,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.lastWish.push({
                   x: raidActivitiesPlayed.lastWish.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 548750096
@@ -153,7 +160,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.SotP.push({
                   x: raidActivitiesPlayed.SotP.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 2812525063
@@ -161,7 +169,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.SotP.push({
                   x: raidActivitiesPlayed.SotP.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 3089205900
@@ -169,7 +178,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.EoW.push({
                   x: raidActivitiesPlayed.EoW.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 2164432138
@@ -177,7 +187,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.EoW.push({
                   x: raidActivitiesPlayed.EoW.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 809170886
@@ -185,7 +196,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.EoW.push({
                   x: raidActivitiesPlayed.EoW.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 119944200
@@ -193,7 +205,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.SoS.push({
                   x: raidActivitiesPlayed.SoS.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 3213556450
@@ -201,7 +214,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.SoS.push({
                   x: raidActivitiesPlayed.SoS.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 3004605630
@@ -209,7 +223,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.SoS.push({
                   x: raidActivitiesPlayed.SoS.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 2693136600 ||
@@ -222,7 +237,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.leviathan.push({
                   x: raidActivitiesPlayed.leviathan.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 417231112 ||
@@ -235,7 +251,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.leviathan.push({
                   x: raidActivitiesPlayed.leviathan.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               } else if (
                 activity.activityDetails.directorActivityHash === 287649202 ||
@@ -248,7 +265,8 @@ export const getOverallRaidAcitivitesPlayed = (
                 raidActivitiesPlayed.leviathan.push({
                   x: raidActivitiesPlayed.leviathan.length,
                   y: isCompleted ? 1 : 0,
-                  instanceId: activity.activityDetails.instanceId
+                  instanceId: activity.activityDetails.instanceId,
+                  period: activity.period
                 });
               }
             }

@@ -112,7 +112,9 @@
     }
   }
   .scrollbar-container {
-    padding: 20px 0 !important;
+    padding: 45px 0 15px 0 !important;
+    overflow-y: hidden !important;
+    max-height: 120px;
   }
 
   .raid-badges-update-popup {

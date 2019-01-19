@@ -875,7 +875,14 @@
       }
     }
   },
-  "raid": { "activities": {}, "stats": [
+  "raid": { "activities": {
+    "SotP": [],
+    "lastWish": [],
+    "SoS": [],
+    "EoW": [],
+    "leviathan": []
+
+  }, "stats": [
     {
       "character1": [
         {
