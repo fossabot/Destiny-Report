@@ -16,11 +16,15 @@ And create another `.env` file inside client root directory and put Bungie API k
 REACT_APP_API_KEY="Bungie API key here" 
 ```
 
+## Install the dependancies for both the server and client
+
+```$npm install``` or ```$yarn``` (for both root folder and client folder)
+
 <br/>
 
 ## Run the development mode
 
-```yarn dev```
+```$npm run dev``` or ```$yarn dev```
 
 <br/>
 
