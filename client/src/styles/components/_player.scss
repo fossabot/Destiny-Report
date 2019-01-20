@@ -53,22 +53,30 @@
       filter: opacity(0.5);
     }
     &--effect_pgcr {
+      background-size: cover;
+
       border-radius: 50%;
       width: 110px;
-      height: 110px;
-      left: calc(50% - 50px);
-      background-position: 95% 50%;
+      max-height: 90%;
+      height: 90%;
+      left: calc(50% - 55px);
       filter: opacity(0.2);
 
       @include breakpoint(1200px) {
-        width: 150px;
-        height: 150px;
-        left: calc(50% - 75px);
+        width: 160px;
+        left: calc(50% - 80px);
       }
       @include breakpoint(750px) {
         width: 200px;
-        height: 200px;
         left: calc(50% - 100px);
+      }
+      @include breakpoint(400px) {
+        width: 180px;
+        left: calc(50% - 90px);
+      }
+      @include breakpoint(360px) {
+        width: 150px;
+        left: calc(50% - 75px);
       }
     }
     &--content {
