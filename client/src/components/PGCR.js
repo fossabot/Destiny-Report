@@ -11,7 +11,7 @@ class PGCR extends Component {
   };
   async componentDidMount() {
     try {
-      const instanceId = this.props.match.params.instanceId;
+      const instanceId = parseInt(this.props.match.params.instanceId);
       const pgcrResult = await getPGCR(instanceId);
 
       this.setState({ pgcr: pgcrResult.data.Response }, () => {
@@ -29,12 +29,36 @@ class PGCR extends Component {
     if (!this.state.loading) {
       if (!this.state.activityNotFound) {
         return (
-          <div className="pgcr-container">
+          <div className="infamy-container">
             <div className="track-wrapper">
               {this.state.pgcr.entries.map((entry, index) => {
+                const player = {
+                  name: entry.player.destinyUserInfo.displayName,
+                  icon: `https://www.bungie.net${
+                    entry.player.destinyUserInfo.iconPath
+                  }`,
+                  completed: entry.values.completed.basic.displayValue,
+                  kills: entry.values.kills.basic.displayValue,
+                  deaths: entry.values.deaths.basic.displayValue
+                };
                 return (
                   <div key={index} className="track-container">
-                    {entry.player.destinyUserInfo.displayName}
+                    <div
+                      className="track-container--effect track-container--effect_pgcr"
+                      style={{
+                        backgroundImage: `url(${player.icon})`
+                      }}
+                    />
+                    <div className="track-container--content">
+                      <div>
+                        <h4>{player.name}</h4>
+                      </div>
+                      <ul className="center-ul">
+                        <li>Kills: {player.kills}</li>
+                        <li>Deaths: {player.deaths}</li>
+                        <li>Completed: {player.completed}</li>
+                      </ul>
+                    </div>
                   </div>
                 );
               })}
@@ -43,14 +67,14 @@ class PGCR extends Component {
         );
       } else {
         return (
-          <div className="pgcr-container">
+          <div className="infamy-container">
             <div className="error_activity">Activity Not Found</div>
           </div>
         );
       }
     } else {
       return (
-        <div className="pgcr-container">
+        <div className="infamy-container">
           <Loading />;
         </div>
       );

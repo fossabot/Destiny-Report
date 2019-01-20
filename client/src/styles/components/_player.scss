@@ -9,6 +9,9 @@
   align-items: center;
   justify-content: center;
 
+  .error_activity {
+    font-size: 35px;
+  }
   .track-wrapper {
     width: 100%;
     font-size: 2em;
@@ -49,6 +52,25 @@
       background-position: center;
       filter: opacity(0.5);
     }
+    &--effect_pgcr {
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+      left: calc(50% - 50px);
+      background-position: 95% 50%;
+      filter: opacity(0.2);
+
+      @include breakpoint(1200px) {
+        width: 150px;
+        height: 150px;
+        left: calc(50% - 75px);
+      }
+      @include breakpoint(750px) {
+        width: 200px;
+        height: 200px;
+        left: calc(50% - 100px);
+      }
+    }
     &--content {
       z-index: 2;
     }
@@ -86,6 +108,11 @@
         margin-left: auto;
         margin-right: auto;
       }
+    }
+
+    .center-ul {
+      justify-content: center;
+      align-items: center;
     }
 
     .raid-badges-container {

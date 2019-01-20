@@ -92,7 +92,13 @@ class NavBar extends React.Component {
               </NavLink>
             </li>
           </ul>
-          {/* <div className="navbar--addon">Add-on</div> */}
+          {
+            <div className="navbar--addon">
+              <a href="https://chrome.google.com/webstore/detail/destiny-report/bfddnieakjjggiojaipihpfjnimkjaoh">
+                Add-on
+              </a>
+            </div>
+          }
         </div>
         {showProgressBar && <ProgressBar />}
         {(error || privacyError) && ErrorBlock}

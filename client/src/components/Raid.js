@@ -442,7 +442,7 @@ class Raid extends Component {
           <div>
             <h4>Leviathan</h4>
           </div>
-          <ul>
+          <ul className="center-ul">
             <li>Normal: {raid.leviathan.normalCompletions}</li>
             <li>Guided: {raid.leviathan.guided}</li>
             <li>Prestige: {raid.leviathan.prestigeCompletions}</li>
@@ -545,7 +545,7 @@ class Raid extends Component {
           <div>
             <h4>Eater of Worlds</h4>
           </div>
-          <ul>
+          <ul className="center-ul">
             <li>Normal: {raid.EoW.normalCompletions}</li>
             <li>Guided: {raid.EoW.guided}</li>
             <li>Prestige: {raid.EoW.prestigeCompletions}</li>
@@ -635,7 +635,7 @@ class Raid extends Component {
           <div>
             <h4>Spire of Stars</h4>
           </div>
-          <ul>
+          <ul className="center-ul">
             <li>Normal: {raid.SoS.normalCompletions}</li>
             <li>Guided: {raid.SoS.guided}</li>
             <li>Prestige: {raid.SoS.prestigeCompletions}</li>
