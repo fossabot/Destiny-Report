@@ -68,7 +68,7 @@ export const getCheckRaidBadges = (membershipType, membershipId) => {
 
 export const getPGCR = instanceId => {
   return axios.get(
-    `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${instanceId}/`,
+    `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${instanceId}/`,
     {
       headers: {
         "X-API-KEY": process.env.REACT_APP_API_KEY
