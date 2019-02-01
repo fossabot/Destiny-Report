@@ -60,6 +60,11 @@ class Crucible extends Component {
       }
       if (this.props.player.memberships.length === 0) {
         this.props.history.push("/");
+      } else {
+        const { memberships, activeMembership } = this.props.player;
+        this.props.history.push(
+          `/crucible/${memberships[activeMembership].displayName}`
+        );
       }
     } catch (err) {
       console.log(err);

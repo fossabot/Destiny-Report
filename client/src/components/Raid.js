@@ -60,6 +60,11 @@ class Raid extends Component {
       }
       if (this.props.player.memberships.length === 0) {
         this.props.history.push("/");
+      } else {
+        const { memberships, activeMembership } = this.props.player;
+        this.props.history.push(
+          `/raid/${memberships[activeMembership].displayName}`
+        );
       }
     } catch (err) {
       console.log(err);

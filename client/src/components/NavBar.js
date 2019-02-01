@@ -42,7 +42,7 @@ class NavBar extends React.Component {
         ].displayName;
       }
     }
-    const linkHide = path === "/" || path.includes("pgcr") ? "link--hide" : "";
+    const linkHide = path === "/" ? "link--hide" : "";
 
     let { error, privacyError, errorMessage } = this.props.player;
 
