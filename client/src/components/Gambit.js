@@ -61,7 +61,7 @@ class Gambit extends Component {
         this.props.history.push("/");
       } else {
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.push(
+        this.props.history.replace(
           `/gambit/${memberships[activeMembership].displayName}`
         );
       }
@@ -96,7 +96,7 @@ class Gambit extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.push(`/gambit/${memberships[index].displayName}`);
+    this.props.history.replace(`/gambit/${memberships[index].displayName}`);
   };
 
   render() {

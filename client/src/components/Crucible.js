@@ -62,7 +62,7 @@ class Crucible extends Component {
         this.props.history.push("/");
       } else {
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.push(
+        this.props.history.replace(
           `/crucible/${memberships[activeMembership].displayName}`
         );
       }
@@ -96,7 +96,7 @@ class Crucible extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.push(`/crucible/${memberships[index].displayName}`);
+    this.props.history.replace(`/crucible/${memberships[index].displayName}`);
   };
 
   render() {

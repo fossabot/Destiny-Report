@@ -61,8 +61,9 @@ class Raid extends Component {
       if (this.props.player.memberships.length === 0) {
         this.props.history.push("/");
       } else {
+        console.log(this.props.history);
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.push(
+        this.props.history.replace(
           `/raid/${memberships[activeMembership].displayName}`
         );
       }
@@ -96,7 +97,7 @@ class Raid extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.push(`/raid/${memberships[index].displayName}`);
+    this.props.history.replace(`/raid/${memberships[index].displayName}`);
   };
 
   handleBadgeClick = instanceId => {
