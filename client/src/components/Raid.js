@@ -61,11 +61,14 @@ class Raid extends Component {
       if (this.props.player.memberships.length === 0) {
         this.props.history.push("/");
       } else {
-        console.log(this.props.history);
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.replace(
-          `/raid/${memberships[activeMembership].displayName}`
-        );
+
+        let redirectName = memberships[activeMembership].displayName;
+
+        if (redirectName.includes("#")) {
+          redirectName = redirectName.replace("#", "%23");
+        }
+        this.props.history.replace(`/raid/${redirectName}`);
       }
     } catch (err) {
       console.log(err);
@@ -97,7 +100,13 @@ class Raid extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.replace(`/raid/${memberships[index].displayName}`);
+
+    let redirectName = memberships[index].displayName;
+
+    if (redirectName.includes("#")) {
+      redirectName = redirectName.replace("#", "%23");
+    }
+    this.props.history.replace(`/raid/${redirectName}`);
   };
 
   handleBadgeClick = instanceId => {

@@ -62,9 +62,13 @@ class Crucible extends Component {
         this.props.history.push("/");
       } else {
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.replace(
-          `/crucible/${memberships[activeMembership].displayName}`
-        );
+
+        let redirectName = memberships[activeMembership].displayName;
+
+        if (redirectName.includes("#")) {
+          redirectName = redirectName.replace("#", "%23");
+        }
+        this.props.history.replace(`/crucible/${redirectName}`);
       }
     } catch (err) {
       console.log(err);
@@ -96,7 +100,13 @@ class Crucible extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.replace(`/crucible/${memberships[index].displayName}`);
+
+    let redirectName = memberships[index].displayName;
+
+    if (redirectName.includes("#")) {
+      redirectName = redirectName.replace("#", "%23");
+    }
+    this.props.history.replace(`/crucible/${redirectName}`);
   };
 
   render() {
