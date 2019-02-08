@@ -26,14 +26,19 @@ class Home extends React.Component {
   setActive = (e, blur) => {
     if (blur && e.target.value.length === 0) {
       e.target.parentNode.classList.remove("active");
+      this.searchButton.classList.remove("search-button_active");
       return;
     }
     e.target.parentNode.classList.add("active");
+    this.searchButton.classList.add("search-button_active");
   };
 
   handleSubmit = async event => {
     event.preventDefault();
-    const playerGamerTag = this.refs.gamertag.value.toLowerCase();
+    let playerGamerTag = this.refs.gamertag.value.toLowerCase();
+    if (playerGamerTag.includes("#")) {
+      playerGamerTag = playerGamerTag.replace("#", "%23");
+    }
     const redirectLocation = this.state.redirectLocation;
     try {
       await this.props.startSetDataAction();
@@ -91,9 +96,11 @@ class Home extends React.Component {
         );
       }
 
-      this.props.history.push(
-        `/${redirectLocation}/${memberships[0].displayName}`
-      );
+      let redirectName = memberships[0].displayName;
+      if (redirectName.includes("#")) {
+        redirectName = redirectName.replace("#", "%23");
+      }
+      this.props.history.push(`/${redirectLocation}/${redirectName}`);
     } catch (err) {
       console.log(err);
     }
@@ -153,9 +160,11 @@ class Home extends React.Component {
       );
     }
 
-    this.props.history.push(
-      `/${redirectLocation}/${memberships[activeMembership].displayName}`
-    );
+    let redirectName = memberships[activeMembership].displayName;
+    if (redirectName.includes("#")) {
+      redirectName = redirectName.replace("#", "%23");
+    }
+    this.props.history.push(`/${redirectLocation}/${redirectName}`);
   };
 
   checkboxHandler = event => {
@@ -165,14 +174,19 @@ class Home extends React.Component {
   render() {
     const { gambitIsLoading, isPlayerFound } = this.props.player;
     const errorPopup = (
-      <div className="error_popup">This player doesn't exist</div>
+      <div className="error_popup">
+        Guardian not found
+        <div className="pc-ids-info">
+          Blizzard ids must be in this format name#id, example: Gladd#11693
+        </div>
+      </div>
     );
 
     const inputPlayerId = (
       <form className="input-form" onSubmit={this.handleSubmit}>
         <div className="search-wrapper">
           <label className="search-label" htmlFor="gamertag">
-            Enter a player's name
+            Search for a guardian
           </label>
           <input
             className="search-input"
@@ -184,6 +198,13 @@ class Home extends React.Component {
             onBlur={event => this.setActive(event, true)}
             autoComplete="off"
           />
+          <button
+            type="submit"
+            className="search-button"
+            ref={ele => (this.searchButton = ele)}
+          >
+            <i className="fas fa-arrow-circle-right" />
+          </button>
         </div>
         <div className="checkbox-wrapper">
           <label className="checkbox-label" htmlFor="gambit">

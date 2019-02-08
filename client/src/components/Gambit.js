@@ -61,9 +61,14 @@ class Gambit extends Component {
         this.props.history.push("/");
       } else {
         const { memberships, activeMembership } = this.props.player;
-        this.props.history.replace(
-          `/gambit/${memberships[activeMembership].displayName}`
-        );
+
+        let redirectName = memberships[activeMembership].displayName;
+
+        if (redirectName.includes("#")) {
+          redirectName = redirectName.replace("#", "%23");
+        }
+
+        this.props.history.replace(`/gambit/${redirectName}`);
       }
     } catch (err) {
       console.log(err);
@@ -96,7 +101,13 @@ class Gambit extends Component {
     );
 
     this.setState({ isMore: false });
-    this.props.history.replace(`/gambit/${memberships[index].displayName}`);
+
+    let redirectName = memberships[index].displayName;
+    if (redirectName.includes("#")) {
+      redirectName = redirectName.replace("#", "%23");
+    }
+
+    this.props.history.replace(`/gambit/${redirectName}`);
   };
 
   render() {

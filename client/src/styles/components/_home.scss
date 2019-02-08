@@ -23,6 +23,11 @@
     background-color: rgba(0, 0, 0, 0.1);
     color: $white;
 
+    .pc-ids-info {
+      margin-top: 5px;
+      font-size: 12px;
+      color: gray;
+    }
     @include breakpoint(768px) {
       font-size: 5vw;
       top: 40px;
@@ -75,6 +80,31 @@
         outline: none;
         background-color: rgba(0, 0, 0, 0.1);
         color: $white;
+      }
+
+      .search-button {
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        font-size: 7vh;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.851);
+
+        &:hover {
+          color: #5aa8b6;
+        }
+        &_active {
+          display: block;
+        }
+
+        @include breakpoint(515px) {
+          font-size: 5vh;
+          right: 10px;
+        }
       }
     }
     .checkbox-wrapper {
