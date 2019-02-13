@@ -134,6 +134,13 @@ server
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9210265394268724",
+    enable_page_level_ads: true
+  });
+</script>
         <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
