@@ -1,12 +1,13 @@
 {
-  "name": "api",
-  "version": "2.0.0",
+  "name": "Destiny-Report",
+  "version": "2.0.1",
   "license": "MIT",
+  "author": "Sarbast Mohammed",
   "scripts": {
-    "start": "razzle start",
+    "dev": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node build/server.js",
+    "start": "NODE_ENV=production node build/server.js",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
