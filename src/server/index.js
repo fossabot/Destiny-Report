@@ -23,21 +23,21 @@ const getEnv = c => process.env[c];
 
 axios.defaults.headers.common["X-API-KEY"] = getEnv("RAZZLE_API_KEY");
 
-// if (process.env.NODE_ENV === "production") {
-//   server.use((req, res, next) => {
-//     if (req.header("x-forwarded-proto") !== "https")
-//       res.redirect(`https://${req.header("host")}${req.url}`);
-//     else next();
-//   });
+if (process.env.NODE_ENV === "production") {
+  server.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https")
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    else next();
+  });
 
-//   const corsOptions = {
-//     origin: "https://destiny.report",
-//     optionsSuccessStatus: 200
-//   };
-//   server.use(cors(corsOptions));
-// } else {
-//   server.use(cors());
-// }
+  const corsOptions = {
+    origin: "https://destiny.report",
+    optionsSuccessStatus: 200
+  };
+  server.use(cors(corsOptions));
+} else {
+  server.use(cors());
+}
 
 mongoose.connect(
   `mongodb://${getEnv("RAZZLE_DB_USERNAME")}:${getEnv(
@@ -159,13 +159,13 @@ server
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
           assets.client.css
-            ? `<link rel="stylesheet" href="${assets.client.css}">`
+            ? `<link rel="stylesheet" href="/${assets.client.css}">`
             : ""
         }
           ${
             process.env.NODE_ENV === "production"
-              ? `<script src="${assets.client.js}" defer></script>`
-              : `<script src="${assets.client.js}" defer crossorigin></script>`
+              ? `<script src="/${assets.client.js}" defer></script>`
+              : `<script src="/${assets.client.js}" defer crossorigin></script>`
           }
     </head>
     <body>
