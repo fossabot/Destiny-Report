@@ -151,10 +151,9 @@ server
       />
       <meta
         name="keywords"
-        content="Destiny 2, Raid, Crucible, KD, destiny 2 tracker, Gambit, Flawless, Raid Badges, Destiny 2 raid stats, last wish, leviathan, scourge of the past, eater of worlds, spire of stars"
+        content="Destiny Report, Destiny 2, Raid, Crucible, KD, destiny 2 tracker, Gambit, Flawless, Raid Badges, Destiny 2 raid stats, last wish, leviathan, scourge of the past, eater of worlds, spire of stars"
       />
   
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
           assets.client.css
@@ -168,6 +167,7 @@ server
           }
     </head>
     <body>
+        <noscript> You need to enable JavaScript to run this app. </noscript>
         <div id="root">${markup}</div>
         <script>
           window.__PRELOADED_STATE__ = ${serialize(finalState)}
