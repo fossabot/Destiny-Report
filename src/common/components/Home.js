@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import Loading from "./Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 class Home extends React.Component {
   state = {
@@ -205,7 +207,7 @@ class Home extends React.Component {
             className="search-button"
             ref={ele => (this.searchButton = ele)}
           >
-            <i className="fas fa-arrow-circle-right" />
+            <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
         <div className="checkbox-wrapper">
