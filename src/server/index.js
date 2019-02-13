@@ -19,9 +19,7 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
 
-const getEnv = c => process.env[c];
-
-axios.defaults.headers.common["X-API-KEY"] = getEnv("RAZZLE_API_KEY");
+axios.defaults.headers.common["X-API-KEY"] = process.env.RAZZLE_API_KEY;
 
 if (process.env.NODE_ENV === "production") {
   server.use((req, res, next) => {
@@ -40,9 +38,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.connect(
-  `mongodb://${getEnv("RAZZLE_DB_USERNAME")}:${getEnv(
-    "RAZZLE_DB_PASSWORD"
-  )}@ds253922.mlab.com:53922/destinyreport`,
+  `mongodb://${process.env.RAZZLE_DB_USERNAME}:${
+    process.env.RAZZLE_DB_PASSWORD
+  }@ds253922.mlab.com:53922/destinyreport`,
   { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
 );
 

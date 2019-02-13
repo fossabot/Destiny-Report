@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const getEnv = c => process.env[c];
-axios.defaults.headers.common["X-API-KEY"] = getEnv("RAZZLE_API_KEY");
+axios.defaults.headers.common["X-API-KEY"] = process.env.RAZZLE_API_KEY;
 export const getMembershipID = playerTag => {
   if (playerTag.includes("#")) {
     playerTag = playerTag.replace("#", "%23");

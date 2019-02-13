@@ -4,12 +4,11 @@
   "license": "MIT",
   "author": "Sarbast Mohammed",
   "scripts": {
-    "start": "razzle start",
+    "dev": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "prestart:prod": "yarn build",
-    "start:prod": "NODE_ENV=production node build/server.js",
-    "deploy": "git push heroku master"
+    "start": "NODE_ENV=production node build/server.js",
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
@@ -27,6 +26,7 @@
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.0",
     "qs": "^6.4.0",
+    "razzle-heroku": "^3.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-ga": "^2.5.6",
