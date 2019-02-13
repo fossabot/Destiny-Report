@@ -5,26 +5,20 @@ You can get the API key on [Bungie.net](https://www.bungie.net/en/Application)
 Create a `.env` file in the root of the project and put the keys inside it
 
 ```
-DB_USERNAME="DB username here"
-DB_PASSWORD="DB password here"
-BUNGIE_API_KEY="Bungie API key here"
+RAZZLE_API_KEY="Bungie API key here"
+RAZZLE_DB_USERNAME="DB username"
+RAZZLE_DB_PASSWORD="DB password"
 ```
 
-And create another `.env` file inside client root directory and put Bungie API key inside it
+## Install the dependancies
 
-``` 
-REACT_APP_API_KEY="Bungie API key here" 
-```
-
-## Install the dependancies for both the server and client
-
-```$npm install``` or ```$yarn``` (for both root folder and client folder)
+`$npm install` or `$yarn`
 
 <br/>
 
 ## Run the development mode
 
-```$npm run dev``` or ```$yarn dev```
+`$npm run start` or `$yarn start`
 
 <br/>
 
