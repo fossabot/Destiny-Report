@@ -39,6 +39,7 @@ class Gambit extends Component {
           return;
         }
 
+        await this.props.setActiveMembership(0);
         this.props.setOverallRaidAcitivitesPlayed(
           playerMemberships[0].membershipType,
           playerMemberships[0].membershipId

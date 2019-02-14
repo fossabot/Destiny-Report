@@ -75,7 +75,7 @@ class PGCR extends Component {
     } else {
       return (
         <div className="infamy-container">
-          <Loading />;
+          <Loading />
         </div>
       );
     }
