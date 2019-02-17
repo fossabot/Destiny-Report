@@ -107,7 +107,7 @@ server
     }
   })
   .get("/*", (req, res) => {
-    const store = configureStore(initialState);
+    const store = configureStore();
 
     const context = {};
     const markup = renderToString(

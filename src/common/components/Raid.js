@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  resetTheStateAction,
   setMembershipInfoAction,
   setGambitProgressionAction,
   setCrucibleProgressionAction,
@@ -773,7 +772,6 @@ const mapStoreToProps = store => {
 export default connect(
   mapStoreToProps,
   {
-    resetTheStateAction,
     setMembershipInfoAction,
     setGambitProgressionAction,
     setCrucibleProgressionAction,

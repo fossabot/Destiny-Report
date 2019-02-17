@@ -60,7 +60,7 @@
       max-height: 90%;
       height: 90%;
       left: calc(50% - 55px);
-      filter: opacity(0.2);
+      filter: opacity(0.3);
 
       @include breakpoint(1200px) {
         width: 160px;

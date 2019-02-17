@@ -107,6 +107,7 @@ const player = (state = initial, action) => {
       return state;
     case RESET_DATA:
       state = cloneDeep(initial);
+      state.gambitIsLoading = false;
       return state;
     case PLAYER_NOT_FOUND:
       state = {

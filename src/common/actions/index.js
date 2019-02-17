@@ -1,7 +1,7 @@
 import { values } from "lodash";
 import * as endpoints from "../utility/endpoints";
 
-export const resetTheStateAction = error => {
+export const resetTheStateAction = () => {
   return { type: "RESET_DATA" };
 };
 
