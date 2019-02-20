@@ -1,68 +1,68 @@
 .footer {
-  background-color: black;
-  color: white;
-  text-align: center;
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	background-color: black;
+	color: white;
+	text-align: center;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  .source-and-contact {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin-left: 6.5%;
-    padding: 0;
+	.source-and-contact {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+		margin-left: 6.5%;
+		padding: 0;
 
-    li {
-      margin-right: 20px;
-      a {
-        text-decoration: none;
-        color: white;
+		li {
+			margin-right: 20px;
+			a {
+				text-decoration: none;
+				color: white;
 
-        &:hover {
-          color: aqua;
-        }
+				&:hover {
+					color: aqua;
+				}
 
-        .fa {
-          font-size: 1.5em;
-        }
-        span {
-          margin-left: 5px;
-          font-size: 1.3em;
+				.fa {
+					font-size: 1.5em;
+				}
+				span {
+					margin-left: 5px;
+					font-size: 1.3em;
 
-          @include breakpoint(425px) {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-  .info {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    margin-left: auto;
-    padding-right: 10px;
+					@include breakpoint(425px) {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	.info {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		margin-left: auto;
+		padding-right: 10px;
 
-    @include breakpoint(500px) {
-      display: none;
-    }
+		@include breakpoint(500px) {
+			display: none;
+		}
 
-    li {
-      padding: 2px 10px 2px 2px;
-    }
-  }
+		li {
+			padding: 2px 10px 2px 2px;
+		}
+	}
 
-  .developer {
-    margin-right: auto;
-    margin-left: 10px;
+	.developer {
+		margin-right: auto;
+		margin-left: 10px;
 
-    li {
-      .developer-anchor {
-        color: aqua;
-      }
-    }
-  }
+		li {
+			.developer-anchor {
+				color: aqua;
+			}
+		}
+	}
 }

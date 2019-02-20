@@ -1,63 +1,63 @@
 .navbar-wrapper {
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: $white;
-    height: 10vh;
-    display: flex;
-    flex-direction: flex-start;
-    align-items: center;
-    padding: 0 10px 0 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	.navbar {
+		background-color: rgba(0, 0, 0, 0.8);
+		color: $white;
+		height: 10vh;
+		display: flex;
+		flex-direction: flex-start;
+		align-items: center;
+		padding: 0 10px 0 10px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-    &--home-item {
-      display: flex;
-      .link {
-        margin-right: 20px;
-        font-size: 30px;
-        font-weight: 500;
+		&--home-item {
+			display: flex;
+			.link {
+				margin-right: 20px;
+				font-size: 30px;
+				font-weight: 500;
 
-        @include breakpoint(560px) {
-          font-size: 20px;
-        }
-        @include breakpoint(410px) {
-          font-size: 15px;
-        }
-        &--hide {
-          display: none;
-        }
-        &:hover {
-          border-bottom: 1px solid $white;
-        }
-        &.link-active {
-          border-bottom: 1px solid $white;
-        }
-      }
-    }
+				@include breakpoint(560px) {
+					font-size: 20px;
+				}
+				@include breakpoint(410px) {
+					font-size: 15px;
+				}
+				&--hide {
+					display: none;
+				}
+				&:hover {
+					border-bottom: 1px solid $white;
+				}
+				&.link-active {
+					border-bottom: 1px solid $white;
+				}
+			}
+		}
 
-    &--addon {
-      margin-left: auto;
-      font-size: 30px;
-      margin-right: 10px;
+		&--addon {
+			margin-left: auto;
+			font-size: 30px;
+			margin-right: 10px;
 
-      @include breakpoint(550px) {
-        font-size: 20px;
-      }
-      @include breakpoint(400px) {
-        font-size: 15px;
-      }
-    }
-  }
+			@include breakpoint(550px) {
+				font-size: 20px;
+			}
+			@include breakpoint(400px) {
+				font-size: 15px;
+			}
+		}
+	}
 
-  .api-issue {
-    width: 100%;
-    font-size: 20px;
-    background-color: rgb(250, 0, 0);
-    font-weight: 460;
-    padding: 5px 30px;
-    color: rgb(255, 253, 253);
-    text-align: center;
-    @include breakpoint(550px) {
-      font-size: 18px;
-    }
-  }
+	.api-issue {
+		width: 100%;
+		font-size: 20px;
+		background-color: rgb(250, 0, 0);
+		font-weight: 460;
+		padding: 5px 30px;
+		color: rgb(255, 253, 253);
+		text-align: center;
+		@include breakpoint(550px) {
+			font-size: 18px;
+		}
+	}
 }
