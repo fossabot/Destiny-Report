@@ -22,23 +22,17 @@ class Gambit extends Component {
 		try {
 			const { memberships } = this.props.player;
 			if (memberships.length === 0 && this.props.match.params.id) {
-				let playerGamerTag =
-					this.props.match.params.id + this.props.location.hash;
+				let playerGamerTag = this.props.match.params.id + this.props.location.hash;
 
 				if (playerGamerTag.includes("#")) {
 					playerGamerTag = playerGamerTag.replace("#", "%23");
 				}
 				await this.props.startSetDataAction();
 
-				const playerMemberships = await this.props.setMembershipInfoAction(
-					playerGamerTag
-				);
+				const playerMemberships = await this.props.setMembershipInfoAction(playerGamerTag);
 				const activeMembership = this.props.player.activeMembership;
 
-				if (
-					this.props.player.memberships.length > 1 &&
-					activeMembership === -1
-				) {
+				if (this.props.player.memberships.length > 1 && activeMembership === -1) {
 					this.setState({ isMore: true });
 					return;
 				}
@@ -88,22 +82,10 @@ class Gambit extends Component {
 		await this.props.startSetDataAction();
 
 		await this.props.setActiveMembership(index);
-		this.props.setOverallRaidAcitivitesPlayed(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		await this.props.setGambitProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		this.props.setCrucibleProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		this.props.setRaidProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
+		this.props.setOverallRaidAcitivitesPlayed(memberships[index].membershipType, memberships[index].membershipId);
+		await this.props.setGambitProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
+		this.props.setCrucibleProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
+		this.props.setRaidProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
 
 		this.setState({ isMore: false });
 
@@ -121,9 +103,7 @@ class Gambit extends Component {
 
 		if (this.props.player.gambitSuccess) {
 			gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
-			gambit.lost =
-				this.props.player.gambitStats.allTime.activitiesEntered.basic
-					.value - gambit.won;
+			gambit.lost = this.props.player.gambitStats.allTime.activitiesEntered.basic.value - gambit.won;
 			gambit.kills = this.props.player.gambitStats.allTime.kills.basic.value;
 			gambit.deaths = this.props.player.gambitStats.allTime.deaths.basic.value;
 			gambit.invaderKills = this.props.player.gambitStats.allTime.invaderKills.basic.value;
@@ -133,19 +113,13 @@ class Gambit extends Component {
 			gambit.smallBlockersSent = this.props.player.gambitStats.allTime.smallBlockersSent.basic.value;
 			gambit.mediumBlockersSent = this.props.player.gambitStats.allTime.mediumBlockersSent.basic.value;
 			gambit.largeBlockersSent = this.props.player.gambitStats.allTime.largeBlockersSent.basic.value;
-			gambit.blockersSent =
-				gambit.smallBlockersSent +
-				gambit.mediumBlockersSent +
-				gambit.largeBlockersSent;
+			gambit.blockersSent = gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
 
 			gambit.motesDeposited = this.props.player.gambitStats.allTime.motesDeposited.basic.value;
 			gambit.motesLost = this.props.player.gambitStats.allTime.motesLost.basic.value;
 			gambit.motesDenied = this.props.player.gambitStats.allTime.motesDenied.basic.value;
 
-			gambit.winLossRatio = (
-				100 *
-				(gambit.won / (gambit.won + gambit.lost))
-			).toFixed(1);
+			gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
 
 			if (gambit.won === 0 && gambit.lost === 0) {
 				gambit.winLossRatio = 0;
@@ -153,21 +127,14 @@ class Gambit extends Component {
 			infamy.currentInfamy = this.props.player.infamy.currentProgress;
 			infamy.armyOfOne = this.props.player.infamy.armyOfOne;
 			if (this.props.player.infamy.level === 16) {
-				infamy.currentRank =
-					infamySteps[this.props.player.infamy.level - 1].stepName;
+				infamy.currentRank = infamySteps[this.props.player.infamy.level - 1].stepName;
 				infamy.progressToNextLevel =
-					infamySteps[this.props.player.infamy.level - 1]
-						.progressTotal -
+					infamySteps[this.props.player.infamy.level - 1].progressTotal -
 					this.props.player.infamy.progressToNextLevel;
-				infamy.icon =
-					"https://www.bungie.net" +
-					infamySteps[this.props.player.infamy.level - 1].icon;
+				infamy.icon = "https://www.bungie.net" + infamySteps[this.props.player.infamy.level - 1].icon;
 			} else {
-				infamy.icon =
-					"https://www.bungie.net" +
-					infamySteps[this.props.player.infamy.level].icon;
-				infamy.currentRank =
-					infamySteps[this.props.player.infamy.level].stepName;
+				infamy.icon = "https://www.bungie.net" + infamySteps[this.props.player.infamy.level].icon;
+				infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
 				infamy.progressToNextLevel =
 					infamySteps[this.props.player.infamy.level].progressTotal -
 					this.props.player.infamy.progressToNextLevel;
@@ -180,10 +147,7 @@ class Gambit extends Component {
 		const trackContainer = (
 			<div className="track-wrapper">
 				<div className="track-container">
-					<div
-						className="track-container--effect"
-						style={{ backgroundImage: `url(${infamy.icon})` }}
-					/>
+					<div className="track-container--effect" style={{ backgroundImage: `url(${infamy.icon})` }} />
 					<div className="track-container--content">
 						<div>
 							<h4>Infamy</h4>
@@ -203,15 +167,16 @@ class Gambit extends Component {
 						<h4>Overall</h4>
 					</div>
 					<ul>
-						<li>Wins: {gambit.won}</li>
-						<li>Losses: {gambit.lost}</li>
+						<li>
+							Wins: <span className="color--green">{gambit.won} </span>
+						</li>
+						<li>
+							Losses: <span className="color--red">{gambit.lost} </span>
+						</li>
 						<li>Wins/Losses: {gambit.winLossRatio}%</li>
 						<li>Kills: {gambit.kills}</li>
 						<li>Deaths: {gambit.deaths}</li>
-						<li>
-							Kills/Deaths:{" "}
-							{(gambit.kills / gambit.deaths).toFixed(2)}
-						</li>
+						<li>Kills/Deaths: {(gambit.kills / gambit.deaths).toFixed(2)}</li>
 					</ul>
 				</div>
 
@@ -222,7 +187,9 @@ class Gambit extends Component {
 					<ul>
 						<li>Invader Kills: {gambit.invaderKills}</li>
 						<li>Invasion Kills: {gambit.invasionKills}</li>
-						<li>Army of One: {infamy.armyOfOne}</li>
+						<li>
+							Army of One: <span className="color--gold">{infamy.armyOfOne}</span>
+						</li>
 					</ul>
 				</div>
 				<div className="track-container">
@@ -250,19 +217,14 @@ class Gambit extends Component {
 			</div>
 		);
 
-		const progression =
-			gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
+		const progression = gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
 		return (
 			<div className="infamy-container">
 				<Helmet>
 					<meta charSet="utf-8" />
 					<title>Gambit</title>
 				</Helmet>
-				{this.state.isMore && (
-					<MultiMembershipPopup
-						handleMembershipType={this.handleMembershipType}
-					/>
-				)}
+				{this.state.isMore && <MultiMembershipPopup handleMembershipType={this.handleMembershipType} />}
 				{progression}
 			</div>
 		);
