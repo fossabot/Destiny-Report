@@ -1,0 +1,43 @@
+@import "../base/base";
+
+.tooltip-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover &--tooltip {
+		visibility: visible;
+		opacity: 1;
+	}
+	&:hover &--item {
+		background-color: rgba(0, 126, 126, 0.568);
+	}
+	&--tooltip {
+		position: absolute;
+		top: -30px;
+		display: block;
+		background-color: rgb(192, 177, 159);
+		text-shadow: none;
+		color: black;
+		font-size: 18px;
+		border-radius: 2px;
+		padding: 4px;
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s ease-in, opacity 0.3s linear;
+		@include breakpoint(460px) {
+			font-size: 12px;
+			top: -25px;
+		}
+	}
+
+	&--item {
+		cursor: pointer;
+		border-radius: 5px;
+		outline: none;
+		background-color: rgba(90, 141, 141, 0.589);
+		color: rgba(255, 250, 250, 0.932);
+		text-shadow: none;
+		padding: 10px;
+	}
+}

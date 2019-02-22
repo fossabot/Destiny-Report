@@ -14,6 +14,7 @@ import Loading from "./Loading";
 import { Helmet } from "react-helmet";
 import Tooltip from "./Tooltip";
 import Chart from "./Chart";
+import "../styles/components/Player.scss";
 
 class Raid extends Component {
 	state = {
@@ -23,21 +24,15 @@ class Raid extends Component {
 		try {
 			const { memberships } = this.props.player;
 			if (memberships.length === 0 && this.props.match.params.id) {
-				let playerGamerTag =
-					this.props.match.params.id + this.props.location.hash;
+				let playerGamerTag = this.props.match.params.id + this.props.location.hash;
 				if (playerGamerTag.includes("#")) {
 					playerGamerTag = playerGamerTag.replace("#", "%23");
 				}
 				await this.props.startSetDataAction();
-				const playerMemberships = await this.props.setMembershipInfoAction(
-					playerGamerTag
-				);
+				const playerMemberships = await this.props.setMembershipInfoAction(playerGamerTag);
 				const activeMembership = this.props.player.activeMembership;
 
-				if (
-					this.props.player.memberships.length > 1 &&
-					activeMembership === -1
-				) {
+				if (this.props.player.memberships.length > 1 && activeMembership === -1) {
 					this.setState({ isMore: true });
 					return;
 				}
@@ -85,22 +80,10 @@ class Raid extends Component {
 		this.setState({ isMore: false });
 		await this.props.startSetDataAction();
 		await this.props.setActiveMembership(index);
-		this.props.setOverallRaidAcitivitesPlayed(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		await this.props.setRaidProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		this.props.setGambitProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
-		this.props.setCrucibleProgressionAction(
-			memberships[index].membershipType,
-			memberships[index].membershipId
-		);
+		this.props.setOverallRaidAcitivitesPlayed(memberships[index].membershipType, memberships[index].membershipId);
+		await this.props.setRaidProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
+		this.props.setGambitProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
+		this.props.setCrucibleProgressionAction(memberships[index].membershipType, memberships[index].membershipId);
 
 		this.setState({ isMore: false });
 
@@ -117,11 +100,7 @@ class Raid extends Component {
 	};
 
 	render() {
-		const {
-			raidIsLoading,
-			isApiLoading,
-			raidActivitiesLoading
-		} = this.props.player;
+		const { raidIsLoading, isApiLoading, raidActivitiesLoading } = this.props.player;
 
 		const raid = {
 			lastWish: { normalCompletions: 0, guided: 0 },
@@ -183,43 +162,28 @@ class Raid extends Component {
 			raid.petrasRun = this.props.player.raid.petrasRun;
 			raid.likeADiamond = this.props.player.raid.likeADiamond;
 			for (let i = 0; i < this.props.player.raid.stats.length; ++i) {
-				if (
-					this.props.player.raid.stats[i][`character${i + 1}`] !==
-					undefined
-				) {
-					this.props.player.raid.stats[i][
-						`character${i + 1}`
-					].forEach(elm => {
+				if (this.props.player.raid.stats[i][`character${i + 1}`] !== undefined) {
+					this.props.player.raid.stats[i][`character${i + 1}`].forEach(elm => {
 						if (elm.activityHash === 2122313384) {
-							raid.lastWish.normalCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.lastWish.normalCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 1661734046) {
-							raid.lastWish.guided +=
-								elm.values.activityCompletions.basic.value;
+							raid.lastWish.guided += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 548750096) {
-							raid.SotP.normalCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.SotP.normalCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 2812525063) {
-							raid.SotP.guided +=
-								elm.values.activityCompletions.basic.value;
+							raid.SotP.guided += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 3089205900) {
-							raid.EoW.normalCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.EoW.normalCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 2164432138) {
-							raid.EoW.guided +=
-								elm.values.activityCompletions.basic.value;
+							raid.EoW.guided += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 809170886) {
-							raid.EoW.prestigeCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.EoW.prestigeCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 119944200) {
-							raid.SoS.normalCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.SoS.normalCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 3213556450) {
-							raid.SoS.prestigeCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.SoS.prestigeCompletions += elm.values.activityCompletions.basic.value;
 						} else if (elm.activityHash === 3004605630) {
-							raid.SoS.guided +=
-								elm.values.activityCompletions.basic.value;
+							raid.SoS.guided += elm.values.activityCompletions.basic.value;
 						} else if (
 							elm.activityHash === 2693136600 ||
 							elm.activityHash === 2693136601 ||
@@ -228,8 +192,7 @@ class Raid extends Component {
 							elm.activityHash === 2693136604 ||
 							elm.activityHash === 2693136605
 						) {
-							raid.leviathan.normalCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.leviathan.normalCompletions += elm.values.activityCompletions.basic.value;
 						} else if (
 							elm.activityHash === 417231112 ||
 							elm.activityHash === 757116822 ||
@@ -238,8 +201,7 @@ class Raid extends Component {
 							elm.activityHash === 3446541099 ||
 							elm.activityHash === 3879860661
 						) {
-							raid.leviathan.prestigeCompletions +=
-								elm.values.activityCompletions.basic.value;
+							raid.leviathan.prestigeCompletions += elm.values.activityCompletions.basic.value;
 						} else if (
 							elm.activityHash === 287649202 ||
 							elm.activityHash === 3916343513 ||
@@ -248,8 +210,7 @@ class Raid extends Component {
 							elm.activityHash === 1875726950 ||
 							elm.activityHash === 1699948563
 						) {
-							raid.leviathan.guided +=
-								elm.values.activityCompletions.basic.value;
+							raid.leviathan.guided += elm.values.activityCompletions.basic.value;
 						}
 					});
 				}
@@ -269,13 +230,7 @@ class Raid extends Component {
 					<div className="raid-badges-container">
 						<ul className="raid-badges-list">
 							{raid.badges.SotP.flawless.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SotP.flawless.instanceId
-										)
-									}
-								>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.flawless.instanceId)}>
 									<Tooltip
 										name="Flawless"
 										tooltip="Completed the whole raid without anyone in the fireteam dies"
@@ -284,89 +239,37 @@ class Raid extends Component {
 							)}
 							{raid.likeADiamond && (
 								<li>
-									<Tooltip
-										name="Like a Diamond"
-										tooltip="Completed Like a Diamond triumph"
-									/>
+									<Tooltip name="Like a Diamond" tooltip="Completed Like a Diamond triumph" />
 								</li>
 							)}
 							{raid.badges.SotP.dayOne.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SotP.dayOne.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Day one"
-										tooltip="Finished the raid within 24 hours"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.dayOne.instanceId)}>
+									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
 								</li>
 							)}
-							{raid.badges.SotP.weekOne.value &&
-								!raid.badges.SotP.dayOne.value && (
-									<li
-										onClick={() =>
-											this.handleBadgeClick(
-												raid.badges.SotP.weekOne
-													.instanceId
-											)
-										}
-									>
-										<Tooltip
-											name="Week one"
-											tooltip="Finished the raid within 168 hours"
-										/>
-									</li>
-								)}
+							{raid.badges.SotP.weekOne.value && !raid.badges.SotP.dayOne.value && (
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.weekOne.instanceId)}>
+									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+								</li>
+							)}
 							{raid.badges.SotP.twoMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SotP.twoMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Two man"
-										tooltip="Completed the raid with a fireteam of two"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.twoMan.instanceId)}>
+									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.SotP.threeMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SotP.threeMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Three man"
-										tooltip="Completed the raid with a fireteam of three"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.threeMan.instanceId)}>
+									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.SotP.fourMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SotP.fourMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Four man"
-										tooltip="Completed the raid with a fireteam of four"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.fourMan.instanceId)}>
+									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
 								</li>
 							)}
 						</ul>
 					</div>
-					{!raidActivitiesLoading && (
-						<Chart data={this.props.player.raid.activities.SotP} />
-					)}
+					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SotP} />}
 				</div>
 
 				<div className="track-container">
@@ -380,14 +283,7 @@ class Raid extends Component {
 					<div className="raid-badges-container">
 						<ul className="raid-badges-list">
 							{raid.badges.lastWish.flawless.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.lastWish.flawless
-												.instanceId
-										)
-									}
-								>
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.flawless.instanceId)}>
 									<Tooltip
 										name="Flawless"
 										tooltip="Completed the whole raid without anyone in the fireteam dies"
@@ -396,95 +292,37 @@ class Raid extends Component {
 							)}
 							{raid.petrasRun && (
 								<li>
-									<Tooltip
-										name="Petra's Run"
-										tooltip="Completed Petra's run triumph"
-									/>
+									<Tooltip name="Petra's Run" tooltip="Completed Petra's run triumph" />
 								</li>
 							)}
 							{raid.badges.lastWish.dayOne.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.lastWish.dayOne
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Day one"
-										tooltip="Finished the raid within 24 hours"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.dayOne.instanceId)}>
+									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
 								</li>
 							)}
-							{raid.badges.lastWish.weekOne.value &&
-								!raid.badges.lastWish.dayOne.value && (
-									<li
-										onClick={() =>
-											this.handleBadgeClick(
-												raid.badges.lastWish.weekOne
-													.instanceId
-											)
-										}
-									>
-										<Tooltip
-											name="Week one"
-											tooltip="Finished the raid within 168 hours"
-										/>
-									</li>
-								)}
+							{raid.badges.lastWish.weekOne.value && !raid.badges.lastWish.dayOne.value && (
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.weekOne.instanceId)}>
+									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+								</li>
+							)}
 							{raid.badges.lastWish.twoMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.lastWish.twoMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Two man"
-										tooltip="Completed the raid with a fireteam of two"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.twoMan.instanceId)}>
+									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.lastWish.threeMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.lastWish.threeMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Three man"
-										tooltip="Completed the raid with a fireteam of three"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.threeMan.instanceId)}>
+									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.lastWish.fourMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.lastWish.fourMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Four man"
-										tooltip="Completed the raid with a fireteam of four"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.fourMan.instanceId)}>
+									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
 								</li>
 							)}
 						</ul>
 					</div>
-					{!raidActivitiesLoading && (
-						<Chart
-							data={this.props.player.raid.activities.lastWish}
-						/>
-					)}
+					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.lastWish} />}
 				</div>
 
 				<div className="track-container">
@@ -499,14 +337,7 @@ class Raid extends Component {
 					<div className="raid-badges-container">
 						<ul className="raid-badges-list">
 							{raid.badges.leviathan.flawless.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.leviathan.flawless
-												.instanceId
-										)
-									}
-								>
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.flawless.instanceId)}>
 									<Tooltip
 										name="Flawless"
 										tooltip="Completed the whole raid without anyone in the fireteam dies"
@@ -514,88 +345,33 @@ class Raid extends Component {
 								</li>
 							)}
 							{raid.badges.leviathan.dayOne.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.leviathan.dayOne
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Day one"
-										tooltip="Finished the raid within 24 hours"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.dayOne.instanceId)}>
+									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
 								</li>
 							)}
-							{raid.badges.leviathan.weekOne.value &&
-								!raid.badges.leviathan.dayOne.value && (
-									<li
-										onClick={() =>
-											this.handleBadgeClick(
-												raid.badges.leviathan.weekOne
-													.instanceId
-											)
-										}
-									>
-										<Tooltip
-											name="Week one"
-											tooltip="Finished the raid within 168 hours"
-										/>
-									</li>
-								)}
+							{raid.badges.leviathan.weekOne.value && !raid.badges.leviathan.dayOne.value && (
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.weekOne.instanceId)}>
+									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+								</li>
+							)}
 							{raid.badges.leviathan.twoMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.leviathan.twoMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Two man"
-										tooltip="Completed the raid with a fireteam of two"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.twoMan.instanceId)}>
+									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.leviathan.threeMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.leviathan.threeMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Three man"
-										tooltip="Completed the raid with a fireteam of three"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.threeMan.instanceId)}>
+									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.leviathan.fourMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.leviathan.fourMan
-												.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Four man"
-										tooltip="Completed the raid with a fireteam of four"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.fourMan.instanceId)}>
+									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
 								</li>
 							)}
 						</ul>
 					</div>
-					{!raidActivitiesLoading && (
-						<Chart
-							data={this.props.player.raid.activities.leviathan}
-						/>
-					)}
+					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.leviathan} />}
 				</div>
 
 				<div className="track-container">
@@ -610,13 +386,7 @@ class Raid extends Component {
 					<div className="raid-badges-container">
 						<ul className="raid-badges-list">
 							{raid.badges.EoW.flawless.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.EoW.weekOne.instanceId
-										)
-									}
-								>
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
 									<Tooltip
 										name="Flawless"
 										tooltip="Completed the whole raid without anyone in the fireteam dies"
@@ -624,82 +394,33 @@ class Raid extends Component {
 								</li>
 							)}
 							{raid.badges.EoW.dayOne.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.EoW.dayOne.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Day one"
-										tooltip="Finished the raid within 24 hours"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.dayOne.instanceId)}>
+									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
 								</li>
 							)}
-							{raid.badges.EoW.weekOne.value &&
-								!raid.badges.EoW.dayOne.value && (
-									<li
-										onClick={() =>
-											this.handleBadgeClick(
-												raid.badges.EoW.weekOne
-													.instanceId
-											)
-										}
-									>
-										<Tooltip
-											name="Week one"
-											tooltip="Finished the raid within 168 hours"
-										/>
-									</li>
-								)}
+							{raid.badges.EoW.weekOne.value && !raid.badges.EoW.dayOne.value && (
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
+									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+								</li>
+							)}
 							{raid.badges.EoW.twoMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.EoW.twoMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Two man"
-										tooltip="Completed the raid with a fireteam of two"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.twoMan.instanceId)}>
+									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.EoW.threeMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.EoW.threeMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Three man"
-										tooltip="Completed the raid with a fireteam of three"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.threeMan.instanceId)}>
+									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.EoW.fourMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.EoW.fourMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Four man"
-										tooltip="Completed the raid with a fireteam of four"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.fourMan.instanceId)}>
+									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
 								</li>
 							)}
 						</ul>
 					</div>
-					{!raidActivitiesLoading && (
-						<Chart data={this.props.player.raid.activities.EoW} />
-					)}
+					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.EoW} />}
 				</div>
 
 				<div className="track-container">
@@ -714,13 +435,7 @@ class Raid extends Component {
 					<div className="raid-badges-container">
 						<ul className="raid-badges-list">
 							{raid.badges.SoS.flawless.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SoS.flawless.instanceId
-										)
-									}
-								>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.flawless.instanceId)}>
 									<Tooltip
 										name="Flawless"
 										tooltip="Completed the whole raid without anyone in the fireteam dies"
@@ -728,89 +443,39 @@ class Raid extends Component {
 								</li>
 							)}
 							{raid.badges.SoS.dayOne.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SoS.dayOne.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Day one"
-										tooltip="Finished the raid within 24 hours"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.dayOne.instanceId)}>
+									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
 								</li>
 							)}
-							{raid.badges.SoS.weekOne.value &&
-								!raid.badges.SoS.dayOne.value && (
-									<li
-										onClick={() =>
-											this.handleBadgeClick(
-												raid.badges.SoS.weekOne
-													.instanceId
-											)
-										}
-									>
-										<Tooltip
-											name="Week one"
-											tooltip="Finished the raid within 168 hours"
-										/>
-									</li>
-								)}
+							{raid.badges.SoS.weekOne.value && !raid.badges.SoS.dayOne.value && (
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.weekOne.instanceId)}>
+									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+								</li>
+							)}
 							{raid.badges.SoS.twoMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SoS.twoMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Two man"
-										tooltip="Completed the raid with a fireteam of two"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.twoMan.instanceId)}>
+									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.SoS.threeMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SoS.threeMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Three man"
-										tooltip="Completed the raid with a fireteam of three"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.threeMan.instanceId)}>
+									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.SoS.fourMan.value && (
-								<li
-									onClick={() =>
-										this.handleBadgeClick(
-											raid.badges.SoS.fourMan.instanceId
-										)
-									}
-								>
-									<Tooltip
-										name="Four man"
-										tooltip="Completed the raid with a fireteam of four"
-									/>
+								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.fourMan.instanceId)}>
+									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
 								</li>
 							)}
 						</ul>
 					</div>
 
-					{!raidActivitiesLoading && (
-						<Chart data={this.props.player.raid.activities.SoS} />
-					)}
+					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SoS} />}
 				</div>
 			</div>
 		);
 
-		const progression =
-			raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
+		const progression = raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
 
 		return (
 			<div className="infamy-container">
@@ -818,16 +483,10 @@ class Raid extends Component {
 					<meta charSet="utf-8" />
 					<title>Raid</title>
 				</Helmet>
-				{this.state.isMore && (
-					<MultiMembershipPopup
-						handleMembershipType={this.handleMembershipType}
-					/>
-				)}
+				{this.state.isMore && <MultiMembershipPopup handleMembershipType={this.handleMembershipType} />}
 				{progression}
 				{isApiLoading && (
-					<div className="raid-badges-update-popup">
-						Updating your raid badges, please wait...
-					</div>
+					<div className="raid-badges-update-popup">Updating your raid badges, please wait...</div>
 				)}
 			</div>
 		);

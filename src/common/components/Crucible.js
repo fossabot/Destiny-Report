@@ -13,6 +13,7 @@ import { valorSteps, glorySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import { Helmet } from "react-helmet";
+import "../styles/components/Player.scss";
 
 class Crucible extends Component {
 	state = {

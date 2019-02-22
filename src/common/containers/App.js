@@ -1,17 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import NavBar from "../components/NavBar";
-// import Home from "../components/Home";
 import Footer from "../components/Footer";
-// import Gambit from "../components/Gambit";
-// import Crucible from "../components/Crucible";
-// import Raid from "../components/Raid";
-// import PGCR from "../components/PGCR";
-// import Error from "../components/Error";
 import Loading from "../components/Loading";
 import ReactGA from "react-ga";
-import "../styles/main.scss";
-
+import "../styles/components/App.scss";
 import Loadable from "react-loadable";
 
 const AsyncHome = Loadable({

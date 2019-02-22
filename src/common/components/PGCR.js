@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getPGCR } from "../utility/endpoints";
 import Loading from "../components/Loading";
 import { connect } from "react-redux";
+import "../styles/components/Player.scss";
 
 class PGCR extends Component {
 	state = {
