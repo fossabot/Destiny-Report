@@ -54,19 +54,4 @@ const App = () => {
 	);
 };
 
-// class App extends Component {
-//   constructor() {
-//     super();
-//   }
-
-//   render() {
-//     if (typeof window !== "undefined") {
-//       ReactGA.pageview(window.location.pathname + window.location.search);
-//     }
-//     return (
-
-//     );
-//   }
-// }
-
 export default App;

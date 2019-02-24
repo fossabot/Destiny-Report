@@ -9,14 +9,12 @@ export const setMembershipInfoAction = (playerGamerTag, pageName) => {
 	return dispatch => {
 		return new Promise(async (resolve, reject) => {
 			try {
-				console.log(playerGamerTag);
 				const res = await endpoints.getMembershipID(playerGamerTag);
 
 				if (res.data.ErrorCode === 5) {
 					dispatch({
 						type: "FAIL_SET_DATA",
-						payload:
-							"Bungie API is under maintenance at this moment, please try again later"
+						payload: "Bungie API is under maintenance at this moment, please try again later"
 					});
 					reject({ ErrorCode: 5 });
 					return;
@@ -50,14 +48,8 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 	return dispatch => {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const gambitStats = await endpoints.getGambitStats(
-					membershipType,
-					membershipId
-				);
-				const allStats = await endpoints.getAllProgression(
-					membershipType,
-					membershipId
-				);
+				const gambitStats = await endpoints.getGambitStats(membershipType, membershipId);
+				const allStats = await endpoints.getAllProgression(membershipType, membershipId);
 
 				let infamyData = {
 					currentProgress: 0,
@@ -67,14 +59,11 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 					progress: 0,
 					armyOfOne: 0
 				};
-				if (
-					allStats.data.Response.characterProgressions.data !==
-					undefined
-				) {
+				if (allStats.data.Response.characterProgressions.data !== undefined) {
 					//Infamy
-					infamyData.level = values(
-						allStats.data.Response.characterProgressions.data
-					)[0].progressions["2772425241"].level;
+					infamyData.level = values(allStats.data.Response.characterProgressions.data)[0].progressions[
+						"2772425241"
+					].level;
 
 					infamyData.progressToNextLevel = values(
 						allStats.data.Response.characterProgressions.data
@@ -85,17 +74,11 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 					)[0].progressions["2772425241"].currentProgress;
 
 					infamyData.ranks =
-						allStats.data.Response.profileRecords.data.records[
-							"3470255495"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["3470255495"].objectives[0].progress;
 					infamyData.progress =
-						allStats.data.Response.profileRecords.data.records[
-							"3901785488"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["3901785488"].objectives[0].progress;
 					infamyData.armyOfOne =
-						allStats.data.Response.profileRecords.data.records[
-							"1071663279"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["1071663279"].objectives[0].progress;
 				} else {
 					dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
 				}
@@ -122,8 +105,7 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 			} catch (err) {
 				dispatch({
 					type: "FAIL_SET_DATA",
-					payload:
-						"This player doesn't have any destiny 2 stats or something went wrong"
+					payload: "This player doesn't have any destiny 2 stats or something went wrong"
 				});
 				reject(err);
 			}
@@ -134,15 +116,9 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 	return dispatch => {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const crucibleStats = await endpoints.getCrucibleStats(
-					membershipType,
-					membershipId
-				);
+				const crucibleStats = await endpoints.getCrucibleStats(membershipType, membershipId);
 
-				const allStats = await endpoints.getAllProgression(
-					membershipType,
-					membershipId
-				);
+				const allStats = await endpoints.getAllProgression(membershipType, membershipId);
 
 				let crucibleData = {
 					valor: {
@@ -165,49 +141,35 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 				if (allStats.data.Response.profileRecords.data !== undefined) {
 					//Valor
 					crucibleData.valor.ranks =
-						allStats.data.Response.profileRecords.data.records[
-							"1711079800"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["1711079800"].objectives[0].progress;
 
-					const valorLevelStats = values(
-						allStats.data.Response.characterProgressions.data
-					)[0].progressions["2626549951"];
+					const valorLevelStats = values(allStats.data.Response.characterProgressions.data)[0].progressions[
+						"2626549951"
+					];
 
 					crucibleData.valor.level = valorLevelStats.level;
-					crucibleData.valor.nextLevelAt =
-						valorLevelStats.nextLevelAt;
-					crucibleData.valor.progressToNextLevel =
-						valorLevelStats.progressToNextLevel;
-					crucibleData.valor.currentProgress =
-						valorLevelStats.currentProgress;
+					crucibleData.valor.nextLevelAt = valorLevelStats.nextLevelAt;
+					crucibleData.valor.progressToNextLevel = valorLevelStats.progressToNextLevel;
+					crucibleData.valor.currentProgress = valorLevelStats.currentProgress;
 
 					crucibleData.valor.resets =
-						allStats.data.Response.profileRecords.data.records[
-							"559943871"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["559943871"].objectives[0].progress;
 
 					//Glory
 					crucibleData.glory.ranks =
-						allStats.data.Response.profileRecords.data.records[
-							"200792717"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["200792717"].objectives[0].progress;
 
-					const gloryLevelStats = values(
-						allStats.data.Response.characterProgressions.data
-					)[0].progressions["2000925172"];
+					const gloryLevelStats = values(allStats.data.Response.characterProgressions.data)[0].progressions[
+						"2000925172"
+					];
 
 					crucibleData.glory.level = gloryLevelStats.level;
-					crucibleData.glory.nextLevelAt =
-						gloryLevelStats.nextLevelAt;
-					crucibleData.glory.progressToNextLevel =
-						gloryLevelStats.progressToNextLevel;
-					crucibleData.glory.currentProgress =
-						gloryLevelStats.currentProgress;
+					crucibleData.glory.nextLevelAt = gloryLevelStats.nextLevelAt;
+					crucibleData.glory.progressToNextLevel = gloryLevelStats.progressToNextLevel;
+					crucibleData.glory.currentProgress = gloryLevelStats.currentProgress;
 
 					crucibleData.glory.resets =
-						allStats.data.Response.profileRecords.data.records[
-							"4185918315"
-						].objectives[0].progress;
+						allStats.data.Response.profileRecords.data.records["4185918315"].objectives[0].progress;
 				}
 
 				dispatch({
@@ -224,8 +186,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 			} catch (err) {
 				dispatch({
 					type: "FAIL_SET_DATA",
-					payload:
-						"This player doesn't have any destiny 2 stats or something went wrong"
+					payload: "This player doesn't have any destiny 2 stats or something went wrong"
 				});
 				reject(err);
 			}
@@ -237,38 +198,26 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 		return new Promise(async (resolve, reject) => {
 			try {
 				const raidStats = { stats: [] };
-				const profileResult = await endpoints.getAllProgression(
-					membershipType,
-					membershipId
-				);
+				const profileResult = await endpoints.getAllProgression(membershipType, membershipId);
 
 				raidStats.petrasRun =
 					profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
 				raidStats.likeADiamond =
 					profileResult.data.Response.profileRecords.data.records[2648109757].objectives[0].complete;
-				const characterIds =
-					profileResult.data.Response.profile.data.characterIds;
+				const characterIds = profileResult.data.Response.profile.data.characterIds;
 
 				const charactersRaidStats = await Promise.all(
 					characterIds.map(characterId => {
-						return endpoints.getRaidStats(
-							membershipType,
-							membershipId,
-							characterId
-						);
+						return endpoints.getRaidStats(membershipType, membershipId, characterId);
 					})
 				);
 				for (let i = 0; i < charactersRaidStats.length; ++i) {
 					raidStats.stats.push({
-						[`character${i + 1}`]: charactersRaidStats[i].data
-							.Response.activities
+						[`character${i + 1}`]: charactersRaidStats[i].data.Response.activities
 					});
 				}
 
-				const raidBadges = await endpoints.getRaidBadges(
-					membershipType,
-					membershipId
-				);
+				const raidBadges = await endpoints.getRaidBadges(membershipType, membershipId);
 
 				if (raidBadges.data) {
 					raidStats.badges = raidBadges.data;
@@ -294,8 +243,7 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 			} catch (err) {
 				dispatch({
 					type: "FAIL_SET_DATA",
-					payload:
-						"This player doesn't have some destiny 2 stats or something went wrong"
+					payload: "This player doesn't have some destiny 2 stats or something went wrong"
 				});
 				reject(err);
 			}
@@ -303,17 +251,11 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 	};
 };
 
-export const setOverallRaidAcitivitesPlayed = (
-	membershipType,
-	membershipId
-) => {
+export const setOverallRaidAcitivitesPlayed = (membershipType, membershipId) => {
 	return dispatch => {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const raidActivities = await endpoints.getOverallRaidAcitivitesPlayed(
-					membershipType,
-					membershipId
-				);
+				const raidActivities = await endpoints.getOverallRaidAcitivitesPlayed(membershipType, membershipId);
 
 				dispatch({
 					type: "SET_RAID_ACTIVITIES_DATA",
@@ -327,8 +269,7 @@ export const setOverallRaidAcitivitesPlayed = (
 			} catch (err) {
 				dispatch({
 					type: "FAIL_SET_DATA",
-					payload:
-						"This player doesn't have some destiny 2 stats or something went wrong"
+					payload: "This player doesn't have some destiny 2 stats or something went wrong"
 				});
 				reject(err);
 			}
