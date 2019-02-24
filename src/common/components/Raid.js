@@ -231,10 +231,7 @@ class Raid extends Component {
 						<ul className="raid-badges-list">
 							{raid.badges.SotP.flawless.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.flawless.instanceId)}>
-									<Tooltip
-										name="Flawless"
-										tooltip="Completed the whole raid without anyone in the fireteam dies"
-									/>
+									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
 								</li>
 							)}
 							{raid.likeADiamond && (
@@ -244,27 +241,27 @@ class Raid extends Component {
 							)}
 							{raid.badges.SotP.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
+									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
 								</li>
 							)}
 							{raid.badges.SotP.weekOne.value && !raid.badges.SotP.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
 								</li>
 							)}
 							{raid.badges.SotP.twoMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
+									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.SotP.threeMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
+									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.SotP.fourMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
+									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
 								</li>
 							)}
 						</ul>
@@ -284,40 +281,37 @@ class Raid extends Component {
 						<ul className="raid-badges-list">
 							{raid.badges.lastWish.flawless.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.flawless.instanceId)}>
-									<Tooltip
-										name="Flawless"
-										tooltip="Completed the whole raid without anyone in the fireteam dies"
-									/>
+									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
 								</li>
 							)}
 							{raid.petrasRun && (
 								<li>
-									<Tooltip name="Petra's Run" tooltip="Completed Petra's run triumph" />
+									<Tooltip name="Petra's Run" tooltip="Completed Petra's Run triumph" />
 								</li>
 							)}
 							{raid.badges.lastWish.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
+									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
 								</li>
 							)}
 							{raid.badges.lastWish.weekOne.value && !raid.badges.lastWish.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
 								</li>
 							)}
 							{raid.badges.lastWish.twoMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
+									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.lastWish.threeMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
+									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.lastWish.fourMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
+									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
 								</li>
 							)}
 						</ul>
@@ -338,35 +332,32 @@ class Raid extends Component {
 						<ul className="raid-badges-list">
 							{raid.badges.leviathan.flawless.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.flawless.instanceId)}>
-									<Tooltip
-										name="Flawless"
-										tooltip="Completed the whole raid without anyone in the fireteam dies"
-									/>
+									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
 								</li>
 							)}
 							{raid.badges.leviathan.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
+									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
 								</li>
 							)}
 							{raid.badges.leviathan.weekOne.value && !raid.badges.leviathan.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
 								</li>
 							)}
 							{raid.badges.leviathan.twoMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
+									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.leviathan.threeMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
+									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.leviathan.fourMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
+									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
 								</li>
 							)}
 						</ul>
@@ -387,35 +378,32 @@ class Raid extends Component {
 						<ul className="raid-badges-list">
 							{raid.badges.EoW.flawless.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
-									<Tooltip
-										name="Flawless"
-										tooltip="Completed the whole raid without anyone in the fireteam dies"
-									/>
+									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
 								</li>
 							)}
 							{raid.badges.EoW.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
+									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
 								</li>
 							)}
 							{raid.badges.EoW.weekOne.value && !raid.badges.EoW.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
 								</li>
 							)}
 							{raid.badges.EoW.twoMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
+									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.EoW.threeMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
+									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.EoW.fourMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
+									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
 								</li>
 							)}
 						</ul>
@@ -436,35 +424,32 @@ class Raid extends Component {
 						<ul className="raid-badges-list">
 							{raid.badges.SoS.flawless.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.flawless.instanceId)}>
-									<Tooltip
-										name="Flawless"
-										tooltip="Completed the whole raid without anyone in the fireteam dies"
-									/>
+									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
 								</li>
 							)}
 							{raid.badges.SoS.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Finished the raid within 24 hours" />
+									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
 								</li>
 							)}
 							{raid.badges.SoS.weekOne.value && !raid.badges.SoS.dayOne.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Finished the raid within 168 hours" />
+									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
 								</li>
 							)}
 							{raid.badges.SoS.twoMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid with a fireteam of two" />
+									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
 								</li>
 							)}
 							{raid.badges.SoS.threeMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid with a fireteam of three" />
+									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
 								</li>
 							)}
 							{raid.badges.SoS.fourMan.value && (
 								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid with a fireteam of four" />
+									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
 								</li>
 							)}
 						</ul>

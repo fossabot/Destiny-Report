@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import React from "react";
 import configureStore from "../common/store/configureStore";
 import express from "express";
-import initialState from "../common/utility/initials.json";
 import { renderToString } from "react-dom/server";
 import serialize from "serialize-javascript";
 import { StaticRouter as Router } from "react-router-dom";

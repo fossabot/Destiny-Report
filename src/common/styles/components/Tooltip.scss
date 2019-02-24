@@ -4,6 +4,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 
 	&:hover &--tooltip {
 		visibility: visible;
@@ -14,8 +15,10 @@
 	}
 	&--tooltip {
 		position: absolute;
+		white-space: nowrap;
 		top: -30px;
 		display: block;
+
 		background-color: rgb(192, 177, 159);
 		text-shadow: none;
 		color: black;
