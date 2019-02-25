@@ -3,8 +3,12 @@ import { getPGCR } from "../utility/endpoints";
 import Loading from "../components/Loading";
 import { connect } from "react-redux";
 import "../styles/components/Player.scss";
+import warlockIcon from "../../../public/assets/warlock_emblem.svg";
+import titanIcon from "../../../public/assets/titan_emblem.svg";
+import HunterIcon from "../../../public/assets/hunter_emblem.svg";
 
 class PGCR extends Component {
+	classes = { Warlock: warlockIcon, Titan: titanIcon, Hunter: HunterIcon };
 	state = {
 		pgcr: "",
 		loading: true,
@@ -38,8 +42,10 @@ class PGCR extends Component {
 									icon: `https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`,
 									completed: entry.values.completed.basic.displayValue,
 									kills: entry.values.kills.basic.displayValue,
-									deaths: entry.values.deaths.basic.displayValue
+									deaths: entry.values.deaths.basic.displayValue,
+									characterClass: entry.player.characterClass
 								};
+
 								return (
 									<div key={index} className="track-container">
 										<div
@@ -49,7 +55,8 @@ class PGCR extends Component {
 											}}
 										/>
 										<div className="track-container--content">
-											<div>
+											<div className="track-container--title">
+												<img src={this.classes[player.characterClass]} alt="" />
 												<h4>{player.name}</h4>
 											</div>
 											<ul className="center-ul">
