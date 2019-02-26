@@ -1,5 +1,7 @@
 import { values } from "lodash";
 import * as endpoints from "../utility/endpoints";
+import { getSafe } from "../utility/utils";
+import { infamySteps } from "../utility/Steps";
 
 export const resetTheStateAction = () => {
 	return { type: "RESET_DATA" };
@@ -48,7 +50,7 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 	return dispatch => {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const gambitStats = await endpoints.getGambitStats(membershipType, membershipId);
+				let gambitStats = await endpoints.getGambitStats(membershipType, membershipId);
 				const allStats = await endpoints.getAllProgression(membershipType, membershipId);
 
 				let infamyData = {
@@ -59,7 +61,39 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 					progress: 0,
 					armyOfOne: 0
 				};
+				gambitStats = gambitStats.data.Response.pvecomp_gambit;
+				const gambit = {};
+				const infamy = {};
 				if (allStats.data.Response.characterProgressions.data !== undefined) {
+					gambit.won = getSafe(() => gambitStats.allTime.activitiesWon.basic.value, 0);
+					gambit.lost = getSafe(() => gambitStats.allTime.activitiesEntered.basic.value - gambit.won, 0);
+					gambit.kills = getSafe(() => gambitStats.allTime.kills.basic.value, 0);
+					gambit.deaths = getSafe(() => gambitStats.allTime.deaths.basic.value, 0);
+					if (gambit.deaths === 0) {
+						gambit.kd = gambit.kills;
+					} else {
+						gambit.kd = (gambit.kills / gambit.deaths).toFixed(2);
+					}
+					gambit.invaderKills = getSafe(() => gambitStats.allTime.invaderKills.basic.value, 0);
+					gambit.invasionKills = getSafe(() => gambitStats.allTime.invasionKills.basic.value, 0);
+					gambit.blockerKills = getSafe(() => gambitStats.allTime.blockerKills.basic.value, 0);
+
+					gambit.smallBlockersSent = getSafe(() => gambitStats.allTime.smallBlockersSent.basic.value, 0);
+					gambit.mediumBlockersSent = getSafe(() => gambitStats.allTime.mediumBlockersSent.basic.value, 0);
+					gambit.largeBlockersSent = getSafe(() => gambitStats.allTime.largeBlockersSent.basic.value, 0);
+					gambit.blockersSent =
+						gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
+
+					gambit.motesDeposited = getSafe(() => gambitStats.allTime.motesDeposited.basic.value, 0);
+					gambit.motesLost = getSafe(() => gambitStats.allTime.motesLost.basic.value, 0);
+					gambit.motesDenied = getSafe(() => gambitStats.allTime.motesDenied.basic.value, 0);
+
+					if (gambit.won === 0 && gambit.lost === 0) {
+						gambit.winLossRatio = 0;
+					} else {
+						gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
+					}
+
 					//Infamy
 					infamyData.level = values(allStats.data.Response.characterProgressions.data)[0].progressions[
 						"2772425241"
@@ -79,15 +113,34 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 						allStats.data.Response.profileRecords.data.records["3901785488"].objectives[0].progress;
 					infamyData.armyOfOne =
 						allStats.data.Response.profileRecords.data.records["1071663279"].objectives[0].progress;
+
+					console.log(infamyData);
+					infamy.currentInfamy = getSafe(() => infamyData.currentProgress, 0);
+					infamy.armyOfOne = getSafe(() => infamyData.armyOfOne, 0);
+					if (getSafe(() => infamy.level, 0) === 16) {
+						infamy.currentRank = infamySteps[infamyData.level - 1].stepName;
+						infamy.progressToNextLevel =
+							infamySteps[infamy.level - 1].progressTotal - infamyData.progressToNextLevel;
+						infamy.icon = "https://www.bungie.net" + infamySteps[infamyData.level - 1].icon;
+					} else {
+						infamy.icon = "https://www.bungie.net" + infamySteps[getSafe(() => infamyData.level, 0)].icon;
+						infamy.currentRank = infamySteps[getSafe(() => infamyData.level, 0)].stepName;
+						infamy.progressToNextLevel =
+							infamySteps[getSafe(() => infamyData.level, 0)].progressTotal -
+							getSafe(() => infamyData.progressToNextLevel, 0);
+					}
+					infamy.ranks = getSafe(() => infamy.ranks, 0);
+					infamy.resets = getSafe(() => infamy.progress, 0);
 				} else {
 					dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
 				}
 
+				console.log(gambit, infamy);
 				dispatch({
 					type: "SET_GAMBIT_DATA",
 					payload: {
-						gambitStats: gambitStats.data.Response.pvecomp_gambit,
-						infamy: infamyData
+						gambit: gambit,
+						infamy: infamy
 					}
 				});
 				dispatch({ type: "SUCCESS_SET_DATA", payload: "gambit" });

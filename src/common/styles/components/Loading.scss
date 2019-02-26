@@ -5,8 +5,8 @@
 	Granted permission to Destiny.report to use the code
 */
 
-$size: 30rem;
-$time: 1.5;
+$size: 300px;
+$time: 1;
 $color: white;
 
 .loading--wrapper {
@@ -122,9 +122,9 @@ $color: white;
 	height: calc(#{$size} - 50%);
 	top: 25%;
 	left: 25%;
-	transition-property: width, transform-origin, transform;
-	transition-timing-function: ease-in-out;
-	transition-duration: $time + s;
+	// transition-property: width, transform-origin, transform;
+	// transition-timing-function: ease-in-out;
+	// transition-duration: $time + s;
 }
 
 .shape {

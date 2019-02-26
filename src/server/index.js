@@ -22,20 +22,20 @@ const server = express();
 
 axios.defaults.headers.common["X-API-KEY"] = process.env.RAZZLE_API_KEY;
 
-if (process.env.NODE_ENV === "production") {
-	server.use((req, res, next) => {
-		if (req.header("x-forwarded-proto") !== "https") res.redirect(`https://${req.header("host")}${req.url}`);
-		else next();
-	});
+// if (process.env.NODE_ENV === "production") {
+// 	server.use((req, res, next) => {
+// 		if (req.header("x-forwarded-proto") !== "https") res.redirect(`https://${req.header("host")}${req.url}`);
+// 		else next();
+// 	});
 
-	const corsOptions = {
-		origin: "https://destiny.report",
-		optionsSuccessStatus: 200
-	};
-	server.use(cors(corsOptions));
-} else {
-	server.use(cors());
-}
+// 	const corsOptions = {
+// 		origin: "https://destiny.report",
+// 		optionsSuccessStatus: 200
+// 	};
+// 	server.use(cors(corsOptions));
+// } else {
+// 	server.use(cors());
+// }
 
 mongoose.connect(
 	`mongodb://${process.env.RAZZLE_DB_USERNAME}:${

@@ -1,28 +1,28 @@
 {
-  "success": false,
-  "privacyError": false,
-  "isPlayerFound": true,
-  "isApiLoading": true,
-  "gambitSuccess": false,
-  "gambitIsLoading": true,
-  "crucibleSuccess": false,
-  "crucibleIsLoading": true,
-  "raidSuccess": false,
-  "raidIsLoading": true,
-  "raidActivitiesLoading": true,
-  "isLoading": true,
-  "chartIsLoading": true,
-  "error": false,
-  "errorMessage": "Something went wrong, please try again later!",
-  "memberships": [],
-  "activeMembership": -1,
-  "raid": {
-    "activities": {
-      "SotP": [],
-      "lastWish": [],
-      "SoS": [],
-      "EoW": [],
-      "leviathan": []
-    }
-  }
+	"success": false,
+	"privacyError": false,
+	"isPlayerFound": true,
+	"isApiLoading": true,
+	"gambitSuccess": false,
+	"gambitIsLoading": true,
+	"crucibleSuccess": false,
+	"crucibleIsLoading": true,
+	"raidSuccess": false,
+	"raidIsLoading": true,
+	"raidActivitiesLoading": true,
+	"isLoading": true,
+	"chartIsLoading": true,
+	"error": false,
+	"errorMessage": "Something went wrong, please try again later!",
+	"memberships": [],
+	"activeMembership": -1,
+	"raid": {
+		"activities": {
+			"SotP": [],
+			"lastWish": [],
+			"SoS": [],
+			"EoW": [],
+			"leviathan": []
+		}
+	}
 }

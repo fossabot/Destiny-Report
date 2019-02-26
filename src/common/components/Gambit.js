@@ -9,12 +9,10 @@ import {
 	startSetDataAction,
 	setOverallRaidAcitivitesPlayed
 } from "../actions";
-import { infamySteps } from "../utility/Steps";
 import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import { Helmet } from "react-helmet";
 import "../styles/components/Player.scss";
-import { getSafe } from "../utility/utils";
 
 class Gambit extends Component {
 	state = {
@@ -100,145 +98,85 @@ class Gambit extends Component {
 	};
 
 	render() {
-		const gambit = {};
-		const infamy = {};
+		const { gambit, infamy } = this.props.player;
 
-		if (this.props.player.gambitSuccess) {
-			gambit.won = getSafe(() => this.props.player.gambitStats.allTime.activitiesWon.basic.value, 0);
-			gambit.lost = getSafe(
-				() => this.props.player.gambitStats.allTime.activitiesEntered.basic.value - gambit.won,
-				0
-			);
-			gambit.kills = getSafe(() => this.props.player.gambitStats.allTime.kills.basic.value, 0);
-			gambit.deaths = getSafe(() => this.props.player.gambitStats.allTime.deaths.basic.value, 0);
-			if (gambit.deaths === 0) {
-				gambit.kd = gambit.kills;
-			} else {
-				gambit.kd = (gambit.kills / gambit.deaths).toFixed(2);
-			}
-			gambit.invaderKills = getSafe(() => this.props.player.gambitStats.allTime.invaderKills.basic.value, 0);
-			gambit.invasionKills = getSafe(() => this.props.player.gambitStats.allTime.invasionKills.basic.value, 0);
-			gambit.blockerKills = getSafe(() => this.props.player.gambitStats.allTime.blockerKills.basic.value, 0);
+		let progression = <Loading />;
+		const { gambitIsLoading, gambitSuccess } = this.props.player;
+		if (!gambitIsLoading && !this.state.isMore && gambitSuccess) {
+			progression = (
+				<div className="track-wrapper">
+					<div className="track-container">
+						<div className="track-container--effect" style={{ backgroundImage: `url(${infamy.icon})` }} />
+						<div className="track-container--content">
+							<div>
+								<h4>Infamy</h4>
+							</div>
+							<ul>
+								<li>Current: {infamy.currentInfamy}</li>
+								<li>Rank: {infamy.currentRank}</li>
+								<li>To next rank: {infamy.progressToNextLevel}</li>
+								<li>Resets: {infamy.resets}</li>
+								<li>Ranks: {infamy.ranks}</li>
+							</ul>
+						</div>
+					</div>
 
-			gambit.smallBlockersSent = getSafe(
-				() => this.props.player.gambitStats.allTime.smallBlockersSent.basic.value,
-				0
-			);
-			gambit.mediumBlockersSent = getSafe(
-				() => this.props.player.gambitStats.allTime.mediumBlockersSent.basic.value,
-				0
-			);
-			gambit.largeBlockersSent = getSafe(
-				() => this.props.player.gambitStats.allTime.largeBlockersSent.basic.value,
-				0
-			);
-			gambit.blockersSent = gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
-
-			gambit.motesDeposited = getSafe(() => this.props.player.gambitStats.allTime.motesDeposited.basic.value, 0);
-			gambit.motesLost = getSafe(() => this.props.player.gambitStats.allTime.motesLost.basic.value, 0);
-			gambit.motesDenied = getSafe(() => this.props.player.gambitStats.allTime.motesDenied.basic.value, 0);
-
-			if (gambit.won === 0 && gambit.lost === 0) {
-				gambit.winLossRatio = 0;
-			} else {
-				gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
-			}
-
-			infamy.currentInfamy = getSafe(() => this.props.player.infamy.currentProgress, 0);
-			infamy.armyOfOne = getSafe(() => this.props.player.infamy.armyOfOne, 0);
-			if (getSafe(() => this.props.player.infamy.level, 0) === 16) {
-				infamy.currentRank = infamySteps[this.props.player.infamy.level - 1].stepName;
-				infamy.progressToNextLevel =
-					infamySteps[this.props.player.infamy.level - 1].progressTotal -
-					this.props.player.infamy.progressToNextLevel;
-				infamy.icon = "https://www.bungie.net" + infamySteps[this.props.player.infamy.level - 1].icon;
-			} else {
-				infamy.icon =
-					"https://www.bungie.net" + infamySteps[getSafe(() => this.props.player.infamy.level, 0)].icon;
-				infamy.currentRank = infamySteps[getSafe(() => this.props.player.infamy.level, 0)].stepName;
-				infamy.progressToNextLevel =
-					infamySteps[getSafe(() => this.props.player.infamy.level, 0)].progressTotal -
-					getSafe(() => this.props.player.infamy.progressToNextLevel, 0);
-			}
-			infamy.ranks = getSafe(() => this.props.player.infamy.ranks, 0);
-			infamy.resets = getSafe(() => this.props.player.infamy.progress, 0);
-		}
-
-		const { gambitIsLoading } = this.props.player;
-		const trackContainer = (
-			<div className="track-wrapper">
-				<div className="track-container">
-					<div className="track-container--effect" style={{ backgroundImage: `url(${infamy.icon})` }} />
-					<div className="track-container--content">
+					<div className="track-container">
 						<div>
-							<h4>Infamy</h4>
+							<h4>Overall</h4>
 						</div>
 						<ul>
-							<li>Current: {infamy.currentInfamy}</li>
-							<li>Rank: {infamy.currentRank}</li>
-							<li>To next rank: {infamy.progressToNextLevel}</li>
-							<li>Resets: {infamy.resets}</li>
-							<li>Ranks: {infamy.ranks}</li>
+							<li>
+								Wins: <span className="color--green">{gambit.won} </span>
+							</li>
+							<li>
+								Losses: <span className="color--red">{gambit.lost} </span>
+							</li>
+							<li>Wins/Losses: {gambit.winLossRatio}%</li>
+							<li>Kills: {gambit.kills}</li>
+							<li>Deaths: {gambit.deaths}</li>
+							<li>Kills/Deaths: {gambit.kd}</li>
+						</ul>
+					</div>
+
+					<div className="track-container">
+						<div>
+							<h4>Invading & Invaders</h4>
+						</div>
+						<ul>
+							<li>Invader Kills: {gambit.invaderKills}</li>
+							<li>Invasion Kills: {gambit.invasionKills}</li>
+							<li>
+								Army of One: <span className="color--gold">{infamy.armyOfOne}</span>
+							</li>
+						</ul>
+					</div>
+					<div className="track-container">
+						<div>
+							<h4>Blockers</h4>
+						</div>
+						<ul>
+							<li>Large Blockers: {gambit.largeBlockersSent}</li>
+							<li>Medium Blockers: {gambit.mediumBlockersSent}</li>
+							<li>Small Blockers: {gambit.smallBlockersSent}</li>
+							<li>Blockers sent: {gambit.blockersSent}</li>
+							<li>Blockers killed: {gambit.blockerKills}</li>
+						</ul>
+					</div>
+					<div className="track-container">
+						<div>
+							<h4>Motes</h4>
+						</div>
+						<ul>
+							<li>Motes banked: {gambit.motesDeposited}</li>
+							<li>Motes lost: {gambit.motesLost}</li>
+							<li>Motes denied: {gambit.motesDenied}</li>
 						</ul>
 					</div>
 				</div>
+			);
+		}
 
-				<div className="track-container">
-					<div>
-						<h4>Overall</h4>
-					</div>
-					<ul>
-						<li>
-							Wins: <span className="color--green">{gambit.won} </span>
-						</li>
-						<li>
-							Losses: <span className="color--red">{gambit.lost} </span>
-						</li>
-						<li>Wins/Losses: {gambit.winLossRatio}%</li>
-						<li>Kills: {gambit.kills}</li>
-						<li>Deaths: {gambit.deaths}</li>
-						<li>Kills/Deaths: {gambit.kd}</li>
-					</ul>
-				</div>
-
-				<div className="track-container">
-					<div>
-						<h4>Invading & Invaders</h4>
-					</div>
-					<ul>
-						<li>Invader Kills: {gambit.invaderKills}</li>
-						<li>Invasion Kills: {gambit.invasionKills}</li>
-						<li>
-							Army of One: <span className="color--gold">{infamy.armyOfOne}</span>
-						</li>
-					</ul>
-				</div>
-				<div className="track-container">
-					<div>
-						<h4>Blockers</h4>
-					</div>
-					<ul>
-						<li>Large Blockers: {gambit.largeBlockersSent}</li>
-						<li>Medium Blockers: {gambit.mediumBlockersSent}</li>
-						<li>Small Blockers: {gambit.smallBlockersSent}</li>
-						<li>Blockers sent: {gambit.blockersSent}</li>
-						<li>Blockers killed: {gambit.blockerKills}</li>
-					</ul>
-				</div>
-				<div className="track-container">
-					<div>
-						<h4>Motes</h4>
-					</div>
-					<ul>
-						<li>Motes banked: {gambit.motesDeposited}</li>
-						<li>Motes lost: {gambit.motesLost}</li>
-						<li>Motes denied: {gambit.motesDenied}</li>
-					</ul>
-				</div>
-			</div>
-		);
-
-		const progression = gambitIsLoading || this.state.isMore ? <Loading /> : trackContainer;
 		return (
 			<div className="infamy-container">
 				<Helmet>

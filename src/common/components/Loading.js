@@ -11,27 +11,22 @@ import "../styles/components/Loading.scss";
 class Loading extends Component {
 	id = 0;
 	current = 0;
-	timeoutId = 0;
+	guardians = ["warlock", "titan", "hunter"];
 	state = {
-		guardians: ["warlock", "titan", "hunter"],
 		guardian: ""
 	};
 
 	componentDidMount() {
-		this.timeoutId = setTimeout(() => {
-			this.updateClass();
-		}, 100);
-
-		this.id = setInterval(this.updateClass, 2100);
+		this.updateClass();
+		this.id = setInterval(this.updateClass, 1500);
 	}
 
 	componentWillUnmount() {
-		clearTimeout(this.timeoutId);
 		clearInterval(this.id);
 	}
 
 	updateClass = () => {
-		const { guardians } = this.state;
+		const guardians = this.guardians;
 		this.setState({ guardian: guardians[this.current] }, () => {
 			if (this.current === 2) {
 				this.current = 0;
