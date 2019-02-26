@@ -9,14 +9,19 @@
 	justify-content: center;
 	align-items: center;
 
-	.source-and-contact {
+	.source-and-contact,
+	.info {
 		list-style-type: none;
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
-		margin-left: 6.5%;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 0;
 
+		@include breakpoint(600px) {
+			margin-right: 0;
+		}
 		li {
 			margin-right: 20px;
 			a {
@@ -34,31 +39,19 @@
 					margin-left: 5px;
 					font-size: 1.3em;
 
-					@include breakpoint(425px) {
+					@include breakpoint(600px) {
 						display: none;
 					}
 				}
 			}
 		}
 	}
+
 	.info {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		margin-left: auto;
-		padding-right: 10px;
-
-		@include breakpoint(500px) {
-			display: none;
-		}
-
-		li {
-			padding: 2px 10px 2px 2px;
-		}
+		margin-left: 0;
+		margin-right: 0;
 	}
-
 	.developer {
-		margin-right: auto;
 		margin-left: 10px;
 
 		li {

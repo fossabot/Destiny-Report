@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaypal, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faPaypal, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import "../styles/components/Footer.scss";
 
 export default () => (
@@ -27,7 +27,9 @@ export default () => (
 		</ul>
 		<ul className="info">
 			<li>
-				<a href="mailto:contact@destiny.report">contact@destiny.report</a>
+				<a href="https://twitter.com/SarKurd">
+					<FontAwesomeIcon icon={faTwitter} size="lg" /> <span>SarKurd</span>
+				</a>
 			</li>
 		</ul>
 	</footer>
