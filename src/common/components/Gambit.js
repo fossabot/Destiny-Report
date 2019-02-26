@@ -14,6 +14,7 @@ import Loading from "../components/Loading";
 import MultiMembershipPopup from "./MultiMembershipPopup";
 import { Helmet } from "react-helmet";
 import "../styles/components/Player.scss";
+import { getSafe } from "../utility/utils";
 
 class Gambit extends Component {
 	state = {
@@ -103,45 +104,64 @@ class Gambit extends Component {
 		const infamy = {};
 
 		if (this.props.player.gambitSuccess) {
-			gambit.won = this.props.player.gambitStats.allTime.activitiesWon.basic.value;
-			gambit.lost = this.props.player.gambitStats.allTime.activitiesEntered.basic.value - gambit.won;
-			gambit.kills = this.props.player.gambitStats.allTime.kills.basic.value;
-			gambit.deaths = this.props.player.gambitStats.allTime.deaths.basic.value;
-			gambit.invaderKills = this.props.player.gambitStats.allTime.invaderKills.basic.value;
-			gambit.invasionKills = this.props.player.gambitStats.allTime.invasionKills.basic.value;
-			gambit.blockerKills = this.props.player.gambitStats.allTime.blockerKills.basic.value;
+			gambit.won = getSafe(() => this.props.player.gambitStats.allTime.activitiesWon.basic.value, 0);
+			gambit.lost = getSafe(
+				() => this.props.player.gambitStats.allTime.activitiesEntered.basic.value - gambit.won,
+				0
+			);
+			gambit.kills = getSafe(() => this.props.player.gambitStats.allTime.kills.basic.value, 0);
+			gambit.deaths = getSafe(() => this.props.player.gambitStats.allTime.deaths.basic.value, 0);
+			if (gambit.deaths === 0) {
+				gambit.kd = gambit.kills;
+			} else {
+				gambit.kd = (gambit.kills / gambit.deaths).toFixed(2);
+			}
+			gambit.invaderKills = getSafe(() => this.props.player.gambitStats.allTime.invaderKills.basic.value, 0);
+			gambit.invasionKills = getSafe(() => this.props.player.gambitStats.allTime.invasionKills.basic.value, 0);
+			gambit.blockerKills = getSafe(() => this.props.player.gambitStats.allTime.blockerKills.basic.value, 0);
 
-			gambit.smallBlockersSent = this.props.player.gambitStats.allTime.smallBlockersSent.basic.value;
-			gambit.mediumBlockersSent = this.props.player.gambitStats.allTime.mediumBlockersSent.basic.value;
-			gambit.largeBlockersSent = this.props.player.gambitStats.allTime.largeBlockersSent.basic.value;
+			gambit.smallBlockersSent = getSafe(
+				() => this.props.player.gambitStats.allTime.smallBlockersSent.basic.value,
+				0
+			);
+			gambit.mediumBlockersSent = getSafe(
+				() => this.props.player.gambitStats.allTime.mediumBlockersSent.basic.value,
+				0
+			);
+			gambit.largeBlockersSent = getSafe(
+				() => this.props.player.gambitStats.allTime.largeBlockersSent.basic.value,
+				0
+			);
 			gambit.blockersSent = gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
 
-			gambit.motesDeposited = this.props.player.gambitStats.allTime.motesDeposited.basic.value;
-			gambit.motesLost = this.props.player.gambitStats.allTime.motesLost.basic.value;
-			gambit.motesDenied = this.props.player.gambitStats.allTime.motesDenied.basic.value;
-
-			gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
+			gambit.motesDeposited = getSafe(() => this.props.player.gambitStats.allTime.motesDeposited.basic.value, 0);
+			gambit.motesLost = getSafe(() => this.props.player.gambitStats.allTime.motesLost.basic.value, 0);
+			gambit.motesDenied = getSafe(() => this.props.player.gambitStats.allTime.motesDenied.basic.value, 0);
 
 			if (gambit.won === 0 && gambit.lost === 0) {
 				gambit.winLossRatio = 0;
+			} else {
+				gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
 			}
-			infamy.currentInfamy = this.props.player.infamy.currentProgress;
-			infamy.armyOfOne = this.props.player.infamy.armyOfOne;
-			if (this.props.player.infamy.level === 16) {
+
+			infamy.currentInfamy = getSafe(() => this.props.player.infamy.currentProgress, 0);
+			infamy.armyOfOne = getSafe(() => this.props.player.infamy.armyOfOne, 0);
+			if (getSafe(() => this.props.player.infamy.level, 0) === 16) {
 				infamy.currentRank = infamySteps[this.props.player.infamy.level - 1].stepName;
 				infamy.progressToNextLevel =
 					infamySteps[this.props.player.infamy.level - 1].progressTotal -
 					this.props.player.infamy.progressToNextLevel;
 				infamy.icon = "https://www.bungie.net" + infamySteps[this.props.player.infamy.level - 1].icon;
 			} else {
-				infamy.icon = "https://www.bungie.net" + infamySteps[this.props.player.infamy.level].icon;
-				infamy.currentRank = infamySteps[this.props.player.infamy.level].stepName;
+				infamy.icon =
+					"https://www.bungie.net" + infamySteps[getSafe(() => this.props.player.infamy.level, 0)].icon;
+				infamy.currentRank = infamySteps[getSafe(() => this.props.player.infamy.level, 0)].stepName;
 				infamy.progressToNextLevel =
-					infamySteps[this.props.player.infamy.level].progressTotal -
-					this.props.player.infamy.progressToNextLevel;
+					infamySteps[getSafe(() => this.props.player.infamy.level, 0)].progressTotal -
+					getSafe(() => this.props.player.infamy.progressToNextLevel, 0);
 			}
-			infamy.ranks = this.props.player.infamy.ranks || 0;
-			infamy.resets = this.props.player.infamy.progress;
+			infamy.ranks = getSafe(() => this.props.player.infamy.ranks, 0);
+			infamy.resets = getSafe(() => this.props.player.infamy.progress, 0);
 		}
 
 		const { gambitIsLoading } = this.props.player;
@@ -177,7 +197,7 @@ class Gambit extends Component {
 						<li>Wins/Losses: {gambit.winLossRatio}%</li>
 						<li>Kills: {gambit.kills}</li>
 						<li>Deaths: {gambit.deaths}</li>
-						<li>Kills/Deaths: {(gambit.kills / gambit.deaths).toFixed(2)}</li>
+						<li>Kills/Deaths: {gambit.kd}</li>
 					</ul>
 				</div>
 

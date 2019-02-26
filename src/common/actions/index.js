@@ -83,20 +83,11 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 					dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
 				}
 
-				const infamy = {
-					currentProgress: infamyData.currentProgress,
-					progressToNextLevel: infamyData.progressToNextLevel,
-					level: infamyData.level,
-					ranks: infamyData.ranks,
-					progress: infamyData.progress,
-					armyOfOne: infamyData.armyOfOne
-				};
-
 				dispatch({
 					type: "SET_GAMBIT_DATA",
 					payload: {
 						gambitStats: gambitStats.data.Response.pvecomp_gambit,
-						infamy
+						infamy: infamyData
 					}
 				});
 				dispatch({ type: "SUCCESS_SET_DATA", payload: "gambit" });
