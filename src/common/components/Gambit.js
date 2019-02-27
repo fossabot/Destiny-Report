@@ -99,7 +99,6 @@ class Gambit extends Component {
 
 	render() {
 		const { gambit, infamy } = this.props.player;
-
 		let progression = <Loading />;
 		const { gambitIsLoading, gambitSuccess } = this.props.player;
 		if (!gambitIsLoading && !this.state.isMore && gambitSuccess) {

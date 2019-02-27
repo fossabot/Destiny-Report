@@ -129,8 +129,8 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 							infamySteps[getSafe(() => infamyData.level, 0)].progressTotal -
 							getSafe(() => infamyData.progressToNextLevel, 0);
 					}
-					infamy.ranks = getSafe(() => infamy.ranks, 0);
-					infamy.resets = getSafe(() => infamy.progress, 0);
+					infamy.ranks = getSafe(() => infamyData.ranks, 0);
+					infamy.resets = getSafe(() => infamyData.progress, 0);
 				} else {
 					dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
 				}
