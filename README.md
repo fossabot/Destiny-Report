@@ -1,4 +1,4 @@
-# MongoDB database and Bungie API key are required
+# Mlab MongoDB database and Bungie API key are required
 
 You can get the API key on [Bungie.net](https://www.bungie.net/en/Application)
 
