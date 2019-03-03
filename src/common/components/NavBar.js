@@ -37,9 +37,6 @@ class NavBar extends React.Component {
 
 		let { error, privacyError, errorMessage } = this.props.player;
 
-		if (privacyError) {
-			errorMessage = "Due to player's privacy, you can't see most of his/her stats";
-		}
 		const ErrorBlock = <div className="api-issue">{errorMessage}</div>;
 
 		return (

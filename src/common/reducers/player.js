@@ -33,6 +33,7 @@ const player = (state = initial, action) => {
 				error: false,
 				isPlayerFound: true
 			};
+
 			return state;
 		case SET_GAMBIT_DATA:
 			state = cloneDeep(state);
@@ -101,7 +102,7 @@ const player = (state = initial, action) => {
 			}
 			return state;
 		case FAIL_SET_DATA:
-			state = cloneDeep(initial);
+			state = cloneDeep(state);
 			state.error = true;
 			state.errorMessage = action.payload;
 			return state;
@@ -124,7 +125,6 @@ const player = (state = initial, action) => {
 		case FAIL_SET_DATA_PRIVACY:
 			state = { ...state, privacyError: true };
 			return state;
-
 		default:
 			return state;
 	}

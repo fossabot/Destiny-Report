@@ -64,78 +64,85 @@ export const setGambitProgressionAction = (membershipType, membershipId) => {
 				gambitStats = gambitStats.data.Response.pvecomp_gambit;
 				const gambit = {};
 				const infamy = {};
-				if (allStats.data.Response.characterProgressions.data !== undefined) {
-					gambit.won = getSafe(() => gambitStats.allTime.activitiesWon.basic.value, 0);
-					gambit.lost = getSafe(() => gambitStats.allTime.activitiesEntered.basic.value - gambit.won, 0);
-					gambit.kills = getSafe(() => gambitStats.allTime.kills.basic.value, 0);
-					gambit.deaths = getSafe(() => gambitStats.allTime.deaths.basic.value, 0);
-					if (gambit.deaths === 0) {
-						gambit.kd = gambit.kills;
-					} else {
-						gambit.kd = (gambit.kills / gambit.deaths).toFixed(2);
-					}
-					gambit.invaderKills = getSafe(() => gambitStats.allTime.invaderKills.basic.value, 0);
-					gambit.invasionKills = getSafe(() => gambitStats.allTime.invasionKills.basic.value, 0);
-					gambit.blockerKills = getSafe(() => gambitStats.allTime.blockerKills.basic.value, 0);
 
-					gambit.smallBlockersSent = getSafe(() => gambitStats.allTime.smallBlockersSent.basic.value, 0);
-					gambit.mediumBlockersSent = getSafe(() => gambitStats.allTime.mediumBlockersSent.basic.value, 0);
-					gambit.largeBlockersSent = getSafe(() => gambitStats.allTime.largeBlockersSent.basic.value, 0);
-					gambit.blockersSent =
-						gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
-
-					gambit.motesDeposited = getSafe(() => gambitStats.allTime.motesDeposited.basic.value, 0);
-					gambit.motesLost = getSafe(() => gambitStats.allTime.motesLost.basic.value, 0);
-					gambit.motesDenied = getSafe(() => gambitStats.allTime.motesDenied.basic.value, 0);
-
-					if (gambit.won === 0 && gambit.lost === 0) {
-						gambit.winLossRatio = 0;
-					} else {
-						gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
-					}
-
-					//Infamy
-					infamyData.level = values(allStats.data.Response.characterProgressions.data)[0].progressions[
-						"2772425241"
-					].level;
-
-					infamyData.progressToNextLevel = values(
-						allStats.data.Response.characterProgressions.data
-					)[0].progressions["2772425241"].progressToNextLevel;
-
-					infamyData.currentProgress = values(
-						allStats.data.Response.characterProgressions.data
-					)[0].progressions["2772425241"].currentProgress;
-
-					infamyData.ranks =
-						allStats.data.Response.profileRecords.data.records["3470255495"].objectives[0].progress;
-					infamyData.progress =
-						allStats.data.Response.profileRecords.data.records["3901785488"].objectives[0].progress;
-					infamyData.armyOfOne =
-						allStats.data.Response.profileRecords.data.records["1071663279"].objectives[0].progress;
-
-					console.log(infamyData);
-					infamy.currentInfamy = getSafe(() => infamyData.currentProgress, 0);
-					infamy.armyOfOne = getSafe(() => infamyData.armyOfOne, 0);
-					if (getSafe(() => infamy.level, 0) === 16) {
-						infamy.currentRank = infamySteps[infamyData.level - 1].stepName;
-						infamy.progressToNextLevel =
-							infamySteps[infamy.level - 1].progressTotal - infamyData.progressToNextLevel;
-						infamy.icon = "https://www.bungie.net" + infamySteps[infamyData.level - 1].icon;
-					} else {
-						infamy.icon = "https://www.bungie.net" + infamySteps[getSafe(() => infamyData.level, 0)].icon;
-						infamy.currentRank = infamySteps[getSafe(() => infamyData.level, 0)].stepName;
-						infamy.progressToNextLevel =
-							infamySteps[getSafe(() => infamyData.level, 0)].progressTotal -
-							getSafe(() => infamyData.progressToNextLevel, 0);
-					}
-					infamy.ranks = getSafe(() => infamyData.ranks, 0);
-					infamy.resets = getSafe(() => infamyData.progress, 0);
+				gambit.won = getSafe(() => gambitStats.allTime.activitiesWon.basic.value, 0);
+				gambit.lost = getSafe(() => gambitStats.allTime.activitiesEntered.basic.value - gambit.won, 0);
+				gambit.kills = getSafe(() => gambitStats.allTime.kills.basic.value, 0);
+				gambit.deaths = getSafe(() => gambitStats.allTime.deaths.basic.value, 0);
+				if (gambit.deaths === 0) {
+					gambit.kd = gambit.kills;
 				} else {
-					dispatch({ type: "FAIL_SET_DATA_PRIVACY" });
+					gambit.kd = (gambit.kills / gambit.deaths).toFixed(2);
+				}
+				gambit.invaderKills = getSafe(() => gambitStats.allTime.invaderKills.basic.value, 0);
+				gambit.invasionKills = getSafe(() => gambitStats.allTime.invasionKills.basic.value, 0);
+				gambit.blockerKills = getSafe(() => gambitStats.allTime.blockerKills.basic.value, 0);
+
+				gambit.smallBlockersSent = getSafe(() => gambitStats.allTime.smallBlockersSent.basic.value, 0);
+				gambit.mediumBlockersSent = getSafe(() => gambitStats.allTime.mediumBlockersSent.basic.value, 0);
+				gambit.largeBlockersSent = getSafe(() => gambitStats.allTime.largeBlockersSent.basic.value, 0);
+				gambit.blockersSent = gambit.smallBlockersSent + gambit.mediumBlockersSent + gambit.largeBlockersSent;
+
+				gambit.motesDeposited = getSafe(() => gambitStats.allTime.motesDeposited.basic.value, 0);
+				gambit.motesLost = getSafe(() => gambitStats.allTime.motesLost.basic.value, 0);
+				gambit.motesDenied = getSafe(() => gambitStats.allTime.motesDenied.basic.value, 0);
+
+				if (gambit.won === 0 && gambit.lost === 0) {
+					gambit.winLossRatio = 0;
+				} else {
+					gambit.winLossRatio = (100 * (gambit.won / (gambit.won + gambit.lost))).toFixed(1);
 				}
 
-				console.log(gambit, infamy);
+				//Infamy
+				infamyData.level = getSafe(
+					() => values(allStats.data.Response.characterProgressions.data)[0].progressions["2772425241"].level,
+					0
+				);
+
+				infamyData.progressToNextLevel = getSafe(
+					() =>
+						values(allStats.data.Response.characterProgressions.data)[0].progressions["2772425241"]
+							.progressToNextLevel,
+					0
+				);
+
+				infamyData.currentProgress = getSafe(
+					() =>
+						values(allStats.data.Response.characterProgressions.data)[0].progressions["2772425241"]
+							.currentProgress,
+					0
+				);
+
+				infamyData.ranks = getSafe(
+					() => allStats.data.Response.profileRecords.data.records["3470255495"].objectives[0].progress,
+					0
+				);
+				infamyData.progress = getSafe(
+					() => allStats.data.Response.profileRecords.data.records["3901785488"].objectives[0].progress,
+					0
+				);
+				infamyData.armyOfOne = getSafe(
+					() => allStats.data.Response.profileRecords.data.records["1071663279"].objectives[0].progress,
+					0
+				);
+
+				infamy.currentInfamy = getSafe(() => infamyData.currentProgress, 0);
+				infamy.armyOfOne = getSafe(() => infamyData.armyOfOne, 0);
+				if (getSafe(() => infamy.level, 0) === 16) {
+					infamy.currentRank = infamySteps[infamyData.level - 1].stepName;
+					infamy.progressToNextLevel =
+						infamySteps[infamy.level - 1].progressTotal - infamyData.progressToNextLevel;
+					infamy.icon = "https://www.bungie.net" + infamySteps[infamyData.level - 1].icon;
+				} else {
+					infamy.icon = "https://www.bungie.net" + infamySteps[getSafe(() => infamyData.level, 0)].icon;
+					infamy.currentRank = infamySteps[getSafe(() => infamyData.level, 0)].stepName;
+					infamy.progressToNextLevel =
+						infamySteps[getSafe(() => infamyData.level, 0)].progressTotal -
+						getSafe(() => infamyData.progressToNextLevel, 0);
+				}
+				infamy.ranks = getSafe(() => infamyData.ranks, 0);
+				infamy.resets = getSafe(() => infamyData.progress, 0);
+
 				dispatch({
 					type: "SET_GAMBIT_DATA",
 					payload: {
@@ -164,7 +171,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 
 				const allStats = await endpoints.getAllProgression(membershipType, membershipId);
 
-				let crucibleData = {
+				const crucibleData = {
 					valor: {
 						ranks: 0,
 						progress: 0,
@@ -182,6 +189,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 						progressToNextLevel: 0
 					}
 				};
+
 				if (allStats.data.Response.profileRecords.data !== undefined) {
 					//Valor
 					crucibleData.valor.ranks =
@@ -214,6 +222,11 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 
 					crucibleData.glory.resets =
 						allStats.data.Response.profileRecords.data.records["4185918315"].objectives[0].progress;
+				} else {
+					dispatch({
+						type: "FAIL_SET_DATA",
+						payload: "Due to player's privacy, some of his/her stats are lowest value"
+					});
 				}
 
 				dispatch({
@@ -226,6 +239,7 @@ export const setCrucibleProgressionAction = (membershipType, membershipId) => {
 				});
 				dispatch({ type: "SUCCESS_SET_DATA", payload: "crucible" });
 				dispatch({ type: "FINISHED_LOADING", payload: "crucible" });
+
 				resolve();
 			} catch (err) {
 				dispatch({
@@ -244,10 +258,14 @@ export const setRaidProgressionAction = (membershipType, membershipId) => {
 				const raidStats = { stats: [] };
 				const profileResult = await endpoints.getAllProgression(membershipType, membershipId);
 
-				raidStats.petrasRun =
-					profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete;
-				raidStats.likeADiamond =
-					profileResult.data.Response.profileRecords.data.records[2648109757].objectives[0].complete;
+				raidStats.petrasRun = getSafe(
+					() => profileResult.data.Response.profileRecords.data.records[4177910003].objectives[0].complete,
+					false
+				);
+				raidStats.likeADiamond = getSafe(
+					() => profileResult.data.Response.profileRecords.data.records[2648109757].objectives[0].complete,
+					false
+				);
 				const characterIds = profileResult.data.Response.profile.data.characterIds;
 
 				const charactersRaidStats = await Promise.all(
