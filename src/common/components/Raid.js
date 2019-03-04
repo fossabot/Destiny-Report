@@ -119,7 +119,8 @@ class Raid extends Component {
 					weekOne: { value: false, instanceId: "" },
 					fourMan: { value: false, instanceId: "" },
 					threeMan: { value: false, instanceId: "" },
-					twoMan: { value: false, instanceId: "" }
+					twoMan: { value: false, instanceId: "" },
+					solo: { value: false, instanceId: "" }
 				},
 				EoW: {
 					flawless: { value: false, instanceId: "" },
@@ -127,7 +128,8 @@ class Raid extends Component {
 					weekOne: { value: false, instanceId: "" },
 					fourMan: { value: false, instanceId: "" },
 					threeMan: { value: false, instanceId: "" },
-					twoMan: { value: false, instanceId: "" }
+					twoMan: { value: false, instanceId: "" },
+					solo: { value: false, instanceId: "" }
 				},
 				SoS: {
 					flawless: { value: false, instanceId: "" },
@@ -135,7 +137,8 @@ class Raid extends Component {
 					weekOne: { value: false, instanceId: "" },
 					fourMan: { value: false, instanceId: "" },
 					threeMan: { value: false, instanceId: "" },
-					twoMan: { value: false, instanceId: "" }
+					twoMan: { value: false, instanceId: "" },
+					solo: { value: false, instanceId: "" }
 				},
 				lastWish: {
 					flawless: { value: false, instanceId: "" },
@@ -143,7 +146,8 @@ class Raid extends Component {
 					weekOne: { value: false, instanceId: "" },
 					fourMan: { value: false, instanceId: "" },
 					threeMan: { value: false, instanceId: "" },
-					twoMan: { value: false, instanceId: "" }
+					twoMan: { value: false, instanceId: "" },
+					solo: { value: false, instanceId: "" }
 				},
 				SotP: {
 					flawless: { value: false, instanceId: "" },
@@ -151,10 +155,13 @@ class Raid extends Component {
 					weekOne: { value: false, instanceId: "" },
 					fourMan: { value: false, instanceId: "" },
 					threeMan: { value: false, instanceId: "" },
-					twoMan: { value: false, instanceId: "" }
+					twoMan: { value: false, instanceId: "" },
+					solo: { value: false, instanceId: "" }
 				}
 			}
 		};
+
+		let trackContainer = "<div> Somthing went wrong :( </div>";
 		if (!raidIsLoading) {
 			if (this.props.player.raid.badges !== undefined) {
 				raid.badges = this.props.player.raid.badges;
@@ -215,250 +222,354 @@ class Raid extends Component {
 					});
 				}
 			}
+
+			trackContainer = (
+				<div className="track-wrapper">
+					<div className="track-container">
+						<div>
+							<h4>Scourge of the Past</h4>
+						</div>
+						<ul>
+							<li>Normal: {raid.SotP.normalCompletions}</li>
+							<li>Guided: {raid.SotP.guided}</li>
+						</ul>
+						<div className="raid-badges-container">
+							<ul className="raid-badges-list">
+								{raid.badges.SotP.flawless.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SotP.flawless.instanceId)}>
+										<Tooltip
+											name="Flawless"
+											tooltip="Completed the raid with no deaths(fireteam)"
+										/>
+									</li>
+								)}
+								{raid.likeADiamond && (
+									<li>
+										<Tooltip name="Like a Diamond" tooltip="Completed Like a Diamond triumph" />
+									</li>
+								)}
+								{raid.badges.SotP.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SotP.dayOne.instanceId)}>
+										<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
+									</li>
+								)}
+								{raid.badges.SotP.weekOne.value && !raid.badges.SotP.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SotP.weekOne.instanceId)}>
+										<Tooltip name="Week one" tooltip="Completed the raid within one week" />
+									</li>
+								)}
+
+								{raid.badges.SotP.solo.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SotP.solo.instanceId)}>
+										<Tooltip
+											name="Solo"
+											tooltip="defeated Insurrection Prime in a fireteam of one"
+										/>
+									</li>
+								)}
+								{!raid.badges.SotP.solo.value && raid.badges.SotP.twoMan.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SotP.twoMan.instanceId)}>
+										<Tooltip
+											name="Two man"
+											tooltip="Defeated Insurrection Prime in a fireteam of two"
+										/>
+									</li>
+								)}
+								{!raid.badges.SotP.solo.value &&
+									!raid.badges.SotP.twoMan.value &&
+									raid.badges.SotP.threeMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.SotP.threeMan.instanceId)}>
+											<Tooltip
+												name="Three man"
+												tooltip="Defeated Insurrection Prime in a fireteam of three"
+											/>
+										</li>
+									)}
+								{!raid.badges.SotP.solo.value &&
+									!raid.badges.SotP.twoMan.value &&
+									!raid.badges.SotP.threeMan.value &&
+									raid.badges.SotP.fourMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.SotP.fourMan.instanceId)}>
+											<Tooltip
+												name="Four man"
+												tooltip="Defeated Insurrection Prime in a fireteam of four"
+											/>
+										</li>
+									)}
+							</ul>
+						</div>
+						{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SotP} />}
+					</div>
+
+					<div className="track-container">
+						<div>
+							<h4>Last Wish</h4>
+						</div>
+						<ul>
+							<li>Normal: {raid.lastWish.normalCompletions}</li>
+							<li>Guided: {raid.lastWish.guided}</li>
+						</ul>
+						<div className="raid-badges-container">
+							<ul className="raid-badges-list">
+								{raid.badges.lastWish.flawless.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.flawless.instanceId)}>
+										<Tooltip
+											name="Flawless"
+											tooltip="Completed the raid with no deaths(fireteam)"
+										/>
+									</li>
+								)}
+								{raid.petrasRun && (
+									<li>
+										<Tooltip name="Petra's Run" tooltip="Completed Petra's Run triumph" />
+									</li>
+								)}
+								{raid.badges.lastWish.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.dayOne.instanceId)}>
+										<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
+									</li>
+								)}
+								{raid.badges.lastWish.weekOne.value && !raid.badges.lastWish.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.weekOne.instanceId)}>
+										<Tooltip name="Week one" tooltip="Completed the raid within one week" />
+									</li>
+								)}
+
+								{raid.badges.lastWish.solo.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.solo.instanceId)}>
+										<Tooltip name="Solo" tooltip="Defeated Riven in a fireteam of one" />
+									</li>
+								)}
+								{!raid.badges.lastWish.solo.value && raid.badges.lastWish.twoMan.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.twoMan.instanceId)}>
+										<Tooltip name="Two man" tooltip="Defeated Riven in a fireteam of two" />
+									</li>
+								)}
+								{!raid.badges.lastWish.solo.value &&
+									!raid.badges.lastWish.twoMan.value &&
+									raid.badges.lastWish.threeMan.value && (
+										<li
+											onClick={() =>
+												this.handleBadgeClick(raid.badges.lastWish.threeMan.instanceId)
+											}
+										>
+											<Tooltip name="Three man" tooltip="Defeated Riven in a fireteam of three" />
+										</li>
+									)}
+								{!raid.badges.lastWish.solo.value &&
+									!raid.badges.lastWish.twoMan.value &&
+									!raid.badges.lastWish.threeMan.value &&
+									raid.badges.lastWish.fourMan.value && (
+										<li
+											onClick={() =>
+												this.handleBadgeClick(raid.badges.lastWish.fourMan.instanceId)
+											}
+										>
+											<Tooltip name="Four man" tooltip="Defeated Riven in a fireteam of four" />
+										</li>
+									)}
+							</ul>
+						</div>
+						{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.lastWish} />}
+					</div>
+
+					<div className="track-container">
+						<div>
+							<h4>Leviathan</h4>
+						</div>
+						<ul className="center-ul">
+							<li>Normal: {raid.leviathan.normalCompletions}</li>
+							<li>Guided: {raid.leviathan.guided}</li>
+							<li>Prestige: {raid.leviathan.prestigeCompletions}</li>
+						</ul>
+						<div className="raid-badges-container">
+							<ul className="raid-badges-list">
+								{raid.badges.leviathan.flawless.value && (
+									<li
+										onClick={() => this.handleBadgeClick(raid.badges.leviathan.flawless.instanceId)}
+									>
+										<Tooltip
+											name="Flawless"
+											tooltip="Completed the raid with no deaths(fireteam)"
+										/>
+									</li>
+								)}
+								{raid.badges.leviathan.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.dayOne.instanceId)}>
+										<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
+									</li>
+								)}
+								{raid.badges.leviathan.weekOne.value && !raid.badges.leviathan.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.weekOne.instanceId)}>
+										<Tooltip name="Week one" tooltip="Completed the raid within one week" />
+									</li>
+								)}
+
+								{raid.badges.leviathan.solo.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.solo.instanceId)}>
+										<Tooltip name="Solo" tooltip="Defeated Calus in a fireteam of one" />
+									</li>
+								)}
+								{!raid.badges.leviathan.solo.value && raid.badges.leviathan.twoMan.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.twoMan.instanceId)}>
+										<Tooltip name="Two man" tooltip="Defeated Calus in a fireteam of two" />
+									</li>
+								)}
+								{!raid.badges.leviathan.solo.value &&
+									!raid.badges.leviathan.twoMan.value &&
+									raid.badges.leviathan.threeMan.value && (
+										<li
+											onClick={() =>
+												this.handleBadgeClick(raid.badges.leviathan.threeMan.instanceId)
+											}
+										>
+											<Tooltip name="Three man" tooltip="Defeated Calus in a fireteam of three" />
+										</li>
+									)}
+								{!raid.badges.leviathan.solo.value &&
+									!raid.badges.leviathan.twoMan.value &&
+									!raid.badges.leviathan.threeMan.value &&
+									raid.badges.leviathan.fourMan.value && (
+										<li
+											onClick={() =>
+												this.handleBadgeClick(raid.badges.leviathan.fourMan.instanceId)
+											}
+										>
+											<Tooltip name="Four man" tooltip="Defeated Calus in a fireteam of four" />
+										</li>
+									)}
+							</ul>
+						</div>
+						{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.leviathan} />}
+					</div>
+
+					<div className="track-container">
+						<div>
+							<h4>Eater of Worlds</h4>
+						</div>
+						<ul className="center-ul">
+							<li>Normal: {raid.EoW.normalCompletions}</li>
+							<li>Guided: {raid.EoW.guided}</li>
+							<li>Prestige: {raid.EoW.prestigeCompletions}</li>
+						</ul>
+						<div className="raid-badges-container">
+							<ul className="raid-badges-list">
+								{raid.badges.EoW.flawless.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
+										<Tooltip
+											name="Flawless"
+											tooltip="Completed the raid with no deaths(fireteam)"
+										/>
+									</li>
+								)}
+								{raid.badges.EoW.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.EoW.dayOne.instanceId)}>
+										<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
+									</li>
+								)}
+								{raid.badges.EoW.weekOne.value && !raid.badges.EoW.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
+										<Tooltip name="Week one" tooltip="Completed the raid within one week" />
+									</li>
+								)}
+
+								{raid.badges.EoW.solo.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.EoW.solo.instanceId)}>
+										<Tooltip name="Solo" tooltip="Defeated Argos in a fireteam of one" />
+									</li>
+								)}
+								{!raid.badges.EoW.solo.value && raid.badges.EoW.twoMan.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.EoW.twoMan.instanceId)}>
+										<Tooltip name="Two man" tooltip="Defeated Argos in a fireteam of two" />
+									</li>
+								)}
+								{!raid.badges.EoW.solo.value &&
+									!raid.badges.EoW.twoMan.value &&
+									raid.badges.EoW.threeMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.EoW.threeMan.instanceId)}>
+											<Tooltip name="Three man" tooltip="Defeated Argos in a fireteam of three" />
+										</li>
+									)}
+								{!raid.badges.EoW.solo.value &&
+									!raid.badges.EoW.twoMan.value &&
+									!raid.badges.EoW.threeMan.value &&
+									raid.badges.EoW.fourMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.EoW.fourMan.instanceId)}>
+											<Tooltip name="Four man" tooltip="Defeated Argos in a fireteam of four" />
+										</li>
+									)}
+							</ul>
+						</div>
+						{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.EoW} />}
+					</div>
+
+					<div className="track-container">
+						<div>
+							<h4>Spire of Stars</h4>
+						</div>
+						<ul className="center-ul">
+							<li>Normal: {raid.SoS.normalCompletions}</li>
+							<li>Guided: {raid.SoS.guided}</li>
+							<li>Prestige: {raid.SoS.prestigeCompletions}</li>
+						</ul>
+						<div className="raid-badges-container">
+							<ul className="raid-badges-list">
+								{raid.badges.SoS.flawless.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SoS.flawless.instanceId)}>
+										<Tooltip
+											name="Flawless"
+											tooltip="Completed the raid with no deaths(fireteam)"
+										/>
+									</li>
+								)}
+								{raid.badges.SoS.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SoS.dayOne.instanceId)}>
+										<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
+									</li>
+								)}
+								{raid.badges.SoS.weekOne.value && !raid.badges.SoS.dayOne.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SoS.weekOne.instanceId)}>
+										<Tooltip name="Week one" tooltip="Completed the raid within one week" />
+									</li>
+								)}
+								{raid.badges.SoS.solo.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SoS.solo.instanceId)}>
+										<Tooltip name="Solo" tooltip="Defeated Val Ca'uor in a fireteam of one" />
+									</li>
+								)}
+								{!raid.badges.SoS.solo.value && raid.badges.SoS.twoMan.value && (
+									<li onClick={() => this.handleBadgeClick(raid.badges.SoS.twoMan.instanceId)}>
+										<Tooltip name="Two man" tooltip="Defeated Val Ca'uor in a fireteam of two" />
+									</li>
+								)}
+								{!raid.badges.SoS.solo.value &&
+									!raid.badges.SoS.twoMan.value &&
+									raid.badges.SoS.threeMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.SoS.threeMan.instanceId)}>
+											<Tooltip
+												name="Three man"
+												tooltip="Defeated Val Ca'uor in a fireteam of three"
+											/>
+										</li>
+									)}
+								{!raid.badges.SoS.solo.value &&
+									!raid.badges.SoS.twoMan.value &&
+									!raid.badges.SoS.threeMan.value &&
+									raid.badges.SoS.fourMan.value && (
+										<li onClick={() => this.handleBadgeClick(raid.badges.SoS.fourMan.instanceId)}>
+											<Tooltip
+												name="Four man"
+												tooltip="Defeated Val Ca'uor in a fireteam of four"
+											/>
+										</li>
+									)}
+							</ul>
+						</div>
+						{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SoS} />}
+					</div>
+				</div>
+			);
 		}
-
-		const trackContainer = (
-			<div className="track-wrapper">
-				<div className="track-container">
-					<div>
-						<h4>Scourge of the Past</h4>
-					</div>
-					<ul>
-						<li>Normal: {raid.SotP.normalCompletions}</li>
-						<li>Guided: {raid.SotP.guided}</li>
-					</ul>
-					<div className="raid-badges-container">
-						<ul className="raid-badges-list">
-							{raid.badges.SotP.flawless.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.flawless.instanceId)}>
-									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
-								</li>
-							)}
-							{raid.likeADiamond && (
-								<li>
-									<Tooltip name="Like a Diamond" tooltip="Completed Like a Diamond triumph" />
-								</li>
-							)}
-							{raid.badges.SotP.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
-								</li>
-							)}
-							{raid.badges.SotP.weekOne.value && !raid.badges.SotP.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
-								</li>
-							)}
-							{raid.badges.SotP.twoMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
-								</li>
-							)}
-							{raid.badges.SotP.threeMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
-								</li>
-							)}
-							{raid.badges.SotP.fourMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SotP.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
-								</li>
-							)}
-						</ul>
-					</div>
-					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SotP} />}
-				</div>
-
-				<div className="track-container">
-					<div>
-						<h4>Last Wish</h4>
-					</div>
-					<ul>
-						<li>Normal: {raid.lastWish.normalCompletions}</li>
-						<li>Guided: {raid.lastWish.guided}</li>
-					</ul>
-					<div className="raid-badges-container">
-						<ul className="raid-badges-list">
-							{raid.badges.lastWish.flawless.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.flawless.instanceId)}>
-									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
-								</li>
-							)}
-							{raid.petrasRun && (
-								<li>
-									<Tooltip name="Petra's Run" tooltip="Completed Petra's Run triumph" />
-								</li>
-							)}
-							{raid.badges.lastWish.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
-								</li>
-							)}
-							{raid.badges.lastWish.weekOne.value && !raid.badges.lastWish.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
-								</li>
-							)}
-							{raid.badges.lastWish.twoMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
-								</li>
-							)}
-							{raid.badges.lastWish.threeMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
-								</li>
-							)}
-							{raid.badges.lastWish.fourMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.lastWish.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
-								</li>
-							)}
-						</ul>
-					</div>
-					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.lastWish} />}
-				</div>
-
-				<div className="track-container">
-					<div>
-						<h4>Leviathan</h4>
-					</div>
-					<ul className="center-ul">
-						<li>Normal: {raid.leviathan.normalCompletions}</li>
-						<li>Guided: {raid.leviathan.guided}</li>
-						<li>Prestige: {raid.leviathan.prestigeCompletions}</li>
-					</ul>
-					<div className="raid-badges-container">
-						<ul className="raid-badges-list">
-							{raid.badges.leviathan.flawless.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.flawless.instanceId)}>
-									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
-								</li>
-							)}
-							{raid.badges.leviathan.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
-								</li>
-							)}
-							{raid.badges.leviathan.weekOne.value && !raid.badges.leviathan.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
-								</li>
-							)}
-							{raid.badges.leviathan.twoMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
-								</li>
-							)}
-							{raid.badges.leviathan.threeMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
-								</li>
-							)}
-							{raid.badges.leviathan.fourMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.leviathan.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
-								</li>
-							)}
-						</ul>
-					</div>
-					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.leviathan} />}
-				</div>
-
-				<div className="track-container">
-					<div>
-						<h4>Eater of Worlds</h4>
-					</div>
-					<ul className="center-ul">
-						<li>Normal: {raid.EoW.normalCompletions}</li>
-						<li>Guided: {raid.EoW.guided}</li>
-						<li>Prestige: {raid.EoW.prestigeCompletions}</li>
-					</ul>
-					<div className="raid-badges-container">
-						<ul className="raid-badges-list">
-							{raid.badges.EoW.flawless.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
-									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
-								</li>
-							)}
-							{raid.badges.EoW.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
-								</li>
-							)}
-							{raid.badges.EoW.weekOne.value && !raid.badges.EoW.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
-								</li>
-							)}
-							{raid.badges.EoW.twoMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
-								</li>
-							)}
-							{raid.badges.EoW.threeMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
-								</li>
-							)}
-							{raid.badges.EoW.fourMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.EoW.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
-								</li>
-							)}
-						</ul>
-					</div>
-					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.EoW} />}
-				</div>
-
-				<div className="track-container">
-					<div>
-						<h4>Spire of Stars</h4>
-					</div>
-					<ul className="center-ul">
-						<li>Normal: {raid.SoS.normalCompletions}</li>
-						<li>Guided: {raid.SoS.guided}</li>
-						<li>Prestige: {raid.SoS.prestigeCompletions}</li>
-					</ul>
-					<div className="raid-badges-container">
-						<ul className="raid-badges-list">
-							{raid.badges.SoS.flawless.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.flawless.instanceId)}>
-									<Tooltip name="Flawless" tooltip="Completed the raid with no deaths(fireteam)" />
-								</li>
-							)}
-							{raid.badges.SoS.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.dayOne.instanceId)}>
-									<Tooltip name="Day one" tooltip="Completed the raid within 24 hours" />
-								</li>
-							)}
-							{raid.badges.SoS.weekOne.value && !raid.badges.SoS.dayOne.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.weekOne.instanceId)}>
-									<Tooltip name="Week one" tooltip="Completed the raid within one week" />
-								</li>
-							)}
-							{raid.badges.SoS.twoMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.twoMan.instanceId)}>
-									<Tooltip name="Two man" tooltip="Completed the raid within a fireteam of two" />
-								</li>
-							)}
-							{raid.badges.SoS.threeMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.threeMan.instanceId)}>
-									<Tooltip name="Three man" tooltip="Completed the raid within a fireteam of three" />
-								</li>
-							)}
-							{raid.badges.SoS.fourMan.value && (
-								<li onClick={() => this.handleBadgeClick(raid.badges.SoS.fourMan.instanceId)}>
-									<Tooltip name="Four man" tooltip="Completed the raid within a fireteam of four" />
-								</li>
-							)}
-						</ul>
-					</div>
-
-					{!raidActivitiesLoading && <Chart data={this.props.player.raid.activities.SoS} />}
-				</div>
-			</div>
-		);
 
 		const progression = raidIsLoading || this.state.isMore ? <Loading /> : trackContainer;
 
