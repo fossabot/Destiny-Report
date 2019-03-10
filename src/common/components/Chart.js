@@ -1,16 +1,24 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { VictoryScatter, VictoryTooltip, VictoryContainer, VictoryGroup } from "victory";
+import {
+	VictoryScatter,
+	VictoryTooltip,
+	VictoryContainer,
+	VictoryGroup
+} from "victory";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import moment from "moment";
 
 class Chart extends React.Component {
 	componentDidUpdate() {
-		const activitiesScrollContainer = document.querySelectorAll(".scrollbar-container");
+		const activitiesScrollContainer = document.querySelectorAll(
+			".scrollbar-container"
+		);
 		for (let activityScrollContainer of activitiesScrollContainer)
 			activityScrollContainer.scrollLeft =
-				activityScrollContainer.scrollWidth - activityScrollContainer.clientWidth;
+				activityScrollContainer.scrollWidth -
+				activityScrollContainer.clientWidth;
 	}
 	render() {
 		const data = this.props.data;
@@ -20,7 +28,10 @@ class Chart extends React.Component {
 					data={data}
 					width={20 * data.length}
 					containerComponent={
-						<VictoryContainer style={{ parent: { overflow: "visible" } }} responsive={false} />
+						<VictoryContainer
+							style={{ parent: { overflow: "visible" } }}
+							responsive={false}
+						/>
 					}
 					style={{ marginTop: "20px" }}
 					height={30}
@@ -64,7 +75,12 @@ class Chart extends React.Component {
 											{
 												target: "data",
 												mutation: props => {
-													this.props.history.push(`/pgcr/${data[props.index].instanceId}`);
+													this.props.history.push(
+														`/pgcr/${
+															data[props.index]
+																.instanceId
+														}`
+													);
 												}
 											}
 										];
