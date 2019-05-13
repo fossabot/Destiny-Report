@@ -1,3 +1,6 @@
+``` Destiny Report will be completly rewritten from ground up soon to clear the crap code, add new features and a completly new theme.```
+
+
 # Mlab MongoDB database and Bungie API key are required
 
 You can get the API key on [Bungie.net](https://www.bungie.net/en/Application)
