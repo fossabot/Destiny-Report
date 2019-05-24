@@ -1,16 +1,5 @@
-const {
-  PHASE_DEVELOPMENT_SERVER,
-  PHASE_PRODUCTION_BUILD
-} = require("next/constants");
+const withPlugins = require("next-compose-plugins");
+const withSASS = require("@zeit/next-sass");
+const withImages = require("next-images");
 
-module.exports = (phase, { defaultConfig }) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
-    const withSASS = require("@zeit/next-sass");
-    return withSASS({
-      target: "serverless"
-    });
-  }
-  return {
-    target: "serverless"
-  };
-};
+module.exports = withPlugins([withSASS, withImages], { target: "serverless" });

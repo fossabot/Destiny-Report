@@ -1,0 +1,37 @@
+@import "variables";
+
+.header--wrapper {
+  height: 48px;
+  background-color: rgba(9, 10, 15, 0.637);
+  width: 100%;
+}
+
+.header--content {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.destiny-report--addon {
+  margin-left: auto;
+}
+.destiny-report--addon,
+.destiny-report--title {
+  &::after {
+    height: 2px;
+    display: block;
+    width: 100%;
+    background: $color-gold;
+    content: "";
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 1px;
+  }
+  &:hover:after {
+    transform: scale(1);
+  }
+}

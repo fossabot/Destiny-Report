@@ -1,3 +1,5 @@
 # Info
 
-This README is for Destiny Report v3 that we are working on, you can check the releases tab for older versions
+This README is for Destiny Report v3 that we are working on, you can check the releases tab for older versions.
+
+You can see the progress here https://destiny-report.sarkurd.now.sh
