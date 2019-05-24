@@ -5,10 +5,10 @@
   "author": "Sarbast Mohammed",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.0.0-beta.2",
-    "@material-ui/styles": "^4.0.0-beta.2",
-    "clsx": "^1.0.4",
+    "@zeit/next-sass": "^1.0.1",
+    "micro": "^9.3.4",
     "next": "^8.1.0",
+    "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
