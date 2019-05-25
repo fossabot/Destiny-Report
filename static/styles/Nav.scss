@@ -1,0 +1,33 @@
+@import "./variables";
+
+.navbar {
+  padding-top: 35px;
+  display: flex;
+}
+
+.navbar__item {
+  font-size: 20px;
+  margin-right: 20px;
+  display: block;
+
+  &::after {
+    height: 2px;
+    display: block;
+    width: 100%;
+    background: $color-gold;
+    content: "";
+    transform: scale(0);
+    transform-origin: center;
+    transition: all 0.3s ease-in-out;
+    margin-top: 1px;
+  }
+  &:hover:after {
+    transform: scale(1);
+  }
+
+  &.navbar__item-active {
+    &::after {
+      transform: scale(1);
+    }
+  }
+}

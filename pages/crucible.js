@@ -1,7 +1,12 @@
 import React from "react";
+import { UserAndNav } from "../src/components";
 
 const crucible = () => {
-  return <div>Crucible page</div>;
+  return (
+    <div>
+      <UserAndNav />
+    </div>
+  );
 };
 
 export default crucible;

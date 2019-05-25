@@ -1,0 +1,19 @@
+@import "./variables";
+
+.user-and-nav--wrapper {
+  display: flex;
+  align-items: center;
+  height: 200px;
+}
+
+.uan__user {
+  margin-right: 40px;
+
+  .user__id {
+    margin-bottom: 5px;
+    font-size: 45px;
+  }
+  .user__platform {
+    color: $color-dark-gray;
+  }
+}
