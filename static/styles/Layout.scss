@@ -11,14 +11,6 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: white;
   background-color: rgb(9, 10, 29);
-  background-image: url("../images/background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 80% center;
-
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-  text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased !important;
 }
 
 * {
@@ -33,6 +25,15 @@ a {
 #__next {
   height: 100%;
   width: 100%;
+  background-image: linear-gradient(to bottom right, #16253a6c, #202938cb),
+    url("../images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 80% center;
+
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .layout {

@@ -5,11 +5,11 @@ import "../../static/styles/UserAndNav.scss";
 const UserAndNav = () => {
   return (
     <div className="user-and-nav--wrapper">
-      <div className="uan__user">
+      <div className="uan__user__nav">
         <h1 className="user__id">xXSARKURDZz</h1>
-        <div className="user__platform">PSN</div>
+        <Nav />
       </div>
-      <Nav />
+      <div className="user__platform">PSN</div>
     </div>
   );
 };
