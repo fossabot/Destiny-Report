@@ -1,19 +1,40 @@
 @import "./variables";
+@import "./breakpoints";
 
 .user-and-nav--wrapper {
-  display: flex;
-  align-items: center;
   height: 200px;
+
+  @include breakpoint("mobile_portrait") {
+    height: 100px;
+  }
 }
 
-.uan__user {
-  margin-right: 40px;
+.uan__user__nav {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0;
+
+  @include breakpoint("mobile_portrait") {
+    margin-right: 20px;
+  }
 
   .user__id {
-    margin-bottom: 5px;
     font-size: 45px;
+    margin-bottom: 0;
+    margin-right: 20px;
+
+    @include breakpoint("mobile_landscape") {
+      font-size: 35px;
+    }
+    @include breakpoint(500px) {
+      font-size: 20px;
+    }
   }
-  .user__platform {
-    color: $color-dark-gray;
+}
+
+.user__platform {
+  color: $color-dark-gray;
+  @include breakpoint("mobile_portrait") {
+    font-size: 2vh;
   }
 }
