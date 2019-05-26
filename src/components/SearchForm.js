@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../../static/styles/SearchForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Spacer } from "./";
 
 const SearchForm = () => {
   const [user, setUserChange] = useState({
     guardianName: "",
     platform: {
-      name: "PSN",
+      name: "playstation",
       id: 2
     }
   });
@@ -14,28 +15,29 @@ const SearchForm = () => {
 
   useEffect(() => {
     window.addEventListener("click", e => {
-      if (!e.target.classList.contains("dropbtn")) {
-        setShowPlatforms(false);
-      }
+      setShowPlatforms(false);
     });
 
     return () => window.removeEventListener("click");
   }, []);
 
-  const showPlatformDropdown = () => {
+  const showPlatformDropdown = e => {
+    e.stopPropagation();
     setShowPlatforms(prev => !prev);
   };
   const handleUserFormChange = event => {
-    if (event.target.tagName === "INPUT") {
-      const value = event.target.value;
+    event.stopPropagation();
+
+    if (event.currentTarget.tagName === "INPUT") {
+      const value = event.currentTarget.value;
       setUserChange(prevState => ({
         ...prevState,
         guardianName: value
       }));
       return;
     }
-    const name = event.target.getAttribute("name");
-    const value = event.target.getAttribute("value");
+    const name = event.currentTarget.getAttribute("name");
+    const value = event.currentTarget.getAttribute("value");
     setShowPlatforms(prev => !prev);
     setUserChange(prevState => ({
       ...prevState,
@@ -56,22 +58,38 @@ const SearchForm = () => {
         <label>Search for a Guardian</label>
         <div className="input--wrapper">
           <div className="dropdown">
-            <button
-              type="button"
-              className="dropbtn"
-              onClick={showPlatformDropdown}
-            >
-              {user.platform.name}
-            </button>
+            <div className="dropbtn" onClick={showPlatformDropdown}>
+              <FontAwesomeIcon icon={["fab", user.platform.name]} />
+              <Spacer width="10px" />
+              <FontAwesomeIcon icon="chevron-down" size="1x" />
+            </div>
             <div className={`dropdown-content ${showPlatfoms ? "active" : ""}`}>
-              <div value={2} name="PSN" onClick={handleUserFormChange}>
-                PSN
+              <div
+                className="dropdown-item"
+                value={2}
+                name="playstation"
+                onClick={handleUserFormChange}
+              >
+                <FontAwesomeIcon icon={["fab", "playstation"]} />
+                <span>PSN</span>
               </div>
-              <div value={1} name="XBOX" onClick={handleUserFormChange}>
-                XBOX
+              <div
+                className="dropdown-item"
+                value={1}
+                name="xbox"
+                onClick={handleUserFormChange}
+              >
+                <FontAwesomeIcon icon={["fab", "xbox"]} />
+                <span>Xbox</span>
               </div>
-              <div value={4} name="Blizzard" onClick={handleUserFormChange}>
-                Blizzard
+              <div
+                className="dropdown-item"
+                value={4}
+                name="windows"
+                onClick={handleUserFormChange}
+              >
+                <FontAwesomeIcon icon={["fab", "windows"]} />
+                <span>Battle.net</span>
               </div>
             </div>
           </div>
