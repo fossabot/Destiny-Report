@@ -1,0 +1,135 @@
+@import "./variables";
+@import "./breakpoints";
+
+.search--wrapper {
+  width: 70%;
+
+  @include breakpoint("mobile_landscape") {
+    width: 90%;
+  }
+}
+.search--form {
+  font-size: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 30px;
+
+    @include breakpoint(500px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.input--wrapper {
+  display: flex;
+  position: relative;
+  .search--input {
+    width: 100%;
+    font-size: 45px;
+    display: flex;
+    padding: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.356);
+    color: #fff;
+    border: 1px solid $color-light-gray;
+    border-left: none;
+    outline: none;
+
+    @include breakpoint(550px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.platform--select {
+  width: 120px;
+  background-color: green;
+}
+
+.platform--select__inner__control {
+  height: 100%;
+}
+
+.dropbtn {
+  background-color: rgba(0, 0, 0, 0.356);
+  color: white;
+  padding: 10px;
+  font-size: 30px;
+  height: 100%;
+  border-top-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 5px;
+  border-left: 1px solid $color-light-gray;
+  border-right: none;
+  border-top: 1px solid $color-light-gray;
+  border-bottom: 1px solid $color-light-gray;
+  cursor: pointer;
+  outline: none;
+
+  @include breakpoint(500px) {
+    font-size: 20px;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.356);
+
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  &.active {
+    display: block;
+  }
+
+  @include breakpoint(550px) {
+    font-size: 20px;
+  }
+}
+
+.dropdown-content div {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background-color: #20243554;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: rgba(0, 0, 0, 0.411);
+}
+
+.search-button {
+  position: absolute;
+  font-size: 45px !important;
+  right: 20px;
+  top: 50%;
+
+  transform: translateY(-22px);
+  cursor: pointer;
+
+  @include breakpoint(550px) {
+    font-size: 30px !important;
+    transform: translateY(-15px);
+  }
+
+  &:hover {
+    color: rgba(13, 214, 120, 0.356);
+  }
+}
