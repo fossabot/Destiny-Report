@@ -1,12 +1,15 @@
 import React from "react";
 import { UserAndNav } from "../src/components";
 
-const player = () => {
+const player = ({ name, platform }) => {
   return (
     <div>
-      <UserAndNav />
+      <UserAndNav name={name} platform={platform} />
     </div>
   );
 };
 
+player.getInitialProps = ({ query }) => {
+  return { name: query.name, platform: query.platform };
+};
 export default player;

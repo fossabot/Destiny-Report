@@ -18,7 +18,7 @@ const SearchForm = () => {
       setShowPlatforms(false);
     });
 
-    return () => window.removeEventListener("click");
+    return () => window.removeEventListener("click", () => {});
   }, []);
 
   const showPlatformDropdown = e => {
