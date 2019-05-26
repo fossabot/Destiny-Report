@@ -5,7 +5,14 @@
   "author": "Sarbast Mohammed",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-brands-svg-icons": "^5.8.2",
+    "@fortawesome/free-regular-svg-icons": "^5.8.2",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "add": "^2.0.6",
     "classnames": "^2.2.6",
     "micro": "^9.3.4",
     "next": "^8.1.0",
@@ -14,7 +21,9 @@
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-select": "^2.4.3",
+    "yarn": "^1.16.0"
   },
   "scripts": {
     "dev": "next",
