@@ -25,7 +25,12 @@ const SearchHistory = () => {
     <ul className="search--history">
       {history.map((player, index) => (
         <li key={index} className="search--history__item">
-          <Link href={`/player/${player.platform.value}/${player.name}`}>
+          <Link
+            href={`/player?platform=${player.platform.value}&name=${
+              player.name
+            }`}
+            as={`/player/${player.platform.value}/${player.name}`}
+          >
             <a>
               <FontAwesomeIcon
                 icon={["fab", platformsList[player.platform.id]]}

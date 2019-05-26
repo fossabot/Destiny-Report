@@ -7,7 +7,7 @@ const ActiveLink = ({ router, activeClassName, children, ...props }) => {
   const child = Children.only(children);
 
   const className = cx(child.props.className, {
-    [activeClassName]: router.asPath === props.as && activeClassName
+    [activeClassName]: router.asPath === props.as
   });
 
   return <Link {...props}>{React.cloneElement(child, { className })}</Link>;
