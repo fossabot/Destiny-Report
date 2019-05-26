@@ -5,3 +5,4 @@ export { default as Nav } from "./Nav";
 export { default as UserAndNav } from "./UserAndNav";
 export { default as SearchForm } from "./SearchForm";
 export { default as Spacer } from "./Spacer";
+export { default as SearchHistory } from "./SearchHistory";

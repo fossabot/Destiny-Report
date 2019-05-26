@@ -1,12 +1,16 @@
 import React from "react";
 import { UserAndNav } from "../src/components";
 
-const raid = () => {
+const raid = ({ name, platform }) => {
   return (
     <div>
-      <UserAndNav />
+      <UserAndNav name={name} platform={platform} />
     </div>
   );
+};
+
+raid.getInitialProps = ({ query }) => {
+  return { name: query.name, platform: query.platform };
 };
 
 export default raid;

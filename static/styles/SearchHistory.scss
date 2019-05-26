@@ -1,0 +1,46 @@
+@import "./variables";
+@import "./breakpoints";
+
+.search--history {
+  max-height: 250px;
+  overflow: auto;
+  padding: 0;
+  max-width: 500px;
+  width: 500px;
+  @include breakpoint(720px) {
+    width: 300px;
+  }
+  @include breakpoint(500px) {
+    width: 250px;
+  }
+}
+.search--history__item {
+  font-size: 30px;
+  color: $color-light-gray;
+  background: linear-gradient(
+    to right,
+    rgba(5, 5, 5, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(78, 88, 102, 0) 100%
+  );
+  padding: 10px;
+  cursor: pointer;
+
+  @include breakpoint(600px) {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      rgba(5, 5, 5, 0.66) 0%,
+      rgba(0, 0, 0, 0.66) 0%,
+      rgba(0, 0, 0, 0.09) 86%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  a {
+    display: flex;
+  }
+}
