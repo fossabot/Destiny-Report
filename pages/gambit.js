@@ -1,10 +1,11 @@
 import React from "react";
-import { UserAndNav } from "../src/components";
+import { UserAndNav, Loading } from "../src/components";
 
 const gambit = ({ name, platform }) => {
   return (
-    <div>
-      <UserAndNav name={name} platform={platform} />
+    <div className="gambit--wrapper" style={{ height: "100%" }}>
+      {/* <UserAndNav name={name} platform={platform} /> */}
+      <Loading />
     </div>
   );
 };
