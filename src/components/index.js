@@ -8,3 +8,4 @@ export { default as Spacer } from "./Spacer";
 export { default as SearchHistory } from "./SearchHistory";
 export { default as Loadout } from "./Loadout";
 export { default as EquippedItem } from "./EquippedItem";
+export { default as Loading } from "./Loading";
