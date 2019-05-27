@@ -2,7 +2,7 @@
 @import "./breakpoints";
 
 .user-and-nav--wrapper {
-  height: 200px;
+  height: 150px;
 
   @include breakpoint("mobile_portrait") {
     height: 100px;

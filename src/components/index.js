@@ -6,3 +6,5 @@ export { default as UserAndNav } from "./UserAndNav";
 export { default as SearchForm } from "./SearchForm";
 export { default as Spacer } from "./Spacer";
 export { default as SearchHistory } from "./SearchHistory";
+export { default as Loadout } from "./Loadout";
+export { default as EquippedItem } from "./EquippedItem";
