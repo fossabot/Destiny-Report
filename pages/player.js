@@ -1,10 +1,16 @@
 import React from "react";
-import { UserAndNav } from "../src/components";
+import { UserAndNav, Loadout } from "../src/components";
+import "../static/styles/Player.scss";
 
 const player = ({ name, platform }) => {
   return (
-    <div>
+    <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />
+      <main className="loadouts--wrapper">
+        <Loadout />
+        <Loadout />
+        <Loadout />
+      </main>
     </div>
   );
 };
