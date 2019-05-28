@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Router from "next/router";
 import "../../static/styles/SearchForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spacer } from "./";
+import UserContext from "../context/UserContext";
+import GlobalContext from "../context/GlobalContext";
+import { getMembershipID } from "../utils/endpoints";
 
 const SearchForm = () => {
   const [user, setUserChange] = useState({
-    guardianName: "",
+    name: "",
     platform: {
-      name: "playstation",
+      name: "psn",
+      icon: "playstation",
       id: 2
     }
   });
   const [showPlatfoms, setShowPlatforms] = useState(false);
+
+  const { dispatch } = useContext(UserContext);
+  const { setGlobalState } = useContext(GlobalContext);
 
   useEffect(() => {
     window.addEventListener("click", e => {
       setShowPlatforms(false);
     });
 
-    return () => window.removeEventListener("click", () => {});
+    return () => {
+      window.removeEventListener("click", () => {});
+    };
   }, []);
 
   const showPlatformDropdown = e => {
@@ -32,34 +42,66 @@ const SearchForm = () => {
       const value = event.currentTarget.value;
       setUserChange(prevState => ({
         ...prevState,
-        guardianName: value
+        name: value
       }));
       return;
     }
     const name = event.currentTarget.getAttribute("name");
     const value = event.currentTarget.getAttribute("value");
+    const icon = event.currentTarget.getAttribute("data-platform");
     setShowPlatforms(prev => !prev);
     setUserChange(prevState => ({
       ...prevState,
       platform: {
         ...prevState.platform,
-        name: name,
+        name,
+        icon,
         id: value
       }
     }));
   };
-  const onSubmit = () => {
-    console.log("Submitted");
+  const formSubmitHandler = async e => {
+    e.preventDefault();
+    setGlobalState({ showLoader: true });
+    const res = await getMembershipID(user.name, user.platform.id);
+
+    if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
+      const previousHistory =
+        JSON.parse(localStorage.getItem("searchHistory")) || [];
+      previousHistory.unshift({
+        name: user.name,
+        platform: { id: user.platform.id, name: user.platform.name }
+      });
+
+      previousHistory.splice(10);
+      localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
+
+      dispatch({ type: "SET_USER_DATA", payload: res.data.Response[0] });
+
+      Router.push(
+        `/player?platform=${user.platform.name}&name=${
+          res.data.Response[0].displayName
+        }`,
+        `/player/${user.platform.name}/${res.data.Response[0].displayName}`
+      );
+    } else {
+      setGlobalState({
+        showLoader: false,
+        error: true,
+        errorMessage: "Guardian Not Found",
+        errorLevel: 1
+      });
+    }
   };
 
   return (
     <div className="search--wrapper">
-      <form className="search--form" onSubmit={onSubmit}>
+      <form className="search--form" onSubmit={formSubmitHandler}>
         <label>Search for a Guardian</label>
         <div className="input--wrapper">
           <div className="dropdown">
             <div className="dropbtn" onClick={showPlatformDropdown}>
-              <FontAwesomeIcon icon={["fab", user.platform.name]} />
+              <FontAwesomeIcon icon={["fab", user.platform.icon]} />
               <Spacer width="10px" />
               <FontAwesomeIcon icon="chevron-down" size="1x" />
             </div>
@@ -67,7 +109,8 @@ const SearchForm = () => {
               <div
                 className="dropdown-item"
                 value={2}
-                name="playstation"
+                name="psn"
+                data-platform="playstation"
                 onClick={handleUserFormChange}
               >
                 <FontAwesomeIcon icon={["fab", "playstation"]} />
@@ -76,7 +119,8 @@ const SearchForm = () => {
               <div
                 className="dropdown-item"
                 value={1}
-                name="xbox"
+                name="xbl"
+                data-platform="xbox"
                 onClick={handleUserFormChange}
               >
                 <FontAwesomeIcon icon={["fab", "xbox"]} />
@@ -85,7 +129,8 @@ const SearchForm = () => {
               <div
                 className="dropdown-item"
                 value={4}
-                name="windows"
+                name="bnet"
+                data-platform="windows"
                 onClick={handleUserFormChange}
               >
                 <FontAwesomeIcon icon={["fab", "windows"]} />
@@ -98,10 +143,15 @@ const SearchForm = () => {
             type="text"
             id="guardian-input"
             placeholder="Enter a Guardian"
-            value={user.guardianName}
+            autoComplete="off"
+            value={user.name}
             onChange={handleUserFormChange}
           />
-          <FontAwesomeIcon className="search-button" icon="arrow-right" />
+          <FontAwesomeIcon
+            onClick={formSubmitHandler}
+            className="search-button"
+            icon="arrow-right"
+          />
         </div>
       </form>
     </div>

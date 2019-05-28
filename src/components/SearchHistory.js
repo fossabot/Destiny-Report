@@ -7,16 +7,8 @@ import "../../static/styles/SearchHistory.scss";
 const SearchHistory = () => {
   const [history, setHistory] = useState([]);
   useEffect(() => {
-    const storageHistory = JSON.parse(
-      localStorage.getItem("searchHistory")
-    ) || [
-      { name: "xXSARKURDZz", platform: { id: 2, value: "psn" } },
-      { name: "PickleRick", platform: { id: 1, value: "xbl" } },
-      { name: "Gladd#11111", platform: { id: 4, value: "bnet" } },
-      { name: "xEdrisx", platform: { id: 2, value: "psn" } },
-      { name: "xXSARKURDZz", platform: { id: 1, value: "xbl" } }
-    ];
-
+    const storageHistory =
+      JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storageHistory);
   }, []);
 
@@ -26,10 +18,10 @@ const SearchHistory = () => {
       {history.map((player, index) => (
         <li key={index} className="search--history__item">
           <Link
-            href={`/player?platform=${player.platform.value}&name=${
+            href={`/player?platform=${player.platform.name}&name=${
               player.name
             }`}
-            as={`/player/${player.platform.value}/${player.name}`}
+            as={`/player/${player.platform.name}/${player.name}`}
           >
             <a>
               <FontAwesomeIcon
