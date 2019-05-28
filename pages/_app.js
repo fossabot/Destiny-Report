@@ -1,7 +1,6 @@
 import React from "react";
 import App, { Container } from "next/app";
 import { Layout } from "../src/Layout";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faPaypal,
@@ -13,6 +12,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+
+import { UserProvider } from "../src/context/UserContext";
+import { GlobalProvider } from "../src/context/GlobalContext";
 
 library.add(
   faPaypal,
@@ -38,9 +40,13 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Container>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <GlobalProvider>
+          <UserProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </UserProvider>
+        </GlobalProvider>
       </Container>
     );
   }
