@@ -93,7 +93,15 @@ const SearchForm = () => {
       Router.push(
         `/player?platform=${user.platform.name}&name=${displayName}`,
         `/player/${user.platform.name}/${displayName}`
-      );
+      ).then(() => {
+        setGlobalState(prev => ({
+          ...prev,
+          showLoader: false,
+          error: false,
+          errorMessage: "Something went wrong!",
+          errorLevel: 1
+        }));
+      });
     } else {
       setGlobalState({
         showLoader: false,

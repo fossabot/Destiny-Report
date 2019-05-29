@@ -10,8 +10,12 @@ const Layout = ({ children }) => {
       <Header />
       <Modal
         active={globalState.error}
-        errorMessage="Guardian Not Found"
-        secondaryMessage="Battle.net ids must be in this format name#id, example: Gladd#11693"
+        errorMessage={globalState.errorMessage}
+        secondaryMessage={
+          globalState.errorLevel === 1
+            ? "Battle.net ids must be in this format name#id, example: Gladd#11693"
+            : ""
+        }
       />
       <div className="main--wrapper">
         <main className="main--content">{children}</main>

@@ -58,7 +58,7 @@ const styles = {
   }
 };
 
-const Modal = ({ errorMessage, secondaryMessage, classes, active }) => {
+const Modal = ({ errorMessage, secondaryMessage, classes }) => {
   const { setGlobalState } = useContext(GlobalContext);
 
   const updateGlobalState = () => {
