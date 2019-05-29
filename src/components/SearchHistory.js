@@ -18,10 +18,12 @@ const SearchHistory = () => {
       {history.map((player, index) => (
         <li key={index} className="search--history__item">
           <Link
-            href={`/player?platform=${player.platform.name}&name=${
+            href={`/player?platform=${
+              player.platform.name
+            }&name=${encodeURIComponent(player.name)}`}
+            as={`/player/${player.platform.name}/${encodeURIComponent(
               player.name
-            }`}
-            as={`/player/${player.platform.name}/${player.name}`}
+            )}`}
           >
             <a>
               <FontAwesomeIcon
