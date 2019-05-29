@@ -66,11 +66,23 @@ const SearchForm = () => {
     const res = await getMembershipID(user.name, user.platform.id);
 
     if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
-      const previousHistory =
+      const nakedDisplayName = res.data.Response[0].displayName;
+      const displayName = encodeURIComponent(res.data.Response[0].displayName);
+
+      let previousHistory =
         JSON.parse(localStorage.getItem("searchHistory")) || [];
+      previousHistory;
+
+      previousHistory = previousHistory.filter(
+        player => player.name.trim() !== nakedDisplayName.trim()
+      );
+
       previousHistory.unshift({
-        name: user.name,
-        platform: { id: user.platform.id, name: user.platform.name }
+        name: nakedDisplayName,
+        platform: {
+          id: user.platform.id,
+          name: user.platform.name
+        }
       });
 
       previousHistory.splice(10);
@@ -79,10 +91,8 @@ const SearchForm = () => {
       dispatch({ type: "SET_USER_DATA", payload: res.data.Response[0] });
 
       Router.push(
-        `/player?platform=${user.platform.name}&name=${
-          res.data.Response[0].displayName
-        }`,
-        `/player/${user.platform.name}/${res.data.Response[0].displayName}`
+        `/player?platform=${user.platform.name}&name=${displayName}`,
+        `/player/${user.platform.name}/${displayName}`
       );
     } else {
       setGlobalState({

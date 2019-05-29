@@ -6,11 +6,11 @@ const player = ({ name, platform }) => {
   return (
     <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />
-      <main className="loadouts--wrapper">
+      <div className="loadouts--wrapper">
         <Loadout />
         <Loadout />
         <Loadout />
-      </main>
+      </div>
     </div>
   );
 };
