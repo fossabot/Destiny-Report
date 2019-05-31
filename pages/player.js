@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Router from "next/router";
 import { UserAndNav, Loadout } from "../src/components";
 import "../static/styles/Player.scss";
-import UserContext from "../src/context/UserContext";
-import GlobalContext from "../src/context/GlobalContext";
+
 import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
 
 const player = ({ name, platform, loadout }) => {
-  // const { setGlobalState } = useContext(GlobalContext);
-
   return (
     <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />

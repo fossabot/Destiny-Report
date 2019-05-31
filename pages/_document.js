@@ -1,6 +1,7 @@
 import React from "react";
 import Document from "next/document";
 import Head from "next/head";
+import "../static/styles/nprogress.css";
 
 import { SheetsRegistry, JssProvider, createGenerateId } from "react-jss";
 
@@ -23,6 +24,7 @@ export default class JssDocument extends Document {
                   />
                   <link
                     rel="stylesheet"
+                    type="text/css"
                     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
                   />
                 </Head>

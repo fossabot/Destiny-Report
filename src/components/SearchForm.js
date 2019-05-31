@@ -88,7 +88,11 @@ const SearchForm = () => {
       previousHistory.splice(10);
       localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
 
-      setUserState(true, res.data.Response[0]);
+      setUserState({
+        fetchinSucceed: true,
+        fetchingFailed: false,
+        user: res.data.Response[0]
+      });
 
       Router.push(
         `/player?platform=${user.platform.name}&name=${displayName}`,
