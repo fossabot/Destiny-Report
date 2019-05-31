@@ -102,16 +102,14 @@ const SearchForm = () => {
           ...prev,
           showLoader: false,
           error: false,
-          errorMessage: "Something went wrong!",
-          errorLevel: 1
+          errorMessage: "Something went wrong!"
         }));
       });
     } else {
       setGlobalState({
         showLoader: false,
         error: true,
-        errorMessage: "Guardian Not Found",
-        errorLevel: 1
+        errorMessage: "Guardian Not Found"
       });
     }
   };

@@ -1,7 +1,6 @@
 import React from "react";
 import Document from "next/document";
 import Head from "next/head";
-import "../static/styles/nprogress.css";
 
 import { SheetsRegistry, JssProvider, createGenerateId } from "react-jss";
 

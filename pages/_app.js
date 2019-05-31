@@ -12,7 +12,11 @@ import {
   faPlaystation,
   faXbox
 } from "@fortawesome/free-brands-svg-icons";
-import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faChevronDown,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import { UserProvider } from "../src/context/UserContext";
@@ -20,6 +24,7 @@ import { GlobalProvider } from "../src/context/GlobalContext";
 import { Loading } from "../src/components";
 
 library.add(
+  faTimes,
   faPaypal,
   faTwitter,
   faGithub,

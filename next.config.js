@@ -4,5 +4,8 @@ const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
 
 module.exports = withPlugins([withSASS, withCSS, withImages], {
-  target: "serverless"
+  target: "serverless",
+  env: {
+    API_KEY: "1eec7ade76114bf280b3e4e468a8ff3f"
+  }
 });

@@ -21,6 +21,11 @@ const player = ({ name, platform, loadout }) => {
 
 player.getInitialProps = async ({ query, res }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
+  const BASE_URL =
+    process.env.NODE_ENV !== "development"
+      ? "https://destiny-report.sarkurd.now.sh"
+      : "http://localhost:3000";
+
   try {
     const response = await getMembershipID(
       query.name,
@@ -30,7 +35,7 @@ player.getInitialProps = async ({ query, res }) => {
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
       const { membershipId, membershipType } = response.data.Response[0];
       const { data: loadout } = await axios.get(
-        `http://localhost:3000/api/player?membershipId=${membershipId}&membershipType=${membershipType}`
+        `${BASE_URL}/api/player?membershipId=${membershipId}&membershipType=${membershipType}`
       );
 
       return {
@@ -39,16 +44,27 @@ player.getInitialProps = async ({ query, res }) => {
         platform: query.platform
       };
     } else {
-      throw new Error("notfound");
+      throw new Error("not found");
     }
   } catch (err) {
-    if (res) {
-      res.writeHead(302, { Location: "/?error=notfound" });
-      res.end();
-      return;
+    if (err.message === "not found") {
+      if (res) {
+        res.writeHead(302, { Location: "/?error=1" });
+        res.end();
+        return;
+      } else {
+        Router.push(`/?error=1`, "/");
+      }
     } else {
-      Router.push(`/?error=notfound`, "/");
+      if (res) {
+        res.writeHead(302, { Location: "/?error=2" });
+        res.end();
+        return;
+      } else {
+        Router.push(`/?error=2`, "/");
+      }
     }
   }
+  return {};
 };
 export default player;
