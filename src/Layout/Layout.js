@@ -14,9 +14,7 @@ const Layout = ({ children }) => {
         active={globalState.error}
         errorMessage={globalState.errorMessage}
         secondaryMessage={
-          globalState.errorLevel === 1
-            ? "Battle.net ids must be in this format name#id, example: Gladd#11693"
-            : ""
+          "Battle.net ids must be in this format name#id, example: Gladd#11693"
         }
       />
       <div className="main--wrapper">

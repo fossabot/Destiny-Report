@@ -65,8 +65,7 @@ const Modal = ({ errorMessage, secondaryMessage, classes }) => {
     setGlobalState(prev => ({
       ...prev,
       error: false,
-      errorMessage: "Something went wrong!",
-      errorLevel: 1
+      errorMessage: "Something went wrong!"
     }));
   };
 
@@ -76,7 +75,7 @@ const Modal = ({ errorMessage, secondaryMessage, classes }) => {
         <FontAwesomeIcon
           size="2x"
           className={classes.modaleClose}
-          icon={["fab", "playstation"]}
+          icon={["fa", "times"]}
           onClick={updateGlobalState}
         />
         <div className={classes.primaryMessage}>{errorMessage}</div>

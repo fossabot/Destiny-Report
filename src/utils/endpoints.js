@@ -1,7 +1,7 @@
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
 
-axios.defaults.headers.common["X-API-KEY"] = "1eec7ade76114bf280b3e4e468a8ff3f";
+axios.defaults.headers.common["X-API-KEY"] = process.env.API_KEY;
 
 const limitedAxios = rateLimit(axios.create(), {
   maxRequests: 100,

@@ -7,12 +7,17 @@ const index = ({ error }) => {
   const { globalState, setGlobalState } = useContext(GlobalContext);
 
   useEffect(() => {
-    if (error === "notfound") {
+    if (error === "1") {
       setGlobalState({
         showLoader: false,
         error: true,
-        errorMessage: "Guardian Not Found",
-        errorLevel: 1
+        errorMessage: "Guardian Not Found"
+      });
+    } else if (error === "2") {
+      setGlobalState({
+        showLoader: false,
+        error: true,
+        errorMessage: "Somthing Went Wrong"
       });
     }
   }, []);
