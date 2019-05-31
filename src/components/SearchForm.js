@@ -18,7 +18,7 @@ const SearchForm = () => {
   });
   const [showPlatfoms, setShowPlatforms] = useState(false);
 
-  const { dispatch } = useContext(UserContext);
+  const { setUserState } = useContext(UserContext);
   const { setGlobalState } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const SearchForm = () => {
       previousHistory.splice(10);
       localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
 
-      dispatch({ type: "SET_USER_DATA", payload: res.data.Response[0] });
+      setUserState(true, res.data.Response[0]);
 
       Router.push(
         `/player?platform=${user.platform.name}&name=${displayName}`,

@@ -2,6 +2,7 @@ import React from "react";
 import App, { Container } from "next/app";
 import { Layout } from "../src/Layout";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import Router from "next/router";
 import {
   faPaypal,
   faTwitter,
@@ -13,7 +14,7 @@ import {
 import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import { UserProvider } from "../src/context/UserContext";
+import UserContext from "../src/context/UserContext";
 import { GlobalProvider } from "../src/context/GlobalContext";
 
 library.add(
@@ -28,7 +29,15 @@ library.add(
 );
 
 export default class MyApp extends App {
+  state = {
+    user: {},
+    fetchingSucceed: false,
+    fecthingFailed: false
+  };
+
   componentDidMount() {
+  
+
     const style = document.getElementById("server-side-styles");
 
     if (style) {
@@ -36,16 +45,26 @@ export default class MyApp extends App {
     }
   }
 
+  setUserState = (succeed, userData) => {
+    this.setState({
+      user: userData,
+      fetchingSucceed: succeed,
+      fecthingFailed: !succeed
+    });
+  };
+
   render() {
     const { Component, pageProps } = this.props;
     return (
       <Container>
         <GlobalProvider>
-          <UserProvider>
+          <UserContext.Provider
+            value={{ userState: this.state, setUserState: this.setUserState }}
+          >
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </UserProvider>
+          </UserContext.Provider>
         </GlobalProvider>
       </Container>
     );
