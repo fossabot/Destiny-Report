@@ -3,6 +3,7 @@ import App, { Container } from "next/app";
 import { Layout } from "../src/Layout";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Router from "next/router";
+import NProgress from "nprogress";
 import {
   faPaypal,
   faTwitter,
@@ -14,8 +15,9 @@ import {
 import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import UserContext from "../src/context/UserContext";
+import { UserProvider } from "../src/context/UserContext";
 import { GlobalProvider } from "../src/context/GlobalContext";
+import { Loading } from "../src/components";
 
 library.add(
   faPaypal,
@@ -30,13 +32,22 @@ library.add(
 
 export default class MyApp extends App {
   state = {
-    user: {},
-    fetchingSucceed: false,
-    fecthingFailed: false
+    showLoader: false
   };
 
   componentDidMount() {
-  
+    Router.events.on("routeChangeStart", () => {
+      this.setState({ showLoader: true });
+      NProgress.start();
+    });
+    Router.events.on("routeChangeComplete", () => {
+      this.setState({ showLoader: false });
+      NProgress.done();
+    });
+    Router.events.on("routeChangeError", () => {
+      this.setState({ showLoader: false });
+      NProgress.done();
+    });
 
     const style = document.getElementById("server-side-styles");
 
@@ -55,16 +66,15 @@ export default class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
+    const { showLoader } = this.state;
     return (
       <Container>
         <GlobalProvider>
-          <UserContext.Provider
-            value={{ userState: this.state, setUserState: this.setUserState }}
-          >
+          <UserProvider>
             <Layout>
-              <Component {...pageProps} />
+              {showLoader ? <Loading /> : <Component {...pageProps} />}
             </Layout>
-          </UserContext.Provider>
+          </UserProvider>
         </GlobalProvider>
       </Container>
     );
