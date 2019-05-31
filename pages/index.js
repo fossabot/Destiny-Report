@@ -1,10 +1,21 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useEffect } from "react";
 import { SearchForm, SearchHistory, Spacer, Loading } from "../src/components";
 import "../static/styles/Home.scss";
 import GlobalContext from "../src/context/GlobalContext";
 
-const index = () => {
-  const { globalState } = useContext(GlobalContext);
+const index = ({ error }) => {
+  const { globalState, setGlobalState } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (error === "notfound") {
+      setGlobalState({
+        showLoader: false,
+        error: true,
+        errorMessage: "Guardian Not Found",
+        errorLevel: 1
+      });
+    }
+  }, []);
 
   return (
     <div className="home--wrapper">
@@ -19,6 +30,10 @@ const index = () => {
       )}
     </div>
   );
+};
+
+index.getInitialProps = ({ query }) => {
+  return { error: query.error };
 };
 
 export default index;

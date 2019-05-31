@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import Router from "next/router";
 import { Header, Footer, Modal } from "../components";
 import "../../static/styles/Layout.scss";
 import GlobalContext from "../context/GlobalContext";
 
 const Layout = ({ children }) => {
   const { globalState } = useContext(GlobalContext);
+
   return (
     <div className="layout">
       <Header />
