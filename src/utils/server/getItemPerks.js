@@ -31,10 +31,12 @@ module.exports = (membershipId, membershipType, item) => {
             "DestinySandboxPerkDefinition"
           );
 
-          perks.push({
-            name: itemPerkDefinition.displayProperties.name,
-            icon: itemPerkDefinition.displayProperties.icon
-          });
+          if (itemPerkDefinition.displayProperties.name) {
+            perks.push({
+              name: itemPerkDefinition.displayProperties.name,
+              icon: itemPerkDefinition.displayProperties.icon
+            });
+          }
         }
       }
 
@@ -49,7 +51,6 @@ module.exports = (membershipId, membershipType, item) => {
         data.level = itemPerksLevel.instance.data.primaryStat.value;
       }
     } catch (error) {
-      console.log(error);
       data = {
         name: "Error",
         icon: "Error",

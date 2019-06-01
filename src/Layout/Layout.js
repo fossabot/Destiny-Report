@@ -10,13 +10,7 @@ const Layout = ({ children }) => {
   return (
     <div className="layout">
       <Header />
-      <Modal
-        active={globalState.error}
-        errorMessage={globalState.errorMessage}
-        secondaryMessage={
-          "Battle.net ids must be in this format name#id, example: Gladd#11693"
-        }
-      />
+      <Modal active={globalState.error} />
       <div className="main--wrapper">
         <main className="main--content">{children}</main>
       </div>

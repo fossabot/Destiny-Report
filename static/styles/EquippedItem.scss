@@ -7,6 +7,8 @@ $color-gray: #8f8f8f;
 }
 
 .et__icon {
+  min-width: 60px;
+  min-height: 60px;
   width: 60px;
   height: 60px;
   margin: 5px;
@@ -19,6 +21,8 @@ $color-gray: #8f8f8f;
 
 .et__description {
   margin: 5px 0;
+  flex: 1;
+  overflow: hidden;
 
   .et__category {
     color: $color-gray;
@@ -28,10 +32,18 @@ $color-gray: #8f8f8f;
 
   .et__perks {
     display: flex;
+    overflow: hidden;
+
+    &::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
 
     .et__perk-icon {
-      height: 25px;
-      width: 25px;
+      min-height: 25px;
+      min-width: 25px;
+      max-height: 25px;
+      max-width: 25px;
       margin-right: 5px;
 
       img {

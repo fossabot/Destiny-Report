@@ -102,14 +102,17 @@ const SearchForm = () => {
           ...prev,
           showLoader: false,
           error: false,
-          errorMessage: "Something went wrong!"
+          errorStatus: "Something Went Wrong!",
+          errorMessage: "Please Try Again Later"
         }));
       });
     } else {
       setGlobalState({
         showLoader: false,
         error: true,
-        errorMessage: "Guardian Not Found"
+        errorStatus: "Guardian Not Found",
+        errorMessage:
+          "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
       });
     }
   };

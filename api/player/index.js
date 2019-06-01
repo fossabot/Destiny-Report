@@ -13,6 +13,17 @@ module.exports = async (req, res) => {
         205
       ]);
 
+      if (profileReponse.data.ErrorCode !== 1) {
+        res.end(
+          JSON.stringify({
+            ErrorCode: profileReponse.data.ErrorCode,
+            success: false,
+            ErrorStatus: profileReponse.data.ErrorStatus,
+            Message: profileReponse.data.Message
+          })
+        );
+        return;
+      }
       const equipments = profileReponse.data.Response.characterEquipment.data;
       const characters = profileReponse.data.Response.characters.data;
       const charactersIds = Object.keys(equipments);
@@ -31,21 +42,29 @@ module.exports = async (req, res) => {
 
       const perksAndDefinition = await Promise.all(promisesTobeResolved);
 
-      res.end(JSON.stringify(perksAndDefinition));
+      res.end(
+        JSON.stringify({
+          success: true,
+          data: perksAndDefinition
+        })
+      );
     } else {
       res.end(
         JSON.stringify({
-          success: "false",
-          error: "MembershipId and membershipType required"
+          success: false,
+          ErrorCode: 18,
+          ErrorStatus: "MembershipId And(Or) MembershipType Not Found",
+          Message: "MembershipId And MembershipType Are Required"
         })
       );
     }
   } catch (err) {
-    console.log(err);
     res.end(
       JSON.stringify({
-        success: "false",
-        error: "Something went wrong"
+        success: false,
+        ErrorCode: 111993,
+        ErrorStatus: "Something Went Wrong",
+        Message: "Please Try Again Later"
       })
     );
   }
