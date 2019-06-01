@@ -10,6 +10,7 @@ module.exports = (membershipId, membershipType, equipments, character) => {
       race: constansts.raceType[character.raceType],
       gender: constansts.genderType[character.genderType],
       class: constansts.classType[character.classType],
+      emblem: character.emblemBackgroundPath,
       items: []
     };
     const promisesToBeResolved = [];
@@ -20,7 +21,22 @@ module.exports = (membershipId, membershipType, equipments, character) => {
     }
     const itemsPerks = await Promise.all(promisesToBeResolved);
 
-    simplifiedCharacterData.items = itemsPerks;
+    const items = {
+      3: [],
+      2: [],
+      16: [],
+      24: [],
+      22: [],
+      21: [],
+      17: [],
+      14: []
+    };
+    for (let i = 0; i < itemsPerks.length; ++i) {
+      if (items[itemsPerks[i].itemType]) {
+        items[itemsPerks[i].itemType].push(itemsPerks[i]);
+      }
+    }
+    simplifiedCharacterData.items = items;
     resolve(simplifiedCharacterData);
   });
 };

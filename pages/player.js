@@ -11,9 +11,9 @@ const player = ({ name, platform, loadout }) => {
     <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />
       <div className="loadouts--wrapper">
-        <Loadout />
-        <Loadout />
-        <Loadout />
+        {loadout.map(data => (
+          <Loadout key={data.characterId} data={data} name={name} />
+        ))}
       </div>
     </div>
   );
@@ -34,37 +34,44 @@ player.getInitialProps = async ({ query, res }) => {
 
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
       const { membershipId, membershipType } = response.data.Response[0];
-      const { data: loadout } = await axios.get(
+      const loadoutResponse = await axios.get(
         `${BASE_URL}/api/player?membershipId=${membershipId}&membershipType=${membershipType}`
       );
 
-      return {
-        loadout,
-        name: response.data.Response[0].displayName,
-        platform: query.platform
-      };
+      if (loadoutResponse.data.success) {
+        return {
+          loadout: loadoutResponse.data.data,
+          name: response.data.Response[0].displayName,
+          platform: query.platform
+        };
+      } else {
+        throw new Error(
+          JSON.stringify({
+            ErrorStatus: loadoutResponse.data.ErrorStatus,
+            Message: loadoutResponse.data.Message
+          })
+        );
+      }
     } else {
-      throw new Error("not found");
+      throw new Error(
+        JSON.stringify({
+          ErrorStatus: "Player Not Found",
+          Message: "Make Sure to Choose The Correct Platform"
+        })
+      );
     }
-  } catch (err) {
-    if (err.message === "not found") {
-      if (res) {
-        res.writeHead(302, { Location: "/?error=1" });
-        res.end();
-        return;
-      } else {
-        Router.push(`/?error=1`, "/");
-      }
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    if (res) {
+      res.writeHead(302, {
+        Location: `/?error=${err.ErrorStatus}&message=${err.Message}`
+      });
+      res.end();
+      return;
     } else {
-      if (res) {
-        res.writeHead(302, { Location: "/?error=2" });
-        res.end();
-        return;
-      } else {
-        Router.push(`/?error=2`, "/");
-      }
+      Router.push(`/?error=${err.ErrorStatus}&message=${err.Message}`, "/");
     }
   }
-  return {};
+  return { loadout: [], name: null, platform: null };
 };
 export default player;

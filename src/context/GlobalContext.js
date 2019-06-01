@@ -6,7 +6,8 @@ const GlobalProvider = props => {
   const [globalState, setGlobalState] = useState({
     showLoader: false,
     error: false,
-    errorMessage: "Something went wrong!"
+    errorStatus: "Something Went Wrong!",
+    errorMessage: "Please Try Again Later"
   });
 
   return (

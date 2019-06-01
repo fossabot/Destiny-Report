@@ -3,12 +3,9 @@ import "../../static/styles/Loadout.scss";
 import { EquippedItem, Subclass } from ".";
 import withStyles from "react-jss";
 
-const icon =
-  "https://www.bungie.net/common/destiny2_content/icons/8e7fec497d1649f736dc71f7c550a805.jpg";
-
 const styles = {
   characterEmblem: {
-    backgroundImage: `url(${icon})`,
+    backgroundImage: props => `url(https://www.bungie.net${props.data.emblem})`,
     width: "100%",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -24,125 +21,80 @@ const styles = {
   },
   playerClass: {
     fontSize: "15px",
-    color: "#908a8a",
-    fontWeight: "500"
+    color: "#f3f3f3",
+    fontWeight: "500",
+    textShadow: "2px 4px 3px rgba(0,0,0,0.3)"
   },
   playerName: {
     fontSize: "20px",
     fontWeight: "bold"
     // marginBottom: "5px"
   },
-  characterPowerLevel: {
+  characterLightHours: {
     position: "absolute",
     right: "10px",
+    top: "10px",
+    fontWeight: "bold"
+  },
+  characterPowerLevel: {
     fontSize: "30px",
-    fontWeight: "bold",
-    color: "#2cb3ad",
-    top: "10px"
+    color: "#2cb3ad"
+  },
+  characterHoursPlayed: {
+    fontSize: "14px",
+    textAlign: "right",
+    textShadow: "2px 4px 3px rgba(0,0,0,0.3)",
+    color: "#f3f3f3"
   }
 };
 
-const Loadout = ({ classes }) => {
+const Loadout = ({ classes, data, name }) => {
   return (
     <div className="loadout--wrapper">
       <div className={classes.characterEmblem}>
         <div className={classes.playerNameClass}>
-          <div className={classes.playerName}>xXSARKURDZz</div>
-          <div className={classes.playerClass}>Titan Human</div>
+          <div className={classes.playerName}>{name}</div>
+          <div className={classes.playerClass}>{`${data.class} ${data.race} ${
+            data.gender
+          } `}</div>
         </div>
-        <div className={classes.characterPowerLevel}>700</div>
+        <div className={classes.characterLightHours}>
+          <div className={classes.characterPowerLevel}>✧{data.light}</div>
+          <div className={classes.characterHoursPlayed}>
+            {(Number(data.minutesPlayedTotal) / 60).toFixed(2)} h
+          </div>
+        </div>
       </div>
       <div className="loadout--container">
         <div className="loadout__subclass">
           <EquippedItem
-            name="Sunbreaker"
-            icon="https://www.bungie.net/common/destiny2_content/icons/ce681395733e3b2cfe86d538e74416b5.png"
-            category="Titan Subclass"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
+            name={data.items[16][0].name}
+            icon={`https://www.bungie.net${data.items[16][0].icon}`}
+            category={data.items[16][0].type}
+            perks={data.items[16][0].perks}
           />
         </div>
         <div className="loadout__weapons">
-          <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
-          />
-          <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
-          />
-          <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
-          />
+          {data.items[3].map((item, index) => (
+            <EquippedItem
+              key={index}
+              name={item.name}
+              icon={`https://www.bungie.net/${item.icon}`}
+              category={item.type}
+              perks={item.perks}
+            />
+          ))}
         </div>
-        <div className="loadout__armors">
+        {data.items[2].map((item, index) => (
           <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
+            key={index}
+            name={item.name}
+            icon={`https://www.bungie.net/${item.icon}`}
+            category={item.type}
+            perks={item.perks}
           />
-          <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
-          />
-          <EquippedItem
-            name="One-Eyed Mask"
-            icon="https://www.bungie.net/common/destiny2_content/icons/08cf83be64d4583ab0400722c79b7659.jpg"
-            category="Titan Helmet"
-            perks={[
-              {
-                name: "Vengeance",
-                icon:
-                  "https://www.bungie.net/common/destiny2_content/icons/015525bda9f4da320c9fad69532080dc.png"
-              }
-            ]}
-          />
-        </div>
+        ))}
+        <div className="loadout__armors" />
       </div>
     </div>
   );

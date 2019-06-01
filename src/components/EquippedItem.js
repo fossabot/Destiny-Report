@@ -12,9 +12,15 @@ const EquipedItem = ({ icon, name, category, perks = [] }) => {
         <div className="et__name">{name}</div>
         <div className="et__category">{category}</div>
         <div className="et__perks">
-          {perks.map((perk, index) => (
+          {perks.map((perk, index, perksArr) => (
             <div className="et__perk-icon" key={index}>
-              <img src={perk.icon} alt="perk icon" data-tip={perk.name} />
+              <img
+                src={`https://www.bungie.net${
+                  perksArr[perksArr.length - 1 - index].icon
+                }`}
+                alt="perk icon"
+                data-tip={perksArr[perksArr.length - 1 - index].name}
+              />
               <ReactTooltip className="tooltip" effect="solid" />
             </div>
           ))}

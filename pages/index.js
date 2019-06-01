@@ -3,21 +3,16 @@ import { SearchForm, SearchHistory, Spacer, Loading } from "../src/components";
 import "../static/styles/Home.scss";
 import GlobalContext from "../src/context/GlobalContext";
 
-const index = ({ error }) => {
+const index = ({ error, message }) => {
   const { globalState, setGlobalState } = useContext(GlobalContext);
 
   useEffect(() => {
-    if (error === "1") {
+    if (error) {
       setGlobalState({
         showLoader: false,
         error: true,
-        errorMessage: "Guardian Not Found"
-      });
-    } else if (error === "2") {
-      setGlobalState({
-        showLoader: false,
-        error: true,
-        errorMessage: "Somthing Went Wrong"
+        errorStatus: error,
+        errorMessage: message
       });
     }
   }, []);
@@ -38,7 +33,7 @@ const index = ({ error }) => {
 };
 
 index.getInitialProps = ({ query }) => {
-  return { error: query.error };
+  return { error: query.error, message: query.message };
 };
 
 export default index;

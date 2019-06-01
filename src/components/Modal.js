@@ -58,14 +58,15 @@ const styles = {
   }
 };
 
-const Modal = ({ errorMessage, secondaryMessage, classes }) => {
-  const { setGlobalState } = useContext(GlobalContext);
+const Modal = ({ classes }) => {
+  const { globalState, setGlobalState } = useContext(GlobalContext);
 
   const updateGlobalState = () => {
     setGlobalState(prev => ({
       ...prev,
       error: false,
-      errorMessage: "Something went wrong!"
+      errorStatus: "Something Went Wrong!",
+      errorMessage: "Please Try Again Later"
     }));
   };
 
@@ -78,8 +79,10 @@ const Modal = ({ errorMessage, secondaryMessage, classes }) => {
           icon={["fa", "times"]}
           onClick={updateGlobalState}
         />
-        <div className={classes.primaryMessage}>{errorMessage}</div>
-        <div className={classes.secondaryMessage}>{secondaryMessage}</div>
+        <div className={classes.primaryMessage}>{globalState.errorStatus}</div>
+        <div className={classes.secondaryMessage}>
+          {globalState.errorMessage}
+        </div>
       </div>
     </div>
   );
