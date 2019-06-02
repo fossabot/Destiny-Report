@@ -1,4 +1,5 @@
 @import "variables";
+@import "breakpoints";
 
 html,
 body {
@@ -61,15 +62,28 @@ ul {
 }
 
 .tooltip {
-  background-color: #16253a31 !important;
+  background-color: rgba(0, 0, 0, 0.849) !important;
+  @include breakpoint(600px) {
+    font-size: 10px !important;
+  }
 
-  &::after {
-    border-top-color: #16253a31 !important;
+  &.place-top::after,
+  &.place-bottom::after {
+    border-color: rgba(0, 0, 0, 0.849) transparent !important;
+  }
+  &.place-right::after,
+  &.place-left::after {
+    border-color: transparent rgba(0, 0, 0, 0.849) !important;
   }
 }
 
+.color-green {
+  color: #4caf50;
+}
+.color-red {
+  color: #f44336;
+}
 //nprogress
-
 #nprogress {
   pointer-events: none;
 }

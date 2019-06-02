@@ -3,6 +3,7 @@ import Router from "next/router";
 import { Header, Footer, Modal } from "../components";
 import "../../static/styles/Layout.scss";
 import GlobalContext from "../context/GlobalContext";
+import ReactTooltip from "react-tooltip";
 
 const Layout = ({ children }) => {
   const { globalState } = useContext(GlobalContext);
@@ -15,6 +16,7 @@ const Layout = ({ children }) => {
         <main className="main--content">{children}</main>
       </div>
       <Footer />
+      <ReactTooltip className="tooltip" effect="solid" />
     </div>
   );
 };
