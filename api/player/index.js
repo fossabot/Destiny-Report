@@ -59,11 +59,12 @@ module.exports = async (req, res) => {
       );
     }
   } catch (err) {
+    console.log(err.message);
     res.end(
       JSON.stringify({
         success: false,
         ErrorCode: 111993,
-        ErrorStatus: "Something Went Wrong",
+        ErrorStatus: "Something Went Wrong Or Bungie API Down",
         Message: "Please Try Again Later"
       })
     );

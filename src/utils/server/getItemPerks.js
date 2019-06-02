@@ -6,17 +6,18 @@ module.exports = (membershipId, membershipType, item) => {
 
     try {
       const {
-        data: { Response: itemPerksLevel }
-      } = await getItem(membershipId, membershipType, item.itemInstanceId, [
-        302,
-        300
-      ]);
-      const {
         data: { Response: itemDefinition }
       } = await getEntityDefinition(
         item.itemHash,
         "DestinyInventoryItemDefinition"
       );
+
+      const {
+        data: { Response: itemPerksLevel }
+      } = await getItem(membershipId, membershipType, item.itemInstanceId, [
+        302,
+        300
+      ]);
 
       const perks = [];
       if (
@@ -24,18 +25,20 @@ module.exports = (membershipId, membershipType, item) => {
         typeof itemPerksLevel.perks.data !== "undefined"
       ) {
         for (let j = 0; j < itemPerksLevel.perks.data.perks.length; ++j) {
-          const {
-            data: { Response: itemPerkDefinition }
-          } = await getEntityDefinition(
-            itemPerksLevel.perks.data.perks[j].perkHash,
-            "DestinySandboxPerkDefinition"
-          );
+          if (itemPerksLevel.perks.data.perks[j].isActive) {
+            const {
+              data: { Response: itemPerkDefinition }
+            } = await getEntityDefinition(
+              itemPerksLevel.perks.data.perks[j].perkHash,
+              "DestinySandboxPerkDefinition"
+            );
 
-          if (itemPerkDefinition.displayProperties.name) {
-            perks.push({
-              name: itemPerkDefinition.displayProperties.name,
-              icon: itemPerkDefinition.displayProperties.icon
-            });
+            if (itemPerkDefinition.displayProperties.name) {
+              perks.push({
+                name: itemPerkDefinition.displayProperties.name,
+                icon: itemPerkDefinition.displayProperties.icon
+              });
+            }
           }
         }
       }

@@ -71,7 +71,7 @@ const Loadout = ({ classes, data, name }) => {
             name={data.items[16][0].name}
             icon={`https://www.bungie.net${data.items[16][0].icon}`}
             category={data.items[16][0].type}
-            perks={data.items[16][0].perks}
+            perks={data.items[16][0].perks.reverse()}
           />
         </div>
         <div className="loadout__weapons">

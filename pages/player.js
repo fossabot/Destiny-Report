@@ -61,15 +61,24 @@ player.getInitialProps = async ({ query, res }) => {
       );
     }
   } catch (error) {
-    const err = JSON.parse(error.message);
-    if (res) {
-      res.writeHead(302, {
-        Location: `/?error=${err.ErrorStatus}&message=${err.Message}`
-      });
-      res.end();
-      return;
-    } else {
-      Router.push(`/?error=${err.ErrorStatus}&message=${err.Message}`, "/");
+    let err = {
+      ErrorStatus: "Something Went Wrong Or Bungie API Is Down",
+      Message: "Please Try Again Later"
+    };
+    try {
+      err = JSON.parse(error.message);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      if (res) {
+        res.writeHead(302, {
+          Location: `/?error=${err.ErrorStatus}&message=${err.Message}`
+        });
+        res.end();
+        return;
+      } else {
+        Router.push(`/?error=${err.ErrorStatus}&message=${err.Message}`, "/");
+      }
     }
   }
   return { loadout: [], name: null, platform: null };
