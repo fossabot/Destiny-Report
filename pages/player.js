@@ -55,8 +55,8 @@ player.getInitialProps = async ({ query, res }) => {
     } else {
       throw new Error(
         JSON.stringify({
-          ErrorStatus: "Player Not Found",
-          Message: "Make Sure to Choose The Correct Platform"
+          ErrorStatus: "Guardian Not Found",
+          Message: "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
         })
       );
     }
