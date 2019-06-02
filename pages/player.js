@@ -61,6 +61,7 @@ player.getInitialProps = async ({ query, res }) => {
       );
     }
   } catch (error) {
+    console.log(error);
     let err = {
       ErrorStatus: "Something Went Wrong Or Bungie API Is Down",
       Message: "Please Try Again Later"
