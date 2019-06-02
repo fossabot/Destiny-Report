@@ -1,12 +1,19 @@
 import React from "react";
-import "../../static/styles/RaidHeader.scss";
+import "../../static/styles/ActivityHeader.scss";
 import { Spacer } from ".";
 
-const RaidHeader = () => {
+const ActivityHeader = ({
+  overall = "OVERALL",
+  overallSecondary,
+  win,
+  loss,
+  ratio,
+  hoursPlayed
+}) => {
   return (
     <div className="rh--wrapper">
       <div className="rh__overall">
-        <div className="rh__overall-text">OVERALL</div>
+        <div className="rh__overall-text">{overall}</div>
         <Spacer height="5px" />
         <div className="rh__overall-games">223 Clears</div>
       </div>
@@ -31,4 +38,4 @@ const RaidHeader = () => {
   );
 };
 
-export default RaidHeader;
+export default ActivityHeader;
