@@ -1,0 +1,80 @@
+@import "./variables";
+@import "./breakpoints";
+
+.raid-card--wrapper {
+  width: 100%;
+
+  .raid-card__header {
+    @include breakpoint(380px) {
+      font-size: 26px;
+    }
+  }
+  .raid-card__stats {
+    display: flex;
+    padding: 5px 5px 5px 0;
+
+    &-box {
+      width: 150px;
+      height: 80px;
+      margin: 5px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.493);
+      &:nth-child(1) {
+        margin-left: 0;
+      }
+
+      @include breakpoint(520px) {
+        font-size: 8px;
+        height: 40px;
+      }
+    }
+
+    &-primary {
+      font-size: 2em;
+
+      @include breakpoint(520px) {
+        font-size: 1.5em;
+      }
+    }
+
+    &-secondary {
+      color: $color-dark-gray;
+      @include breakpoint(520px) {
+        font-size: 8px;
+      }
+    }
+  }
+
+  .raid-card__badges {
+    padding: 5px 5px 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    .raid-card__badges-text {
+      white-space: nowrap;
+      margin: 5px;
+      color: black;
+      background-color: gold;
+      padding: 5px 10px;
+      border-radius: 3px;
+
+      &:nth-child(1) {
+        margin-left: 0;
+      }
+
+      &:nth-child(5) {
+        @include breakpoint(354px) {
+          margin-left: 0;
+        }
+      }
+
+      @include breakpoint(600px) {
+        font-size: 10px;
+      }
+    }
+  }
+}
