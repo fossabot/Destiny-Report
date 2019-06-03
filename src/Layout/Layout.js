@@ -16,7 +16,6 @@ const Layout = ({ children }) => {
         <main className="main--content">{children}</main>
       </div>
       <Footer />
-      <ReactTooltip className="tooltip" effect="solid" />
     </div>
   );
 };

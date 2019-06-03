@@ -13,3 +13,5 @@ export { default as Modal } from "./Modal";
 export { default as ActivityHeader } from "./ActivityHeader";
 export { default as RaidCard } from "./RaidCard";
 export { default as Divider } from "./Divider";
+export { default as CrucibleCard } from "./CrucibleCard";
+export { default as ActivityModeCard } from "./ActivityModeCard";

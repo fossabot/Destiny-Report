@@ -4,8 +4,7 @@ import { UserAndNav, Loading } from "../src/components";
 const gambit = ({ name, platform }) => {
   return (
     <div className="gambit--wrapper" style={{ height: "100%" }}>
-      {/* <UserAndNav name={name} platform={platform} /> */}
-      <Loading />
+      <UserAndNav name={name} platform={platform} />
     </div>
   );
 };

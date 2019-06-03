@@ -1,0 +1,80 @@
+@import "breakpoints";
+@import "variables";
+
+.crucible-card__wrapper {
+  margin-bottom: 20px;
+
+  .crucible-card__stats {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 0;
+  }
+}
+
+.crucible-card__stats-box.crucible-card__stats-img {
+  background-color: transparent;
+  padding: 0;
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  margin-right: 50px;
+
+  @include breakpoint(768px) {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+    min-height: 75px;
+  }
+  @include breakpoint(480px) {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    margin-right: 20px;
+  }
+  > img {
+    margin-left: -20px;
+    width: 100%;
+    height: 100%;
+  }
+}
+.crucible-card__stats-box {
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.493);
+
+  @include breakpoint(768px) {
+    padding: 10px;
+  }
+
+  @include breakpoint(480px) {
+    padding: 10px 5px;
+  }
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  .crucible-card__stats-primary {
+    font-size: 25px;
+
+    @include breakpoint(768px) {
+      font-size: 14px;
+    }
+  }
+
+  .crucible-card__stats-secondary {
+    color: $color-dark-gray;
+    font-size: 14px;
+    @include breakpoint(768px) {
+      font-size: 10px;
+    }
+    @include breakpoint(480px) {
+      font-size: 8px;
+    }
+  }
+}

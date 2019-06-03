@@ -5,12 +5,19 @@ import {
   RaidCard,
   Divider
 } from "../src/components";
+import withStyles from "react-jss";
 
-const raid = ({ name, platform }) => {
+const styles = {
+  raidWrapper: {
+    marginBottom: "20px"
+  }
+};
+
+const raid = ({ classes, name, platform }) => {
   return (
-    <div>
+    <div className={classes.raidWrapper}>
       <UserAndNav name={name} platform={platform} />
-      <ActivityHeader />
+      <ActivityHeader name="OVERALL" />
       <RaidCard />
       <Divider />
       <RaidCard />
@@ -28,4 +35,4 @@ raid.getInitialProps = ({ query }) => {
   return { name: query.name, platform: query.platform };
 };
 
-export default raid;
+export default withStyles(styles)(raid);

@@ -7,7 +7,7 @@ const UserAndNav = ({ name, platform }) => {
     <div className="user-and-nav--wrapper">
       <div className="uan__user__nav">
         <h1 className="user__id">{name}</h1>
-        <Nav />
+        <Nav name={name} platform={platform} />
       </div>
       <div className="user__platform">{platform.toUpperCase()}</div>
     </div>
