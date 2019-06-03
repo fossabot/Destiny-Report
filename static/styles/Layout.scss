@@ -12,6 +12,7 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: white;
   background-color: rgb(9, 20, 36);
+  overflow: hidden;
 }
 
 * {
@@ -30,12 +31,14 @@ ul {
 #__next {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(to bottom right, #1c3b666c, #202938cb),
+  background-image: linear-gradient(to bottom right, #0d1d334d, #141a257e),
     url("../images/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 80% center;
-
+  background-attachment: fixed;
+  z-index: 1000;
+  overflow: auto;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
@@ -62,18 +65,19 @@ ul {
 }
 
 .tooltip {
-  background-color: rgba(0, 0, 0, 0.849) !important;
+  background-color: rgba(20, 20, 20, 0.966) !important;
+
   @include breakpoint(600px) {
     font-size: 10px !important;
   }
 
   &.place-top::after,
   &.place-bottom::after {
-    border-color: rgba(0, 0, 0, 0.849) transparent !important;
+    border-color: rgba(20, 20, 20, 0.966) transparent !important;
   }
   &.place-right::after,
   &.place-left::after {
-    border-color: transparent rgba(0, 0, 0, 0.849) !important;
+    border-color: transparent rgba(20, 20, 20, 0.966) !important;
   }
 }
 

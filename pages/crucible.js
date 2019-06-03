@@ -1,10 +1,20 @@
 import React from "react";
-import { UserAndNav } from "../src/components";
+import {
+  UserAndNav,
+  ActivityHeader,
+  CrucibleCard,
+  Divider
+} from "../src/components";
 
 const crucible = ({ name, platform }) => {
   return (
     <div>
       <UserAndNav name={name} platform={platform} />
+      <ActivityHeader name="OVERALL" />
+      <Divider />
+      <CrucibleCard name="QUICK PLAY" />
+      <Divider />
+      <CrucibleCard name="COMPETITIVE" />
     </div>
   );
 };

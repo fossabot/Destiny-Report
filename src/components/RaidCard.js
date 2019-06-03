@@ -1,5 +1,6 @@
 import React from "react";
 import "../../static/styles/RaidCard.scss";
+import ReactTooltip from "react-tooltip";
 
 const RaidCard = ({ name, stats }) => {
   return (
@@ -55,6 +56,7 @@ const RaidCard = ({ name, stats }) => {
           Day One
         </div>
       </div>
+      <ReactTooltip className="tooltip" effect="solid" />
     </div>
   );
 };
