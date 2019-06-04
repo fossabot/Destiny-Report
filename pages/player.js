@@ -7,6 +7,8 @@ import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
 
 const player = ({ name, platform, loadout }) => {
+  console.log(loadout);
+
   return (
     <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />
