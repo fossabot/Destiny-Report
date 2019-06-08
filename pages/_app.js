@@ -4,6 +4,9 @@ import { Layout } from "../src/Layout";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Router from "next/router";
 import NProgress from "nprogress";
+import withReduxStore from "../lib/with-redux-store";
+import { Provider } from "react-redux";
+
 import {
   faPaypal,
   faTwitter,
@@ -22,6 +25,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { UserProvider } from "../src/context/UserContext";
 import { GlobalProvider } from "../src/context/GlobalContext";
 import { Loading } from "../src/components";
+import { setLoader } from "../src/actions";
 
 library.add(
   faTimes,
@@ -35,22 +39,15 @@ library.add(
   faChevronDown
 );
 
-export default class MyApp extends App {
-  state = {
-    showLoader: false
-  };
-
+class MyApp extends App {
   componentDidMount() {
     Router.events.on("routeChangeStart", () => {
-      this.setState({ showLoader: true });
       NProgress.start();
     });
     Router.events.on("routeChangeComplete", () => {
-      this.setState({ showLoader: false });
       NProgress.done();
     });
     Router.events.on("routeChangeError", () => {
-      this.setState({ showLoader: false });
       NProgress.done();
     });
 
@@ -70,18 +67,24 @@ export default class MyApp extends App {
   };
 
   render() {
-    const { Component, pageProps } = this.props;
-    const { showLoader } = this.state;
+    const { Component, pageProps, reduxStore } = this.props;
+
     return (
       <Container>
-        <GlobalProvider>
-          <UserProvider>
+        <UserProvider>
+          <Provider store={reduxStore}>
             <Layout>
-              {showLoader ? <Loading /> : <Component {...pageProps} />}
+              {reduxStore.getState().global.showLoader ? (
+                <Loading />
+              ) : (
+                <Component {...pageProps} />
+              )}
             </Layout>
-          </UserProvider>
-        </GlobalProvider>
+          </Provider>
+        </UserProvider>
       </Container>
     );
   }
 }
+
+export default withReduxStore(MyApp);
