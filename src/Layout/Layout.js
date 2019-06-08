@@ -2,16 +2,13 @@ import React, { useContext, useEffect } from "react";
 import Router from "next/router";
 import { Header, Footer, Modal } from "../components";
 import "../../static/styles/Layout.scss";
-import GlobalContext from "../context/GlobalContext";
-import ReactTooltip from "react-tooltip";
+import { connect } from "react-redux";
 
-const Layout = ({ children }) => {
-  const { globalState } = useContext(GlobalContext);
-
+const Layout = ({ children, error }) => {
   return (
     <div className="layout">
       <Header />
-      <Modal active={globalState.error} />
+      <Modal active={error} />
       <div className="main--wrapper">
         <main className="main--content">{children}</main>
       </div>
@@ -20,4 +17,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default connect(state => ({ error: state.global.error }))(Layout);

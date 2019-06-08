@@ -4,10 +4,11 @@ import "../../static/styles/SearchForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spacer } from "./";
 import UserContext from "../context/UserContext";
-import GlobalContext from "../context/GlobalContext";
 import { getMembershipID } from "../utils/endpoints";
+import { connect } from "react-redux";
+import { setError, setLoader } from "../actions";
 
-const SearchForm = () => {
+const SearchForm = props => {
   const [user, setUserChange] = useState({
     name: "",
     platform: {
@@ -19,7 +20,6 @@ const SearchForm = () => {
   const [showPlatfoms, setShowPlatforms] = useState(false);
 
   const { setUserState } = useContext(UserContext);
-  const { setGlobalState } = useContext(GlobalContext);
 
   useEffect(() => {
     window.addEventListener("click", e => {
@@ -62,7 +62,7 @@ const SearchForm = () => {
   };
   const formSubmitHandler = async e => {
     e.preventDefault();
-    setGlobalState({ showLoader: true });
+    props.setLoader(true);
     const res = await getMembershipID(user.name, user.platform.id);
 
     if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
@@ -97,23 +97,12 @@ const SearchForm = () => {
       Router.push(
         `/player?platform=${user.platform.name}&name=${displayName}`,
         `/player/${user.platform.name}/${displayName}`
-      ).then(() => {
-        setGlobalState(prev => ({
-          ...prev,
-          showLoader: false,
-          error: false,
-          errorStatus: "Something Went Wrong!",
-          errorMessage: "Please Try Again Later"
-        }));
-      });
+      );
     } else {
-      setGlobalState({
-        showLoader: false,
-        error: true,
-        errorStatus: "Guardian Not Found",
-        errorMessage:
-          "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
-      });
+      const errorStatus = "Guardian Not Found";
+      const errorMessage =
+        "Battle.net IDs Must Be In This Format, Example: Gladd#11693";
+      props.setError(errorStatus, errorMessage);
     }
   };
 
@@ -181,4 +170,7 @@ const SearchForm = () => {
   );
 };
 
-export default SearchForm;
+export default connect(
+  null,
+  { setLoader, setError }
+)(SearchForm);

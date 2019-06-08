@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import withStyles from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GlobalContext from "../context/GlobalContext";
+
+import { connect } from "react-redux";
+import { setLoader } from "../actions";
 
 const styles = {
   modalWrapper: {
@@ -58,16 +60,9 @@ const styles = {
   }
 };
 
-const Modal = ({ classes }) => {
-  const { globalState, setGlobalState } = useContext(GlobalContext);
-
-  const updateGlobalState = () => {
-    setGlobalState(prev => ({
-      ...prev,
-      error: false,
-      errorStatus: "Something Went Wrong!",
-      errorMessage: "Please Try Again Later"
-    }));
+const Modal = ({ classes, global, setLoader }) => {
+  const closeModalHandler = () => {
+    setLoader(false);
   };
 
   return (
@@ -77,15 +72,20 @@ const Modal = ({ classes }) => {
           size="2x"
           className={classes.modaleClose}
           icon={["fa", "times"]}
-          onClick={updateGlobalState}
+          onClick={closeModalHandler}
         />
-        <div className={classes.primaryMessage}>{globalState.errorStatus}</div>
-        <div className={classes.secondaryMessage}>
-          {globalState.errorMessage}
-        </div>
+        <div className={classes.primaryMessage}>{global.errorStatus}</div>
+        <div className={classes.secondaryMessage}>{global.errorMessage}</div>
       </div>
     </div>
   );
 };
 
-export default withStyles(styles)(Modal);
+const mapStateToProps = state => ({ global: state.global });
+
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    { setLoader }
+  )(Modal)
+);
