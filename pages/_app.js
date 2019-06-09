@@ -23,8 +23,6 @@ import {
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import { UserProvider } from "../src/context/UserContext";
-import { GlobalProvider } from "../src/context/GlobalContext";
-import { Loading } from "../src/components";
 import { setLoader } from "../src/actions";
 
 library.add(
@@ -42,12 +40,17 @@ library.add(
 class MyApp extends App {
   componentDidMount() {
     Router.events.on("routeChangeStart", () => {
+      this.props.reduxStore.dispatch(setLoader(true));
       NProgress.start();
     });
     Router.events.on("routeChangeComplete", () => {
+      this.props.reduxStore.dispatch(setLoader(false));
       NProgress.done();
     });
     Router.events.on("routeChangeError", () => {
+      if (this.props.reduxStore.getState().global.showLoader) {
+        this.props.reduxStore.dispatch(setLoader(false));
+      }
       NProgress.done();
     });
 
@@ -74,11 +77,7 @@ class MyApp extends App {
         <UserProvider>
           <Provider store={reduxStore}>
             <Layout>
-              {reduxStore.getState().global.showLoader ? (
-                <Loading />
-              ) : (
-                <Component {...pageProps} />
-              )}
+              <Component {...pageProps} />
             </Layout>
           </Provider>
         </UserProvider>
