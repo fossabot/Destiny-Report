@@ -28,7 +28,6 @@ const player = ({ name, platform, loadout, error, setError }) => {
 };
 
 player.getInitialProps = async ({ query, reduxStore }) => {
-  reduxStore.dispatch(setLoader(true));
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
   const BASE_URL =
     process.env.NODE_ENV !== "development"
@@ -46,7 +45,6 @@ player.getInitialProps = async ({ query, reduxStore }) => {
       const loadoutResponse = await axios.get(
         `${BASE_URL}/api/player?membershipId=${membershipId}&membershipType=${membershipType}`
       );
-      reduxStore.dispatch(setLoader(false));
 
       if (loadoutResponse.data.success) {
         return {

@@ -7,6 +7,7 @@ import UserContext from "../context/UserContext";
 import { getMembershipID } from "../utils/endpoints";
 import { connect } from "react-redux";
 import { setError, setLoader } from "../actions";
+import safeJsonParse from "../utils/safeJsonParse";
 
 const SearchForm = props => {
   const [user, setUserChange] = useState({
@@ -70,8 +71,7 @@ const SearchForm = props => {
       const displayName = encodeURIComponent(res.data.Response[0].displayName);
 
       let previousHistory =
-        JSON.parse(localStorage.getItem("searchHistory")) || [];
-      previousHistory;
+        safeJsonParse(localStorage.getItem("searchHistory")) || [];
 
       previousHistory = previousHistory.filter(
         player => player.name.trim() !== nakedDisplayName.trim()
@@ -113,9 +113,12 @@ const SearchForm = props => {
         <div className="input--wrapper">
           <div className="dropdown">
             <div className="dropbtn" onClick={showPlatformDropdown}>
-              <FontAwesomeIcon icon={["fab", user.platform.icon]} />
+              <FontAwesomeIcon
+                className="platform--icon"
+                icon={["fab", user.platform.icon]}
+              />
               <Spacer width="10px" />
-              <FontAwesomeIcon icon="chevron-down" size="1x" />
+              <FontAwesomeIcon icon="chevron-down" size="1x" color="#9E9E9E" />
             </div>
             <div className={`dropdown-content ${showPlatfoms ? "active" : ""}`}>
               <div
