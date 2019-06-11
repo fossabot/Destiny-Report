@@ -24,6 +24,21 @@ export const getProfile = (membershipId, membershipType, components) => {
     )}`
   );
 };
+export const getHistorialStats = (membershipId, membershipType, modes) => {
+  return axios.get(
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/0/Stats/?groups=0&modes=${modes.join(
+      ","
+    )}&periodType=2`
+  );
+};
+
+export const getAllProgression = (membershipType, membershipId, components) => {
+  return axios.get(
+    `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components.join(
+      ","
+    )}`
+  );
+};
 
 export const getItem = (
   membershipId,
@@ -35,5 +50,15 @@ export const getItem = (
     `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Item/${instanceId}/?components=${components.join(
       ","
     )}`
+  );
+};
+
+export const getCharactersOverallCrucibleStats = (
+  membershipId,
+  membershipType,
+  CharacterId
+) => {
+  return axios.get(
+    ` https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${CharacterId}/Stats/?groups=102&modes=70,69,31,37,38,71,72,73,74&periodType=2`
   );
 };
