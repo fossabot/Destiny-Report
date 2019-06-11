@@ -4,7 +4,7 @@ import { UserAndNav, Loadout } from "../src/components";
 import "../static/styles/Player.scss";
 import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
-import { setLoader, setError } from "../src/actions";
+import { setError } from "../src/actions";
 import { connect } from "react-redux";
 
 const player = ({ name, platform, loadout, error, setError }) => {
@@ -75,5 +75,5 @@ player.getInitialProps = async ({ query, reduxStore }) => {
 };
 export default connect(
   null,
-  { setLoader, setError }
+  { setError }
 )(player);

@@ -1,5 +1,6 @@
 import React from "react";
 import withStyles from "react-jss";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 
 const styles = {
   activityModeWrapper: {
@@ -53,29 +54,37 @@ const styles = {
     }
   }
 };
-const ActivityModeCard = ({ classes }) => {
+const ActivityModeCard = ({ classes, name, stats }) => {
   return (
     <div className={classes.activityModeWrapper}>
       <div className={classes.activityModeHeader}>
-        <div className={classes.activityModeHeaderText}>Survival</div>
-        <div className={classes.activityModeHeaderMatches}>225 Matches</div>
+        <div className={classes.activityModeHeaderText}>
+          {capitalizeFirstLetter(name)}
+        </div>
+        <div className={classes.activityModeHeaderMatches}>
+          {stats.matches} Matches
+        </div>
       </div>
       <div className={classes.activityModeStats}>
         <div className={classes.activityModeStatBox}>
-          <div className={classes.activityModeStatValue}>225</div>
-          <div className={classes.activityModeStatName}>win</div>
+          <div className={classes.activityModeStatValue}>
+            <span className="color-green">{stats.wins}</span>
+          </div>
+          <div className={classes.activityModeStatName}>wins</div>
         </div>
         <div className={classes.activityModeStatBox}>
-          <div className={classes.activityModeStatValue}>225</div>
-          <div className={classes.activityModeStatName}>win</div>
+          <div className={classes.activityModeStatValue}>
+            <span className="color-red">{stats.matches - stats.wins}</span>
+          </div>
+          <div className={classes.activityModeStatName}>loss</div>
         </div>
         <div className={classes.activityModeStatBox}>
-          <div className={classes.activityModeStatValue}>225</div>
-          <div className={classes.activityModeStatName}>win</div>
+          <div className={classes.activityModeStatValue}>{stats.kills}</div>
+          <div className={classes.activityModeStatName}>kills</div>
         </div>
         <div className={classes.activityModeStatBox}>
-          <div className={classes.activityModeStatValue}>225</div>
-          <div className={classes.activityModeStatName}>win</div>
+          <div className={classes.activityModeStatValue}>{stats.deaths}</div>
+          <div className={classes.activityModeStatName}>deaths</div>
         </div>
       </div>
     </div>
