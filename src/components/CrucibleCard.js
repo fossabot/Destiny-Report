@@ -12,10 +12,20 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
       <h1>{name}</h1>
       <div className="crucible-card__stats">
         <div className="crucible-card__stats-box crucible-card__stats-img ">
-          <img
-            src="https://www.bungie.net/common/destiny2_content/icons/d0cf2b35891cd4f07a355af2af568221.png"
-            alt=""
-          />
+          <div className="progression--icon">
+            <img src={progressionRank.icon} alt="" />
+          </div>
+          <div className="progression--info">
+            <div className="progression--info__header">
+              {progressionRank.name}
+            </div>
+            <div className="progression--info__rank">
+              {progressionRank.stepName}
+            </div>
+            <div className="progression--info__rank">
+              {progressionRank.currentPoints}
+            </div>
+          </div>
         </div>
         <div className="crucible-card__stats-box">
           <div className="crucible-card__stats-primary">{overall.matches}</div>

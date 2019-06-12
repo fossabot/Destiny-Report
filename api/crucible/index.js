@@ -7,6 +7,7 @@ const getCrucibleOverallStats = require("../../src/server/getCrucibleOverallStat
 const getSafe = require("../../src/utils/getValueSafely");
 const { parse } = require("url");
 const { values } = require("lodash");
+const { glorySteps, valorSteps } = require("../../src/utils/steps");
 
 module.exports = async (req, res) => {
   const { query } = parse(req.url, true);
@@ -29,14 +30,20 @@ module.exports = async (req, res) => {
       totalActivityDuration: ""
     },
     valor: {
+      name: "Valor",
       resets: 0,
       currentPoints: 0,
-      rank: 0
+      rank: 0,
+      icon: "",
+      stepName: ""
     },
     glory: {
+      name: "Glory",
       resets: 0,
       currentPoints: 0,
-      rank: 0
+      rank: 0,
+      icon: "",
+      stepName: ""
     },
     stats: {}
   };
@@ -76,6 +83,11 @@ module.exports = async (req, res) => {
       0
     );
 
+    let step = gloryLevelStats.stepIndex;
+
+    data.glory.stepName = glorySteps[step].stepName;
+    data.glory.icon = "https://www.bungie.net" + glorySteps[step].icon;
+
     //quick play
     const valorLevelStats = values(
       progressionStats.characterProgressions.data
@@ -90,6 +102,11 @@ module.exports = async (req, res) => {
           .progress,
       0
     );
+
+    step = valorLevelStats.stepIndex;
+
+    data.valor.stepName = valorSteps[step].stepName;
+    data.valor.icon = "https://www.bungie.net" + valorSteps[step].icon;
 
     //activityTypes overall stats
     const stats = await getCrucibleOverallStats(

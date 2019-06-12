@@ -14,31 +14,56 @@
 .crucible-card__stats-box.crucible-card__stats-img {
   background-color: transparent;
   padding: 0;
-  width: 100px;
-  height: 100px;
   min-width: 100px;
   min-height: 100px;
   margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transform: translateX(-18px);
+  position: relative;
+  @include breakpoint(480px) {
+    transform: translateX(-5px);
+  }
+  .progression--icon {
+    width: 100px;
+    height: 100px;
+
+    @include breakpoint(480px) {
+      width: 50px;
+      height: 50px;
+    }
+
+    > img {
+      height: 100%;
+    }
+  }
 
   @include breakpoint(768px) {
-    width: 75px;
     height: 75px;
     min-width: 75px;
     min-height: 75px;
+    margin-right: 0;
   }
+
   @include breakpoint(480px) {
-    width: 50px;
     height: 50px;
     min-width: 50px;
     min-height: 50px;
-    margin-right: 20px;
-  }
-  > img {
-    margin-left: -20px;
-    width: 100%;
-    height: 100%;
   }
 }
+
+.progression--info {
+  &__header {
+    color: $color-dark-gray;
+  }
+
+  @include breakpoint(480px) {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}
+
 .crucible-card__stats-box {
   padding: 20px 20px;
   display: flex;
