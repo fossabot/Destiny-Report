@@ -1,18 +1,12 @@
 const { getItem } = require("../utils/endpoints");
-const readFromDb = require("./readFromDb");
-const safelyParseJson = require("../utils/safeJsonParse");
 
-module.exports = (membershipId, membershipType, item) => {
+module.exports = (membershipId, membershipType, item, manifestJson) => {
   return new Promise(async (resolve, reject) => {
     let data = {};
 
     try {
-      const unparsedDbResult = await readFromDb(
-        "DestinyInventoryItemDefinition",
-        item.itemHash
-      );
-
-      const itemDefinition = JSON.parse(unparsedDbResult.json);
+      const itemDefinition =
+        manifestJson.DestinyInventoryItemDefinition[item.itemHash];
 
       if (
         itemDefinition.itemType !== 2 &&
@@ -42,12 +36,10 @@ module.exports = (membershipId, membershipType, item) => {
       ) {
         for (let j = 0; j < itemPerksLevel.perks.data.perks.length; ++j) {
           if (itemPerksLevel.perks.data.perks[j].isActive) {
-            const dbResult = await readFromDb(
-              "DestinySandboxPerkDefinition",
-              itemPerksLevel.perks.data.perks[j].perkHash
-            );
-
-            const itemPerkDefinition = JSON.parse(dbResult.json);
+            const itemPerkDefinition =
+              manifestJson.DestinySandboxPerkDefinition[
+                itemPerksLevel.perks.data.perks[j].perkHash
+              ];
 
             if (
               itemPerkDefinition.displayProperties &&
