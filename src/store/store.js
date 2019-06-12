@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 
 export default function initializeStore() {
   const composeEnhancers = composeWithDevTools({
-    trace: true,
+    trace: false,
     traceLimit: 25
   });
   return createStore(

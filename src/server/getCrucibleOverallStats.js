@@ -14,7 +14,6 @@ module.exports = async (membershipId, membershipType, characters) => {
     }
     const result = await Promise.all(promisesToBeResolved);
 
-    // console.log(result[0].data.Response.pvpQuickplay.allTime);
     const overallCrucible = {
       quickplay: {
         matches: 0,
