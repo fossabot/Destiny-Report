@@ -50,8 +50,12 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
         </div>
       </div>
       <div className="crucibe-card__report">
-        {Object.keys(modes).map(name => (
-          <ActivityModeCard name={name} stats={modes[name]} />
+        {Object.keys(modes).map((name, index) => (
+          <ActivityModeCard
+            key={`${name}-${index}`}
+            name={name}
+            stats={modes[name]}
+          />
         ))}
       </div>
     </div>

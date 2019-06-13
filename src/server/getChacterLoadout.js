@@ -15,26 +15,11 @@ module.exports = (membershipId, membershipType, equipments, character) => {
       items: []
     };
 
-    let foundFilename = "";
-    const tempFiles = readdirSync("/tmp");
-    for (let i = 0; i < tempFiles.length; i++) {
-      if (tempFiles[i].indexOf("aggregate") > -1) {
-        foundFilename = tempFiles[i];
-      }
-    }
-
-    const manifestJson = JSON.parse(readFileSync(`/tmp/${foundFilename}`));
-
     const promisesToBeResolved = [];
 
     for (let k = 0; k < equipments.items.length; ++k) {
       promisesToBeResolved.push(
-        getItemPerks(
-          membershipId,
-          membershipType,
-          equipments.items[k],
-          manifestJson
-        )
+        getItemPerks(membershipId, membershipType, equipments.items[k])
       );
     }
     const itemsPerks = await Promise.all(promisesToBeResolved);
@@ -44,6 +29,7 @@ module.exports = (membershipId, membershipType, equipments, character) => {
       2: [],
       16: []
     };
+
     for (let i = 0; i < itemsPerks.length; ++i) {
       if (items[itemsPerks[i].itemType]) {
         items[itemsPerks[i].itemType].push(itemsPerks[i]);

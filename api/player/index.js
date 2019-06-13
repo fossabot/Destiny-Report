@@ -24,7 +24,6 @@ module.exports = async (req, res) => {
         return;
       }
 
-      await getJsonManifest();
       const equipments = profileReponse.data.Response.characterEquipment.data;
       const characters = profileReponse.data.Response.characters.data;
       const charactersIds = Object.keys(equipments);
