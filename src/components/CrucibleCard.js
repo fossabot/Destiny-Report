@@ -9,12 +9,14 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
 
   return (
     <div className="crucible-card__wrapper">
-      <h1>{name}</h1>
+      <div className="crucible-card__headr-container">
+        <h1>{name}</h1>
+        <div className="progression--icon">
+          <img src={progressionRank.icon} alt="" />
+        </div>
+      </div>
       <div className="crucible-card__stats">
         <div className="crucible-card__stats-box crucible-card__stats-img ">
-          <div className="progression--icon">
-            <img src={progressionRank.icon} alt="" />
-          </div>
           <div className="progression--info">
             <div className="progression--info__header">
               {progressionRank.name}

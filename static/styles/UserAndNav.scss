@@ -26,8 +26,8 @@
     @include breakpoint("mobile_landscape") {
       font-size: 35px;
     }
-    @include breakpoint(500px) {
-      font-size: 20px;
+    @include breakpoint(480px) {
+      font-size: 25px;
     }
   }
 }

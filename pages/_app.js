@@ -37,6 +37,8 @@ library.add(
   faChevronDown
 );
 
+NProgress.configure({ minimum: 0.5 });
+
 class MyApp extends App {
   componentDidMount() {
     Router.events.on("routeChangeStart", () => {

@@ -7,7 +7,9 @@ const styles = {
     display: "flex",
     alignItems: "center"
   },
-  activityModeHeader: {},
+  activityModeHeader: {
+    minWidth: "180px"
+  },
   activityModeHeaderText: {
     fontSize: "20px"
   },
@@ -34,14 +36,20 @@ const styles = {
   "@media (max-width: 768px)": {
     activityModeStats: {
       marginLeft: "40px"
+    },
+    activityModeHeader: {
+      minWidth: "100px"
     }
   },
   "@media (max-width: 480px)": {
+    activityModeHeader: {
+      minWidth: "80px"
+    },
     activityModeStats: {
-      marginLeft: "10px"
+      marginLeft: "0"
     },
     activityModeHeaderText: {
-      fontSize: "16px"
+      fontSize: "14px"
     },
     activityModeHeaderMatches: {
       fontSize: "8px"
