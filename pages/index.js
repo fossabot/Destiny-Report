@@ -1,5 +1,5 @@
-import React, { useContext, Fragment, useEffect } from "react";
-import { SearchForm, SearchHistory, Spacer, Loading } from "../src/components";
+import React from "react";
+import { SearchForm, SearchHistory, Spacer } from "../src/components";
 import "../static/styles/Home.scss";
 
 const index = () => {

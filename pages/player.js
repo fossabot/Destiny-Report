@@ -6,6 +6,7 @@ import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
 import { setError } from "../src/actions";
 import { connect } from "react-redux";
+import getBaseUrl from "../src/utils/getBaseUrl";
 
 const player = ({ name, platform, loadout, error, setError }) => {
   useEffect(() => {
@@ -27,12 +28,9 @@ const player = ({ name, platform, loadout, error, setError }) => {
   );
 };
 
-player.getInitialProps = async ({ query, reduxStore }) => {
+player.getInitialProps = async ({ query, req }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
-  const BASE_URL =
-    process.env.NODE_ENV !== "development"
-      ? "https://destiny-report.sarkurd.now.sh"
-      : "http://localhost:3000";
+  const BASE_URL = getBaseUrl(req);
 
   try {
     const response = await getMembershipID(

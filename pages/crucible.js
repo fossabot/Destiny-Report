@@ -10,6 +10,7 @@ import { setError } from "../src/actions";
 import { connect } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
+import getBaseUrl from "../src/utils/getBaseUrl";
 
 const Crucible = ({ name, platform, crucibleData, error, setError }) => {
   useEffect(() => {
@@ -40,13 +41,10 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
   );
 };
 
-Crucible.getInitialProps = async ({ query }) => {
+Crucible.getInitialProps = async ({ query, req }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
 
-  const BASE_URL =
-    process.env.NODE_ENV !== "development"
-      ? "https://destiny-report.sarkurd.now.sh"
-      : "http://localhost:3000";
+  const BASE_URL = getBaseUrl(req);
 
   try {
     const response = await getMembershipID(
