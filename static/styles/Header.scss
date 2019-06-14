@@ -1,7 +1,7 @@
 @import "variables";
 
 .header--wrapper {
-  height: 48px;
+  height: 60px;
   background-color: rgba(9, 10, 15, 0.637);
   width: 100%;
 }
@@ -20,6 +20,9 @@
 }
 .destiny-report--addon,
 .destiny-report--title {
+  font-weight: bold;
+  font-size: 25px;
+  color: rgb(151, 151, 151);
   &::after {
     height: 2px;
     display: block;
