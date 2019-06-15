@@ -7,7 +7,8 @@ const UserAndNav = ({ name, platform }) => {
     <div className="user-and-nav--wrapper">
       <div className="uan__user__nav">
         <h1 className="user__id">{name}</h1>
-        <Nav name={name} platform={platform} />
+
+        <Nav name={encodeURIComponent(name)} platform={platform} />
       </div>
       <div className="user__platform">{platform.toUpperCase()}</div>
     </div>
