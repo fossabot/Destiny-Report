@@ -6,7 +6,7 @@ import {
   Divider
 } from "../src/components";
 import { getMembershipID } from "../src/utils/endpoints";
-import { setError } from "../src/actions";
+import { setError, setCrucibleData } from "../src/actions";
 import { connect } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
@@ -19,6 +19,7 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
       Router.push("/");
     }
   });
+
   return (
     <div>
       <UserAndNav name={name} platform={platform} />
@@ -41,7 +42,7 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
   );
 };
 
-Crucible.getInitialProps = async ({ query, req }) => {
+Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
   const BASE_URL = getBaseUrl(req);
 
@@ -52,14 +53,20 @@ Crucible.getInitialProps = async ({ query, req }) => {
     );
 
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
+      if (reduxStore.getState().crucible.isFetched) {
+        return {
+          name: response.data.Response[0].displayName,
+          platform: query.platform
+        };
+      }
       const { membershipId, membershipType } = response.data.Response[0];
       const crucibleDataResponse = await axios.get(
         `${BASE_URL}/api/crucible?membershipId=${membershipId}&membershipType=${membershipType}`
       );
 
       if (crucibleDataResponse.data.success) {
+        reduxStore.dispatch(setCrucibleData(crucibleDataResponse.data.data));
         return {
-          crucibleData: crucibleDataResponse.data.data,
           name: response.data.Response[0].displayName,
           platform: query.platform
         };
@@ -78,7 +85,6 @@ Crucible.getInitialProps = async ({ query, req }) => {
   } catch (error) {
     console.log(error);
     return {
-      crucibleData: {},
       error,
       name: query.name,
       platform: query.platform
@@ -86,7 +92,9 @@ Crucible.getInitialProps = async ({ query, req }) => {
   }
 };
 
+const mapStateToProps = state => ({ crucibleData: state.crucible.data });
+
 export default connect(
-  null,
+  mapStateToProps,
   { setError }
 )(Crucible);

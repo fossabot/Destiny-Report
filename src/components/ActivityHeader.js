@@ -29,7 +29,7 @@ const ActivityHeader = ({
               {data.activitiesEntered - data.activitiesWon}
             </span>
           </div>
-          <div className="rh__stats-secondary">Performance</div>
+          <div className="rh__stats-secondary">Wins - Loss</div>
         </div>
         <div className="rh__stats-box">
           <div className="rh__stats-primary">{winLossRatio}%</div>

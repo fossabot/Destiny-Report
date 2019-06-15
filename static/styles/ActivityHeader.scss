@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: center;
   min-width: 250px;
+  margin-right: 15px;
 
   @include breakpoint(768px) {
     min-width: 150px;
@@ -25,20 +26,13 @@
     font-size: 30px;
     font-weight: 600;
 
-    @include breakpoint(768px) {
-      font-size: 25px;
-    }
     @include breakpoint(480px) {
-      font-size: 14px;
+      font-size: 20px;
     }
   }
   .rh__overall-games {
-    font-size: 14px;
+    font-size: 16px;
     color: $color-dark-gray;
-
-    @include breakpoint(700px) {
-      font-size: 10px;
-    }
   }
 }
 
@@ -63,11 +57,11 @@
     }
   }
   .rh__stats-primary {
-    font-size: 2vw;
+    font-size: 25px;
     font-weight: 600;
 
     @include breakpoint(720px) {
-      font-size: 3vw;
+      font-size: 25px;
     }
     @include breakpoint(480px) {
       font-size: 14px;
@@ -76,8 +70,8 @@
   .rh__stats-secondary {
     font-size: 14px;
     color: $color-dark-gray;
-    @include breakpoint(660px) {
-      font-size: 5px;
+    @include breakpoint(480px) {
+      font-size: 10px;
     }
   }
 }
