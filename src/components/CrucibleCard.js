@@ -3,6 +3,7 @@ import "../../static/styles/CrucibleCard.scss";
 import { ActivityModeCard } from "./";
 import getRatio from "../utils/getRatio";
 import secondsToDhm from "../utils/secondsToDhm";
+import ReactTooltip from "react-tooltip";
 
 const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
   const winLosssRatio = getRatio(overall.matches, overall.wins);
@@ -10,7 +11,12 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
   return (
     <div className="crucible-card__wrapper">
       <div className="crucible-card__headr-container">
-        <h1>{name}</h1>
+        <div className="cruble-card_header">
+          <h1 style={{ marginBottom: "0" }}>{name}</h1>
+          <div className="crucible-card__hours-played">
+            {secondsToDhm(overall.secondsPlayed)}
+          </div>
+        </div>
         <div className="progression--icon">
           <img src={progressionRank.icon} alt="" />
         </div>
@@ -19,7 +25,10 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
         <div className="crucible-card__stats-box crucible-card__stats-img ">
           <div className="progression--info">
             <div className="progression--info__header">
-              {progressionRank.name}
+              {progressionRank.name}{" "}
+              <span className="color-green" data-tip="Resets">
+                {progressionRank.resets}
+              </span>
             </div>
             <div className="progression--info__rank">
               {progressionRank.stepName}
@@ -46,9 +55,9 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
         </div>
         <div className="crucible-card__stats-box">
           <div className="crucible-card__stats-primary">
-            {secondsToDhm(overall.secondsPlayed)}
+            {(overall.kills / overall.deaths).toFixed(2) || overall.kills}
           </div>
-          <div className="crucible-card__stats-secondary">Time Played</div>
+          <div className="crucible-card__stats-secondary">K/D</div>
         </div>
       </div>
       <div className="crucibe-card__report">
@@ -60,6 +69,7 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
           />
         ))}
       </div>
+      <ReactTooltip className="tooltip" effect="solid" />
     </div>
   );
 };

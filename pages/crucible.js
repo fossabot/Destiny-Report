@@ -43,7 +43,6 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
 
 Crucible.getInitialProps = async ({ query, req }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
-
   const BASE_URL = getBaseUrl(req);
 
   try {
