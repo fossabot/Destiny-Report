@@ -5,6 +5,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .rh__overall {
@@ -19,15 +20,18 @@
     min-width: 150px;
   }
 
-  @include breakpoint(480px) {
+  @include breakpoint(520px) {
     min-width: 85px;
+  }
+  @include breakpoint(380px) {
+    margin-right: 5px;
   }
   .rh__overall-text {
     font-size: 30px;
     font-weight: 600;
 
-    @include breakpoint(480px) {
-      font-size: 20px;
+    @include breakpoint(520px) {
+      font-size: 18px;
     }
   }
   .rh__overall-games {
@@ -60,18 +64,18 @@
     font-size: 25px;
     font-weight: 600;
 
-    @include breakpoint(720px) {
-      font-size: 25px;
+    @include breakpoint(768px) {
+      font-size: 18px;
     }
-    @include breakpoint(480px) {
-      font-size: 14px;
+    @include breakpoint(520px) {
+      font-size: 12px;
     }
   }
   .rh__stats-secondary {
     font-size: 14px;
     color: $color-dark-gray;
-    @include breakpoint(480px) {
-      font-size: 10px;
+    @include breakpoint(520px) {
+      font-size: 8px;
     }
   }
 }

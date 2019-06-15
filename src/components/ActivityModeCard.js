@@ -41,7 +41,7 @@ const styles = {
       minWidth: "100px"
     }
   },
-  "@media (max-width: 480px)": {
+  "@media (max-width: 520px)": {
     activityModeHeader: {
       minWidth: "80px"
     },

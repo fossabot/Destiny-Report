@@ -4,7 +4,7 @@
 .user-and-nav--wrapper {
   height: 150px;
 
-  @include breakpoint("mobile_portrait") {
+  @include breakpoint(520px) {
     height: 100px;
   }
 }
