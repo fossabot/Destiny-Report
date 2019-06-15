@@ -23,6 +23,10 @@ const ActivityHeader = ({
       </div>
       <div className="rh__stats">
         <div className="rh__stats-box">
+          <div className="rh__stats-primary">{data.activitiesEntered}</div>
+          <div className="rh__stats-secondary">{secondary}</div>
+        </div>
+        <div className="rh__stats-box">
           <div className="rh__stats-primary">
             <span className="color-green">{data.activitiesWon}</span> -{" "}
             <span className="color-red">
@@ -36,8 +40,8 @@ const ActivityHeader = ({
           <div className="rh__stats-secondary">Win%</div>
         </div>
         <div className="rh__stats-box">
-          <div className="rh__stats-primary">{data.activitiesEntered}</div>
-          <div className="rh__stats-secondary">{secondary}</div>
+          <div className="rh__stats-primary">{data.kd}</div>
+          <div className="rh__stats-secondary">K/D</div>
         </div>
       </div>
     </div>

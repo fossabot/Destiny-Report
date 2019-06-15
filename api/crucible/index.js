@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
     overall: {
       activitiesEntered: 0,
       activitiesWon: 0,
+      kd: "",
       totalActivityDuration: ""
     },
     valor: {
@@ -57,6 +58,8 @@ module.exports = async (req, res) => {
       data: { Response }
     } = await getHistorialStats(membershipId, membershipType, [5]);
 
+    data.overall.kd =
+      Response.allPvP.allTime.killsDeathsRatio.basic.displayValue;
     data.overall.activitiesEntered =
       Response.allPvP.allTime.activitiesEntered.basic.value;
     data.overall.activitiesWon =
