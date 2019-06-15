@@ -4,7 +4,7 @@ import { UserAndNav, Loadout } from "../src/components";
 import "../static/styles/Player.scss";
 import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
-import { setError } from "../src/actions";
+import { setError, setLoadout } from "../src/actions";
 import { connect } from "react-redux";
 import getBaseUrl from "../src/utils/getBaseUrl";
 
@@ -28,7 +28,7 @@ const player = ({ name, platform, loadout, error, setError }) => {
   );
 };
 
-player.getInitialProps = async ({ query, req }) => {
+player.getInitialProps = async ({ query, req, reduxStore }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
   const BASE_URL = getBaseUrl(req);
 
@@ -39,14 +39,21 @@ player.getInitialProps = async ({ query, req }) => {
     );
 
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
+      if (reduxStore.getState().loadout.isFetched) {
+        return {
+          name: response.data.Response[0].displayName,
+          platform: query.platform
+        };
+      }
+
       const { membershipId, membershipType } = response.data.Response[0];
       const loadoutResponse = await axios.get(
         `${BASE_URL}/api/player?membershipId=${membershipId}&membershipType=${membershipType}`
       );
 
       if (loadoutResponse.data.success) {
+        reduxStore.dispatch(setLoadout(loadoutResponse.data.data));
         return {
-          loadout: loadoutResponse.data.data,
           name: response.data.Response[0].displayName,
           platform: query.platform
         };
@@ -64,14 +71,15 @@ player.getInitialProps = async ({ query, req }) => {
     }
   } catch (error) {
     return {
-      loadout: [],
       error,
       name: query.name,
       platform: query.platform
     };
   }
 };
+
+const mapStateToProps = state => ({ loadout: state.loadout.data });
 export default connect(
-  null,
-  { setError }
+  mapStateToProps,
+  { setError, setLoadout }
 )(player);
