@@ -1,6 +1,5 @@
 import React from "react";
 import "../../static/styles/EquippedItem.scss";
-import ReactTooltip from "react-tooltip";
 
 const EquipedItem = ({ icon, name, category, perks = [] }) => {
   return (

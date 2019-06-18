@@ -3,14 +3,16 @@ import {
   UserAndNav,
   ActivityHeader,
   CrucibleCard,
-  Divider
+  Divider,
+  MatchesHistory
 } from "../src/components";
 import { getMembershipID } from "../src/utils/endpoints";
-import { setError, setCrucibleData } from "../src/actions";
+import { setError, setCrucibleData, setCrucibleMatches } from "../src/actions";
 import { connect } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
 import getBaseUrl from "../src/utils/getBaseUrl";
+import getCrucibleMatchesHistory from "../src/utils/getCrucibleMatchesHistory";
 
 const Crucible = ({ name, platform, crucibleData, error, setError }) => {
   useEffect(() => {
@@ -38,6 +40,8 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
         progressionRank={crucibleData.glory}
         modes={crucibleData.stats.overallModesData.comp}
       />
+      <Divider />
+      <MatchesHistory />
     </div>
   );
 };
@@ -52,14 +56,26 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
       platforms[query.platform]
     );
 
+    const { membershipId, membershipType } = response.data.Response[0];
+
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
+      //getActivityHistory
+      if (!reduxStore.getState().crucible.matches.isFetched) {
+        getCrucibleMatchesHistory(BASE_URL, membershipType, membershipId).then(
+          result => {
+            if (result.success) {
+              reduxStore.dispatch(setCrucibleMatches(result.data));
+            }
+          }
+        );
+      }
+
       if (reduxStore.getState().crucible.isFetched) {
         return {
           name: response.data.Response[0].displayName,
           platform: query.platform
         };
       }
-      const { membershipId, membershipType } = response.data.Response[0];
       const crucibleDataResponse = await axios.get(
         `${BASE_URL}/api/crucible?membershipId=${membershipId}&membershipType=${membershipType}`
       );
@@ -67,6 +83,7 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
       if (crucibleDataResponse.data.success) {
         reduxStore.dispatch(setCrucibleData(crucibleDataResponse.data.data));
         return {
+          BASE_URL,
           name: response.data.Response[0].displayName,
           platform: query.platform
         };
@@ -86,6 +103,7 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
     console.log(error);
     return {
       error,
+      BASE_URL,
       name: query.name,
       platform: query.platform
     };

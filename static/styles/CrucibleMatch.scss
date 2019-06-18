@@ -1,0 +1,81 @@
+@import "breakpoints";
+@import "variables";
+
+.crucible-match__wrapper {
+  display: flex;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  text-shadow: 1px 1px 1px black;
+
+  .crucible-match__image {
+    height: 60px;
+
+    @include breakpoint(600px) {
+      height: 40px;
+    }
+    > img {
+      height: 100%;
+    }
+  }
+}
+
+.crucible-match__stat-container {
+  display: flex;
+  padding: 10px 5px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.493);
+
+  .crucible-match__stat {
+    padding: 0 10px;
+
+    @include breakpoint(600px) {
+      padding: 0 5px;
+    }
+
+    > .crucible-match__stat-name {
+      color: #a9a9a9;
+      font-size: 15px;
+
+      @include breakpoint(600px) {
+        font-size: 10px;
+      }
+    }
+    > .crucible-match__stat-value {
+      font-size: 20px;
+      @include breakpoint(600px) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.crucible-match__name-location {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .crucible-match__name {
+    @include breakpoint(600px) {
+      font-size: 14px;
+    }
+  }
+  .crucible-match__location {
+    color: #a9a9a9;
+    font-size: 16px;
+
+    @include breakpoint(600px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.crucible-match__mode-info {
+  display: flex;
+  min-width: 250px;
+  transform: translateX(-10px);
+  align-items: center;
+
+  @include breakpoint(600px) {
+    min-width: 150px;
+  }
+}

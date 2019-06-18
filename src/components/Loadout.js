@@ -2,6 +2,7 @@ import React from "react";
 import "../../static/styles/Loadout.scss";
 import { EquippedItem, Subclass } from ".";
 import withStyles from "react-jss";
+import secondsToDhm from "../utils/secondsToDhm";
 
 const styles = {
   characterEmblem: {
@@ -61,7 +62,7 @@ const Loadout = ({ classes, data, name }) => {
         <div className={classes.characterLightHours}>
           <div className={classes.characterPowerLevel}>✧{data.light}</div>
           <div className={classes.characterHoursPlayed}>
-            {(Number(data.minutesPlayedTotal) / 60).toFixed(2)} h
+            {secondsToDhm(Number(data.minutesPlayedTotal) * 60)}
           </div>
         </div>
       </div>
