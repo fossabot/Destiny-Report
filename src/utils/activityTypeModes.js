@@ -48,7 +48,7 @@ export default {
   17: { name: "HeroicNightfall", icon: "" },
   18: { name: "AllStrikes", icon: "" },
   19: {
-    name: "IronBanner",
+    name: "Iron Banana",
     icon:
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fe57052d7cf971f7502daa75a2ca2437.png"
   },
@@ -99,17 +99,17 @@ export default {
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_f4b12d402bb36270cd911f4e1fa8bb0c.png"
   },
   43: {
-    name: "IronBanner - Control",
+    name: "IB - Control",
     icon:
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fe57052d7cf971f7502daa75a2ca2437.png"
   },
   44: {
-    name: "IronBanner - Clash",
+    name: "IB. - Clash",
     icon:
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fe57052d7cf971f7502daa75a2ca2437.png"
   },
   45: {
-    name: "IronBanner - Supremacy",
+    name: "IB - Supremacy",
     icon:
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fe57052d7cf971f7502daa75a2ca2437.png"
   },
