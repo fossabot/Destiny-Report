@@ -6,7 +6,7 @@ import moment from "moment";
 
 const CrucibleMatch = ({ data }) => {
   const { values, activityDetails: details, period } = data;
-
+  console.log(values);
   const [activityDef, setActivityDef] = useState({
     mode: "Loading",
     loaction: "Loading",
@@ -36,44 +36,52 @@ const CrucibleMatch = ({ data }) => {
     fetchData();
   }, []);
 
-  const nm = "crucible-match";
+  const cm = "crucible-match";
   return (
-    <div className={`${nm}__wrapper`}>
-      <div className={`${nm}__mode-info`}>
-        <div className={`${nm}__image`}>
+    <div
+      className={`${cm}__wrapper ${
+        values.standing.basic.value === 1
+          ? "lost"
+          : values.standing.basic.value === 2 && "tied"
+      }`}
+    >
+      <div className={`${cm}__mode-info`}>
+        <div className={`${cm}__image`}>
           <img src={`${activityDef.icon}`} alt="mode icon" />
         </div>
-        <div className={`${nm}__name-location`}>
-          <div className={`${nm}__name`}>{activityDef.name}</div>
-          <div className={`${nm}__location`}>{activityDef.location}</div>
-          <div className={`${nm}__location`}>{activityDef.date} days ago</div>
+        <div className={`${cm}__name-location`}>
+          <div className={`${cm}__name`}>{activityDef.name}</div>
+          <div className={`${cm}__location`}>{activityDef.location}</div>
+          <div className={`${cm}__location`}>{activityDef.date} days ago</div>
         </div>
       </div>
 
-      <div className={`${nm}__stat-container`}>
-        <div className={`${nm}__stat`}>
-          <div className={`${nm}__stat-value`}>{values.kills.basic.value}</div>
-          <div className={`${nm}__stat-name`}>Kills</div>
+      <div className={`${cm}__stat-container`}>
+        <div className={`${cm}__stat`}>
+          <div className={`${cm}__stat-value`}>{values.kills.basic.value}</div>
+          <div className={`${cm}__stat-name`}>Kills</div>
         </div>
-        <div className={`${nm}__stat`}>
-          <div className={`${nm}__stat-value`}>{values.deaths.basic.value}</div>
-          <div className={`${nm}__stat-name`}>Deaths</div>
+        <div className={`${cm}__stat`}>
+          <div className={`${cm}__stat-value`}>{values.deaths.basic.value}</div>
+          <div className={`${cm}__stat-name`}>Deaths</div>
         </div>
-        <div className={`${nm}__stat`}>
-          <div className={`${nm}__stat-value`}>
+        <div className={`${cm}__stat`}>
+          <div className={`${cm}__stat-value`}>
             {values.assists.basic.value}
           </div>
-          <div className={`${nm}__stat-name`}>Assists</div>
+          <div className={`${cm}__stat-name`}>Assists</div>
         </div>
-        <div className={`${nm}__stat`}>
-          <div className={`${nm}__stat-value`}>
+        <div className={`${cm}__stat`}>
+          <div className={`${cm}__stat-value`}>
             {values.killsDeathsRatio.basic.displayValue}
           </div>
-          <div className={`${nm}__stat-name`}>K/D</div>
+          <div className={`${cm}__stat-name`}>K/D</div>
         </div>
-        <div className={`${nm}__stat`}>
-          <div className={`${nm}__stat-value`}>{values.score.basic.value}</div>
-          <div className={`${nm}__stat-name`}>Score</div>
+        <div className={`${cm}__stat`}>
+          <div className={`${cm}__stat-value`}>
+            {values.teamScore.basic.value}
+          </div>
+          <div className={`${cm}__stat-name`}>Score</div>
         </div>
       </div>
     </div>
