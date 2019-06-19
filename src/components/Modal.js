@@ -3,7 +3,7 @@ import withStyles from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { connect } from "react-redux";
-import { setLoader } from "../actions";
+import { setError } from "../actions";
 
 const styles = {
   modalWrapper: {
@@ -60,9 +60,9 @@ const styles = {
   }
 };
 
-const Modal = ({ classes, global, setLoader }) => {
+const Modal = ({ classes, global, setError }) => {
   const closeModalHandler = () => {
-    setLoader(false);
+    setError(false);
   };
 
   return (
@@ -86,6 +86,6 @@ const mapStateToProps = state => ({ global: state.global });
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { setLoader }
+    { setError }
   )(Modal)
 );

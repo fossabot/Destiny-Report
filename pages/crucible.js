@@ -17,7 +17,7 @@ import getCrucibleMatchesHistory from "../src/utils/getCrucibleMatchesHistory";
 const Crucible = ({ name, platform, crucibleData, error, setError }) => {
   useEffect(() => {
     if (error) {
-      setError(error.ErrorStatus, error.Message);
+      setError(true, error.ErrorStatus, error.Message);
       Router.push("/");
     }
   });

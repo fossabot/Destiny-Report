@@ -23,7 +23,7 @@ import {
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import { UserProvider } from "../src/context/UserContext";
-import { setLoader } from "../src/actions";
+import { setLoader, setError } from "../src/actions";
 
 library.add(
   faTimes,
@@ -61,6 +61,14 @@ class MyApp extends App {
     if (style) {
       style.parentNode.removeChild(style);
     }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.log("CUSTOM ERROR HANDLING", error);
+    // This is needed to render errors correctly in development / production
+    this.props.reduxStore.dispatch(setError(true));
+
+    super.componentDidCatch(error, errorInfo);
   }
 
   setUserState = (succeed, userData) => {

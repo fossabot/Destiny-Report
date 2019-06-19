@@ -11,7 +11,8 @@ import getBaseUrl from "../src/utils/getBaseUrl";
 const player = ({ name, platform, loadout, error, setError }) => {
   useEffect(() => {
     if (error) {
-      setError(error.ErrorStatus, error.Message);
+      console.log(error);
+      setError(true, error.ErrorStatus, error.Message);
       Router.push("/");
     }
   });

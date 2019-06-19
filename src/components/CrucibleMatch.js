@@ -6,7 +6,7 @@ import moment from "moment";
 
 const CrucibleMatch = ({ data }) => {
   const { values, activityDetails: details, period } = data;
-  console.log(values);
+
   const [activityDef, setActivityDef] = useState({
     mode: "Loading",
     loaction: "Loading",

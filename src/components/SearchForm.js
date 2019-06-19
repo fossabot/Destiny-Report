@@ -6,7 +6,7 @@ import { Spacer } from "./";
 import UserContext from "../context/UserContext";
 import { getMembershipID } from "../utils/endpoints";
 import { connect } from "react-redux";
-import { setError, setLoader } from "../actions";
+import { setError, setLoader, resetPlayerData } from "../actions";
 import safeJsonParse from "../utils/safeJsonParse";
 
 const SearchForm = props => {
@@ -67,6 +67,7 @@ const SearchForm = props => {
     const res = await getMembershipID(user.name, user.platform.id);
 
     if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
+      props.resetPlayerData();
       const nakedDisplayName = res.data.Response[0].displayName;
       const displayName = encodeURIComponent(res.data.Response[0].displayName);
 
@@ -102,7 +103,7 @@ const SearchForm = props => {
       const errorStatus = "Guardian Not Found";
       const errorMessage =
         "Battle.net IDs Must Be In This Format, Example: Gladd#11693";
-      props.setError(errorStatus, errorMessage);
+      props.setError(true, errorStatus, errorMessage);
     }
   };
 
@@ -175,5 +176,5 @@ const SearchForm = props => {
 
 export default connect(
   null,
-  { setLoader, setError }
+  { setLoader, setError, resetPlayerData }
 )(SearchForm);
