@@ -3,10 +3,6 @@
 
 .user-and-nav--wrapper {
   height: 150px;
-
-  @include breakpoint(520px) {
-    height: 100px;
-  }
 }
 
 .uan__user__nav {
@@ -32,8 +28,15 @@
   }
 }
 
+.user-nav-platform {
+  display: flex;
+  justify-content: space-between;
+}
+
 .user__platform {
   color: $color-dark-gray;
+  text-shadow: 0.5px 0.5px 0.5px black;
+
   @include breakpoint("mobile_portrait") {
     font-size: 2vh;
   }

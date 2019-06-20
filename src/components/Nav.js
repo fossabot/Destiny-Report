@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "./";
 import "../../static/styles/Nav.scss";
 
-const Nav = ({ name, platform }) => {
+const Nav = ({ name, platform, className }) => {
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${className}`}>
       <Link
         href={`/player?name=${name}&platform=${platform}`}
         as={`/player/${platform}/${name}`}

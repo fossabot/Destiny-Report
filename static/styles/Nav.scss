@@ -2,21 +2,17 @@
 @import "./breakpoints";
 
 .navbar {
-  padding-top: 35px;
   display: flex;
 }
 
 .navbar__item {
   font-size: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
   display: block;
 
   @include breakpoint(580px) {
+    margin-right: 8px;
     font-size: 16px;
-    margin-right: 5px;
-  }
-  @include breakpoint(390px) {
-    font-size: 11px;
   }
 
   &::after {
@@ -38,5 +34,18 @@
     &::after {
       transform: scale(1);
     }
+  }
+}
+
+.top-nav {
+  @include breakpoint(480px) {
+    display: none;
+  }
+}
+.bottom-nav {
+  display: none;
+  @include breakpoint(480px) {
+    display: flex;
+    margin-top: 20px;
   }
 }
