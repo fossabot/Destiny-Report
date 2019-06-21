@@ -2,10 +2,9 @@ const {
   getActivityHistory,
   getProfile
 } = require("../../../src/utils/endpoints");
-const { parse } = require("url");
 
 module.exports = async (req, res) => {
-  const { query } = parse(req.url, true);
+  const query = req.query;
   const { membershipId, membershipType } = query;
 
   try {
@@ -34,9 +33,9 @@ module.exports = async (req, res) => {
         return new Date(b.period) - new Date(a.period);
       })
       .slice(0, 10);
-    res.end(JSON.stringify(activities));
+    res.json(activities);
   } catch (error) {
     console.log(error.data);
-    res.end("[]");
+    res.json([]);
   }
 };

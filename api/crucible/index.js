@@ -5,22 +5,20 @@ const {
 } = require("../../src/utils/endpoints");
 const getCrucibleOverallStats = require("../../src/server/getCrucibleOverallStats");
 const getSafe = require("../../src/utils/getValueSafely");
-const { parse } = require("url");
 const { values } = require("lodash");
 const { glorySteps, valorSteps } = require("../../src/utils/steps");
 
 module.exports = async (req, res) => {
-  const { query } = parse(req.url, true);
+  const query = req.query;
   const { membershipId, membershipType } = query;
+
   if (!membershipType || !membershipType) {
-    res.end(
-      JSON.stringify({
-        success: false,
-        ErrorCode: 18,
-        ErrorStatus: "MembershipId And(Or) MembershipType Not Found",
-        Message: "MembershipId And MembershipType Are Required"
-      })
-    );
+    res.json({
+      success: false,
+      ErrorCode: 18,
+      ErrorStatus: "MembershipId And(Or) MembershipType Not Found",
+      Message: "MembershipId And MembershipType Are Required"
+    });
   }
 
   const data = {
@@ -119,15 +117,13 @@ module.exports = async (req, res) => {
     );
 
     data.stats = stats;
-    res.end(JSON.stringify({ success: true, data }));
+    res.json({ success: true, data });
   } catch (err) {
-    res.end(
-      JSON.stringify({
-        success: false,
-        ErrorCode: 111993,
-        ErrorStatus: err.response.data.ErrorStatus,
-        Message: err.response.data.Message
-      })
-    );
+    res.json({
+      success: false,
+      ErrorCode: 111993,
+      ErrorStatus: err.response.data.ErrorStatus,
+      Message: err.response.data.Message
+    });
   }
 };

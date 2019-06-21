@@ -166,15 +166,39 @@ export default {
       "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_52f64830161b33289d36edc03f6d2ea6.png"
   },
   58: { name: "HeroicAdventure", icon: "" },
-  59: { name: "Showdown", icon: "" },
-  60: { name: "Lockdown", icon: "" },
-  61: { name: "Scorched", icon: "" },
+  59: {
+    name: "Showdown",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fb3e9149c43f7a2e8f8b66cbea7845fe.png"
+  },
+  60: {
+    name: "Lockdown",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fb3e9149c43f7a2e8f8b66cbea7845fe.png"
+  },
+  61: {
+    name: "Scorched",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fb3e9149c43f7a2e8f8b66cbea7845fe.png"
+  },
   62: { name: "ScorchedTeam", icon: "" },
-  63: { name: "Gambit", icon: "" },
+  63: {
+    name: "Gambit",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_96f7e9009d4f26e30cfd60564021925e.png"
+  },
   64: { name: "AllPvE - Comp.", icon: "" },
-  65: { name: "Breakthrough", icon: "" },
+  65: {
+    name: "Breakthrough",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fb3e9149c43f7a2e8f8b66cbea7845fe.png"
+  },
   66: { name: "BlackArmoryRun", icon: "" },
-  67: { name: "Salvage", icon: "" },
+  67: {
+    name: "Salvage",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_fb3e9149c43f7a2e8f8b66cbea7845fe.png"
+  },
   68: {
     name: "Iron Banner - Salvage",
     icon:
@@ -210,6 +234,14 @@ export default {
     icon:
       "https://bungie.net/common/destiny2_content/icons/1c17984345f393e728dc8d2b898eca66.png"
   },
-  75: { name: "Gambit - Prime", icon: "" },
-  76: { name: "Reckoning", icon: "" }
+  75: {
+    name: "Gambit - Prime",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_1e392d102336226d85cc12bc5dbe1ff0.png"
+  },
+  76: {
+    name: "Reckoning",
+    icon:
+      "https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_e74b3385c5269da226372df8ae7f500d.png"
+  }
 };
