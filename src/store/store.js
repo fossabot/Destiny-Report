@@ -1,6 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { globalReducer, crucibleReducer, loadoutReducer } from "../reducers";
+import {
+  globalReducer,
+  crucibleReducer,
+  loadoutReducer,
+  gambitReducer
+} from "../reducers";
 import thunk from "redux-thunk";
 
 export default function initializeStore(initialState) {
@@ -12,7 +17,8 @@ export default function initializeStore(initialState) {
     combineReducers({
       global: globalReducer,
       loadout: loadoutReducer,
-      crucible: crucibleReducer
+      crucible: crucibleReducer,
+      gambit: gambitReducer
     }),
     initialState,
     composeEnhancers(applyMiddleware(thunk))

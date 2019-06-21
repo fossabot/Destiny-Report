@@ -1,6 +1,5 @@
 import React from "react";
-import { CrucibleMatch, Spacer } from "./";
-import { connect } from "react-redux";
+import { ActivityMatch, Spacer } from "./";
 
 const MatchesHistory = ({ matches }) => {
   return (
@@ -10,13 +9,11 @@ const MatchesHistory = ({ matches }) => {
       </div>
       <Spacer height="20px" />
       {matches.data.map(match => (
-        <CrucibleMatch key={match.activityDetails.instanceId} data={match} />
+        <ActivityMatch key={match.activityDetails.instanceId} data={match} />
       ))}
       <Spacer height="20px" />
     </div>
   );
 };
 
-export default connect(state => ({ matches: state.crucible.matches }))(
-  MatchesHistory
-);
+export default MatchesHistory;

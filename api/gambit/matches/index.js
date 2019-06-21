@@ -23,9 +23,6 @@ module.exports = async (req, res) => {
       promisesToBeResolved.push(
         getActivityHistory(membershipId, membershipType, characterIds[i], 75)
       );
-      promisesToBeResolved.push(
-        getActivityHistory(membershipId, membershipType, characterIds[i], 76)
-      );
     }
 
     const result = await Promise.all(promisesToBeResolved);

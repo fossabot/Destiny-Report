@@ -12,9 +12,16 @@ import { connect } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
 import getBaseUrl from "../src/utils/getBaseUrl";
-import getCrucibleMatchesHistory from "../src/utils/getCrucibleMatchesHistory";
+import getActivityMatchesHistory from "../src/utils/getActivityMatchesHistory";
 
-const Crucible = ({ name, platform, crucibleData, error, setError }) => {
+const Crucible = ({
+  name,
+  platform,
+  crucibleData,
+  crucibleMatches,
+  error,
+  setError
+}) => {
   useEffect(() => {
     if (error) {
       setError(true, error.ErrorStatus, error.Message);
@@ -41,7 +48,7 @@ const Crucible = ({ name, platform, crucibleData, error, setError }) => {
         modes={crucibleData.stats.overallModesData.comp}
       />
       <Divider />
-      <MatchesHistory />
+      <MatchesHistory matches={crucibleMatches} />
     </div>
   );
 };
@@ -61,13 +68,16 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
       //getActivityHistory
       if (!reduxStore.getState().crucible.matches.isFetched) {
-        getCrucibleMatchesHistory(BASE_URL, membershipType, membershipId).then(
-          result => {
-            if (result.success) {
-              reduxStore.dispatch(setCrucibleMatches(result.data));
-            }
+        getActivityMatchesHistory(
+          BASE_URL,
+          membershipType,
+          membershipId,
+          "crucible"
+        ).then(result => {
+          if (result.success) {
+            reduxStore.dispatch(setCrucibleMatches(result.data));
           }
-        );
+        });
       }
 
       if (reduxStore.getState().crucible.isFetched) {
@@ -110,7 +120,10 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
   }
 };
 
-const mapStateToProps = state => ({ crucibleData: state.crucible.data });
+const mapStateToProps = state => ({
+  crucibleData: state.crucible.data,
+  crucibleMatches: state.crucible.matches
+});
 
 export default connect(
   mapStateToProps,

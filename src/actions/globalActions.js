@@ -1,6 +1,7 @@
 import {
   globalActionTypes,
   crucibleActionTypes,
+  gambitActionTypes,
   loadoutActionTypes
 } from "./actionTypes";
 
@@ -23,5 +24,8 @@ export const resetPlayerData = () => dispatch => {
   });
   dispatch({
     type: crucibleActionTypes.RESET_CRUCIBLE_DATA
+  });
+  dispatch({
+    type: gambitActionTypes.RESET_GAMBIT_DATA
   });
 };
