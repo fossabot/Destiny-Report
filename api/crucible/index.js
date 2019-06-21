@@ -119,11 +119,20 @@ module.exports = async (req, res) => {
     data.stats = stats;
     res.json({ success: true, data });
   } catch (err) {
-    res.json({
-      success: false,
-      ErrorCode: 111993,
-      ErrorStatus: err.response.data.ErrorStatus,
-      Message: err.response.data.Message
-    });
+    if (err.response) {
+      res.json({
+        success: false,
+        ErrorCode: 111993,
+        ErrorStatus: err.response.data.ErrorStatus,
+        Message: err.response.data.Message
+      });
+    } else {
+      res.json({
+        success: false,
+        ErrorCode: 111993,
+        ErrorStatus: "Somthing Went Wrong",
+        Message: "Please Try Again Later"
+      });
+    }
   }
 };
