@@ -10,7 +10,16 @@ export const setLoader = value => ({
   payload: value
 });
 
-export const setError = (active, errorStatus, errorMessage) => ({
+const defaultError = {
+  errorStatus: "Something Went Wrong!",
+  errorMessage: "Please Try Again Later"
+};
+
+export const setError = (
+  active,
+  errorStatus = defaultError.errorStatus,
+  errorMessage = defaultError.errorMessage
+) => ({
   type: globalActionTypes.SET_ERROR,
   payload: {
     errorStatus,

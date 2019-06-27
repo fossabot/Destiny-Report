@@ -64,46 +64,59 @@ const SearchForm = props => {
   const formSubmitHandler = async e => {
     e.preventDefault();
     props.setLoader(true);
-    const res = await getMembershipID(user.name, user.platform.id);
 
-    if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
-      props.resetPlayerData();
-      const nakedDisplayName = res.data.Response[0].displayName;
-      const displayName = encodeURIComponent(res.data.Response[0].displayName);
+    try {
+      const res = await getMembershipID(user.name, user.platform.id);
 
-      let previousHistory =
-        safeJsonParse(localStorage.getItem("searchHistory")) || [];
+      if (res.data.ErrorCode === 1 && res.data.Response.length > 0) {
+        props.resetPlayerData();
+        const nakedDisplayName = res.data.Response[0].displayName;
+        const displayName = encodeURIComponent(
+          res.data.Response[0].displayName
+        );
 
-      previousHistory = previousHistory.filter(
-        player => player.name.trim() !== nakedDisplayName.trim()
-      );
+        let previousHistory =
+          safeJsonParse(localStorage.getItem("searchHistory")) || [];
 
-      previousHistory.unshift({
-        name: nakedDisplayName,
-        platform: {
-          id: user.platform.id,
-          name: user.platform.name
-        }
-      });
+        previousHistory = previousHistory.filter(
+          player => player.name.trim() !== nakedDisplayName.trim()
+        );
 
-      previousHistory.splice(10);
-      localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
+        previousHistory.unshift({
+          name: nakedDisplayName,
+          platform: {
+            id: user.platform.id,
+            name: user.platform.name
+          }
+        });
 
-      setUserState({
-        fetchinSucceed: true,
-        fetchingFailed: false,
-        user: res.data.Response[0]
-      });
+        previousHistory.splice(10);
+        localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
 
-      Router.push(
-        `/player?platform=${user.platform.name}&name=${displayName}`,
-        `/player/${user.platform.name}/${displayName}`
-      );
-    } else {
-      const errorStatus = "Guardian Not Found";
-      const errorMessage =
-        "Battle.net IDs Must Be In This Format, Example: Gladd#11693";
-      props.setError(true, errorStatus, errorMessage);
+        setUserState({
+          fetchinSucceed: true,
+          fetchingFailed: false,
+          user: res.data.Response[0]
+        });
+
+        Router.push(
+          `/player?platform=${user.platform.name}&name=${displayName}`,
+          `/player/${user.platform.name}/${displayName}`
+        );
+      } else {
+        const errorStatus = "Guardian Not Found";
+        const errorMessage =
+          "Battle.net IDs Must Be In This Format, Example: Gladd#11693";
+        props.setError(true, errorStatus, errorMessage);
+      }
+    } catch (error) {
+      if (error.response) {
+        const { ErrorStatus, Message } = error.response.data;
+
+        props.setError(true, ErrorStatus, Message);
+      } else {
+        props.setError(true);
+      }
     }
   };
 
