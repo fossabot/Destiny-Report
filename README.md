@@ -1,12 +1,12 @@
 # Info
 
-Due to working on Destiny Report v3, I will not be able to update the old Destiny.report
+This is the new version of Destiny Report that i was working on, Raid page and PGCR aren't done yet.
 
-It will hopefully be ready by the end of June.
+Be nice to the bugs as you may see them alot :-D
 
-You can see the progress here https://destiny-report.sarkurd.now.sh
+You can always report them here.
 
-To see the old version's source check the releases tab.
+Enjoy
 
 # Installation
 
