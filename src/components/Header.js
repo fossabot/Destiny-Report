@@ -11,9 +11,9 @@ const Header = () => {
             <a>Destiny Report</a>
           </Link>
         </div>
-        <div className="destiny-report--addon">
-          <Link href="https://chrome.google.com/webstore/detail/destiny-report/bfddnieakjjggiojaipihpfjnimkjaoh">
-            <a target="_blank">Add-on</a>
+        <div className="destiny-report--donate">
+          <Link href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CBDESK5LVTJPC&source=url">
+            <a target="_blank">Donate</a>
           </Link>
         </div>
       </div>
