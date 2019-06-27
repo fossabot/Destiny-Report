@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": ["destiny.report", "www.destiny.report"],
+  "alias": "destiny.report",
   "builds": [
     { "src": "next.config.js", "use": "@now/next" },
     {
