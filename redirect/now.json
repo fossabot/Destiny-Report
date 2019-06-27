@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "alias": "www.destiny.report",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": { "Location": "https://destiny.report/$1" }
+    }
+  ]
+}
