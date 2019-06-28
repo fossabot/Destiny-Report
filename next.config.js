@@ -6,6 +6,6 @@ const withImages = require("next-images");
 module.exports = withPlugins([withSASS, withCSS, withImages], {
   target: "serverless",
   env: {
-    API_KEY: "1eec7ade76114bf280b3e4e468a8ff3f"
+    API_KEY: process.env.API_KEY
   }
 });

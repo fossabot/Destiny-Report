@@ -29,5 +29,11 @@
   "env": {
     "API_KEY": "@bungieapikey",
     "DB_KEY": "@mongo-uri"
+  },
+  "build": {
+    "env": {
+      "API_KEY": "@bungieapikey",
+      "DB_KEY": "@mongo-uri"
+    }
   }
 }
