@@ -20,7 +20,7 @@ Enjoy
 
 2- Add Bungie API key and MongoDB URI
 
-  -create a `.env` in the root of the project put the keys inside it like this
+  -create two files  `.env` and `.env.build` in the root of the project put the keys inside them like this
 ```sh
 API_KEY="your bungie API key"
 DB_KEY="your MongoDB URI"
