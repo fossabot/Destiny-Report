@@ -44,13 +44,13 @@ NProgress.configure({ minimum: 0.5 });
 class MyApp extends App {
   componentDidMount() {
     initGA();
-    logPageView();
 
     Router.events.on("routeChangeStart", () => {
       this.props.reduxStore.dispatch(setLoader(true));
       NProgress.start();
     });
     Router.events.on("routeChangeComplete", () => {
+      logPageView();
       this.props.reduxStore.dispatch(setLoader(false));
       NProgress.done();
     });
