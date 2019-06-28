@@ -9,6 +9,7 @@
     },
     { "src": "static/**/*", "use": "@now/static" }
   ],
+  "regions": ["iad1"],
   "routes": [
     {
       "src": "/player/(?<platform>[^/]+)/(?<name>[^/]+)([/]*)$",
@@ -26,6 +27,7 @@
     { "src": "/.*", "dest": "/error" }
   ],
   "env": {
-    "API_KEY": "@bungieapikey"
+    "API_KEY": "@bungieapikey",
+    "DB_KEY": "@mongo-uri"
   }
 }
