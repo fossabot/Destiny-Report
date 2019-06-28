@@ -25,6 +25,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { UserProvider } from "../src/context/UserContext";
 import { setLoader, setError } from "../src/actions";
 
+import { initGA, logPageView } from "../src/utils/analytics";
+
 library.add(
   faTimes,
   faPaypal,
@@ -41,6 +43,9 @@ NProgress.configure({ minimum: 0.5 });
 
 class MyApp extends App {
   componentDidMount() {
+    initGA();
+    logPageView();
+
     Router.events.on("routeChangeStart", () => {
       this.props.reduxStore.dispatch(setLoader(true));
       NProgress.start();
