@@ -2,7 +2,8 @@ import {
   globalActionTypes,
   crucibleActionTypes,
   gambitActionTypes,
-  loadoutActionTypes
+  loadoutActionTypes,
+  raidActionTypes
 } from "./actionTypes";
 
 export const setLoader = value => ({
@@ -36,5 +37,8 @@ export const resetPlayerData = () => dispatch => {
   });
   dispatch({
     type: gambitActionTypes.RESET_GAMBIT_DATA
+  });
+  dispatch({
+    type: raidActionTypes.RESET_RAID_DATA
   });
 };

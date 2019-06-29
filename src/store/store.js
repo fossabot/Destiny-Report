@@ -4,7 +4,8 @@ import {
   globalReducer,
   crucibleReducer,
   loadoutReducer,
-  gambitReducer
+  gambitReducer,
+  raidReducer
 } from "../reducers";
 import thunk from "redux-thunk";
 
@@ -18,7 +19,8 @@ export default function initializeStore(initialState) {
       global: globalReducer,
       loadout: loadoutReducer,
       crucible: crucibleReducer,
-      gambit: gambitReducer
+      gambit: gambitReducer,
+      raid: raidReducer
     }),
     initialState,
     composeEnhancers(applyMiddleware(thunk))

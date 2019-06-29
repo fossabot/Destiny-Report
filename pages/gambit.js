@@ -35,7 +35,9 @@ const Gambit = ({
       }
       Router.push("/");
     }
-  });
+  }, []);
+
+  console.log(gambitData);
 
   return (
     <div className="gambit--wrapper" style={{ height: "100%" }}>

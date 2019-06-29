@@ -5,8 +5,18 @@
   width: 100%;
 
   .raid-card__header {
-    @include breakpoint(380px) {
-      font-size: 26px;
+    display: flex;
+    align-items: baseline;
+
+    > h1 {
+      margin-right: 10px;
+      @include breakpoint(480px) {
+        font-size: 20px;
+      }
+    }
+
+    .raid-card__time-played {
+      color: $color-dark-gray;
     }
   }
   .raid-card__stats {

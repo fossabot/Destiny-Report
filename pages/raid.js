@@ -1,38 +1,150 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import Router from "next/router";
+import axios from "axios";
 import {
   UserAndNav,
-  ActivityHeader,
+  RaidOverallHeader,
   RaidCard,
-  Divider
+  Divider,
+  Spacer
 } from "../src/components";
-import withStyles from "react-jss";
+import { getMembershipID } from "../src/utils/endpoints";
+import { setRaidData, setError, setRaidBadges } from "../src/actions";
+import getBaseUrl from "../src/utils/getBaseUrl";
 
-const styles = {
-  raidWrapper: {
-    marginBottom: "20px"
-  }
-};
+const Raid = ({ name, platform, error, raidData }) => {
+  useEffect(() => {
+    if (error) {
+      if (error.response) {
+        const { ErrorStatus, Message } = error.response.data;
 
-const raid = ({ classes, name, platform }) => {
+        setError(true, ErrorStatus, Message);
+      } else if (error.ErrorStatus) {
+        setError(true, error.ErrorStatus, error.Message);
+      } else {
+        setError(true);
+      }
+      Router.push("/");
+    }
+  }, []);
+
   return (
-    <div className={classes.raidWrapper}>
+    <div style={{ marginBottom: "20px" }}>
       <UserAndNav name={name} platform={platform} />
-      <ActivityHeader name="OVERALL" />
-      <RaidCard />
-      <Divider />
-      <RaidCard />
-      <Divider />
-      <RaidCard />
-      <Divider />
-      <RaidCard />
-      <Divider />
-      <RaidCard />
+      {raidData.isFetched && (
+        <React.Fragment>
+          <RaidOverallHeader data={raidData.data} />
+          <Spacer height="40px" />
+          <RaidCard
+            stats={raidData.data.CoS}
+            badges={raidData.badges.data && raidData.badges.data.CoS}
+            name="CROWN OF SORROW"
+          />
+          <Divider />
+          <RaidCard
+            stats={raidData.data.SotP}
+            badges={raidData.badges.data && raidData.badges.data.SotP}
+            name="SCOURGE OF THE PAST"
+          />
+          <Divider />
+          <RaidCard
+            stats={raidData.data.lastWish}
+            badges={raidData.badges.data && raidData.badges.data.lastWish}
+            name="LAST WISH"
+          />
+          <Divider />
+          <RaidCard
+            stats={raidData.data.SoS}
+            badges={raidData.badges.data && raidData.badges.data.SoS}
+            name="SPIRE OF STARS"
+            isPrestige={true}
+          />
+          <Divider />
+          <RaidCard
+            stats={raidData.data.EoW}
+            badges={raidData.badges.data && raidData.badges.data.EoW}
+            name="EATER OF WORLDS"
+            isPrestige={true}
+          />
+          <Divider />
+          <RaidCard
+            stats={raidData.data.leviathan}
+            badges={raidData.badges.data && raidData.badges.data.leviathan}
+            name="LEVIATHAN"
+            isPrestige={true}
+          />
+        </React.Fragment>
+      )}
     </div>
   );
 };
 
-raid.getInitialProps = ({ query }) => {
-  return { name: query.name, platform: query.platform };
+Raid.getInitialProps = async ({ query, reduxStore, req }) => {
+  const platforms = { psn: 2, xbl: 1, bnet: 4 };
+  const BASE_URL = getBaseUrl(req);
+
+  try {
+    const response = await getMembershipID(
+      query.name,
+      platforms[query.platform]
+    );
+
+    const { membershipId, membershipType } = response.data.Response[0];
+
+    if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
+      const raidDataResponse = await axios.get(
+        `${BASE_URL}/api/raid?membershipId=${membershipId}&membershipType=${membershipType}`
+      );
+      const raidBadgesResponse = await axios.get(
+        `${BASE_URL}/api/raid/getBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+      );
+
+      axios
+        .get(
+          `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+        )
+        .then(updatedBadges => {
+          if (updatedBadges.data.data) {
+            reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
+          }
+        });
+      if (raidDataResponse.data.success) {
+        reduxStore.dispatch(setRaidData(raidDataResponse.data.data));
+        reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
+        return {
+          BASE_URL,
+          name: response.data.Response[0].displayName,
+          platform: query.platform
+        };
+      } else {
+        throw {
+          ErrorStatus: raidDataResponse.data.ErrorStatus,
+          Message: raidDataResponse.data.Message
+        };
+      }
+    } else {
+      throw {
+        ErrorStatus: "Guardian Not Found",
+        Message: "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      error,
+      BASE_URL,
+      name: query.name,
+      platform: query.platform
+    };
+  }
 };
 
-export default withStyles(styles)(raid);
+const mapStateToProps = state => ({
+  raidData: state.raid
+});
+
+export default connect(
+  mapStateToProps,
+  { setError }
+)(Raid);

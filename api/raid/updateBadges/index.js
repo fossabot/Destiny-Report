@@ -2,6 +2,7 @@ const { getProfile } = require("../../../src/utils/endpoints");
 const checkForBadges = require("../../../src/server/checkForBadges");
 const connectMongoose = require("../../../src/server/connectMongoose");
 const Player = require("../../../src/server/models/player");
+const mongoose = require("mongoose");
 
 module.exports = async (req, res) => {
   try {
@@ -32,15 +33,9 @@ module.exports = async (req, res) => {
       //update the last_date
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      const data = await Player.findOneAndUpdate(
-        {
-          _id: membershipId
-        },
-        {
-          last_date: yesterday.toISOString()
-        },
-        { upsert: true, setDefaultsOnInsert: true, returnNewDocument: true }
-      ).exec();
+      const data = await Player.findById(membershipId).exec();
+
+      mongoose.connection.close();
 
       if (data) {
         res.json({

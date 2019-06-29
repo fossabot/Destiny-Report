@@ -16,3 +16,8 @@ export const gambitActionTypes = {
   SET_GAMBIT_MATCHES: "SET_GAMBIT_MATCHES",
   RESET_GAMBIT_DATA: "RESET_GAMBIT_DATA"
 };
+export const raidActionTypes = {
+  SET_RAID_DATA: "SET_RAID_DATA",
+  SET_RAID_BADGES: "SET_RAID_BADGES",
+  RESET_RAID_DATA: "RESET_RAID_DATA"
+};

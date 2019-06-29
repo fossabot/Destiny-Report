@@ -38,22 +38,43 @@ module.exports = async (membershipId, membershipType) => {
   } = await getHistorialStats(membershipId, membershipType, [63, 75]);
 
   //gambit
-  data.gambit.kd = Response.pvecomp_gambit.allTime.killsDeathsRatio.basic.value;
-  data.gambit.activitiesEntered =
-    Response.pvecomp_gambit.allTime.activitiesEntered.basic.value;
-  data.gambit.activitiesWon =
-    Response.pvecomp_gambit.allTime.activitiesWon.basic.value;
-  data.gambit.totalActivityDuration =
-    Response.pvecomp_gambit.allTime.totalActivityDurationSeconds.basic.value;
+  data.gambit.kd = getSafe(
+    () => Response.pvecomp_gambit.allTime.killsDeathsRatio.basic.value,
+    0
+  );
+  data.gambit.activitiesEntered = getSafe(
+    () => Response.pvecomp_gambit.allTime.activitiesEntered.basic.value,
+    0
+  );
+  data.gambit.activitiesWon = getSafe(
+    () => Response.pvecomp_gambit.allTime.activitiesWon.basic.value,
+    0
+  );
+
+  data.gambit.totalActivityDuration = getSafe(
+    () =>
+      Response.pvecomp_gambit.allTime.totalActivityDurationSeconds.basic.value,
+    0
+  );
 
   //Gambit Prime
-  data.gPrime.kd = Response.pvecomp_mamba.allTime.killsDeathsRatio.basic.value;
-  data.gPrime.activitiesEntered =
-    Response.pvecomp_mamba.allTime.activitiesEntered.basic.value;
-  data.gPrime.activitiesWon =
-    Response.pvecomp_mamba.allTime.activitiesWon.basic.value;
-  data.gPrime.totalActivityDuration =
-    Response.pvecomp_mamba.allTime.totalActivityDurationSeconds.basic.value;
+  data.gPrime.kd = getSafe(
+    () => Response.pvecomp_mamba.allTime.killsDeathsRatio.basic.value,
+    0
+  );
+  data.gPrime.activitiesEntered = getSafe(
+    () => Response.pvecomp_mamba.allTime.activitiesEntered.basic.value,
+    0
+  );
+  data.gPrime.activitiesWon = getSafe(
+    () => Response.pvecomp_mamba.allTime.activitiesWon.basic.value,
+    0
+  );
+  data.gPrime.totalActivityDuration = getSafe(
+    () =>
+      Response.pvecomp_mamba.allTime.totalActivityDurationSeconds.basic.value,
+    0
+  );
 
   //Overall
   data.overall.kd = (data.gambit.kd + data.gPrime.kd) / 2;

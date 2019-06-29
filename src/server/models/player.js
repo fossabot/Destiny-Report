@@ -95,6 +95,24 @@ const playerSchema = mongoose.Schema({
       value: { type: Number, default: 6 },
       instanceId: { type: String, default: "" }
     }
+  },
+  CoS: {
+    flawless: {
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
+    },
+    dayOne: {
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
+    },
+    weekOne: {
+      value: { type: Boolean, default: false },
+      instanceId: { type: String, default: "" }
+    },
+    minPlayersCount: {
+      value: { type: Number, default: 6 },
+      instanceId: { type: String, default: "" }
+    }
   }
 });
 

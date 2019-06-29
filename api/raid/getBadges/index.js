@@ -5,8 +5,7 @@ module.exports = async (req, res) => {
   const query = req.query;
   const { membershipId, membershipType } = query;
 
-  console.log(query);
-  if (!membershipType || !membershipType) {
+  if (!membershipId || !membershipType) {
     res.json({
       success: false,
       ErrorCode: 18,

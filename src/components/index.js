@@ -12,6 +12,7 @@ export { default as Loading } from "./Loading";
 export { default as Modal } from "./Modal";
 export { default as ActivityHeader } from "./ActivityHeader";
 export { default as GambitHeader } from "./GambitHeader";
+export { default as RaidOverallHeader } from "./RaidOverallHeader";
 export { default as RaidCard } from "./RaidCard";
 export { default as Divider } from "./Divider";
 export { default as CrucibleCard } from "./CrucibleCard";
