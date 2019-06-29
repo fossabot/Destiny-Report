@@ -12,7 +12,9 @@ module.exports = async (membershipId, membershipType, characterIds) => {
       prestige: 0,
       guided: 0,
       timePlayed: 0
-    }
+    },
+    clears: 0,
+    combinedTimePlayed: 0
   };
   data = raidInitialData;
 
@@ -23,6 +25,7 @@ module.exports = async (membershipId, membershipType, characterIds) => {
     );
   }
   await Promise.all(toBeResolved);
+
   return data;
 };
 
@@ -46,47 +49,80 @@ const getRaidAggregateAndSimplify = async (
       data.CoS.normal += activities[k].values.activityCompletions.basic.value;
       data.CoS.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 2122313384) {
       data.lastWish.normal +=
         activities[k].values.activityCompletions.basic.value;
       data.lastWish.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 1661734046) {
       data.lastWish.guided +=
         activities[k].values.activityCompletions.basic.value;
       data.lastWish.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 548750096) {
       data.SotP.normal += activities[k].values.activityCompletions.basic.value;
       data.SotP.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 2812525063) {
       data.SotP.guided += activities[k].values.activityCompletions.basic.value;
       data.SotP.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 3089205900) {
       data.EoW.normal += activities[k].values.activityCompletions.basic.value;
       data.EoW.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 2164432138) {
       data.EoW.guided += activities[k].values.activityCompletions.basic.value;
       data.EoW.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 809170886) {
       data.EoW.prestige += activities[k].values.activityCompletions.basic.value;
       data.EoW.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 119944200) {
       data.SoS.normal += activities[k].values.activityCompletions.basic.value;
       data.SoS.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 3213556450) {
       data.SoS.prestige += activities[k].values.activityCompletions.basic.value;
       data.SoS.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (activities[k].activityHash === 3004605630) {
       data.SoS.guided += activities[k].values.activityCompletions.basic.value;
       data.SoS.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     } else if (
       activities[k].activityHash === 2693136600 ||
@@ -100,6 +136,9 @@ const getRaidAggregateAndSimplify = async (
         activities[k].values.activityCompletions.basic.value;
       data.leviathan.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (
       activities[k].activityHash === 417231112 ||
       activities[k].activityHash === 757116822 ||
@@ -112,6 +151,9 @@ const getRaidAggregateAndSimplify = async (
         activities[k].values.activityCompletions.basic.value;
       data.leviathan.timePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
     } else if (
       activities[k].activityHash === 287649202 ||
       activities[k].activityHash === 3916343513 ||
@@ -123,6 +165,9 @@ const getRaidAggregateAndSimplify = async (
       data.leviathan.guided +=
         activities[k].values.activityCompletions.basic.value;
       data.leviathan.timePlayed +=
+        activities[k].values.activitySecondsPlayed.basic.value;
+      data.clears += activities[k].values.activityCompletions.basic.value;
+      data.combinedTimePlayed +=
         activities[k].values.activitySecondsPlayed.basic.value;
     }
   }

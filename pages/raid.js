@@ -34,7 +34,12 @@ const Raid = ({ name, platform, error, raidData }) => {
       <UserAndNav name={name} platform={platform} />
       {raidData.isFetched && (
         <React.Fragment>
-          <RaidOverallHeader data={raidData.data} />
+          <RaidOverallHeader
+            data={{
+              clears: raidData.data.clears,
+              timePlayed: raidData.data.combinedTimePlayed
+            }}
+          />
           <Spacer height="40px" />
           <RaidCard
             stats={raidData.data.CoS}
@@ -92,6 +97,16 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
 
     const { membershipId, membershipType } = response.data.Response[0];
 
+    if (
+      reduxStore.getState().raid.isFetched &&
+      reduxStore.getState().raid.badges.isFetched
+    ) {
+      return {
+        BASE_URL,
+        name: response.data.Response[0].displayName,
+        platform: query.platform
+      };
+    }
     if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
       const raidDataResponse = await axios.get(
         `${BASE_URL}/api/raid?membershipId=${membershipId}&membershipType=${membershipType}`
