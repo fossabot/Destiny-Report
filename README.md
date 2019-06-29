@@ -42,4 +42,4 @@ Destiny Report is NOT affiliated with Bungie, all the resources are propery of B
 # Donate
 I started working on this project around November 2018, spent most of the nights and weekends to finish it and still working on it, if you find it useful, consider donating to help me pay for the hosting and domain costs.
 
-Paypal: http://bit.ly/paypal-destiny-report
+Paypal: http://bit.ly/destiny-report-donate
