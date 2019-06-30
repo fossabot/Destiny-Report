@@ -1,0 +1,10 @@
+.error-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .error__content {
+    font-size: 30px;
+  }
+}
