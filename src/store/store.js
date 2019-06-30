@@ -5,24 +5,27 @@ import {
   crucibleReducer,
   loadoutReducer,
   gambitReducer,
-  raidReducer
+  raidReducer,
+  playerReducer
 } from "../reducers";
 import thunk from "redux-thunk";
 
 export default function initializeStore(initialState) {
-  const composeEnhancers = composeWithDevTools({
-    trace: false,
-    traceLimit: 25
-  });
+  // const composeEnhancers = composeWithDevTools({
+  //   trace: false,
+  //   traceLimit: 25
+  // });
+
   return createStore(
     combineReducers({
       global: globalReducer,
+      player: playerReducer,
       loadout: loadoutReducer,
       crucible: crucibleReducer,
       gambit: gambitReducer,
       raid: raidReducer
     }),
     initialState,
-    composeEnhancers(applyMiddleware(thunk))
+    composeWithDevTools(applyMiddleware(thunk))
   );
 }

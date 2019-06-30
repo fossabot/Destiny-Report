@@ -3,7 +3,8 @@ import {
   crucibleActionTypes,
   gambitActionTypes,
   loadoutActionTypes,
-  raidActionTypes
+  raidActionTypes,
+  playerActionTypes
 } from "./actionTypes";
 
 export const setLoader = value => ({
@@ -40,5 +41,8 @@ export const resetPlayerData = () => dispatch => {
   });
   dispatch({
     type: raidActionTypes.RESET_RAID_DATA
+  });
+  dispatch({
+    type: playerActionTypes.RESET_PLAYER_DATA
   });
 };

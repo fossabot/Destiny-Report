@@ -10,7 +10,12 @@ import {
   Spacer
 } from "../src/components";
 import { getMembershipID } from "../src/utils/endpoints";
-import { setRaidData, setError, setRaidBadges } from "../src/actions";
+import {
+  setRaidData,
+  setError,
+  setRaidBadges,
+  setPlayerData
+} from "../src/actions";
 import getBaseUrl from "../src/utils/getBaseUrl";
 
 const Raid = ({ name, platform, error, raidData }) => {
@@ -89,13 +94,26 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
   const platforms = { psn: 2, xbl: 1, bnet: 4 };
   const BASE_URL = getBaseUrl(req);
 
-  try {
-    const response = await getMembershipID(
-      query.name,
-      platforms[query.platform]
-    );
+  let playerData = reduxStore.getState().player.data;
 
-    const { membershipId, membershipType } = response.data.Response[0];
+  try {
+    if (!reduxStore.getState().player.isFetched) {
+      const response = await getMembershipID(
+        query.name,
+        platforms[query.platform]
+      );
+      if (response.data.ErrorCode !== 1 || response.data.Response.length < 1) {
+        throw {
+          ErrorStatus: "Guardian Not Found",
+          Message: "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
+        };
+      }
+
+      playerData = response.data.Response[0];
+      reduxStore.dispatch(setPlayerData(playerData));
+    }
+
+    const { membershipId, membershipType } = playerData;
 
     if (
       reduxStore.getState().raid.isFetched &&
@@ -103,45 +121,39 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
     ) {
       return {
         BASE_URL,
-        name: response.data.Response[0].displayName,
+        name: playerData.displayName,
         platform: query.platform
       };
     }
-    if (response.data.ErrorCode === 1 && response.data.Response.length > 0) {
-      const raidDataResponse = await axios.get(
-        `${BASE_URL}/api/raid?membershipId=${membershipId}&membershipType=${membershipType}`
-      );
-      const raidBadgesResponse = await axios.get(
-        `${BASE_URL}/api/raid/getBadges?membershipId=${membershipId}&membershipType=${membershipType}`
-      );
 
-      axios
-        .get(
-          `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
-        )
-        .then(updatedBadges => {
-          if (updatedBadges.data.data) {
-            reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
-          }
-        });
-      if (raidDataResponse.data.success) {
-        reduxStore.dispatch(setRaidData(raidDataResponse.data.data));
-        reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
-        return {
-          BASE_URL,
-          name: response.data.Response[0].displayName,
-          platform: query.platform
-        };
-      } else {
-        throw {
-          ErrorStatus: raidDataResponse.data.ErrorStatus,
-          Message: raidDataResponse.data.Message
-        };
-      }
+    const raidDataResponse = await axios.get(
+      `${BASE_URL}/api/raid?membershipId=${membershipId}&membershipType=${membershipType}`
+    );
+    const raidBadgesResponse = await axios.get(
+      `${BASE_URL}/api/raid/getBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+    );
+
+    axios
+      .get(
+        `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+      )
+      .then(updatedBadges => {
+        if (updatedBadges.data.data) {
+          reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
+        }
+      });
+    if (raidDataResponse.data.success) {
+      reduxStore.dispatch(setRaidData(raidDataResponse.data.data));
+      reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
+      return {
+        BASE_URL,
+        name: playerData.displayName,
+        platform: query.platform
+      };
     } else {
       throw {
-        ErrorStatus: "Guardian Not Found",
-        Message: "Battle.net IDs Must Be In This Format, Example: Gladd#11693"
+        ErrorStatus: raidDataResponse.data.ErrorStatus,
+        Message: raidDataResponse.data.Message
       };
     }
   } catch (error) {

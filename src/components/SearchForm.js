@@ -6,7 +6,12 @@ import { Spacer } from "./";
 import UserContext from "../context/UserContext";
 import { getMembershipID } from "../utils/endpoints";
 import { connect } from "react-redux";
-import { setError, setLoader, resetPlayerData } from "../actions";
+import {
+  setError,
+  setLoader,
+  resetPlayerData,
+  setPlayerData
+} from "../actions";
 import safeJsonParse from "../utils/safeJsonParse";
 
 const SearchForm = props => {
@@ -19,8 +24,6 @@ const SearchForm = props => {
     }
   });
   const [showPlatfoms, setShowPlatforms] = useState(false);
-
-  const { setUserState } = useContext(UserContext);
 
   useEffect(() => {
     window.addEventListener("click", e => {
@@ -93,11 +96,7 @@ const SearchForm = props => {
         previousHistory.splice(10);
         localStorage.setItem("searchHistory", JSON.stringify(previousHistory));
 
-        setUserState({
-          fetchinSucceed: true,
-          fetchingFailed: false,
-          user: res.data.Response[0]
-        });
+        props.setPlayerData(res.data.Response[0]);
 
         Router.push(
           `/player?platform=${user.platform.name}&name=${displayName}`,
@@ -189,5 +188,5 @@ const SearchForm = props => {
 
 export default connect(
   null,
-  { setLoader, setError, resetPlayerData }
+  { setLoader, setError, resetPlayerData, setPlayerData }
 )(SearchForm);
