@@ -73,18 +73,40 @@ module.exports = async (membershipType, membershipId, characterIds) => {
   for (let i = 0; i < characterIds.length; ++i) {
     await getCharacterActivities(membershipId, membershipType, characterIds[i]);
   }
+
+  const currentDateAndTime = new Date();
+  currentDateAndTime.setDate(currentDateAndTime.getDate() - 2);
+
+  Player.findOneAndUpdate(
+    {
+      _id: membershipId
+    },
+    {
+      last_date: currentDateAndTime.toISOString()
+    },
+    { upsert: true, setDefaultsOnInsert: true },
+    err => {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
   return data;
 };
 
-const checkPlayerBadges = (activity, raidName, hashes) => {
+const checkPlayerBadges = (activity, index, raidName, hashes) => {
   const completionDate = new Date(activity.period);
+  completionDate.setSeconds(
+    completionDate.getSeconds() +
+      activity.entries[index].values.activityDurationSeconds.basic.value
+  );
   let count = 0;
   let flawless = true;
   if (
     hashes.some(hash => hash === activity.activityDetails.directorActivityHash)
   ) {
     for (let j = 0; j < activity.entries.length; j++) {
-      if (activity.entries[j].values.completed.basic.displayValue === "Yes") {
+      if (activity.entries[j].values.completed.basic.value === 1) {
         ++count;
       }
       if (
@@ -178,44 +200,44 @@ const getCharacterActivities = async (
   }
 };
 
-function getPgcrAndBadges(instanceId) {
-  getPGCR(instanceId)
-    .then(async resp => {
-      const Response = resp.data.Response;
+async function getPgcrAndBadges(instanceId) {
+  try {
+    const resp = await getPGCR(instanceId);
 
-      for (let v = 0; v < Response.entries.length; v++) {
-        if (
-          Response.entries[v].player.destinyUserInfo.membershipId === playerId
-        ) {
-          if (
-            Response.entries[v].values.completed.basic.displayValue === "Yes"
-          ) {
-            await Promise.all([
-              checkPlayerBadges(Response, "leviathan", [
-                2693136600,
-                2693136601,
-                2693136602,
-                2693136603,
-                2693136604,
-                2693136605,
-                417231112,
-                757116822,
-                1685065161,
-                2449714930,
-                3446541099,
-                3879860661
-              ]),
-              checkPlayerBadges(Response, "EoW", [3089205900, 809170886]),
-              checkPlayerBadges(Response, "SoS", [119944200, 3213556450]),
-              checkPlayerBadges(Response, "lastWish", [2122313384]),
-              checkPlayerBadges(Response, "SotP", [548750096, 2812525063]),
-              checkPlayerBadges(Response, "CoS", [960175301, 3333172150])
-            ]);
-          }
+    const Response = resp.data.Response;
+
+    for (let v = 0; v < Response.entries.length; v++) {
+      if (
+        Response.entries[v].player.destinyUserInfo.membershipId === playerId
+      ) {
+        if (Response.entries[v].values.completed.basic.value === 1) {
+          await Promise.all([
+            checkPlayerBadges(Response, v, "leviathan", [
+              2693136600,
+              2693136601,
+              2693136602,
+              2693136603,
+              2693136604,
+              2693136605,
+              417231112,
+              757116822,
+              1685065161,
+              2449714930,
+              3446541099,
+              3879860661
+            ]),
+            checkPlayerBadges(Response, v, "EoW", [3089205900, 809170886]),
+            checkPlayerBadges(Response, v, "SoS", [119944200, 3213556450]),
+            checkPlayerBadges(Response, v, "lastWish", [2122313384]),
+            checkPlayerBadges(Response, v, "SotP", [548750096, 2812525063]),
+            checkPlayerBadges(Response, v, "CoS", [960175301, 3333172150])
+          ]);
         }
       }
-    })
-    .catch(err => console.log("v:", err));
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const findAndUpdate = (
@@ -223,8 +245,7 @@ const findAndUpdate = (
   raidName,
   badgeName,
   value,
-  instanceId,
-  period
+  instanceId
 ) => {
   const field = `${raidName}.${badgeName}.value`;
   const instanceIdField = `${raidName}.${badgeName}.instanceId`;
@@ -234,8 +255,7 @@ const findAndUpdate = (
     },
     {
       [field]: value,
-      [instanceIdField]: instanceId,
-      last_date: period
+      [instanceIdField]: instanceId
     },
     { upsert: true, setDefaultsOnInsert: true },
     err => {

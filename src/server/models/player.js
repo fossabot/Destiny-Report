@@ -4,7 +4,7 @@ const playerSchema = mongoose.Schema({
   _id: String,
   last_date: {
     type: String,
-    default: new Date().toISOString()
+    default: "1993-01-01T10:00:00Z"
   },
   leviathan: {
     flawless: {

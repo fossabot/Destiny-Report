@@ -5,7 +5,7 @@ axios.defaults.headers.common["X-API-KEY"] = process.env.API_KEY;
 
 // sets max 2 requests per 1 second, other will be delayed
 const http = rateLimit(axios.create(), {
-  maxRequests: 25,
+  maxRequests: 20,
   perMilliseconds: 1000
 });
 
