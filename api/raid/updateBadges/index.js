@@ -1,39 +1,45 @@
 const { getProfile } = require("../../../src/utils/endpoints");
-const axios = require("axios");
+const checkForBadges = require("../../../src/server/checkForBadges");
+const connectMongoose = require("../../../src/server/connectMongoose");
+const Player = require("../../../src/server/models/player");
 
 module.exports = async (req, res) => {
-  const query = req.query;
-  const { membershipId, membershipType } = query;
-
+  req.socket.setTimeout(0);
   try {
-    if (!membershipType || !membershipType) {
+    const query = req.query;
+    const { membershipId, membershipType } = query;
+
+    const profileReponse = await getProfile(membershipId, membershipType, [
+      100
+    ]);
+
+    if (profileReponse.data.ErrorCode !== 1) {
       res.json({
+        ErrorCode: profileReponse.data.ErrorCode,
         success: false,
-        ErrorCode: 18,
-        ErrorStatus: "MembershipId And(Or) MembershipType Not Found",
-        Message: "MembershipId And MembershipType Are Required"
+        ErrorStatus: profileReponse.data.ErrorStatus,
+        Message: profileReponse.data.Message
       });
       return;
     }
 
-    const deploymentUrl = req.headers["x-now-deployment-url"];
-    const deploymentProto = req.headers["x-forwarded-proto"];
+    await connectMongoose();
+    const characterIds = profileReponse.data.Response.profile.data.characterIds;
 
-    axios.get(
-      `${deploymentProto}://${deploymentUrl}/api/raid/updateBadgesQueue?membershipId=${membershipId}&membershipType=${membershipType}`,
-      {
-        headers: {
-          "X-Invocation-Type": "Event"
-        }
-      }
-    );
+    await checkForBadges(membershipType, membershipId, characterIds);
 
-    res.end("done");
+    const data = await Player.findById(membershipId).exec();
+
+    res.json({
+      success: true,
+      data
+    });
   } catch (err) {
+    console.log(err);
     if (err.response) {
       res.json({
         success: false,
-        ErrorCode: 111993,
+        ErrorCode: err.response.data.ErrorCode,
         ErrorStatus: err.response.data.ErrorStatus,
         Message: err.response.data.Message
       });
