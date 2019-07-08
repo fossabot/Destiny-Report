@@ -20,6 +20,14 @@
       "dest": "/$activity?name=$name&platform=$platform"
     },
     {
+      "src": "/pgcr/(?<id>[^/]+)([/]*)$",
+      "dest": "/pgcr?id=$id"
+    },
+    {
+      "src": "/pgcr([/]*)$",
+      "dest": "/"
+    },
+    {
       "src": "/",
       "dest": "/"
     },

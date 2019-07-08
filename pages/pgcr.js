@@ -1,0 +1,151 @@
+import React, { useEffect, Fragment } from "react";
+import Router from "next/router";
+import moment from "moment";
+import { connect } from "react-redux";
+import { getPGCR, getEntityDefinition } from "../src/utils/endpoints";
+import "../static/styles/Pgcr.scss";
+import { setError } from "../src/actions";
+import { Spacer } from "../src/components";
+
+const Pgcr = ({ error, setError, pgcr, activity }) => {
+  useEffect(() => {
+    if (error) {
+      if (error.response) {
+        const { ErrorStatus, Message } = error.response.data;
+
+        setError(true, ErrorStatus, Message);
+      } else if (error.ErrorStatus) {
+        setError(true, error.ErrorStatus, error.Message);
+      } else {
+        setError(true);
+      }
+      Router.push("/");
+    }
+  }, []);
+
+  const activityDetails = {
+    name: activity && activity.originalDisplayProperties.name,
+    difficulty: "Normal"
+  };
+
+  if (activity && activity.selectionScreenDisplayProperties) {
+    if (
+      activity.selectionScreenDisplayProperties === "Normal" ||
+      activity.selectionScreenDisplayProperties === "Prestige" ||
+      activity.selectionScreenDisplayProperties === "Guided"
+    ) {
+      activityDetails.difficulty =
+        activity.selectionScreenDisplayProperties.name;
+    }
+  }
+
+  return (
+    <div className="pgcr--wrapper">
+      {activity && (
+        <Fragment>
+          <div className="pgcr--activity">
+            <div className="pgcr--activity-details">
+              <div className="pgcr--activity-details_name">
+                {" "}
+                {activityDetails.name}
+              </div>
+              <div className="pgcr--activity-details_type">
+                <div className="pgcr--activity-details_type_diff">
+                  {activityDetails.difficulty}
+                </div>
+                <div className="pgcr--activity-details_type_sfi">
+                  {activity.startingPhaseIndex <= 1 ? "Fresh" : "Checkpoint"}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pgcr--players_container">
+            <div className="pgcr-date">{moment(pgcr.period).format("LLL")}</div>
+            <Spacer height="10px" />
+            {pgcr.entries.map((player, index) => {
+              return (
+                <div className="pgcr--players" key={index}>
+                  <div
+                    className={`pgcr--player ${player.values.completed.basic
+                      .value !== 1 && "lost"}`}
+                  >
+                    <div className="pgcr--player-icon">
+                      <img
+                        src={`https://stats.bungie.net${
+                          player.player.destinyUserInfo.iconPath
+                        }`}
+                        alt="player emblem"
+                      />
+                    </div>
+                    <div className="pgcr--player-details">
+                      <div className="pgcr--player-details_gamertag">
+                        {player.player.destinyUserInfo.displayName}
+                      </div>
+                      <div className="pgcr--player-details_class">
+                        {player.player.characterClass}
+                      </div>
+                    </div>
+                    <div className="pgcr--player-stats">
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.kills.basic.value}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Kills
+                        </div>
+                      </div>
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.deaths.basic.value}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Deaths
+                        </div>
+                      </div>
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.timePlayedSeconds.basic.displayValue}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Time
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Fragment>
+      )}
+    </div>
+  );
+};
+
+Pgcr.getInitialProps = async ({ query }) => {
+  try {
+    const response = await getPGCR(query.id);
+
+    if (!response.data.Response) {
+      throw response.data;
+    }
+    const {
+      data: { Response: activity }
+    } = await getEntityDefinition(
+      response.data.Response.activityDetails.directorActivityHash,
+      "DestinyActivityDefinition"
+    );
+
+    return { pgcr: response.data.Response, activity };
+  } catch (error) {
+    return {
+      error
+    };
+  }
+};
+
+export default connect(
+  null,
+  { setError }
+)(Pgcr);

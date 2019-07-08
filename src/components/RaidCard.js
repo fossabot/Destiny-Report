@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "../../static/styles/RaidCard.scss";
 import ReactTooltip from "react-tooltip";
 import secondsToDhm from "../utils/secondsToDhm";
+import Link from "next/link";
 
 const numberWords = {
   1: "Solo",
@@ -47,38 +48,58 @@ const RaidCard = ({ name, stats, badges, isPrestige }) => {
         {badges && (
           <Fragment>
             {badges.dayOne.value && (
-              <div
-                className="raid-card__badges-text"
-                data-tip="Completed the raid within 24 hours"
+              <Link
+                href={`/pgcr?id=${badges.dayOne.instanceId}`}
+                as={`/pgcr/${badges.dayOne.instanceId}`}
               >
-                Day One
-              </div>
+                <div
+                  className="raid-card__badges-text"
+                  data-tip="Completed the raid within 24 hours"
+                >
+                  Day One
+                </div>
+              </Link>
             )}
             {badges.weekOne.value && (
-              <div
-                className="raid-card__badges-text"
-                data-tip="Completed the raid within 7 days"
+              <Link
+                href={`/pgcr?id=${badges.weekOne.instanceId}`}
+                as={`/pgcr/${badges.weekOne.instanceId}`}
               >
-                Week One
-              </div>
+                <div
+                  className="raid-card__badges-text"
+                  data-tip="Completed the raid within 7 days"
+                >
+                  Week One
+                </div>
+              </Link>
             )}
             {badges.flawless.value && (
-              <div
-                className="raid-card__badges-text"
-                data-tip="Completed the raid without any fireteam member deaths"
+              <Link
+                href={`/pgcr?id=${badges.flawless.instanceId}`}
+                as={`/pgcr/${badges.flawless.instanceId}`}
               >
-                Flawless
-              </div>
+                <div
+                  className="raid-card__badges-text"
+                  data-tip="Completed the raid without any fireteam member deaths"
+                >
+                  Flawless
+                </div>
+              </Link>
             )}
             {badges.minPlayersCount.value < 5 && (
-              <div
-                className="raid-card__badges-text"
-                data-tip={`Completed the raid in a fireteam of ${
-                  badges.minPlayersCount.value
-                }`}
+              <Link
+                href={`/pgcr?id=${badges.minPlayersCount.instanceId}`}
+                as={`/pgcr/${badges.minPlayersCount.instanceId}`}
               >
-                {numberWords[badges.minPlayersCount.value]}
-              </div>
+                <div
+                  className="raid-card__badges-text"
+                  data-tip={`Completed the raid in a fireteam of ${
+                    badges.minPlayersCount.value
+                  }`}
+                >
+                  {numberWords[badges.minPlayersCount.value]}
+                </div>
+              </Link>
             )}
           </Fragment>
         )}

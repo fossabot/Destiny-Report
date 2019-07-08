@@ -1,0 +1,107 @@
+@import "./variables";
+@import "./breakpoints";
+
+* {
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+.pgcr--wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .pgcr-date {
+    color: $color-dark-gray;
+  }
+}
+
+.pgcr--activity {
+  margin-bottom: 10px;
+
+  &-details {
+    margin: 20px 0;
+
+    &_name {
+      font-size: 40px;
+      font-weight: bold;
+
+      @include breakpoint(600px) {
+        font-size: 30px;
+      }
+    }
+    &_type {
+      color: $color-dark-gray;
+      display: flex;
+      font-size: 18px;
+
+      &_sfi {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.pgcr--player {
+  display: flex;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  padding-right: 5px;
+  margin-bottom: 5px;
+  border-left: 2px solid $color-bright-green;
+
+  &.lost {
+    border-left: 2px solid $color-bright-red;
+  }
+
+  &-icon {
+    height: 50px;
+    margin-right: 5px;
+    > img {
+      height: 100%;
+    }
+  }
+
+  &-details {
+    padding-top: 5px;
+    &_class {
+      font-size: 14px;
+      color: $color-dark-gray;
+    }
+  }
+
+  &-stats {
+    display: flex;
+
+    margin-left: auto;
+    &-box {
+      margin-left: 50px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @include breakpoint(720px) {
+        margin-left: 20px;
+      }
+      @include breakpoint(480px) {
+        margin-left: 10px;
+      }
+
+      &_primary {
+        font-size: 18px;
+        @include breakpoint(480px) {
+          font-size: 14px;
+        }
+      }
+      &_secondary {
+        font-size: 15px;
+        color: $color-dark-gray;
+        @include breakpoint(480px) {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
