@@ -1,13 +1,3 @@
-# Info
-
-This is the new version of Destiny Report that i was working on, PGCR isn't done yet.
-
-Be nice to the bugs as you may see them alot :-D
-
-You can always report them here.
-
-Enjoy
-
 # Installation
 
 ### Now CLI is required
@@ -32,7 +22,7 @@ DB_KEY="your MongoDB URI"
 
 3- Run the development mode
 
-`yarn dev`
+`yarn dev` or `now dev`
 
 
 # Disclaimer
