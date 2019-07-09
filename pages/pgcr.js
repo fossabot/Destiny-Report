@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getPGCR, getEntityDefinition } from "../src/utils/endpoints";
 import "../static/styles/Pgcr.scss";
 import { setError } from "../src/actions";
-import { Spacer } from "../src/components";
+import { Spacer, Divider } from "../src/components";
 
 const Pgcr = ({ error, setError, pgcr, activity }) => {
   useEffect(() => {
@@ -46,17 +46,18 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
           <div className="pgcr--activity">
             <div className="pgcr--activity-details">
               <div className="pgcr--activity-details_name">
-                {" "}
-                {activityDetails.name}
+                {activityDetails.name.toUpperCase()}
               </div>
-              <div className="pgcr--activity-details_type">
-                <div className="pgcr--activity-details_type_diff">
-                  {activityDetails.difficulty}
+              {pgcr.activityDetails.mode === 4 && (
+                <div className="pgcr--activity-details_type">
+                  <div className="pgcr--activity-details_type_diff">
+                    {activityDetails.difficulty}
+                  </div>
+                  <div className="pgcr--activity-details_type_sfi">
+                    {activity.startingPhaseIndex <= 1 ? "Fresh" : "Checkpoint"}
+                  </div>
                 </div>
-                <div className="pgcr--activity-details_type_sfi">
-                  {activity.startingPhaseIndex <= 1 ? "Fresh" : "Checkpoint"}
-                </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -64,12 +65,87 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
             <div className="pgcr-date">{moment(pgcr.period).format("LLL")}</div>
             <Spacer height="10px" />
             {pgcr.entries.map((player, index) => {
+              if (
+                player.standing === 1 ||
+                (pgcr.activityDetails.mode !== 4 &&
+                  player.values.completed.basic.value == 0)
+              ) {
+                return null;
+              }
+
+              let isLost = "";
+
+              if (pgcr.activityDetails.mode === 4) {
+                isLost = player.values.completed.basic.value !== 1 && "lost";
+              }
+
               return (
                 <div className="pgcr--players" key={index}>
-                  <div
-                    className={`pgcr--player ${player.values.completed.basic
-                      .value !== 1 && "lost"}`}
-                  >
+                  <div className={`pgcr--player ${isLost}`}>
+                    <div className="pgcr--player-icon">
+                      <img
+                        src={`https://stats.bungie.net${
+                          player.player.destinyUserInfo.iconPath
+                        }`}
+                        alt="player emblem"
+                      />
+                    </div>
+                    <div className="pgcr--player-details">
+                      <div className="pgcr--player-details_gamertag">
+                        {player.player.destinyUserInfo.displayName}
+                      </div>
+                      <div className="pgcr--player-details_class">
+                        {player.player.characterClass}
+                      </div>
+                    </div>
+                    <div className="pgcr--player-stats">
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.kills.basic.value}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Kills
+                        </div>
+                      </div>
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.deaths.basic.value}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Deaths
+                        </div>
+                      </div>
+                      <div className="pgcr--player-stats-box">
+                        <div className="pgcr--player-stats-box_primary">
+                          {player.values.timePlayedSeconds.basic.displayValue}
+                        </div>
+                        <div className="pgcr--player-stats-box_secondary">
+                          Time
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {pgcr.activityDetails.mode !== 4 && <Divider />}
+            {pgcr.entries.map((player, index) => {
+              if (
+                player.standing === 0 ||
+                (pgcr.activityDetails.mode !== 4 &&
+                  player.values.completed.basic.value == 0)
+              ) {
+                return null;
+              }
+
+              let isLost = "lost";
+
+              if (pgcr.activityDetails.mode === 4) {
+                isLost = player.values.completed.basic.value !== 1 && "lost";
+              }
+              return (
+                <div className="pgcr--players" key={index}>
+                  <div className={`pgcr--player ${isLost}`}>
                     <div className="pgcr--player-icon">
                       <img
                         src={`https://stats.bungie.net${

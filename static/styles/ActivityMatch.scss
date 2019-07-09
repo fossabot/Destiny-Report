@@ -87,3 +87,8 @@
     min-width: 150px;
   }
 }
+
+.activity-match__wrapper:hover .activity-match__mode-info,
+.activity-match__wrapper:hover .activity-match__stat-container {
+  background-color: rgba(255, 255, 255, 0.171);
+}

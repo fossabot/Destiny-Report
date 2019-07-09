@@ -1,5 +1,6 @@
 import React from "react";
 import { ActivityMatch, Spacer } from "./";
+import Link from "./Link";
 
 const MatchesHistory = ({ matches }) => {
   return (
@@ -9,7 +10,15 @@ const MatchesHistory = ({ matches }) => {
       </div>
       <Spacer height="20px" />
       {matches.data.map(match => (
-        <ActivityMatch key={match.activityDetails.instanceId} data={match} />
+        <Link
+          key={match.activityDetails.instanceId}
+          href={`/pgcr?id=${match.activityDetails.instanceId}`}
+          as={`/pgcr/${match.activityDetails.instanceId}`}
+        >
+          <a>
+            <ActivityMatch data={match} />
+          </a>
+        </Link>
       ))}
       <Spacer height="20px" />
     </div>

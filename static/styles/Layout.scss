@@ -65,7 +65,8 @@ ul {
 }
 
 .tooltip {
-  background-color: rgba(20, 20, 20, 0.966) !important;
+  background-color: rgba(180, 180, 180, 0.966) !important;
+  color: black !important;
 
   @include breakpoint(600px) {
     font-size: 10px !important;
@@ -73,11 +74,11 @@ ul {
 
   &.place-top::after,
   &.place-bottom::after {
-    border-color: rgba(20, 20, 20, 0.966) transparent !important;
+    border-color: rgba(192, 184, 184, 0.966) transparent !important;
   }
   &.place-right::after,
   &.place-left::after {
-    border-color: transparent rgba(20, 20, 20, 0.966) !important;
+    border-color: transparent rgba(192, 184, 184, 0.966) !important;
   }
 }
 
