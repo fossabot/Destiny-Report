@@ -8,6 +8,26 @@
   align-items: center;
   margin-bottom: 30px;
 
+  .border--info {
+    display: flex;
+    margin-bottom: 10px;
+
+    > div {
+      font-size: 20px;
+      margin-right: 10px;
+      padding: 0 5px;
+    }
+    &-won {
+      border-left: 3px solid $color-bright-green;
+    }
+    &-lost {
+      border-left: 3px solid $color-bright-red;
+    }
+    &-quit {
+      border-left: 3px solid $color-gold;
+    }
+  }
+
   .pgcr-date {
     color: $color-dark-gray;
     text-shadow: 0.3px 0.3px 0.3px #1f1f1f;
@@ -69,6 +89,9 @@
 
   &.lost {
     border-left: 3px solid $color-bright-red;
+  }
+  &.quit {
+    border-left: 3px solid gold;
   }
 
   &-icon {
