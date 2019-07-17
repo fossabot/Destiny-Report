@@ -54,7 +54,7 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
                     {activityDetails.difficulty}
                   </div>
                   <div className="pgcr--activity-details_type_sfi">
-                    {activity.startingPhaseIndex <= 1 ? "Fresh" : "Checkpoint"}
+                    {pgcr.startingPhaseIndex === 0 ? "Fresh" : "Checkpoint"}
                   </div>
                 </div>
               )}
@@ -62,11 +62,18 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
           </div>
 
           <div className="pgcr--players_container">
-            <div className="border--info">
-              <div className="border--info-won">Won</div>
-              <div className="border--info-lost">Lost</div>
-              <div className="border--info-quit">Quit</div>
-            </div>
+            {pgcr.activityDetails.mode !== 4 ? (
+              <div className="border--info">
+                <div className="border--info-won">Won</div>
+                <div className="border--info-lost">Lost</div>
+                <div className="border--info-quit">Quit</div>
+              </div>
+            ) : (
+              <div className="border--info">
+                <div className="border--info-won">Completed</div>
+                <div className="border--info-quit">Quit</div>
+              </div>
+            )}
             <div className="pgcr-date">{moment(pgcr.period).format("LLL")}</div>
             <Spacer height="10px" />
             {pgcr.entries.map((player, index) => {

@@ -40,7 +40,7 @@
   "scripts": {
     "dev": "now dev",
     "deploy:stage": "now --target staging",
-    "deploy:prod": "next  --target production"
+    "deploy:prod": "next --target production"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"
