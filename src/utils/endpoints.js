@@ -103,5 +103,5 @@ export const getAggregateActivityStats = (
   );
 export const getXur = () =>
   http.get(
-    `https://www.bungie.net/Platform/Destiny2/Vendors?components=402,401,400`
+    `https://www.bungie.net/Platform/Destiny2/Vendors/?components=402,401,400`
   );
