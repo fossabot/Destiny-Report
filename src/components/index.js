@@ -20,3 +20,4 @@ export { default as ActivityModeCard } from "./ActivityModeCard";
 export { default as MatchesHistory } from "./MatchesHistory";
 export { default as ActivityMatch } from "./ActivityMatch";
 export { default as Infamy } from "./Infamy";
+export { default as Xur } from "./Xur";

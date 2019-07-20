@@ -3,7 +3,6 @@ import rateLimit from "axios-rate-limit";
 
 axios.defaults.headers.common["X-API-KEY"] = process.env.API_KEY;
 
-// sets max 2 requests per 1 second, other will be delayed
 const http = rateLimit(axios.create(), {
   maxRequests: 20,
   perMilliseconds: 1000
@@ -101,4 +100,8 @@ export const getAggregateActivityStats = (
 ) =>
   http.get(
     `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${characterId}/Stats/AggregateActivityStats/ `
+  );
+export const getXur = () =>
+  http.get(
+    `https://www.bungie.net/Platform/Destiny2/Vendors?components=402,401,400`
   );

@@ -1,0 +1,67 @@
+@import "./variables";
+@import "./breakpoints";
+
+.xur--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.xur--location-map {
+  display: flex;
+  margin-bottom: 20px;
+
+  .xur--location-map_icon {
+    height: 80px;
+
+    > img {
+      height: 100%;
+    }
+  }
+}
+
+.xur--location-map_descrption {
+  &-header {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  &-planet,
+  &-area {
+    color: $color-dark-gray;
+  }
+}
+
+.xur--items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  &_item {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    width: 280px;
+    &-img {
+      height: 70px;
+      margin-right: 5px;
+
+      > img {
+        height: 100%;
+      }
+    }
+
+    &-description {
+      &_name {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      &_type,
+      &_cost {
+        color: $color-dark-gray;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ export const globalActionTypes = {
 };
 export const playerActionTypes = {
   SET_PLAYER_DATA: "SET_PLAYER_DATA",
+  SET_XUR_DATA: "SET_XUR_DATA",
   RESET_PLAYER_DATA: "RESET_PLAYER_DATA"
 };
 export const loadoutActionTypes = {
