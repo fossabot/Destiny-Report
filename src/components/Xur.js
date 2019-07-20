@@ -1,6 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../../static/styles/Xur.scss";
+import moment from "moment";
+
+const dateFormat = "dddd [at] HH:mm";
+let xurReset = moment.utc("2019-07-23T17:00:00.000Z");
+xurReset = xurReset.local();
+const xurLeavesOnDate = xurReset.format(dateFormat);
+let xurComesback = moment.utc("2019-07-19T17:00:00.000Z");
+xurComesback = xurComesback.local();
+const xurComesbackOnDate = xurComesback.format(dateFormat);
+
 const Xur = ({ xur }) => {
   if (!xur.isFetched) {
     return <div className="xur--container">Loading Xur...</div>;
@@ -21,7 +31,7 @@ const Xur = ({ xur }) => {
               Location: Hidden
             </div>
             <div className="xur--location-map_descrption-area">
-              Leaves on Tuesday
+              Leaves on {xurLeavesOnDate}
             </div>
           </div>
         </div>
@@ -66,7 +76,7 @@ const Xur = ({ xur }) => {
               Location: Unkown
             </div>
             <div className="xur--location-map_descrption-area">
-              Comes back on Friday
+              Comesback on {xurComesbackOnDate}
             </div>
           </div>
         </div>
