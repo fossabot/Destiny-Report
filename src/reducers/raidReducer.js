@@ -2,6 +2,8 @@ import { raidActionTypes } from "../actions/actionTypes";
 
 const initialState = {
   isFetched: false,
+  isUpdated: false,
+  isUpdateFailed: false,
   data: {},
   badges: {
     isFetched: false,
@@ -19,6 +21,23 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         badges: { ...state.badges, isFetched: true, data: payload }
+      };
+    case raidActionTypes.UPDATE_RAID_BADGES:
+      return {
+        ...state,
+        isUpdated: true,
+        isUpdateFailed: false,
+        badges: {
+          isFetched: true,
+          data: payload
+        }
+      };
+    case raidActionTypes.FAIL_UPDATE_RAID_BADGES:
+      return {
+        ...state,
+        isFetched: true,
+        isUpdated: true,
+        isUpdateFailed: true
       };
     default:
       return state;

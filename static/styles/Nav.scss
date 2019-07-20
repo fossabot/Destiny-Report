@@ -38,13 +38,13 @@
 }
 
 .top-nav {
-  @include breakpoint(480px) {
+  @include breakpoint(600px) {
     display: none;
   }
 }
 .bottom-nav {
   display: none;
-  @include breakpoint(480px) {
+  @include breakpoint(600px) {
     display: flex;
     margin-top: 20px;
   }

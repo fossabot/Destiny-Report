@@ -12,13 +12,26 @@ import {
 import { getMembershipID } from "../src/utils/endpoints";
 import {
   setRaidData,
+  updateRaidBadges,
+  failUpdateRaidBadges,
   setError,
   setRaidBadges,
   setPlayerData
 } from "../src/actions";
 import getBaseUrl from "../src/utils/getBaseUrl";
+import "../static/styles/Raid.scss";
 
-const Raid = ({ name, platform, error, raidData }) => {
+const Raid = ({
+  name,
+  platform,
+  BASE_URL,
+  membershipId,
+  membershipType,
+  error,
+  raidData,
+  updateRaidBadges,
+  failUpdateRaidBadges
+}) => {
   useEffect(() => {
     if (error) {
       if (error.response) {
@@ -31,6 +44,29 @@ const Raid = ({ name, platform, error, raidData }) => {
         setError(true);
       }
       Router.push("/");
+    }
+
+    const updateBadgesHandler = () => {
+      axios
+        .get(
+          `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+        )
+        .then(updatedBadges => {
+          if (updatedBadges.status === 524) {
+            failUpdateRaidBadges();
+          } else {
+            if (updatedBadges.data.data) {
+              updateRaidBadges(updatedBadges.data.data);
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+
+    if (!raidData.isUpdated) {
+      updateBadgesHandler();
     }
   }, []);
 
@@ -86,6 +122,18 @@ const Raid = ({ name, platform, error, raidData }) => {
           />
         </React.Fragment>
       )}
+      {!raidData.isUpdated && (
+        <div className="raid--update_modal">Updating Raid Badges...</div>
+      )}
+      {raidData.isUpdateFailed && (
+        <div className="raid--update_modal-error">
+          You have Played Too Many Raid Activites Which Takes Longer To Process
+          All Of Them
+          <div className="color-red">
+            Please Refresh Your Browser After A Few Minutes
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -133,20 +181,13 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
       `${BASE_URL}/api/raid/getBadges?membershipId=${membershipId}&membershipType=${membershipType}`
     );
 
-    axios
-      .get(
-        `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
-      )
-      .then(updatedBadges => {
-        if (updatedBadges.data.data) {
-          reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
-        }
-      });
     if (raidDataResponse.data.success) {
       reduxStore.dispatch(setRaidData(raidDataResponse.data.data));
       reduxStore.dispatch(setRaidBadges(raidBadgesResponse.data.data));
       return {
         BASE_URL,
+        membershipId,
+        membershipType,
         name: playerData.displayName,
         platform: query.platform
       };
@@ -157,10 +198,11 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
       };
     }
   } catch (error) {
-    console.log(error);
     return {
       error,
       BASE_URL,
+      membershipId,
+      membershipType,
       name: query.name,
       platform: query.platform
     };
@@ -173,5 +215,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setError }
+  { setError, updateRaidBadges, failUpdateRaidBadges }
 )(Raid);

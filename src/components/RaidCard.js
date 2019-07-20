@@ -60,7 +60,7 @@ const RaidCard = ({ name, stats, badges, isPrestige }) => {
                 </div>
               </Link>
             )}
-            {badges.weekOne.value && (
+            {!badges.dayOne.value && badges.weekOne.value && (
               <Link
                 href={`/pgcr?id=${badges.weekOne.instanceId}`}
                 as={`/pgcr/${badges.weekOne.instanceId}`}

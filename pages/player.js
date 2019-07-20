@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Router from "next/router";
 import { UserAndNav, Loadout, Xur, Divider } from "../src/components";
 import "../static/styles/Player.scss";
-import { getMembershipID, getXur } from "../src/utils/endpoints";
+import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
 import {
   setError,
