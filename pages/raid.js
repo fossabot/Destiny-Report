@@ -122,14 +122,7 @@ const Raid = ({
           />
         </React.Fragment>
       )}
-      <div className="raid--update_modal">
-        <div className="color-red">
-          You may not see Raid Badges properly due to an Issue, will be fixed on
-          Monday
-        </div>
-        Thanks for understanding
-      </div>
-      {/* {!raidData.isUpdated && (
+      {!raidData.isUpdated && (
         <div className="raid--update_modal">Updating Raid Badges...</div>
       )}
       {raidData.isUpdateFailed && (
@@ -140,7 +133,7 @@ const Raid = ({
             Please Refresh Your Browser After A Few Minutes
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
