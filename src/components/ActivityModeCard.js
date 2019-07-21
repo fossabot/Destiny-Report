@@ -96,7 +96,7 @@ const ActivityModeCard = ({ classes, name, stats }) => {
         </div>
         <div className={classes.activityModeStatBox}>
           <div className={classes.activityModeStatValue}>
-            {(stats.kills / stats.deaths).toFixed(2) || stats.kills}
+            {(stats.kills / (stats.deaths || 1)).toFixed(2) || stats.kills}
           </div>
           <div className={classes.activityModeStatName}>k/d</div>
         </div>

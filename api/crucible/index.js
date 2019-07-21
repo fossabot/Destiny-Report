@@ -56,14 +56,16 @@ module.exports = async (req, res) => {
       data: { Response }
     } = await getHistorialStats(membershipId, membershipType, [5]);
 
-    data.overall.kd =
-      Response.allPvP.allTime.killsDeathsRatio.basic.displayValue;
-    data.overall.activitiesEntered =
-      Response.allPvP.allTime.activitiesEntered.basic.value;
-    data.overall.activitiesWon =
-      Response.allPvP.allTime.activitiesWon.basic.value;
-    data.overall.totalActivityDuration =
-      Response.allPvP.allTime.totalActivityDurationSeconds.basic.displayValue;
+    if (Object.entries(Response.allPvP).length) {
+      data.overall.kd =
+        Response.allPvP.allTime.killsDeathsRatio.basic.displayValue;
+      data.overall.activitiesEntered =
+        Response.allPvP.allTime.activitiesEntered.basic.value;
+      data.overall.activitiesWon =
+        Response.allPvP.allTime.activitiesWon.basic.value;
+      data.overall.totalActivityDuration =
+        Response.allPvP.allTime.totalActivityDurationSeconds.basic.displayValue;
+    }
 
     const {
       data: { Response: progressionStats }

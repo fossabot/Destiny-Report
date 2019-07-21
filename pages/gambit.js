@@ -96,7 +96,6 @@ Gambit.getInitialProps = async ({ query, req, reduxStore }) => {
       });
     }
 
-    // console.log("store: ", reduxStore.getState().gambit.isFetched);
     if (reduxStore.getState().gambit.isFetched) {
       return {
         name: playerData.displayName,
@@ -121,7 +120,6 @@ Gambit.getInitialProps = async ({ query, req, reduxStore }) => {
       };
     }
   } catch (error) {
-    console.log(error);
     return {
       error,
       BASE_URL,

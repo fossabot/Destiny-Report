@@ -35,7 +35,6 @@ module.exports = async (req, res) => {
       .slice(0, 10);
     res.json(activities);
   } catch (error) {
-    console.log(error.data);
     res.json([]);
   }
 };

@@ -61,7 +61,6 @@ module.exports = (membershipId, membershipType, item) => {
         data.level = itemPerksLevel.instance.data.primaryStat.value;
       }
     } catch (error) {
-      console.log(error.message);
       data = {
         name: "Error",
         icon: "Error",

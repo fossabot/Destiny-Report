@@ -236,7 +236,6 @@ module.exports = async (membershipId, membershipType, characters) => {
     };
     return data;
   } catch (error) {
-    console.log(error);
     return { overallCrucible: {}, overallModesData: {} };
   }
 };

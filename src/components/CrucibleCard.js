@@ -55,7 +55,8 @@ const CrucibleCard = ({ name, progressionRank, overall, modes }) => {
         </div>
         <div className="crucible-card__stats-box">
           <div className="crucible-card__stats-primary">
-            {(overall.kills / overall.deaths).toFixed(2) || overall.kills}
+            {(overall.kills / (overall.deaths || 1)).toFixed(2) ||
+              overall.kills}
           </div>
           <div className="crucible-card__stats-secondary">K/D</div>
         </div>

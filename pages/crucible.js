@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
   UserAndNav,
   ActivityHeader,
@@ -59,8 +59,12 @@ const Crucible = ({
         progressionRank={crucibleData.glory}
         modes={crucibleData.stats.overallModesData.comp}
       />
-      <Divider />
-      <MatchesHistory matches={crucibleMatches} />
+      {crucibleMatches.length && (
+        <Fragment>
+          <Divider />
+          <MatchesHistory matches={crucibleMatches} />
+        </Fragment>
+      )}
     </div>
   );
 };
@@ -128,7 +132,6 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
       };
     }
   } catch (error) {
-    console.log(error);
     return {
       error,
       BASE_URL,

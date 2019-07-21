@@ -18,7 +18,6 @@ module.exports = async (req, res) => {
     const data = await getGambitStats(membershipId, membershipType);
     res.json({ success: true, data });
   } catch (err) {
-    console.log(err);
     if (err.response) {
       res.json({
         success: false,

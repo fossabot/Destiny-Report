@@ -31,7 +31,6 @@ module.exports = async (req, res) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.json({
         success: false,
         ErrorCode: 111993,

@@ -28,7 +28,6 @@ module.exports = async (req, res) => {
 
     res.json({ success: true, data });
   } catch (err) {
-    console.log(err);
     if (err.response) {
       res.json({
         success: false,
