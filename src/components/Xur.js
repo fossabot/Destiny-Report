@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "../../static/styles/Xur.scss";
 import moment from "moment";
+import { Spinner } from ".";
 
 const dateFormat = "dddd [at] HH:mm";
 let xurReset = moment.utc("2019-07-23T17:00:00.000Z");
@@ -13,7 +14,11 @@ const xurComesbackOnDate = xurComesback.format(dateFormat);
 
 const Xur = ({ xur }) => {
   if (!xur.isFetched) {
-    return <div className="xur--container">Loading Xur...</div>;
+    return (
+      <div className="xur--container">
+        <Spinner />
+      </div>
+    );
   }
   if (xur.isHere) {
     return (
