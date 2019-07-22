@@ -59,7 +59,14 @@ const Crucible = ({
         progressionRank={crucibleData.glory}
         modes={crucibleData.stats.overallModesData.comp}
       />
-      {crucibleMatches.data.length && (
+      <Divider />
+      <CrucibleCard
+        name="IRON BANNER"
+        overall={crucibleData.stats.overallCrucible.ironBanner}
+        progressionRank={crucibleData.valor}
+        modes={crucibleData.stats.overallModesData.ironBanner}
+      />
+      {crucibleMatches.data.length > 0 && (
         <Fragment>
           <Divider />
           <MatchesHistory matches={crucibleMatches} />

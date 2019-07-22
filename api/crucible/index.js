@@ -73,7 +73,6 @@ module.exports = async (req, res) => {
       data: { Response: progressionStats }
     } = await getAllProgression(membershipType, membershipId, [100, 202, 900]);
 
-    console.log("ddd: ", progressionStats.characterProgressions);
     if (progressionStats.characterProgressions.data) {
       //comp
       const gloryLevelStats = values(

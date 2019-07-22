@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
   UserAndNav,
   GambitHeader,
@@ -51,8 +51,12 @@ const Gambit = ({
       <GambitHeader data={gambitData.gambit} name="GAMBIT" />
       <Divider />
       <GambitHeader data={gambitData.gPrime} name="G. PRIME" />
-      <Divider />
-      {gambitMatches.data.length && <MatchesHistory matches={gambitMatches} />}
+      {gambitMatches.data.length > 0 && (
+        <Fragment>
+          <Divider />
+          <MatchesHistory matches={gambitMatches} />
+        </Fragment>
+      )}
     </div>
   );
 };

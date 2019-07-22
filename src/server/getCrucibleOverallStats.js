@@ -28,6 +28,13 @@ module.exports = async (membershipId, membershipType, characters) => {
         wins: 0,
         kills: 0,
         secondsPlayed: 0
+      },
+      ironBanner: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0,
+        secondsPlayed: 0
       }
     };
     const overallModesData = {
@@ -76,6 +83,32 @@ module.exports = async (membershipId, membershipType, characters) => {
           wins: 0,
           kills: 0
         }
+      },
+      ironBanner: {
+        clash: {
+          matches: 0,
+          deaths: 0,
+          wins: 0,
+          kills: 0
+        },
+        supremacy: {
+          matches: 0,
+          deaths: 0,
+          wins: 0,
+          kills: 0
+        },
+        control: {
+          matches: 0,
+          deaths: 0,
+          wins: 0,
+          kills: 0
+        },
+        salvage: {
+          matches: 0,
+          deaths: 0,
+          wins: 0,
+          kills: 0
+        }
       }
     };
 
@@ -119,6 +152,22 @@ module.exports = async (membershipId, membershipType, characters) => {
           result[
             i
           ].data.Response.pvpCompetitive.allTime.secondsPlayed.basic.value;
+      }
+      if (result[i].data.Response.ironBanner.allTime) {
+        overallCrucible.ironBanner.matches +=
+          result[
+            i
+          ].data.Response.ironBanner.allTime.activitiesEntered.basic.value;
+        overallCrucible.ironBanner.wins +=
+          result[i].data.Response.ironBanner.allTime.activitiesWon.basic.value;
+        overallCrucible.ironBanner.kills +=
+          result[i].data.Response.ironBanner.allTime.kills.basic.value;
+
+        overallCrucible.ironBanner.deaths +=
+          result[i].data.Response.ironBanner.allTime.deaths.basic.value;
+
+        overallCrucible.ironBanner.secondsPlayed +=
+          result[i].data.Response.ironBanner.allTime.secondsPlayed.basic.value;
       }
 
       if (result[i].data.Response.clashQuickplay.allTime) {
@@ -227,6 +276,77 @@ module.exports = async (membershipId, membershipType, characters) => {
           result[i].data.Response.controlCompetitive.allTime.kills.basic.value;
         overallModesData.comp.control.deaths +=
           result[i].data.Response.controlCompetitive.allTime.deaths.basic.value;
+      }
+
+      //IronBanner
+      if (result[i].data.Response.ironBannerControl.allTime) {
+        overallModesData.ironBanner.control.matches +=
+          result[
+            i
+          ].data.Response.ironBannerControl.allTime.activitiesEntered.basic.value;
+
+        overallModesData.ironBanner.control.wins +=
+          result[
+            i
+          ].data.Response.ironBannerControl.allTime.activitiesWon.basic.value;
+
+        overallModesData.ironBanner.control.kills +=
+          result[i].data.Response.ironBannerControl.allTime.kills.basic.value;
+        overallModesData.ironBanner.control.deaths +=
+          result[i].data.Response.ironBannerControl.allTime.deaths.basic.value;
+      }
+      if (result[i].data.Response.ironBannerClash.allTime) {
+        overallModesData.ironBanner.clash.matches +=
+          result[
+            i
+          ].data.Response.ironBannerClash.allTime.activitiesEntered.basic.value;
+
+        overallModesData.ironBanner.clash.wins +=
+          result[
+            i
+          ].data.Response.ironBannerClash.allTime.activitiesWon.basic.value;
+
+        overallModesData.ironBanner.clash.kills +=
+          result[i].data.Response.ironBannerClash.allTime.kills.basic.value;
+
+        overallModesData.ironBanner.clash.deaths +=
+          result[i].data.Response.ironBannerClash.allTime.deaths.basic.value;
+      }
+      if (result[i].data.Response.ironBannerSupremacy.allTime) {
+        overallModesData.ironBanner.supremacy.matches +=
+          result[
+            i
+          ].data.Response.ironBannerSupremacy.allTime.activitiesEntered.basic.value;
+
+        overallModesData.ironBanner.supremacy.wins +=
+          result[
+            i
+          ].data.Response.ironBannerSupremacy.allTime.activitiesWon.basic.value;
+
+        overallModesData.ironBanner.supremacy.kills +=
+          result[i].data.Response.ironBannerSupremacy.allTime.kills.basic.value;
+
+        overallModesData.ironBanner.supremacy.deaths +=
+          result[
+            i
+          ].data.Response.ironBannerSupremacy.allTime.deaths.basic.value;
+      }
+      if (result[i].data.Response.ironBannerSalvage.allTime) {
+        overallModesData.ironBanner.salvage.matches +=
+          result[
+            i
+          ].data.Response.ironBannerSalvage.allTime.activitiesEntered.basic.value;
+
+        overallModesData.ironBanner.salvage.wins +=
+          result[
+            i
+          ].data.Response.ironBannerSalvage.allTime.activitiesWon.basic.value;
+
+        overallModesData.ironBanner.salvage.kills +=
+          result[i].data.Response.ironBannerSalvage.allTime.kills.basic.value;
+
+        overallModesData.ironBanner.salvage.deaths +=
+          result[i].data.Response.ironBannerSalvage.allTime.deaths.basic.value;
       }
     }
 

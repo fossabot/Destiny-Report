@@ -65,7 +65,7 @@ export const getCharactersOverallCrucibleStats = (
   CharacterId
 ) => {
   return http.get(
-    ` https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${CharacterId}/Stats/?groups=102&modes=70,69,31,37,38,71,72,73,74&periodType=2`
+    ` https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${CharacterId}/Stats/?groups=102&modes=70,69,31,37,38,71,72,73,74,19,43,44,45,68&periodType=2`
   );
 };
 export const getActivityHistory = (
