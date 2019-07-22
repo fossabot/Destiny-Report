@@ -61,7 +61,7 @@ const Raid = ({
           }
         })
         .catch(err => {
-          console.log(err);
+          failUpdateRaidBadges();
         });
     };
 
@@ -128,7 +128,7 @@ const Raid = ({
       {raidData.isUpdateFailed && (
         <div className="raid--update_modal-error">
           You have Played Too Many Raid Activites Which Takes Longer To Process
-          All Of Them
+          All Of Them Or Something Went Wrong
           <div className="color-red">
             Please Refresh Your Browser After A Few Minutes
           </div>
