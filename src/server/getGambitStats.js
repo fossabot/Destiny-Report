@@ -27,8 +27,9 @@ const data = {
     resets: 0,
     currentPoints: 0,
     rank: 0,
-    icon: "",
-    stepName: ""
+    icon:
+      "https://www.bungie.net/common/destiny2_content/icons/a4b2789de63ea71cdfb81762b073fcd9.png",
+    stepName: "GUARDIAN I"
   }
 };
 
@@ -90,22 +91,24 @@ module.exports = async (membershipId, membershipType) => {
     data: { Response: progressionStats }
   } = await getAllProgression(membershipType, membershipId, [100, 202, 900]);
 
-  const infamyLevelStats = values(
-    progressionStats.characterProgressions.data
-  )[0].progressions["2772425241"];
+  if (progressionStats.characterProgressions.data) {
+    const infamyLevelStats = values(
+      progressionStats.characterProgressions.data
+    )[0].progressions["2772425241"];
 
-  data.infamy.rank = infamyLevelStats.level;
-  data.infamy.currentPoints = infamyLevelStats.currentProgress;
+    data.infamy.rank = infamyLevelStats.level;
+    data.infamy.currentPoints = infamyLevelStats.currentProgress;
 
-  data.infamy.resets = getSafe(
-    () =>
-      progressionStats.profileRecords.data.records["3901785488"].objectives[0]
-        .progress,
-    0
-  );
-  step = infamyLevelStats.stepIndex;
-  data.infamy.stepName = infamySteps[step].stepName;
-  data.infamy.icon = "https://www.bungie.net" + infamySteps[step].icon;
+    data.infamy.resets = getSafe(
+      () =>
+        progressionStats.profileRecords.data.records["3901785488"].objectives[0]
+          .progress,
+      0
+    );
+    step = infamyLevelStats.stepIndex;
+    data.infamy.stepName = infamySteps[step].stepName;
+    data.infamy.icon = "https://www.bungie.net" + infamySteps[step].icon;
+  }
 
   return data;
 };

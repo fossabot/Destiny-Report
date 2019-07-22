@@ -60,7 +60,7 @@ export const infamySteps = [
     icon: "/common/destiny2_content/icons/e5e4baaf5109e2d0852f23ed5be42f48.png"
   },
   {
-    stepName: "Legend",
+    stepName: "LEGEND",
     icon: "/common/destiny2_content/icons/ca325cfd9a3ef802f7d6599fa2ee6138.png"
   }
 ];
@@ -126,7 +126,7 @@ export const valorSteps = [
     icon: "/common/destiny2_content/icons/628b4cc575769a3e9b2379c738887b54.png"
   },
   {
-    stepName: "Legend",
+    stepName: "LEGEND",
     icon: "/common/destiny2_content/icons/60d01610f4733635564523a1212f047a.png"
   }
 ];
@@ -192,7 +192,7 @@ export const glorySteps = [
     icon: "/common/destiny2_content/icons/e7469d93b21961a75367a1da73d5ac88.png"
   },
   {
-    stepName: "Legend",
+    stepName: "LEGEND",
     icon: "/common/destiny2_content/icons/d0cf2b35891cd4f07a355af2af568221.png"
   }
 ];

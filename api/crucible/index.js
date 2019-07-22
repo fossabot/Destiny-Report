@@ -33,16 +33,18 @@ module.exports = async (req, res) => {
       resets: 0,
       currentPoints: 0,
       rank: 0,
-      icon: "",
-      stepName: ""
+      icon:
+        "https://www.bungie.net/common/destiny2_content/icons/34586ea2c4de2ce5d0016b3d01cec934.png",
+      stepName: "GUARDIAN I"
     },
     glory: {
       name: "Glory",
       resets: 0,
       currentPoints: 0,
       rank: 0,
-      icon: "",
-      stepName: ""
+      icon:
+        "https://www.bungie.net/common/destiny2_content/icons/34586ea2c4de2ce5d0016b3d01cec934.png",
+      stepName: "GUARDIAN I"
     },
     stats: {}
   };
@@ -71,46 +73,48 @@ module.exports = async (req, res) => {
       data: { Response: progressionStats }
     } = await getAllProgression(membershipType, membershipId, [100, 202, 900]);
 
-    //comp
-    const gloryLevelStats = values(
-      progressionStats.characterProgressions.data
-    )[0].progressions["2000925172"];
+    console.log("ddd: ", progressionStats.characterProgressions);
+    if (progressionStats.characterProgressions.data) {
+      //comp
+      const gloryLevelStats = values(
+        progressionStats.characterProgressions.data
+      )[0].progressions["2000925172"];
 
-    data.glory.rank = gloryLevelStats.level;
-    data.glory.currentPoints = gloryLevelStats.currentProgress;
+      data.glory.rank = gloryLevelStats.level;
+      data.glory.currentPoints = gloryLevelStats.currentProgress;
 
-    data.glory.resets = getSafe(
-      () =>
-        progressionStats.profileRecords.data.records["4185918315"].objectives[0]
-          .progress,
-      0
-    );
+      data.glory.resets = getSafe(
+        () =>
+          progressionStats.profileRecords.data.records["4185918315"]
+            .objectives[0].progress,
+        0
+      );
 
-    let step = gloryLevelStats.stepIndex;
+      let step = gloryLevelStats.stepIndex;
 
-    data.glory.stepName = glorySteps[step].stepName;
-    data.glory.icon = "https://www.bungie.net" + glorySteps[step].icon;
+      data.glory.stepName = glorySteps[step].stepName;
+      data.glory.icon = "https://www.bungie.net" + glorySteps[step].icon;
 
-    //quick play
-    const valorLevelStats = values(
-      progressionStats.characterProgressions.data
-    )[0].progressions["2626549951"];
+      //quick play
+      const valorLevelStats = values(
+        progressionStats.characterProgressions.data
+      )[0].progressions["2626549951"];
 
-    data.valor.rank = valorLevelStats.level;
-    data.valor.currentPoints = valorLevelStats.currentProgress;
+      data.valor.rank = valorLevelStats.level;
+      data.valor.currentPoints = valorLevelStats.currentProgress;
 
-    data.valor.resets = getSafe(
-      () =>
-        progressionStats.profileRecords.data.records["559943871"].objectives[0]
-          .progress,
-      0
-    );
+      data.valor.resets = getSafe(
+        () =>
+          progressionStats.profileRecords.data.records["559943871"]
+            .objectives[0].progress,
+        0
+      );
 
-    step = valorLevelStats.stepIndex;
+      step = valorLevelStats.stepIndex;
 
-    data.valor.stepName = valorSteps[step].stepName;
-    data.valor.icon = "https://www.bungie.net" + valorSteps[step].icon;
-
+      data.valor.stepName = valorSteps[step].stepName;
+      data.valor.icon = "https://www.bungie.net" + valorSteps[step].icon;
+    }
     //activityTypes overall stats
     const stats = await getCrucibleOverallStats(
       membershipId,
@@ -121,6 +125,7 @@ module.exports = async (req, res) => {
     data.stats = stats;
     res.json({ success: true, data });
   } catch (err) {
+    console.log(err);
     if (err.response) {
       res.json({
         success: false,
