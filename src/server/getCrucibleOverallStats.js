@@ -1,6 +1,103 @@
 const { getCharactersOverallCrucibleStats } = require("../utils/endpoints");
 
 module.exports = async (membershipId, membershipType, characters) => {
+  const overallCrucible = {
+    quickplay: {
+      matches: 0,
+      deaths: 0,
+      wins: 0,
+      kills: 0,
+      secondsPlayed: 0
+    },
+    comp: {
+      matches: 0,
+      deaths: 0,
+      wins: 0,
+      kills: 0,
+      secondsPlayed: 0
+    },
+    ironBanner: {
+      matches: 0,
+      deaths: 0,
+      wins: 0,
+      kills: 0,
+      secondsPlayed: 0
+    }
+  };
+  const overallModesData = {
+    quickplay: {
+      clash: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      supremacy: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      control: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      }
+    },
+    comp: {
+      survival: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      countdown: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      clash: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      control: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      }
+    },
+    ironBanner: {
+      clash: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      supremacy: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      control: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      },
+      salvage: {
+        matches: 0,
+        deaths: 0,
+        wins: 0,
+        kills: 0
+      }
+    }
+  };
   try {
     const promisesToBeResolved = [];
     for (let i = 0; i < characters.length; i++) {
@@ -13,104 +110,6 @@ module.exports = async (membershipId, membershipType, characters) => {
       );
     }
     const result = await Promise.all(promisesToBeResolved);
-
-    const overallCrucible = {
-      quickplay: {
-        matches: 0,
-        deaths: 0,
-        wins: 0,
-        kills: 0,
-        secondsPlayed: 0
-      },
-      comp: {
-        matches: 0,
-        deaths: 0,
-        wins: 0,
-        kills: 0,
-        secondsPlayed: 0
-      },
-      ironBanner: {
-        matches: 0,
-        deaths: 0,
-        wins: 0,
-        kills: 0,
-        secondsPlayed: 0
-      }
-    };
-    const overallModesData = {
-      quickplay: {
-        clash: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        supremacy: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        control: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        }
-      },
-      comp: {
-        survival: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        countdown: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        clash: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        control: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        }
-      },
-      ironBanner: {
-        clash: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        supremacy: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        control: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        },
-        salvage: {
-          matches: 0,
-          deaths: 0,
-          wins: 0,
-          kills: 0
-        }
-      }
-    };
 
     for (let i = 0; i < result.length; i++) {
       if (result[i].data.Response.pvpQuickplay.allTime) {
@@ -356,6 +355,6 @@ module.exports = async (membershipId, membershipType, characters) => {
     };
     return data;
   } catch (error) {
-    return { overallCrucible: {}, overallModesData: {} };
+    return { overallCrucible, overallModesData };
   }
 };

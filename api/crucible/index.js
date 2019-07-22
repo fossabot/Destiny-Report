@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
       Message: "MembershipId And MembershipType Are Required"
     });
   }
-
   const data = {
     overall: {
       activitiesEntered: 0,
@@ -124,20 +123,21 @@ module.exports = async (req, res) => {
     data.stats = stats;
     res.json({ success: true, data });
   } catch (err) {
-    console.log(err);
     if (err.response) {
       res.json({
         success: false,
         ErrorCode: 111993,
         ErrorStatus: err.response.data.ErrorStatus,
-        Message: err.response.data.Message
+        Message: err.response.data.Message,
+        data
       });
     } else {
       res.json({
         success: false,
         ErrorCode: 111993,
         ErrorStatus: "Somthing Went Wrong",
-        Message: "Please Try Again Later"
+        Message: "Please Try Again Later",
+        data
       });
     }
   }
