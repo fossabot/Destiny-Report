@@ -41,6 +41,11 @@
       padding: 0 5px;
     }
 
+    &-mobile {
+      @include breakpoint(600px) {
+        display: none;
+      }
+    }
     > .activity-match__stat-name {
       color: #a9a9a9;
       font-size: 15px;

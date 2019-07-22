@@ -65,11 +65,11 @@ const ActivityMatch = ({ data }) => {
           <div className={`${am}__stat-value`}>{values.deaths.basic.value}</div>
           <div className={`${am}__stat-name`}>Deaths</div>
         </div>
-        <div className={`${am}__stat`}>
+        <div className={`${am}__stat ${am}__stat-mobile`}>
           <div className={`${am}__stat-value`}>
             {values.assists.basic.value}
           </div>
-          <div className={`${am}__stat-name`}>Assists</div>
+          <div className={`${am}__stat-name `}>Assists</div>
         </div>
         <div className={`${am}__stat`}>
           <div className={`${am}__stat-value`}>
@@ -77,7 +77,7 @@ const ActivityMatch = ({ data }) => {
           </div>
           <div className={`${am}__stat-name`}>K/D</div>
         </div>
-        <div className={`${am}__stat`}>
+        <div className={`${am}__stat ${am}__stat-mobile`}>
           <div className={`${am}__stat-value`}>
             {values.teamScore.basic.value}
           </div>

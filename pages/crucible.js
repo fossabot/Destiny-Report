@@ -59,7 +59,7 @@ const Crucible = ({
         progressionRank={crucibleData.glory}
         modes={crucibleData.stats.overallModesData.comp}
       />
-      {crucibleMatches.length && (
+      {crucibleMatches.data.length && (
         <Fragment>
           <Divider />
           <MatchesHistory matches={crucibleMatches} />

@@ -52,7 +52,7 @@ const Gambit = ({
       <Divider />
       <GambitHeader data={gambitData.gPrime} name="G. PRIME" />
       <Divider />
-      <MatchesHistory matches={gambitMatches} />
+      {gambitMatches.data.length && <MatchesHistory matches={gambitMatches} />}
     </div>
   );
 };
