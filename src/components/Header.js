@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import ActiveLink from "./Link";
 import "../../static/styles/Header.scss";
 
 const Header = () => {
@@ -10,6 +11,15 @@ const Header = () => {
           <Link href="/">
             <a>Destiny Report</a>
           </Link>
+        </div>
+        <div className="destiny-report--world">
+          <ActiveLink
+            href="/world"
+            as="/world"
+            // activeClassName="destiny-report--world_link-active"
+          >
+            <a className="destiny-report--world_link">World</a>
+          </ActiveLink>
         </div>
         <div className="destiny-report--donate">
           <Link href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CBDESK5LVTJPC&source=url">

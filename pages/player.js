@@ -4,12 +4,7 @@ import { UserAndNav, Loadout, Xur, Divider } from "../src/components";
 import "../static/styles/Player.scss";
 import { getMembershipID } from "../src/utils/endpoints";
 import axios from "axios";
-import {
-  setError,
-  setLoadout,
-  setPlayerData,
-  setXurData
-} from "../src/actions";
+import { setError, setLoadout, setPlayerData } from "../src/actions";
 import { connect } from "react-redux";
 import getBaseUrl from "../src/utils/getBaseUrl";
 
@@ -32,8 +27,6 @@ const player = ({ name, platform, loadout, error, setError }) => {
   return (
     <div className="player--wrapper">
       <UserAndNav name={name} platform={platform} />
-      <Xur />
-      <Divider />
       <div className="loadouts--wrapper">
         {loadout.map(data => (
           <Loadout key={data.characterId} data={data} name={name} />
@@ -48,10 +41,6 @@ player.getInitialProps = async ({ query, req, reduxStore }) => {
   const BASE_URL = getBaseUrl(req);
   let playerData = reduxStore.getState().player.data;
   try {
-    if (!reduxStore.getState().player.xur.isFetched) {
-      reduxStore.dispatch(setXurData());
-    }
-
     if (!reduxStore.getState().player.isFetched) {
       const response = await getMembershipID(
         query.name,

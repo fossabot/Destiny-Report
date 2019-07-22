@@ -30,7 +30,7 @@ export default (state = initialState, { type, payload }) => {
         }
       };
     case playerActionTypes.RESET_PLAYER_DATA:
-      return initialState;
+      return { ...state, isFetched: false, data: {} };
     default:
       return state;
   }
