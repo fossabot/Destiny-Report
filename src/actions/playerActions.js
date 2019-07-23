@@ -16,7 +16,8 @@ export const setXurData = () => async dispatch => {
   try {
     const res = await getXur();
     const response = res.data.Response;
-    if (Object.entries(response).length) {
+
+    if (Object.keys(response.sales.data["2190858386"].saleItems).length >= 3) {
       const items = [];
 
       const saleItems = Object.values(
