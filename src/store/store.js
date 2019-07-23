@@ -6,7 +6,8 @@ import {
   loadoutReducer,
   gambitReducer,
   raidReducer,
-  playerReducer
+  playerReducer,
+  worldReducer
 } from "../reducers";
 import thunk from "redux-thunk";
 
@@ -19,6 +20,7 @@ export default function initializeStore(initialState) {
   return createStore(
     combineReducers({
       global: globalReducer,
+      world: worldReducer,
       player: playerReducer,
       loadout: loadoutReducer,
       crucible: crucibleReducer,

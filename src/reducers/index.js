@@ -4,3 +4,4 @@ export { default as crucibleReducer } from "./crucibleReducer";
 export { default as gambitReducer } from "./gambitReducer";
 export { default as raidReducer } from "./raidReducer";
 export { default as playerReducer } from "./playerReducer";
+export { default as worldReducer } from "./worldReducer";

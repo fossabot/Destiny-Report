@@ -20,7 +20,7 @@ const World = ({ xur, setXurData }) => {
   );
 };
 
-const mapStateToProps = state => ({ xur: state.player.xur });
+const mapStateToProps = state => ({ xur: state.world.xur });
 export default connect(
   mapStateToProps,
   { setXurData }

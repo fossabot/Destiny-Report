@@ -91,5 +91,5 @@ const Xur = ({ xur }) => {
 };
 
 export default connect(state => ({
-  xur: state.player.xur
+  xur: state.world.xur
 }))(Xur);

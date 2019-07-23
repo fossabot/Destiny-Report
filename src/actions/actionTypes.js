@@ -3,6 +3,9 @@ export const globalActionTypes = {
   SET_ERROR: "SET_ERROR"
 };
 
+export const worldActionTypes = {
+  SET_XUR_DATA: "SET_XUR_DATA"
+};
 export const playerActionTypes = {
   SET_PLAYER_DATA: "SET_PLAYER_DATA",
   SET_XUR_DATA: "SET_XUR_DATA",
