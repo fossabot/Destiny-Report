@@ -1,11 +1,30 @@
 import { worldActionTypes } from "./actionTypes";
-import { getXur, getEntityDefinition } from "../utils/endpoints";
+import {
+  getXur,
+  getEntityDefinition,
+  getPublicMilestones
+} from "../utils/endpoints";
 
 const classType = {
   0: "Titan ",
   1: "Hunter ",
   2: "Warlock ",
   3: ""
+};
+
+const leviathanERR = {
+  2693136605: ["Gauntlet", "Pleasure Gardens", "Royal Pools"],
+  2693136604: ["Gauntlet", "Royal Pools", "Pleasure Gardens"],
+  2693136602: ["Pleasure Gardens", "Gauntlet", "Royal Pools"],
+  2693136603: ["Pleasure Gardens", "Royal Pools", "Gauntlet"],
+  2693136600: ["Royal Pools", "Gauntlet", "Pleasure Gardens"],
+  2693136601: ["Royal Pools", "Pleasure Gardens", "Gauntlet"],
+  1685065161: ["Gauntlet", "Pleasure Gardens", "Royal Pools"],
+  757116822: ["Gauntlet", "Royal Pools", "Pleasure Gardens"],
+  417231112: ["Pleasure Gardens", "Gauntlet", "Royal Pools"],
+  3446541099: ["Pleasure Gardens", "Royal Pools", "Gauntlet"],
+  2449714930: ["Royal Pools", "Gauntlet", "Pleasure Gardens"],
+  3879860661: ["Royal Pools", "Pleasure Gardens", "Gauntlet"]
 };
 
 export const setXurData = () => async dispatch => {
@@ -68,5 +87,61 @@ export const setXurData = () => async dispatch => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const setWorldData = () => async dispatch => {
+  const data = { flashpoint: "Unknown", nightfalls: [], leviathan: "Unknown" };
+  try {
+    const res = await getPublicMilestones();
+    const response = res.data.Response;
+
+    // flashpoint
+    const flashpointPlanetHash =
+      response["463010297"].availableQuests[0].questItemHash;
+    const { data: flashpointPlanetResponse } = await getEntityDefinition(
+      flashpointPlanetHash,
+      "DestinyInventoryItemDefinition"
+    );
+
+    const flashpointPlanetName = flashpointPlanetResponse.Response.displayProperties.name
+      .split(":")[1]
+      .trim()
+      .toLowerCase();
+
+    data.flashpoint =
+      flashpointPlanetName.charAt(0).toUpperCase() +
+      flashpointPlanetName.slice(1);
+
+    //Nightfalls
+    const nightfallActivities = response["2853331463"].activities;
+    for (let i = 0; i < nightfallActivities.length; i++) {
+      const nightfallEntityResponse = await getEntityDefinition(
+        nightfallActivities[i].activityHash,
+        "DestinyActivityDefinition"
+      );
+
+      data.nightfalls.push(
+        nightfallEntityResponse.data.Response.selectionScreenDisplayProperties
+          .name
+      );
+    }
+
+    //Leviathan
+
+    const leviathanEncountersRotation =
+      leviathanERR[response["3660836525"].activities[0].activityHash];
+    data.leviathan = leviathanEncountersRotation;
+
+    dispatch({
+      type: worldActionTypes.SET_WORLD_DATA,
+      payload: data
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: worldActionTypes.SET_WORLD_DATA,
+      payload: data
+    });
   }
 };

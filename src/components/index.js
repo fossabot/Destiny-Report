@@ -21,4 +21,7 @@ export { default as MatchesHistory } from "./MatchesHistory";
 export { default as ActivityMatch } from "./ActivityMatch";
 export { default as Infamy } from "./Infamy";
 export { default as Xur } from "./Xur";
+export { default as Flashpoint } from "./Flashpoint";
+export { default as Leviathan } from "./Leviathan";
+export { default as Nightfall } from "./Nightfall";
 export { default as Spinner } from "./Spinner";

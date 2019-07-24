@@ -101,7 +101,11 @@ export const getAggregateActivityStats = (
   http.get(
     `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${characterId}/Stats/AggregateActivityStats/ `
   );
+
 export const getXur = () =>
   http.get(
     `https://www.bungie.net/Platform/Destiny2/Vendors/?components=402,401,400`
   );
+
+export const getPublicMilestones = () =>
+  http.get(`https://www.bungie.net/Platform/Destiny2/Milestones/`);

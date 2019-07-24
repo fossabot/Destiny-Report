@@ -1,0 +1,19 @@
+@import "./variables";
+
+.leviathan--wrapper {
+  text-align: center;
+  .leviathan-title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .leviathan-current-order {
+    margin-top: 10px;
+    font-size: 20px;
+    color: $color-dark-gray;
+
+    > div {
+      margin: 10px 0;
+    }
+  }
+}

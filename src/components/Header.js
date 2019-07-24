@@ -13,11 +13,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="destiny-report--world">
-          <ActiveLink
-            href="/world"
-            as="/world"
-            // activeClassName="destiny-report--world_link-active"
-          >
+          <ActiveLink href="/world" as="/world">
             <a className="destiny-report--world_link">World</a>
           </ActiveLink>
         </div>

@@ -16,9 +16,18 @@
   align-items: center;
 }
 
-.destiny-report--donate {
-  margin-left: auto;
+.destiny-report--donate,
+.destiny-report--title {
+  min-width: 170px;
+
+  @include breakpoint(480px) {
+    min-width: 0;
+  }
 }
+.destiny-report--donate {
+  text-align: right;
+}
+
 .destiny-report--donate,
 .destiny-report--title,
 .destiny-report--world {
@@ -46,8 +55,8 @@
 }
 
 .destiny-report--world {
-  margin-left: 20px;
   font-size: 20px;
+  margin: 0 auto;
 
   @include breakpoint(480px) {
     font-size: 16px;

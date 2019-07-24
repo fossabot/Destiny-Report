@@ -4,7 +4,8 @@ export const globalActionTypes = {
 };
 
 export const worldActionTypes = {
-  SET_XUR_DATA: "SET_XUR_DATA"
+  SET_XUR_DATA: "SET_XUR_DATA",
+  SET_WORLD_DATA: "SET_WORLD_DATA"
 };
 export const playerActionTypes = {
   SET_PLAYER_DATA: "SET_PLAYER_DATA",

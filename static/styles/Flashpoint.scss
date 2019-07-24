@@ -1,0 +1,15 @@
+@import "./variables";
+
+.flashpoint--wrapper {
+  text-align: center;
+  & .flashpoint-title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  & .flashpoint-location {
+    color: $color-dark-gray;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}

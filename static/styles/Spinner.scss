@@ -1,22 +1,10 @@
-// This is just to center the spinner
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// Here is where the magic happens
+@import "./variables";
 
 $offset: 187;
 $duration: 1.4s;
 
 .spinner {
+  margin: 10px;
   animation: rotator $duration linear infinite;
 }
 
@@ -28,7 +16,6 @@ $duration: 1.4s;
     transform: rotate(270deg);
   }
 }
-@import "./variables";
 
 .path {
   stroke-dasharray: $offset;

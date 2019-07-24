@@ -1,6 +1,8 @@
 import { worldActionTypes } from "../actions/actionTypes";
 
 const initialState = {
+  isFetched: false,
+  data: { flashpoint: "Unknown", nightfalls: [], leviathan: "Unknown" },
   xur: {
     isFetched: false,
     isHere: false,
@@ -24,6 +26,12 @@ export default (state = initialState, { type, payload }) => {
           comesBackOn: payload.comesBackOn,
           items: payload.items
         }
+      };
+    case worldActionTypes.SET_WORLD_DATA:
+      return {
+        ...state,
+        isFetched: true,
+        data: payload
       };
     default:
       return state;
