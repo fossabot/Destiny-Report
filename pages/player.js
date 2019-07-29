@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import Router from "next/router";
-import { UserAndNav, Loadout, Xur, Divider } from "../src/components";
+import Head from "next/head";
+import axios from "axios";
+import { connect } from "react-redux";
+import { UserAndNav, Loadout } from "../src/components";
+
 import "../static/styles/Player.scss";
 import { getMembershipID } from "../src/utils/endpoints";
-import axios from "axios";
 import { setError, setLoadout, setPlayerData } from "../src/actions";
-import { connect } from "react-redux";
 import getBaseUrl from "../src/utils/getBaseUrl";
 
 const player = ({ name, platform, loadout, error, setError }) => {
@@ -26,6 +28,9 @@ const player = ({ name, platform, loadout, error, setError }) => {
 
   return (
     <div className="player--wrapper">
+      <Head>
+        <title>{name} | Player</title>
+      </Head>
       <UserAndNav name={name} platform={platform} />
       <div className="loadouts--wrapper">
         {loadout.map(data => (

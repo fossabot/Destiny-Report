@@ -18,7 +18,8 @@ import {
 import {
   faArrowRight,
   faChevronDown,
-  faTimes
+  faTimes,
+  faCode
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -36,7 +37,8 @@ library.add(
   faWindows,
   faPlaystation,
   faXbox,
-  faChevronDown
+  faChevronDown,
+  faCode
 );
 
 NProgress.configure({ minimum: 0.5 });
@@ -72,7 +74,7 @@ class MyApp extends App {
     console.log("CUSTOM ERROR HANDLING", error);
     // This is needed to render errors correctly in development / production
     this.props.reduxStore.dispatch(setError(true));
-
+    Router.push("/");
     super.componentDidCatch(error, errorInfo);
   }
 

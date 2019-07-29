@@ -8,14 +8,22 @@
 
 .footer--content {
   max-width: 1200px;
+  font-size: 20px;
   margin: 0 auto;
   height: 100%;
   padding: 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  > div {
+    min-width: 70px;
+    text-align: center;
+  }
 }
 
-.under--construction:hover {
-  text-decoration: underline;
+.footer--source {
+  margin: 0 auto;
+}
+.footer--link_a:hover {
+  color: $color-gold;
 }

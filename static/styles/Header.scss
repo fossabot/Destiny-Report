@@ -25,6 +25,19 @@
   }
 }
 .destiny-report--donate {
+  min-width: 70px;
+
+  @include breakpoint(480px) {
+    min-width: 0;
+  }
+}
+
+.header--spacer {
+  @include breakpoint(780px) {
+    display: none !important;
+  }
+}
+.destiny-report--donate {
   text-align: right;
 }
 

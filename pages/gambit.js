@@ -1,4 +1,9 @@
 import React, { useEffect, Fragment } from "react";
+import Head from "next/head";
+import { connect } from "react-redux";
+import Router from "next/router";
+import axios from "axios";
+
 import {
   UserAndNav,
   GambitHeader,
@@ -13,9 +18,6 @@ import {
   setGambitMatches,
   setPlayerData
 } from "../src/actions";
-import { connect } from "react-redux";
-import Router from "next/router";
-import axios from "axios";
 import getBaseUrl from "../src/utils/getBaseUrl";
 import getActivityMatchesHistory from "../src/utils/getActivityMatchesHistory";
 
@@ -44,6 +46,9 @@ const Gambit = ({
 
   return (
     <div className="gambit--wrapper" style={{ height: "100%" }}>
+      <Head>
+        <title>{name} | Gambit</title>
+      </Head>
       <UserAndNav name={name} platform={platform} />
       <GambitHeader data={gambitData.overall} />
       <Infamy data={gambitData.infamy} />

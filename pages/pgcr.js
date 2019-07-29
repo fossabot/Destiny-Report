@@ -1,7 +1,9 @@
 import React, { useEffect, Fragment } from "react";
 import Router from "next/router";
 import moment from "moment";
+import Head from "next/head";
 import { connect } from "react-redux";
+
 import { getPGCR, getEntityDefinition } from "../src/utils/endpoints";
 import "../static/styles/Pgcr.scss";
 import { setError } from "../src/actions";
@@ -41,6 +43,9 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
 
   return (
     <div className="pgcr--wrapper">
+      <Head>
+        <title>PGCR</title>
+      </Head>
       {activity && (
         <Fragment>
           <div className="pgcr--activity">

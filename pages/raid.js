@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import Head from "next/head";
 import { connect } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
+
 import {
   UserAndNav,
   RaidOverallHeader,
@@ -72,6 +74,10 @@ const Raid = ({
 
   return (
     <div style={{ marginBottom: "20px" }}>
+      <Head>
+        <title>{name} | Raid</title>
+      </Head>
+
       <UserAndNav name={name} platform={platform} />
       {raidData.isFetched && (
         <React.Fragment>

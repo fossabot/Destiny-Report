@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import Head from "next/head";
 
 import {
   Spacer,
@@ -21,9 +22,12 @@ const World = ({ world, setXurData, setWorldData }) => {
     }
   }, []);
 
-  console.log(world);
   return (
     <div className="world--wrapper">
+      <Head>
+        <title>World</title>
+      </Head>
+
       <Spacer height="50px" />
       <Xur data={world.xur} />
       <Divider />

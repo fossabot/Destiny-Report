@@ -1,4 +1,9 @@
 import React, { useEffect, Fragment } from "react";
+import Head from "next/head";
+import { connect } from "react-redux";
+import Router from "next/router";
+import axios from "axios";
+
 import {
   UserAndNav,
   ActivityHeader,
@@ -13,9 +18,6 @@ import {
   setCrucibleMatches,
   setPlayerData
 } from "../src/actions";
-import { connect } from "react-redux";
-import Router from "next/router";
-import axios from "axios";
 import getBaseUrl from "../src/utils/getBaseUrl";
 import getActivityMatchesHistory from "../src/utils/getActivityMatchesHistory";
 
@@ -43,6 +45,9 @@ const Crucible = ({
 
   return (
     <div>
+      <Head>
+        <title>{name} | Crucible</title>
+      </Head>
       <UserAndNav name={name} platform={platform} />
       <ActivityHeader name="OVERALL" data={crucibleData.overall} />
       <Divider />
