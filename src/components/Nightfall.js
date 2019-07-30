@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Nightfall.scss";
+import "../styles/Nightfall.scss";
 import { Spinner } from ".";
 
 const Nightfall = ({ isFetched, data }) => {

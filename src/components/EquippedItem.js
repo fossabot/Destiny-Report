@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/EquippedItem.scss";
+import "../styles/EquippedItem.scss";
 
 const EquipedItem = ({ icon, name, category, perks = [] }) => {
   return (

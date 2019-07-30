@@ -1,10 +1,11 @@
-const getGambitStats = require("../../src/server/getGambitStats");
+import getRaidStats from "../../../src/server/getRaidStats";
+import { getProfile } from "../../../src/utils/endpoints";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const query = req.query;
   const { membershipId, membershipType } = query;
 
-  if (!membershipType || !membershipType) {
+  if (!membershipId || !membershipType) {
     res.json({
       success: false,
       ErrorCode: 18,
@@ -15,7 +16,16 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const data = await getGambitStats(membershipId, membershipType);
+    const {
+      data: { Response: charcatersResponse }
+    } = await getProfile(membershipId, membershipType, [100]);
+
+    const data = await getRaidStats(
+      membershipId,
+      membershipType,
+      charcatersResponse.profile.data.characterIds
+    );
+
     res.json({ success: true, data });
   } catch (err) {
     if (err.response) {

@@ -12,7 +12,7 @@ const MatchesHistory = ({ matches }) => {
       {matches.data.map(match => (
         <Link
           key={match.activityDetails.instanceId}
-          href={`/pgcr?id=${match.activityDetails.instanceId}`}
+          href={`/pgcr/[id]`}
           as={`/pgcr/${match.activityDetails.instanceId}`}
         >
           <a>

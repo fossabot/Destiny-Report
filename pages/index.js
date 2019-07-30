@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchForm, SearchHistory, Spacer } from "../src/components";
-import "../static/styles/Home.scss";
+import "../src/styles/Home.scss";
 
 const index = () => {
   return (

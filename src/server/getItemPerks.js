@@ -1,6 +1,6 @@
-const { getItem, getEntityDefinition } = require("../utils/endpoints");
+import { getItem, getEntityDefinition } from "../utils/endpoints";
 
-module.exports = (membershipId, membershipType, item) => {
+export default (membershipId, membershipType, item) => {
   return new Promise(async (resolve, reject) => {
     let data = {};
 

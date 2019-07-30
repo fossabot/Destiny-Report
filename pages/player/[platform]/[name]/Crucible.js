@@ -10,16 +10,16 @@ import {
   CrucibleCard,
   Divider,
   MatchesHistory
-} from "../src/components";
-import { getMembershipID } from "../src/utils/endpoints";
+} from "../../../../src/components";
+import { getMembershipID } from "../../../../src/utils/endpoints";
 import {
   setError,
   setCrucibleData,
   setCrucibleMatches,
   setPlayerData
-} from "../src/actions";
-import getBaseUrl from "../src/utils/getBaseUrl";
-import getActivityMatchesHistory from "../src/utils/getActivityMatchesHistory";
+} from "../../../../src/actions";
+import getBaseUrl from "../../../../src/utils/getBaseUrl";
+import getActivityMatchesHistory from "../../../../src/utils/getActivityMatchesHistory";
 
 const Crucible = ({
   name,
@@ -42,6 +42,10 @@ const Crucible = ({
       Router.push("/");
     }
   }, []);
+
+  if (error) {
+    return <div />;
+  }
 
   return (
     <div>
@@ -145,7 +149,7 @@ Crucible.getInitialProps = async ({ query, req, reduxStore }) => {
     }
   } catch (error) {
     return {
-      error,
+      error: error.response ? error.response.data : error,
       BASE_URL,
       name: query.name,
       platform: query.platform

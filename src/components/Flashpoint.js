@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Flashpoint.scss";
+import "../styles/Flashpoint.scss";
 import { Spinner } from ".";
 
 const Flashpoint = ({ data, isFetched }) => {

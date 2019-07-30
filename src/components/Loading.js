@@ -6,7 +6,7 @@
 */
 
 import React, { Component, useEffect, useState } from "react";
-import "../../static/styles/Loading.scss";
+import "../styles/Loading.scss";
 
 const Loading = () => {
   const guardians = ["warlock", "titan", "hunter"];

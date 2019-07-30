@@ -1,7 +1,7 @@
-const { getHistorialStats, getAllProgression } = require("../utils/endpoints");
-const getSafe = require("../utils/getValueSafely");
-const { values } = require("lodash");
-const { infamySteps } = require("../utils/steps");
+import { getHistorialStats, getAllProgression } from "../utils/endpoints";
+import getSafe from "../utils/getValueSafely";
+import { values } from "lodash";
+import { infamySteps } from "../utils/steps";
 
 const data = {
   overall: {
@@ -33,7 +33,7 @@ const data = {
   }
 };
 
-module.exports = async (membershipId, membershipType) => {
+export default async (membershipId, membershipType) => {
   const {
     data: { Response }
   } = await getHistorialStats(membershipId, membershipType, [63, 75]);
@@ -105,7 +105,7 @@ module.exports = async (membershipId, membershipType) => {
           .progress,
       0
     );
-    step = infamyLevelStats.stepIndex;
+    const step = infamyLevelStats.stepIndex;
     data.infamy.stepName = infamySteps[step].stepName;
     data.infamy.icon = "https://www.bungie.net" + infamySteps[step].icon;
   }

@@ -36,7 +36,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "dev": "now dev",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
     "deploy:stage": "now --target staging",
     "deploy:prod": "now --target production"
   },

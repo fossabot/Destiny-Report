@@ -24,6 +24,10 @@
 .footer--source {
   margin: 0 auto;
 }
+.footer--developer {
+  cursor: pointer;
+}
+.footer--developer:hover,
 .footer--link_a:hover {
   color: $color-gold;
 }

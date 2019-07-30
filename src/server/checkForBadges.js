@@ -1,5 +1,5 @@
-const { getActivityHistory, getPGCR } = require("../utils/endpoints");
-const Player = require("./models/player");
+import { getActivityHistory, getPGCR } from "../utils/endpoints";
+import Player from "./models/player";
 
 const dates = {
   leviathan: {
@@ -33,7 +33,7 @@ let data = {};
 let playerId = "";
 let lastTimeChecked = new Date("1993-01-01T10:00:00Z");
 
-module.exports = async (membershipType, membershipId, characterIds) => {
+export default async (membershipType, membershipId, characterIds) => {
   const initialData = {
     leviathan: {
       minPlayersCount: 6

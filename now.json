@@ -1,39 +1,7 @@
 {
   "version": 2,
   "alias": "destiny.report",
-  "builds": [
-    { "src": "next.config.js", "use": "@now/next" },
-    {
-      "src": "api/**/*",
-      "use": "@now/node"
-    },
-    { "src": "static/**/*", "use": "@now/static" }
-  ],
   "regions": ["iad1"],
-  "routes": [
-    {
-      "src": "/player/(?<platform>[^/]+)/(?<name>[^/]+)([/]*)$",
-      "dest": "/player?name=$name&platform=$platform"
-    },
-    {
-      "src": "/player/(?<platform>[^/]+)/(?<name>[^/]+)/(?<activity>[^/]+)([/]*)$",
-      "dest": "/$activity?name=$name&platform=$platform"
-    },
-    {
-      "src": "/pgcr/(?<id>[^/]+)([/]*)$",
-      "dest": "/pgcr?id=$id"
-    },
-    {
-      "src": "/pgcr([/]*)$",
-      "dest": "/"
-    },
-    {
-      "src": "/",
-      "dest": "/"
-    },
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/error" }
-  ],
   "env": {
     "API_KEY": "@bungieapikey",
     "DB_KEY": "@mongo-uri"

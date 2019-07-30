@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const playerSchema = mongoose.Schema({
+const playerSchema = new mongoose.Schema({
   _id: String,
   last_date: {
     type: String,
@@ -116,4 +116,4 @@ const playerSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Player", playerSchema);
+export default mongoose.models.Player || mongoose.model("Player", playerSchema);

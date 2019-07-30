@@ -10,8 +10,8 @@ import {
   RaidCard,
   Divider,
   Spacer
-} from "../src/components";
-import { getMembershipID } from "../src/utils/endpoints";
+} from "../../../../src/components";
+import { getMembershipID } from "../../../../src/utils/endpoints";
 import {
   setRaidData,
   updateRaidBadges,
@@ -19,9 +19,9 @@ import {
   setError,
   setRaidBadges,
   setPlayerData
-} from "../src/actions";
-import getBaseUrl from "../src/utils/getBaseUrl";
-import "../static/styles/Raid.scss";
+} from "../../../../src/actions";
+import getBaseUrl from "../../../../src/utils/getBaseUrl";
+import "../../../../src/styles/Raid.scss";
 
 const Raid = ({
   name,
@@ -32,7 +32,8 @@ const Raid = ({
   error,
   raidData,
   updateRaidBadges,
-  failUpdateRaidBadges
+  failUpdateRaidBadges,
+  setError
 }) => {
   useEffect(() => {
     if (error) {
@@ -46,32 +47,35 @@ const Raid = ({
         setError(true);
       }
       Router.push("/");
-    }
-
-    const updateBadgesHandler = () => {
-      axios
-        .get(
-          `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
-        )
-        .then(updatedBadges => {
-          if (updatedBadges.status === 524) {
-            failUpdateRaidBadges();
-          } else {
-            if (updatedBadges.data.data) {
-              updateRaidBadges(updatedBadges.data.data);
+    } else {
+      const updateBadgesHandler = () => {
+        axios
+          .get(
+            `${BASE_URL}/api/raid/updateBadges?membershipId=${membershipId}&membershipType=${membershipType}`
+          )
+          .then(updatedBadges => {
+            if (updatedBadges.status === 524) {
+              failUpdateRaidBadges();
+            } else {
+              if (updatedBadges.data.data) {
+                updateRaidBadges(updatedBadges.data.data);
+              }
             }
-          }
-        })
-        .catch(err => {
-          failUpdateRaidBadges();
-        });
-    };
+          })
+          .catch(err => {
+            failUpdateRaidBadges();
+          });
+      };
 
-    if (!raidData.isUpdated) {
-      updateBadgesHandler();
+      if (!raidData.isUpdated) {
+        updateBadgesHandler();
+      }
     }
   }, []);
 
+  if (error) {
+    return <div />;
+  }
   return (
     <div style={{ marginBottom: "20px" }}>
       <Head>
@@ -156,6 +160,7 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
         query.name,
         platforms[query.platform]
       );
+
       if (response.data.ErrorCode !== 1 || response.data.Response.length < 1) {
         throw {
           ErrorStatus: "Guardian Not Found",
@@ -205,10 +210,8 @@ Raid.getInitialProps = async ({ query, reduxStore, req }) => {
     }
   } catch (error) {
     return {
-      error,
+      error: error.response ? error.response.data : error,
       BASE_URL,
-      membershipId,
-      membershipType,
       name: query.name,
       platform: query.platform
     };

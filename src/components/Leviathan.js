@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Leviathan.scss";
+import "../styles/Leviathan.scss";
 import { Spinner } from ".";
 
 const Leviathan = ({ isFetched, data }) => {

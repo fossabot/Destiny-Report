@@ -1,6 +1,7 @@
-const { getAggregateActivityStats } = require("../utils/endpoints");
+import { getAggregateActivityStats } from "../utils/endpoints";
 let data = {};
-module.exports = async (membershipId, membershipType, characterIds) => {
+
+export default async (membershipId, membershipType, characterIds) => {
   const raidInitialData = {
     CoS: { normal: 0, guided: 0, timePlayed: 0 },
     SotP: { normal: 0, guided: 0, timePlayed: 0 },

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Nav } from "./";
-import "../../static/styles/UserAndNav.scss";
+import "../styles/UserAndNav.scss";
 
 const UserAndNav = ({ name, platform }) => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/ActivityHeader.scss";
+import "../styles/ActivityHeader.scss";
 import { Spacer } from ".";
 import secondsToDhm from "../utils/secondsToDhm";
 

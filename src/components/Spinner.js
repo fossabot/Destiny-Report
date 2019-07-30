@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Spinner.scss";
+import "../styles/Spinner.scss";
 const Spinner = ({ width = "60px", height = "60px" }) => {
   return (
     <svg

@@ -1,6 +1,6 @@
-const { getCharactersOverallCrucibleStats } = require("../utils/endpoints");
+import { getCharactersOverallCrucibleStats } from "../utils/endpoints";
 
-module.exports = async (membershipId, membershipType, characters) => {
+export default async (membershipId, membershipType, characters) => {
   const overallCrucible = {
     quickplay: {
       matches: 0,

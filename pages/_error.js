@@ -1,5 +1,5 @@
 import React from "react";
-import "../static/styles/Error.scss";
+import "../src/styles/Error.scss";
 const error = () => {
   return (
     <div className="error-wrapper">

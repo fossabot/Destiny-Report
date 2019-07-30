@@ -1,8 +1,7 @@
-const getItemPerks = require("./getItemPerks");
-const constansts = require("./apiConstants");
-const { readdirSync, readFileSync } = require("fs");
+import getItemPerks from "./getItemPerks";
+import constansts from "./apiConstants";
 
-module.exports = (membershipId, membershipType, equipments, character) => {
+export default (membershipId, membershipType, equipments, character) => {
   return new Promise(async (resolve, reject) => {
     const simplifiedCharacterData = {
       characterId: character.characterId,

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
+import Router from "next/router";
 
 import {
   Spacer,
@@ -15,10 +16,14 @@ import { setXurData, setWorldData } from "../src/actions";
 const World = ({ world, setXurData, setWorldData }) => {
   useEffect(() => {
     if (!world.xur.isFetched) {
-      setXurData();
+      setXurData().catch(() => {
+        // Router.push("/");
+      });
     }
     if (!world.isFetched) {
-      setWorldData();
+      setWorldData().catch(() => {
+        Router.push("/");
+      });
     }
   }, []);
 

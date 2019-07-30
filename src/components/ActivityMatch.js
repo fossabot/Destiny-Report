@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../static/styles/ActivityMatch.scss";
+import "../styles/ActivityMatch.scss";
 import { getEntityDefinition } from "../utils/endpoints";
 import activityTypeModes from "../utils/activityTypeModes";
 import moment from "moment";
@@ -9,7 +9,8 @@ const ActivityMatch = ({ data }) => {
   const [activityDef, setActivityDef] = useState({
     mode: "Loading",
     loaction: "Loading",
-    icon: "/common/destiny2_content/icons/1c17984345f393e728dc8d2b898eca66.png"
+    icon:
+      "https://www.bungie.com/common/destiny2_content/icons/1c17984345f393e728dc8d2b898eca66.png"
   });
 
   useEffect(() => {

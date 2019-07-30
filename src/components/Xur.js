@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
-import "../../static/styles/Xur.scss";
 import moment from "moment";
-import { Spinner } from ".";
+
+import { connect } from "react-redux";
+import "../styles/Xur.scss";
+import { Spinner, Link } from ".";
 
 const dateFormat = "dddd [at] HH:mm";
 let xurReset = moment.utc("2019-07-23T17:00:00.000Z");
@@ -33,7 +34,16 @@ const Xur = ({ xur }) => {
           <div className="xur--location-map_descrption">
             <div className="xur--location-map_descrption-header">Xur</div>
             <div className="xur--location-map_descrption-planet">
-              Location: Hidden
+              Location:{" "}
+              <Link href="https://whereisxur.com">
+                <a
+                  className="world--where-is-xur"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  whereisxur.com
+                </a>
+              </Link>
             </div>
             <div className="xur--location-map_descrption-area">
               Leaves on {xurLeavesOnDate}

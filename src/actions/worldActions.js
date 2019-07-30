@@ -1,4 +1,4 @@
-import { worldActionTypes } from "./actionTypes";
+import { worldActionTypes, globalActionTypes } from "./actionTypes";
 import {
   getXur,
   getEntityDefinition,
@@ -86,7 +86,25 @@ export const setXurData = () => async dispatch => {
       });
     }
   } catch (error) {
+    // if (error.response) {
+    //   dispatch({
+    //     type: globalActionTypes.SET_ERROR,
+    //     payload: {
+    //       errorStatus: error.response.data.ErrorStatus,
+    //       errorMessage: error.response.data.ErrorMessage,
+    //       active: true
+    //     }
+    //   });
+    // } else {
+    //   dispatch({
+    //     type: globalActionTypes.SET_ERROR,
+    //     payload: {
+    //       active: true
+    //     }
+    //   });
+    // }
     console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -138,10 +156,23 @@ export const setWorldData = () => async dispatch => {
       payload: data
     });
   } catch (error) {
-    console.log(error);
-    dispatch({
-      type: worldActionTypes.SET_WORLD_DATA,
-      payload: data
-    });
+    if (error.response) {
+      dispatch({
+        type: globalActionTypes.SET_ERROR,
+        payload: {
+          errorStatus: error.response.data.ErrorStatus,
+          errorMessage: error.response.data.ErrorMessage,
+          active: true
+        }
+      });
+    } else {
+      dispatch({
+        type: globalActionTypes.SET_ERROR,
+        payload: {
+          active: true
+        }
+      });
+    }
+    throw new Error(error);
   }
 };

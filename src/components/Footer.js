@@ -1,19 +1,23 @@
 import React from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Router from "next/router";
+import { connect } from "react-redux";
 
-import "../../static/styles/Footer.scss";
+import "../styles/Footer.scss";
+import { resetPlayerData } from "../actions";
 
-const Footer = () => {
+const Footer = ({ resetPlayerData }) => {
+  const developerClickHandler = () => {
+    resetPlayerData();
+    Router.push("/player/[platform]/[name]", "/player/psn/xXSARKURDZz");
+  };
+
   return (
     <div className="footer--wrapper">
       <div className="footer--content">
-        <div className="footer--developer">
-          <Link href="https://destiny.report/player/psn/xXSARKURDZz">
-            <a className="footer--link_a" rel="noopener noreferrer">
-              <FontAwesomeIcon size="lg" icon="code" /> SarKurd
-            </a>
-          </Link>
+        <div className="footer--developer" onClick={developerClickHandler}>
+          <FontAwesomeIcon size="lg" icon="code" /> SarKurd
         </div>
         <div className="footer--source">
           <Link href="https://github.com/SarKurd/Destiny-Report">
@@ -42,4 +46,7 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default connect(
+  null,
+  { resetPlayerData }
+)(Footer);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
-import "../../static/styles/SearchForm.scss";
+import "../styles/SearchForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spacer } from "./";
 import UserContext from "../context/UserContext";
@@ -99,7 +99,7 @@ const SearchForm = props => {
         props.setPlayerData(res.data.Response[0]);
 
         Router.push(
-          `/player?platform=${user.platform.name}&name=${displayName}`,
+          `/player/[platform]/[name]`,
           `/player/${user.platform.name}/${displayName}`
         );
       } else {

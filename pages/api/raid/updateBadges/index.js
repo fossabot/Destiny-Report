@@ -1,9 +1,9 @@
-const { getProfile } = require("../../../src/utils/endpoints");
-const checkForBadges = require("../../../src/server/checkForBadges");
-const connectMongoose = require("../../../src/server/connectMongoose");
-const Player = require("../../../src/server/models/player");
+import { getProfile } from "../../../../src/utils/endpoints";
+import checkForBadges from "../../../../src/server/checkForBadges";
+import connectMongoose from "../../../../src/server/connectMongoose";
+import Player from "../../../../src/server/models/player";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   req.socket.setTimeout(0);
   try {
     const query = req.query;

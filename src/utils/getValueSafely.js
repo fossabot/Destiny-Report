@@ -1,4 +1,4 @@
-module.exports = (fn, defaultVal) => {
+export default (fn, defaultVal) => {
   try {
     return fn();
   } catch (e) {

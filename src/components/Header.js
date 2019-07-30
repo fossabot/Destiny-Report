@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import ActiveLink from "./Link";
-import "../../static/styles/Header.scss";
+
 import Spacer from "./Spacer";
+import ActiveLink from "./Link";
+import "../styles/Header.scss";
 
 const Header = () => {
   return (

@@ -1,9 +1,9 @@
-const {
+import {
   getActivityHistory,
   getProfile
-} = require("../../../src/utils/endpoints");
+} from "../../../../src/utils/endpoints";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const query = req.query;
   const { membershipId, membershipType } = query;
 
@@ -18,14 +18,19 @@ module.exports = async (req, res) => {
     const promisesToBeResolved = [];
     for (let i = 0; i < characterIds.length; i++) {
       promisesToBeResolved.push(
-        getActivityHistory(membershipId, membershipType, characterIds[i], 5)
+        getActivityHistory(membershipId, membershipType, characterIds[i], 63)
+      );
+      promisesToBeResolved.push(
+        getActivityHistory(membershipId, membershipType, characterIds[i], 75)
       );
     }
 
     const result = await Promise.all(promisesToBeResolved);
     let activities = [];
     for (let i = 0; i < result.length; i++) {
-      activities = [...activities, ...result[i].data.Response.activities];
+      if (result[i].data.Response.activities) {
+        activities = [...activities, ...result[i].data.Response.activities];
+      }
     }
 
     activities = activities
@@ -33,6 +38,7 @@ module.exports = async (req, res) => {
         return new Date(b.period) - new Date(a.period);
       })
       .slice(0, 10);
+
     res.json(activities);
   } catch (error) {
     res.json([]);

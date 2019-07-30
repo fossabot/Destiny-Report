@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Loadout.scss";
+import "../styles/Loadout.scss";
 import { EquippedItem, Subclass } from ".";
 import withStyles from "react-jss";
 import secondsToDhm from "../utils/secondsToDhm";

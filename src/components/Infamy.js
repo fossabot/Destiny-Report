@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/Infamy.scss";
+import "../styles/Infamy.scss";
 
 const Infamy = ({ data }) => {
   return (

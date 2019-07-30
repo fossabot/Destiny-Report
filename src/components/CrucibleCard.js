@@ -1,5 +1,5 @@
 import React from "react";
-import "../../static/styles/CrucibleCard.scss";
+import "../styles/CrucibleCard.scss";
 import { ActivityModeCard } from "./";
 import getRatio from "../utils/getRatio";
 import secondsToDhm from "../utils/secondsToDhm";

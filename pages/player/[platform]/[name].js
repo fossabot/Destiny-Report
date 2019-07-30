@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Router from "next/router";
 import Head from "next/head";
-import axios from "axios";
 import { connect } from "react-redux";
-import { UserAndNav, Loadout } from "../src/components";
+import axios from "axios";
 
-import "../static/styles/Player.scss";
-import { getMembershipID } from "../src/utils/endpoints";
-import { setError, setLoadout, setPlayerData } from "../src/actions";
-import getBaseUrl from "../src/utils/getBaseUrl";
+import { UserAndNav, Loadout } from "../../../src/components";
+import "../../../src/styles/Player.scss";
+import { getMembershipID } from "../../../src/utils/endpoints";
+import { setError, setLoadout, setPlayerData } from "../../../src/actions";
+import getBaseUrl from "../../../src/utils/getBaseUrl";
 
 const player = ({ name, platform, loadout, error, setError }) => {
   useEffect(() => {
@@ -25,6 +25,10 @@ const player = ({ name, platform, loadout, error, setError }) => {
       Router.push("/");
     }
   }, []);
+
+  if (error) {
+    return <div />;
+  }
 
   return (
     <div className="player--wrapper">
@@ -88,7 +92,7 @@ player.getInitialProps = async ({ query, req, reduxStore }) => {
     }
   } catch (error) {
     return {
-      error,
+      error: error.response ? error.response.data : error,
       name: query.name,
       platform: query.platform
     };

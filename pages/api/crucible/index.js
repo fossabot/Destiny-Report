@@ -1,14 +1,14 @@
-const {
+import { values } from "lodash";
+import {
   getProfile,
   getHistorialStats,
   getAllProgression
-} = require("../../src/utils/endpoints");
-const getCrucibleOverallStats = require("../../src/server/getCrucibleOverallStats");
-const getSafe = require("../../src/utils/getValueSafely");
-const { values } = require("lodash");
-const { glorySteps, valorSteps } = require("../../src/utils/steps");
+} from "../../../src/utils/endpoints";
+import getCrucibleOverallStats from "../../../src/server/getCrucibleOverallStats";
+import getSafe from "../../../src/utils/getValueSafely";
+import { glorySteps, valorSteps } from "../../../src/utils/steps";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const query = req.query;
   const { membershipId, membershipType } = query;
 

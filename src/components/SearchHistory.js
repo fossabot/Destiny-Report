@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spacer } from ".";
 import Router from "next/router";
-import "../../static/styles/SearchHistory.scss";
+import "../styles/SearchHistory.scss";
 import { resetPlayerData } from "../actions";
 import { connect } from "react-redux";
 
@@ -29,9 +29,7 @@ const SearchHistory = ({ resetPlayerData }) => {
         <li
           key={index}
           className="search--history__item"
-          href={`/player?platform=${
-            player.platform.name
-          }&name=${encodeURIComponent(player.name)}`}
+          href={`/player/[platform]/[name]`}
           as={`/player/${player.platform.name}/${encodeURIComponent(
             player.name
           )}`}

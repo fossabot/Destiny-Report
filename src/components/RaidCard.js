@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "../../static/styles/RaidCard.scss";
+import "../styles/RaidCard.scss";
 import ReactTooltip from "react-tooltip";
 import secondsToDhm from "../utils/secondsToDhm";
 import Link from "next/link";

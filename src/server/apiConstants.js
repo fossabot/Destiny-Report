@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   raceType: {
     0: "Human",
     1: "Awoken",

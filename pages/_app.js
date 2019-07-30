@@ -1,12 +1,12 @@
 import React from "react";
 import App, { Container } from "next/app";
-import { Layout } from "../src/Layout";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Router from "next/router";
 import NProgress from "nprogress";
 import withReduxStore from "../lib/with-redux-store";
 import { Provider } from "react-redux";
 
+import { Layout } from "../src/Layout";
 import {
   faPaypal,
   faTwitter,

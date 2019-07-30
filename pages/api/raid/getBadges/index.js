@@ -1,7 +1,7 @@
-const Player = require("../../../src/server/models/player");
-const connectMongoose = require("../../../src/server/connectMongoose");
+import Player from "../../../../src/server/models/player";
+import connectMongoose from "../../../../src/server/connectMongoose";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const query = req.query;
   const { membershipId, membershipType } = query;
 

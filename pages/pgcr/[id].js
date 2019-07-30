@@ -4,10 +4,10 @@ import moment from "moment";
 import Head from "next/head";
 import { connect } from "react-redux";
 
-import { getPGCR, getEntityDefinition } from "../src/utils/endpoints";
-import "../static/styles/Pgcr.scss";
-import { setError } from "../src/actions";
-import { Spacer, Divider } from "../src/components";
+import { getPGCR, getEntityDefinition } from "../../src/utils/endpoints";
+import "../../src/styles/Pgcr.scss";
+import { setError } from "../../src/actions";
+import { Spacer, Divider } from "../../src/components";
 
 const Pgcr = ({ error, setError, pgcr, activity }) => {
   useEffect(() => {

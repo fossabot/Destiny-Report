@@ -1,7 +1,7 @@
-const { getProfile } = require("../../src/utils/endpoints");
-const getCharacterLoadout = require("../../src/server/getChacterLoadout");
+import { getProfile } from "../../../src/utils/endpoints";
+import getCharacterLoadout from "../../../src/server/getChacterLoadout";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   try {
     const query = req.query;
     const { membershipId, membershipType } = query;
