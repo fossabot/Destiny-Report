@@ -23,7 +23,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import { UserProvider } from "../src/context/UserContext";
 import { setLoader, setError } from "../src/actions";
 
 import { initGA, logPageView } from "../src/utils/analytics";
@@ -91,13 +90,11 @@ class MyApp extends App {
 
     return (
       <Container>
-        <UserProvider>
-          <Provider store={reduxStore}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </Provider>
-        </UserProvider>
+        <Provider store={reduxStore}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
       </Container>
     );
   }

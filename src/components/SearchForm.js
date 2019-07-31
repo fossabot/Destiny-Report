@@ -3,7 +3,6 @@ import Router from "next/router";
 import "../styles/SearchForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spacer } from "./";
-import UserContext from "../context/UserContext";
 import { getMembershipID } from "../utils/endpoints";
 import { connect } from "react-redux";
 import {
