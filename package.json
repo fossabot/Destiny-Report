@@ -1,9 +1,9 @@
 {
   "name": "destiny-report",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "license": "MIT",
   "author": "Sarbast Mohammed",
-  "private": true,
+  "private": false,
   "engines": {
     "node": "10.x"
   },
