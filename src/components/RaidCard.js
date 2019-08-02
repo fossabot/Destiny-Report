@@ -67,7 +67,7 @@ const RaidCard = ({
           <Fragment>
             {badges.dayOne.value && (
               <Link
-                href={`/pgcr?id=${badges.dayOne.instanceId}`}
+                href={`/pgcr/[id]`}
                 as={`/pgcr/${badges.dayOne.instanceId}`}
               >
                 <div
@@ -80,7 +80,7 @@ const RaidCard = ({
             )}
             {!badges.dayOne.value && badges.weekOne.value && (
               <Link
-                href={`/pgcr?id=${badges.weekOne.instanceId}`}
+                href={`/pgcr/[id]`}
                 as={`/pgcr/${badges.weekOne.instanceId}`}
               >
                 <div
@@ -93,7 +93,7 @@ const RaidCard = ({
             )}
             {badges.flawless.value && (
               <Link
-                href={`/pgcr?id=${badges.flawless.instanceId}`}
+                href={`/pgcr/[id]`}
                 as={`/pgcr/${badges.flawless.instanceId}`}
               >
                 <div
@@ -106,7 +106,7 @@ const RaidCard = ({
             )}
             {badges.minPlayersCount.value < 5 && (
               <Link
-                href={`/pgcr?id=${badges.minPlayersCount.instanceId}`}
+                href={`/pgcr/[id]`}
                 as={`/pgcr/${badges.minPlayersCount.instanceId}`}
               >
                 <div

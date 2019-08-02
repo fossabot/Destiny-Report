@@ -10,7 +10,7 @@ const Header = () => {
     <div className="header--wrapper">
       <div className="header--content">
         <div className="destiny-report--title">
-          <Link href="/">
+          <Link href="/" as="/">
             <a>Destiny Report</a>
           </Link>
         </div>
@@ -21,11 +21,13 @@ const Header = () => {
         </div>
         <Spacer width="100px" className="header--spacer" />
         <div className="destiny-report--donate">
-          <Link href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CBDESK5LVTJPC&source=url">
-            <a target="_blank" rel="noopener noreferrer">
-              Donate
-            </a>
-          </Link>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CBDESK5LVTJPC&source=url"
+          >
+            Donate
+          </a>
         </div>
       </div>
     </div>

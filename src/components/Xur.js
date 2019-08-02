@@ -28,22 +28,21 @@ const Xur = ({ xur }) => {
           <div className="xur--location-map_icon">
             <img
               src="https://www.bungie.net/img/destiny_content/vendor/icons/xur_map_icon.png"
-              alt="hi"
+              alt="xur icon"
             />
           </div>
           <div className="xur--location-map_descrption">
             <div className="xur--location-map_descrption-header">Xur</div>
             <div className="xur--location-map_descrption-planet">
               Location:{" "}
-              <Link href="https://whereisxur.com">
-                <a
-                  className="world--where-is-xur"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  whereisxur.com
-                </a>
-              </Link>
+              <a
+                href="https://whereisxur.com"
+                className="world--where-is-xur"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                whereisxur.com
+              </a>
             </div>
             <div className="xur--location-map_descrption-area">
               Leaves on {xurLeavesOnDate}
