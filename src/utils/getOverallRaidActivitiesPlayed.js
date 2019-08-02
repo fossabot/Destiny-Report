@@ -171,7 +171,7 @@ export default async (membershipType, membershipId) => {
               activity.activityDetails.directorActivityHash === 960175301 ||
               activity.activityDetails.directorActivityHash === 3333172150
             ) {
-              raidActivitiesPlayed.SotP.push({
+              raidActivitiesPlayed.CoS.push({
                 x: raidActivitiesPlayed.CoS.length,
                 y: isCompleted ? 1 : 0,
                 instanceId: activity.activityDetails.instanceId,
