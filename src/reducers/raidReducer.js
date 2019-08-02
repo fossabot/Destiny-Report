@@ -8,6 +8,10 @@ const initialState = {
   badges: {
     isFetched: false,
     data: {}
+  },
+  activities: {
+    isFetched: false,
+    data: {}
   }
 };
 
@@ -38,6 +42,14 @@ export default (state = initialState, { type, payload }) => {
         isFetched: true,
         isUpdated: true,
         isUpdateFailed: true
+      };
+    case raidActionTypes.SET_ACTIVITIES_PLAYED:
+      return {
+        ...state,
+        activities: {
+          isFetched: true,
+          data: payload
+        }
       };
     default:
       return state;

@@ -1,8 +1,11 @@
 import React, { Fragment } from "react";
 import "../styles/RaidCard.scss";
 import ReactTooltip from "react-tooltip";
+import { connect } from "react-redux";
+
 import secondsToDhm from "../utils/secondsToDhm";
 import Link from "next/link";
+import { ActivitiesChart, Spinner } from "./";
 
 const numberWords = {
   1: "Solo",
@@ -10,7 +13,14 @@ const numberWords = {
   3: "Three Man",
   4: "Four Man"
 };
-const RaidCard = ({ name, stats, badges, isPrestige }) => {
+const RaidCard = ({
+  name,
+  stats,
+  badges,
+  isPrestige,
+  activitiesPlayed,
+  areActivitiesFetched
+}) => {
   let overAll = stats.normal + stats.guided;
   if (isPrestige) {
     overAll += stats.prestige;
@@ -43,6 +53,14 @@ const RaidCard = ({ name, stats, badges, isPrestige }) => {
           <div className="raid-card__stats-primary">{stats.guided}</div>
           <div className="raid-card__stats-secondary">Guided</div>
         </div>
+      </div>
+
+      <div className="raid-card__activities">
+        {areActivitiesFetched ? (
+          <ActivitiesChart data={activitiesPlayed} />
+        ) : (
+          <Spinner />
+        )}
       </div>
       <div className="raid-card__badges">
         {badges && (
@@ -109,4 +127,6 @@ const RaidCard = ({ name, stats, badges, isPrestige }) => {
   );
 };
 
-export default RaidCard;
+export default connect(state => ({
+  areActivitiesFetched: state.raid.activities.isFetched
+}))(RaidCard);

@@ -25,3 +25,4 @@ export { default as Flashpoint } from "./Flashpoint";
 export { default as Leviathan } from "./Leviathan";
 export { default as Nightfall } from "./Nightfall";
 export { default as Spinner } from "./Spinner";
+export { default as ActivitiesChart } from "./ActivitiesChart";

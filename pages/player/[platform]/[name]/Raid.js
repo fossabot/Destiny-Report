@@ -18,7 +18,8 @@ import {
   failUpdateRaidBadges,
   setError,
   setRaidBadges,
-  setPlayerData
+  setPlayerData,
+  setRaidActivitiesPlayed
 } from "../../../../src/actions";
 import getBaseUrl from "../../../../src/utils/getBaseUrl";
 import "../../../../src/styles/Raid.scss";
@@ -33,6 +34,7 @@ const Raid = ({
   raidData,
   updateRaidBadges,
   failUpdateRaidBadges,
+  setRaidActivitiesPlayed,
   setError
 }) => {
   useEffect(() => {
@@ -70,12 +72,17 @@ const Raid = ({
       if (!raidData.isUpdated) {
         updateBadgesHandler();
       }
+
+      if (!raidData.activities.isFetched) {
+        setRaidActivitiesPlayed(membershipId, membershipType);
+      }
     }
   }, []);
 
   if (error) {
     return <div />;
   }
+
   return (
     <div style={{ marginBottom: "20px" }}>
       <Head>
@@ -93,41 +100,47 @@ const Raid = ({
           />
           <Spacer height="40px" />
           <RaidCard
+            name="CROWN OF SORROW"
             stats={raidData.data.CoS}
             badges={raidData.badges.data && raidData.badges.data.CoS}
-            name="CROWN OF SORROW"
+            activitiesPlayed={raidData.activities.data.CoS}
           />
           <Divider />
           <RaidCard
+            name="SCOURGE OF THE PAST"
             stats={raidData.data.SotP}
             badges={raidData.badges.data && raidData.badges.data.SotP}
-            name="SCOURGE OF THE PAST"
+            activitiesPlayed={raidData.activities.data.SotP}
           />
           <Divider />
           <RaidCard
+            name="LAST WISH"
             stats={raidData.data.lastWish}
             badges={raidData.badges.data && raidData.badges.data.lastWish}
-            name="LAST WISH"
+            activitiesPlayed={raidData.activities.data.lastWish}
           />
           <Divider />
           <RaidCard
+            name="SPIRE OF STARS"
             stats={raidData.data.SoS}
             badges={raidData.badges.data && raidData.badges.data.SoS}
-            name="SPIRE OF STARS"
+            activitiesPlayed={raidData.activities.data.SoS}
             isPrestige={true}
           />
           <Divider />
           <RaidCard
+            name="EATER OF WORLDS"
             stats={raidData.data.EoW}
             badges={raidData.badges.data && raidData.badges.data.EoW}
-            name="EATER OF WORLDS"
+            activitiesPlayed={raidData.activities.data.EoW}
             isPrestige={true}
           />
           <Divider />
           <RaidCard
+            name="LEVIATHAN"
             stats={raidData.data.leviathan}
             badges={raidData.badges.data && raidData.badges.data.leviathan}
-            name="LEVIATHAN"
+            activitiesPlayed={raidData.activities.data.leviathan}
             isPrestige={true}
           />
         </React.Fragment>
@@ -224,5 +237,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setError, updateRaidBadges, failUpdateRaidBadges }
+  { setError, updateRaidBadges, failUpdateRaidBadges, setRaidActivitiesPlayed }
 )(Raid);
