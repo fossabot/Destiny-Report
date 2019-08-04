@@ -23,7 +23,9 @@ const styles = {
     marginLeft: "65px",
     padding: "5px"
   },
-
+  activityModeStatValue: {
+    fontSize: "18px"
+  },
   activityModeStatBox: {
     backgroundColor: "rgba(0, 0, 0, 0.493)",
     padding: "10px 20px",
@@ -31,7 +33,7 @@ const styles = {
   },
   activityModeStatName: {
     color: "#a9a9a9",
-    fontSize: "10px"
+    fontSize: "12px"
   },
   "@media (max-width: 768px)": {
     activityModeStats: {
