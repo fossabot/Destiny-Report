@@ -10,19 +10,23 @@
 
 2- Add Bungie API key and MongoDB URI
 
-  - create two files  `.env` and `.env.build` in the root of the project put the keys inside them like this
-```sh
+  - create two files  `.env` and `.env.build` in the root of the project and put the keys inside them like this
+  
+  -- `.env`
+  ```sh
 API_KEY="your bungie API key"
 DB_KEY="your MongoDB URI"
 ```
+  -- `.env.build`
 
-2- Install the dependancies
+```sh
+API_KEY="your bungie API key"
+```
 
-`yarn`
 
-3- Run the development mode
+2- Run the development mode
 
-`yarn dev` or `now dev`
+`now dev`
 
 
 # Disclaimer
