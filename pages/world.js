@@ -13,17 +13,10 @@ import {
 } from "../src/components";
 import { setXurData, setWorldData } from "../src/actions";
 
-const World = ({ world, setXurData, setWorldData }) => {
+const World = ({ world, error }) => {
   useEffect(() => {
-    if (!world.xur.isFetched) {
-      setXurData().catch(() => {
-        // Router.push("/");
-      });
-    }
-    if (!world.isFetched) {
-      setWorldData().catch(() => {
-        Router.push("/");
-      });
+    if (error) {
+      Router.push("/");
     }
   }, []);
 
@@ -44,6 +37,20 @@ const World = ({ world, setXurData, setWorldData }) => {
       <Spacer height="50px" />
     </div>
   );
+};
+
+World.getInitialProps = async ({ reduxStore }) => {
+  try {
+    if (!reduxStore.getState().world.xur.isFetched) {
+      await reduxStore.dispatch(setXurData());
+    }
+    if (!reduxStore.getState().world.isFetched) {
+      await reduxStore.dispatch(setWorldData());
+    }
+    return {};
+  } catch (error) {
+    return { error: true };
+  }
 };
 
 const mapStateToProps = state => ({ world: state.world });

@@ -86,23 +86,23 @@ export const setXurData = () => async dispatch => {
       });
     }
   } catch (error) {
-    // if (error.response) {
-    //   dispatch({
-    //     type: globalActionTypes.SET_ERROR,
-    //     payload: {
-    //       errorStatus: error.response.data.ErrorStatus,
-    //       errorMessage: error.response.data.ErrorMessage,
-    //       active: true
-    //     }
-    //   });
-    // } else {
-    //   dispatch({
-    //     type: globalActionTypes.SET_ERROR,
-    //     payload: {
-    //       active: true
-    //     }
-    //   });
-    // }
+    if (error.response) {
+      dispatch({
+        type: globalActionTypes.SET_ERROR,
+        payload: {
+          errorStatus: error.response.data.ErrorStatus,
+          errorMessage: error.response.data.ErrorMessage,
+          active: true
+        }
+      });
+    } else {
+      dispatch({
+        type: globalActionTypes.SET_ERROR,
+        payload: {
+          active: true
+        }
+      });
+    }
     console.log(error);
     throw new Error(error);
   }
