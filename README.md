@@ -1,4 +1,6 @@
 # Installation
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSarKurd%2FDestiny-Report.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSarKurd%2FDestiny-Report?ref=badge_shield)
+
 
 ### Now CLI is required
 
@@ -37,3 +39,7 @@ Destiny Report is NOT affiliated with Bungie, all the resources are propery of B
 I started working on this project around November 2018, spent most of the nights and weekends to finish it and still working on it, if you find it useful, consider donating to help me pay for the hosting and domain costs.
 
 Paypal: http://bit.ly/destiny-report-donate
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSarKurd%2FDestiny-Report.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSarKurd%2FDestiny-Report?ref=badge_large)
