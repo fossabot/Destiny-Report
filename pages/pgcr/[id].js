@@ -44,7 +44,8 @@ const Pgcr = ({ error, setError, pgcr, activity }) => {
   return (
     <div className="pgcr--wrapper">
       <Head>
-        <title>PGCR</title>
+        <title>Destiny Report | Post Game Carnage Report</title>
+        <meta name="description" content="Post game carnage report" />
       </Head>
       {activity && (
         <Fragment>

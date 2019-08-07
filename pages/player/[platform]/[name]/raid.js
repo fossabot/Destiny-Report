@@ -87,6 +87,7 @@ const Raid = ({
     <div style={{ marginBottom: "20px" }}>
       <Head>
         <title>{name} | Raid</title>
+        <meta name="description" content={`${name}'s Raid stats and badges`} />
       </Head>
 
       <UserAndNav name={name} platform={platform} />

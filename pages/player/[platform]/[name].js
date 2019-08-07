@@ -33,7 +33,8 @@ const player = ({ name, platform, loadout, error, setError }) => {
   return (
     <div className="player--wrapper">
       <Head>
-        <title>{name} | Player</title>
+        <title>{name} | Loadout</title>
+        <meta name="description" content={`${name}'s characters loadout`} />
       </Head>
       <UserAndNav name={name} platform={platform} />
       <div className="loadouts--wrapper">
