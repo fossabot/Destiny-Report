@@ -23,7 +23,11 @@ const World = ({ world, error }) => {
   return (
     <div className="world--wrapper">
       <Head>
-        <title>World</title>
+        <title>Destiny Report | World</title>
+        <meta
+          name="description"
+          content="Xur inventory, Weekly Flashpoint, Weekly Nightfall Strikes and Leviathan encounters order"
+        />
       </Head>
 
       <Spacer height="50px" />

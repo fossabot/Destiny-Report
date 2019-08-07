@@ -52,6 +52,10 @@ const Gambit = ({
     <div className="gambit--wrapper" style={{ height: "100%" }}>
       <Head>
         <title>{name} | Gambit</title>
+        <meta
+          name="description"
+          content={`${name}'s Gambit stats and progression`}
+        />
       </Head>
       <UserAndNav name={name} platform={platform} />
       <GambitHeader data={gambitData.overall} />

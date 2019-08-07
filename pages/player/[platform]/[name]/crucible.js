@@ -51,6 +51,10 @@ const Crucible = ({
     <div>
       <Head>
         <title>{name} | Crucible</title>
+        <meta
+          name="description"
+          content={`${name}'s Crucible stats and progression`}
+        />
       </Head>
       <UserAndNav name={name} platform={platform} />
       <ActivityHeader name="OVERALL" data={crucibleData.overall} />
